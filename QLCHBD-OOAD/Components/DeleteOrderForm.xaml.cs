@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace QLCHBD_OOAD.layout.Order.Forms
+namespace QLCHBD_OOAD.Components
 {
     /// <summary>
     /// Interaction logic for DeleteOrderForm.xaml
