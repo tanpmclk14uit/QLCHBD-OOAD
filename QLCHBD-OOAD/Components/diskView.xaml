@@ -24,6 +24,14 @@
                 <Setter Property="Background" Value="Transparent"></Setter>
                 <Setter Property="FontSize" Value="20"></Setter>
             </Style>
+
+            <Style x:Key="bttMath" TargetType="Button">
+                <Setter Property="Width" Value="20"></Setter>
+                <Setter Property="Height" Value="20"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
+            
+            
         </Grid.Resources>
 
 
@@ -138,28 +146,24 @@
                     x:Name="bttDivorce"
                     Grid.Column="1"
                     VerticalContentAlignment="Center"
-                    Width="20" 
-                    Height="20"
-                    FontWeight="Bold"
+                    Style="{StaticResource bttMath}"
                     Click="bttDivorce_Click">-</Button>
                 <Button 
                     x:Name="bttPlus"
                     HorizontalAlignment="Right" 
-                    VerticalContentAlignment="Center"
                     Grid.Column="3" Width="20" 
-                    Height="20"
-                    FontWeight="Bold"
+                    Style="{StaticResource bttMath}"
                     Click="bttPlus_Click">+</Button>
 
             </Grid>
 
             <Grid Margin="0,40, 0, 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="15"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="15"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="15"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <Button 

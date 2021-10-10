@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QLCHBD_OOAD"
         mc:Ignorable="d"
         Title="Disk Rentaling System" Height="450" Width="800"
         WindowStyle="None"
@@ -39,11 +38,24 @@
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
 
+        <Style x:Key="SpecialKeyStyle" TargetType="Button">
+            <Setter Property="Width" Value="30"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Background" Value="#1E3C64"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        
     </Window.Resources>
 
     <DockPanel>
 
-        <Grid DockPanel.Dock="Top" Height="40" VerticalAlignment="Top" Background="#1E3C64">
+        <Grid 
+            DockPanel.Dock="Top"
+            Height="40" 
+            VerticalAlignment="Top" 
+            Background="#1E3C64"
+            Mouse.MouseDown="Header_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -76,28 +88,32 @@
                     Grid.Column="1">Admin</TextBlock>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal"
-                        HorizontalAlignment="Right" VerticalAlignment="Center">
+            <WrapPanel Grid.Column="1" Orientation="Horizontal"
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
 
                 <Button 
                     x:Name="bttMinimize"
-                    Width="30"
-                    Height="30"
-                    Background="#1E3C64"
-                    FontSize="22">
+                    Style="{StaticResource SpecialKeyStyle}"
+                    Click="bttMinimize_Click">
                     -
                 </Button>
 
                 <Button 
+                    x:Name="bttMaximize"
+                    Style="{StaticResource SpecialKeyStyle}"
+                    Click="bttMaximize_Click">
+                    ❐
+                </Button>
+
+                <Button 
                     x:Name="bttClose"
-                    Width="30"
-                    Height="30"
+                    Style="{StaticResource SpecialKeyStyle}"
                     Background="#641E2F"
-                    FontSize="20">
+                    Click="bttClose_Click">
                     X
                 </Button>
 
-            </StackPanel>
+            </WrapPanel>
         </Grid>
 
         <DockPanel>
@@ -116,7 +132,8 @@
 
                 <Button x:Name="bttDashBoard" 
                         Style="{StaticResource MyButtonStyle}"
-                        Grid.Row="1">
+                        Grid.Row="1"
+                        Click="bttDashBoard_Click">
 
                     <DockPanel>
                         <Ellipse
@@ -134,7 +151,8 @@
 
                 <Button x:Name="bttImages" 
                         Style="{StaticResource MyButtonStyle}"
-                        Grid.Row="2">
+                        Grid.Row="2"
+                        Click="bttImages_Click">
 
                     <DockPanel>
                         <Ellipse
@@ -152,7 +170,8 @@
 
                 <Button x:Name="bttDelivering" 
                         Style="{StaticResource MyButtonStyle}"
-                        Grid.Row="3">
+                        Grid.Row="3"
+                        Click="bttDelivering_Click">
 
                     <DockPanel>
 
@@ -171,7 +190,8 @@
 
                 <Button x:Name="bttBorrowed" 
                         Style="{StaticResource MyButtonStyle}"
-                        Grid.Row="4">
+                        Grid.Row="4"
+                        Click="bttBorrowed_Click">
 
                     <DockPanel>
                         <Ellipse
@@ -189,7 +209,8 @@
 
                 <Button x:Name="bttReport" 
                         Style="{StaticResource MyButtonStyle}"
-                        Grid.Row="5">
+                        Grid.Row="5"
+                        Click="bttReport_Click">
 
                     <DockPanel>
 
@@ -228,7 +249,10 @@
 
             </Grid>
 
-            <Frame Background="White">
+            <Frame 
+                x:Name="Holder"
+                Background="White"
+                NavigationUIVisibility="Hidden">
 
             </Frame>
 

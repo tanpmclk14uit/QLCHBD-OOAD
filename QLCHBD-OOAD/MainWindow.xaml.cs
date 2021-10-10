@@ -23,7 +23,71 @@ namespace QLCHBD_OOAD
     {
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
+            //HomeScreen content = new HomeScreen();
+            //Holder.Content = content;
         }
+
+        private void bttDashBoard_Click(object sender, RoutedEventArgs e)
+        {
+            //Screen content = new Screen();
+            //Holder.Content = content;
+        }
+
+        private void bttImages_Click(object sender, RoutedEventArgs e)
+        {
+            //Screen content = new Screen();
+            //Holder.Content = content;
+        }
+
+        private void bttDelivering_Click(object sender, RoutedEventArgs e)
+        {
+            //Screen content = new Screen();
+            //Holder.Content = content;
+        }
+
+        private void bttBorrowed_Click(object sender, RoutedEventArgs e)
+        {
+            //Screen content = new Screen();
+            //Holder.Content = content;
+        }
+
+        private void bttReport_Click(object sender, RoutedEventArgs e)
+        {
+            //Screen content = new Screen();
+            //Holder.Content = content;
+        }
+
+
+
+
+
+        private void Header_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+        private void bttClose_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+            this.Close();
+        }
+        private void bttMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+        private void bttMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else
+                WindowState = WindowState.Maximized;
+
+        }
+
     }
 }
