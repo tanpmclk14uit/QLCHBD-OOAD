@@ -10,7 +10,7 @@
         WindowStyle="None"
         Topmost="True"
         ResizeMode="NoResize" 
-        Title="DeleteOrderForm" Height="313" Width="1028">
+        Title="AskCreateMemberForm" Height="313" Width="1028">
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0"/>
     </Window.Background>

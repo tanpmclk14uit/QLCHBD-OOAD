@@ -1,4 +1,4 @@
-﻿<Window x:Class="QLCHBD_OOAD.Components.DeleteOrderForm"
+﻿<Window x:Class="QLCHBD_OOAD.Components.ReserveDiskForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,7 +10,7 @@
         WindowStyle="None"
         Topmost="True"
         ResizeMode="NoResize" 
-        Title="DeleteOrderForm" Height="313" Width="1028">
+        Title="ReserveForm" Height="313" Width="1028">
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0"/>
     </Window.Background>
