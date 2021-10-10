@@ -5,8 +5,238 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLCHBD_OOAD"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Disk Rentaling System" Height="450" Width="800"
+        WindowStyle="None"
+        MinHeight="900"
+        MinWidth="1600"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+
+                        <Grid>
+                            <Rectangle x:Name="backgroundElement" Fill="#1E3C64" Height="auto" />
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="15, 0, 0, 0"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" TargetName="backgroundElement" Value="#0A2141"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="FontSize" Value="35"></Setter>
+            <Setter Property="FontFamily" Value="Roboto"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <DockPanel>
+
+        <Grid DockPanel.Dock="Top" Height="40" VerticalAlignment="Top" Background="#1E3C64">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Ellipse Width="35" Height="35" HorizontalAlignment="Center">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg" />
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <StackPanel Grid.Column="1" Margin="0, 4, 0, 0">
+                <TextBlock
+                   x:Name="tbName"
+                    FontSize="16"
+                    FontFamily="Roboto"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Grid.Column="1">eNViDAT</TextBlock>
+                <TextBlock
+                    x:Name="tbRole"
+                    FontSize="10"
+                    FontFamily="Roboto"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    Grid.Column="1">Admin</TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal"
+                        HorizontalAlignment="Right" VerticalAlignment="Center">
+
+                <Button 
+                    x:Name="bttMinimize"
+                    Width="30"
+                    Height="30"
+                    Background="#1E3C64"
+                    FontSize="22">
+                    -
+                </Button>
+
+                <Button 
+                    x:Name="bttClose"
+                    Width="30"
+                    Height="30"
+                    Background="#641E2F"
+                    FontSize="20">
+                    X
+                </Button>
+
+            </StackPanel>
+        </Grid>
+
+        <DockPanel>
+            <Grid Background="#1E3C64">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="https://tuoitre.uit.edu.vn/wp-content/uploads/2015/07/logo-uit.png"
+                       Width="250"></Image>
+
+                <Button x:Name="bttDashBoard" 
+                        Style="{StaticResource MyButtonStyle}"
+                        Grid.Row="1">
+
+                    <DockPanel>
+                        <Ellipse
+                            Width="40"
+                            Height="40"
+                            HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/mahm0udwally/all-flat/256/Home-icon.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock VerticalAlignment="Center">Dashboard</TextBlock>
+                    </DockPanel>
+
+                </Button>
+
+                <Button x:Name="bttImages" 
+                        Style="{StaticResource MyButtonStyle}"
+                        Grid.Row="2">
+
+                    <DockPanel>
+                        <Ellipse
+                            Width="40"
+                            Height="40"
+                            HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/vexels/office/1024/disc-icon.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock VerticalAlignment="Center">Images</TextBlock>
+                    </DockPanel>
+
+                </Button>
+
+                <Button x:Name="bttDelivering" 
+                        Style="{StaticResource MyButtonStyle}"
+                        Grid.Row="3">
+
+                    <DockPanel>
+
+                        <Ellipse
+                            Width="40"
+                            Height="40"
+                            HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/fatcow/farm-fresh/32/lorry-icon.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock VerticalAlignment="Center">Delivering</TextBlock>
+                    </DockPanel>
+
+                </Button>
+
+                <Button x:Name="bttBorrowed" 
+                        Style="{StaticResource MyButtonStyle}"
+                        Grid.Row="4">
+
+                    <DockPanel>
+                        <Ellipse
+                            Width="42"
+                            Height="42"
+                            HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/streamlineicons/streamline-ux-free/1024/user-male-add-icon.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock VerticalAlignment="Center">Borrowed</TextBlock>
+                    </DockPanel>
+
+                </Button>
+
+                <Button x:Name="bttReport" 
+                        Style="{StaticResource MyButtonStyle}"
+                        Grid.Row="5">
+
+                    <DockPanel>
+
+                        <Ellipse
+                            Width="40"
+                            Height="40"
+                            HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-5/512/Product-sale-report-icon.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock VerticalAlignment="Center">Report</TextBlock>
+                    </DockPanel>
+
+                </Button>
+
+                <Button x:Name="bttLogout" 
+                        Style="{StaticResource MyButtonStyle}"
+                        Grid.Row="6">
+
+
+                    <DockPanel>
+                        <Ellipse
+                            Width="40"
+                            Height="40"
+                            HorizontalAlignment="Left">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Other-Power-Standby-Metro-icon.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock VerticalAlignment="Center">Log out</TextBlock>
+                    </DockPanel>
+
+                </Button>
+
+
+            </Grid>
+
+            <Frame Background="White">
+
+            </Frame>
+
+        </DockPanel>
+
+
+
+
+
+    </DockPanel>
 </Window>
