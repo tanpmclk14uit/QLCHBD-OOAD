@@ -83,6 +83,46 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Components\AskCreateMemberForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\BorrowConfirmCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\ChangeAccountForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\DeliveredParcelForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\DiskInformationCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\LogOutForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\OrderDiskInformationCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\ProviderInfomationCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\ReserveDiskForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\SaveConfirmForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="disk.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +135,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Components\AskCreateMemberForm.xaml.cs">
+      <DependentUpon>AskCreateMemberForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\BorrowConfirmCard.xaml.cs">
+      <DependentUpon>BorrowConfirmCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ChangeAccountForm.xaml.cs">
+      <DependentUpon>ChangeAccountForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DeliveredParcelForm.xaml.cs">
+      <DependentUpon>DeliveredParcelForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DiskInformationCard.xaml.cs">
+      <DependentUpon>DiskInformationCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\LogOutForm.xaml.cs">
+      <DependentUpon>LogOutForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\OrderDiskInformationCard.xaml.cs">
+      <DependentUpon>OrderDiskInformationCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ProviderInfomationCard.xaml.cs">
+      <DependentUpon>ProviderInfomationCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ReserveDiskForm.xaml.cs">
+      <DependentUpon>ReserveDiskForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\SaveConfirmForm.xaml.cs">
+      <DependentUpon>SaveConfirmForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="dao\Db.cs" />
     <Compile Include="viewmodel\BaseViewModel.cs" />
     <Page Include="Components\DeleteOrderForm.xaml">
@@ -156,7 +226,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
     <Folder Include="bus\" />
     <Folder Include="model\" />
     <Folder Include="viewmodel\login\" />
