@@ -83,15 +83,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="disk.xaml">
+    <Page Include="Components\disk.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="diskView.xaml">
+    <Page Include="Components\diskView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="diskInfo.xaml">
+    <Page Include="Components\diskInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -182,13 +182,13 @@
     <Compile Include="Components\SaveConfirmForm.xaml.cs">
       <DependentUpon>SaveConfirmForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="disk.xaml.cs">
+    <Compile Include="Components\disk.xaml.cs">
       <DependentUpon>disk.xaml</DependentUpon>
     </Compile>
-    <Compile Include="diskView.xaml.cs">
+    <Compile Include="Components\diskView.xaml.cs">
       <DependentUpon>diskView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="diskInfo.xaml.cs">
+    <Compile Include="Components\diskInfo.xaml.cs">
       <DependentUpon>diskInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="appUtil\Delegates.cs" />
@@ -247,7 +247,6 @@
     <Resource Include="Assets\img_noImage.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
     <Folder Include="bus\" />
     <Folder Include="model\" />
     <Folder Include="viewmodel\login\" />

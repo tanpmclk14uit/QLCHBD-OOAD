@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLCHBD_OOAD
+namespace QLCHBD_OOAD.Components
 {
     /// <summary>
     /// Interaction logic for disk.xaml

@@ -1,4 +1,4 @@
-﻿<Window x:Class="QLCHBD_OOAD.diskInfo"
+﻿<Window x:Class="QLCHBD_OOAD.Components.diskView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:QLCHBD_OOAD"
       mc:Ignorable="d" 
       WindowStyle="None"
-      Title="diskInfo"
+      Title="diskView"
       d:DesignHeight="300" d:DesignWidth="450">
 
 
@@ -68,7 +68,7 @@
                 FontSize="20"
                 >ID:</TextBlock>
             <TextBlock 
-                x:Name="tbID"
+                x:Name="txtID"
                 FontWeight="Bold"
                 FontSize="20">
                 #23423
@@ -134,9 +134,26 @@
 
                 <TextBlock Grid.Column="2" FontSize="20" HorizontalAlignment="Center">123</TextBlock>
 
+                <Button
+                    x:Name="bttDivorce"
+                    Grid.Column="1"
+                    VerticalContentAlignment="Center"
+                    Width="20" 
+                    Height="20"
+                    FontWeight="Bold"
+                    Click="bttDivorce_Click">-</Button>
+                <Button 
+                    x:Name="bttPlus"
+                    HorizontalAlignment="Right" 
+                    VerticalContentAlignment="Center"
+                    Grid.Column="3" Width="20" 
+                    Height="20"
+                    FontWeight="Bold"
+                    Click="bttPlus_Click">+</Button>
+
             </Grid>
 
-            <Grid Margin="0,50, 0, 0">
+            <Grid Margin="0,40, 0, 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -146,24 +163,27 @@
                 </Grid.ColumnDefinitions>
 
                 <Button 
-                    x:Name="bttAccept"
+                    x:Name="bttSave"
                     Height="28"
                     Background="#28A745"
                     FontWeight="Bold"
                     Foreground="White"
-                    Grid.Column="1" Click="bttAccept_Click">
+                    Grid.Column="1"
+                    Click="bttSave_Click">
                     <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
+                        <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
-                    </Button.Resources> ACCEPT
+                    </Button.Resources>
+                    SAVE
                 </Button>
                 <Button 
                     x:Name="bttCancel"
                     Background="#8B8B8B"
                     FontWeight="Bold"
                     Foreground="White"
-                    Grid.Column="3" Click="bttCancel_Click">
+                    Grid.Column="3"
+                    Click="bttCancel_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>

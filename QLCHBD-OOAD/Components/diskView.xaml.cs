@@ -13,19 +13,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLCHBD_OOAD
+namespace QLCHBD_OOAD.Components
 {
     /// <summary>
     /// Interaction logic for diskDetail.xaml
     /// </summary>
-    public partial class diskInfo : Window
+    public partial class diskView : Window
     {
-        public diskInfo()
+        public diskView()
         {
             InitializeComponent();
         }
 
-        private void bttAccept_Click(object sender, RoutedEventArgs e)
+        private void bttDivorce_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bttPlus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bttSave_Click(object sender, RoutedEventArgs e)
         {
 
         }
