@@ -75,6 +75,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="disk.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="diskView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="diskInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Compile Include="dao\Db.cs" />
     <Compile Include="viewmodel\BaseViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -84,6 +96,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="disk.xaml.cs">
+      <DependentUpon>disk.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="diskView.xaml.cs">
+      <DependentUpon>diskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="diskInfo.xaml.cs">
+      <DependentUpon>diskInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="appUtil\Delegates.cs" />
     <Compile Include="appUtil\Enum.cs" />
