@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLCHBD_OOAD.dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace QLCHBD_OOAD
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
     }
 }
