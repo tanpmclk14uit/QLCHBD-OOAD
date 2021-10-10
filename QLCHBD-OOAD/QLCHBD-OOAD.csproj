@@ -63,7 +63,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Components\AskCreateMemberForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\BorrowConfirmCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ChangeAccountForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\DeleteOrderForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\DeliveredParcelForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\DiskInformationCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\LogOutForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\OrderDiskInformationCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ProviderInfomationCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ReserveDiskForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\SaveConfirmForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,8 +115,38 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Components\AskCreateMemberForm.xaml.cs">
+      <DependentUpon>AskCreateMemberForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\BorrowConfirmCard.xaml.cs">
+      <DependentUpon>BorrowConfirmCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ChangeAccountForm.xaml.cs">
+      <DependentUpon>ChangeAccountForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\DeleteOrderForm.xaml.cs">
       <DependentUpon>DeleteOrderForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DeliveredParcelForm.xaml.cs">
+      <DependentUpon>DeliveredParcelForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DiskInformationCard.xaml.cs">
+      <DependentUpon>DiskInformationCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\LogOutForm.xaml.cs">
+      <DependentUpon>LogOutForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\OrderDiskInformationCard.xaml.cs">
+      <DependentUpon>OrderDiskInformationCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ProviderInfomationCard.xaml.cs">
+      <DependentUpon>ProviderInfomationCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ReserveDiskForm.xaml.cs">
+      <DependentUpon>ReserveDiskForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\SaveConfirmForm.xaml.cs">
+      <DependentUpon>SaveConfirmForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -112,6 +182,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\img_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_confirm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_power.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_netflix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_jocker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_noImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets')" />

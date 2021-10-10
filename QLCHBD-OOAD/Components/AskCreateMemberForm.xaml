@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLCHBD_OOAD.Components"
         mc:Ignorable="d"
-        Title="AskCreateMemberForm" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        WindowStartupLocation="CenterScreen"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStyle="None"
+        Topmost="True"
+        ResizeMode="NoResize" 
+        Title="DeleteOrderForm" Height="313" Width="1028">
+    <Window.Background>
+        <SolidColorBrush Color="White" Opacity="0"/>
+    </Window.Background>
+    <Border CornerRadius="36" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.7*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0 15 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/QLCHBD-OOAD;component/assets/img_confirm.png"
+                       Width="130" 
+                       Height="144"
+                       Grid.Column="0"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="This client has not registered"
+                    FontSize="45"
+                    FontFamily="Roboto"
+                    FontWeight="Bold"/>
+                    <TextBlock Text="Do you want to create new member?"
+                    FontSize="45"
+                    FontFamily="Roboto"
+                    FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="1" 
+                        Orientation="Horizontal" 
+                        FlowDirection="RightToLeft" >
+                <Button Width="202"
+                        Height="66"
+                        Background="#8B8B8B"
+                        Margin="20 0 20 0"
+                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="16">
+                    <TextBlock Text="CANCEL"
+                               FontSize="40"
+                               FontFamily="Roboto"
+                               FontWeight="Medium"
+                               Foreground="White"/>
+                </Button>
+                <Button Width="210"
+                        Height="66"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="16"
+                        Background="#28A745">
+                    <TextBlock Text="YES"
+                               FontSize="40"
+                               FontFamily="Roboto"
+                               FontWeight="Medium"
+                               Foreground="White"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
+

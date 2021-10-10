@@ -5,8 +5,147 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QLCHBD_OOAD.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="887" d:DesignWidth="380">
+    <Border BorderThickness="1" CornerRadius="16" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="40" Margin="20 20 20 0" Background="Black">
+                <Grid>
+                    <Image Source="/QLCHBD-OOAD;component/assets/img_jocker.png"
+                           Stretch="Fill"/>
+                </Grid>
+            </Border>
+            <Button Grid.Row="1" 
+                Width="218"
+                        Height="47"
+                        Margin="0 8 7 0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Background="White">
+                <TextBlock Text="CHANGE INFO"
+                               FontSize="25"
+                               FontFamily="Roboto"
+                               FontWeight="Medium"
+                               Foreground="Black"/>
+            </Button>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Name: "
+                           FontSize="30"
+                           Margin="20 0 0 0"
+                           FontFamily="Calibri"
+                               Grid.Row="0"/>
+                    <TextBlock Text="Provider: "
+                           FontSize="30"
+                           Margin="20 0 0 0"
+                           FontFamily="Calibri"
+                               Grid.Row="1"/>
+                    <TextBlock Text="Rental day: "
+                           FontSize="30"
+                           Margin="20 0 0 0"
+                           FontFamily="Calibri"
+                               Grid.Row="2"/>
+                    <TextBlock Text="Total copy: "
+                           FontSize="30"
+                           Margin="20 0 0 0"
+                           FontFamily="Calibri"
+                               Grid.Row="3"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Jocker"
+                           FontFamily="Calibri"
+                           FontSize="30"
+                               Grid.Row="0"/>
+                    <TextBlock Text="Netflix"
+                           FontFamily="Calibri"
+                           FontSize="30"
+                               Grid.Row="1"/>
+                    <TextBlock Text="12/12/9999"
+                           FontFamily="Calibri"
+                           FontSize="30"
+                               Grid.Row="2"/>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top">
+                        <Button Height="43"
+                                Width="43"
+                                
+                                Margin="0 0 10 0">
+                            <TextBlock Text="-"
+                                FontSize="25"
+                                FontWeight="Bold"
+                                VerticalAlignment="Center"
+                                Margin="0 0 0 10"/>
+                        </Button>
+                        <TextBlock Text="30"
+                           FontFamily="Calibri"                    
+                           FontSize="30"/>
+                        <Button Height="43"
+                                Width="43"
+                              
+                                Margin="10 0 0 0">
+                            <TextBlock Text="+"
+                                FontSize="25"
+                                FontWeight="Bold"
+                                VerticalAlignment="Center"
+                                Margin="0 0 0 10"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center"
+                        Margin="13 0 13 0">
+                <Button Width="161"
+                        Height="62"
+                        Margin="0 0 7 0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Background="#0DBE00">
+                    <TextBlock Text="Confirm"
+                               FontSize="30"
+                               FontFamily="Roboto"
+                               FontWeight="Medium"
+                               Foreground="Black"/>
+                </Button>
+                <Button Width="175"
+                        Height="62"
+                        Margin="0 0 7 0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Background="#707070">
+                    <TextBlock Text="Delete"
+                               FontSize="30"
+                               FontFamily="Roboto"
+                               FontWeight="Medium"
+                               Foreground="Black"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
+
+
