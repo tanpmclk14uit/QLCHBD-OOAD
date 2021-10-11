@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLCHBD_OOAD.Components"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStyle="None"
         Topmost="True"
         ResizeMode="NoResize" 

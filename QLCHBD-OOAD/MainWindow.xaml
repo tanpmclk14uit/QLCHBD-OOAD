@@ -7,6 +7,7 @@
         Title="Disk Rentaling System" Height="450" Width="800"
         WindowStyle="None"
         MinHeight="900"
+        WindowStartupLocation="CenterScreen"
         MinWidth="1600"
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip">
@@ -45,7 +46,7 @@
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
-        
+
     </Window.Resources>
 
     <DockPanel>
@@ -188,7 +189,7 @@
 
                 </Button>
 
-                <Button x:Name="bttBorrowed" 
+                <Button x:Name="btnRental" 
                         Style="{StaticResource MyButtonStyle}"
                         Grid.Row="4"
                         Click="bttBorrowed_Click">
@@ -202,7 +203,7 @@
                                 <ImageBrush ImageSource="https://icons.iconarchive.com/icons/streamlineicons/streamline-ux-free/1024/user-male-add-icon.png" />
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock VerticalAlignment="Center">Borrowed</TextBlock>
+                        <TextBlock VerticalAlignment="Center">Rental</TextBlock>
                     </DockPanel>
 
                 </Button>
@@ -253,13 +254,9 @@
                 x:Name="Holder"
                 Background="White"
                 NavigationUIVisibility="Hidden">
-
             </Frame>
 
         </DockPanel>
-
-
-
 
 
     </DockPanel>

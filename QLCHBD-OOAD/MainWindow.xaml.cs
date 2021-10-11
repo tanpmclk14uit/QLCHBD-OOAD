@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.dao;
+using QLCHBD_OOAD.view.rental;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,8 +49,8 @@ namespace QLCHBD_OOAD
 
         private void bttBorrowed_Click(object sender, RoutedEventArgs e)
         {
-            //Screen content = new Screen();
-            //Holder.Content = content;
+            RentalMainPage rentalMainPage = new RentalMainPage();
+            Holder.Content = rentalMainPage;       
         }
 
         private void bttReport_Click(object sender, RoutedEventArgs e)
