@@ -12,7 +12,33 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="TextBox" x:Key="seach"
-                                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                   xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <VisualBrush 
+                                     AlignmentX="Left"
+                                     AlignmentY="Center"
+                                     Stretch="None">
+                            <VisualBrush.Visual>
+                                <Grid Background="White"
+                                              Margin="40 0 0 0"
+                                              Height="70"
+                                              Width="1275">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Width="20"
+                                       Height="20"
+                                       Stretch="UniformToFill"                                       
+                                       Margin="5 0 0 0"                                                    
+                                       Source="/Assets/ic_search.png" 
+                                    />                                    
+                                </Grid>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Setter.Value>
+                </Setter>
                 <Style.Resources>
                     <VisualBrush x:Key="CueBannerBrush"
                                      AlignmentX="Left"
@@ -20,7 +46,7 @@
                                      Stretch="None">
                         <VisualBrush.Visual>
                             <Grid Background="White"
-                                              Margin="50 0 0 0"
+                                              Margin="40 0 0 0"
                                               Height="70"
                                               Width="1275">
                                 <Grid.ColumnDefinitions>
@@ -29,8 +55,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Width="20"
                                        Height="20"
-                                       Stretch="UniformToFill"
-                                       
+                                       Stretch="UniformToFill"                                       
                                        Margin="5 0 0 0"                                                    
                                        Source="/Assets/ic_search.png" 
 
@@ -41,40 +66,18 @@
                                        FontSize="15"
                                        FontFamily="Roboto"
                                        VerticalContentAlignment="Center"
-                                       Padding="15 0 0 0"
+                                       Padding="0 0 0 0"
                                        Opacity="0.5"                                                   
                                                    />
                             </Grid>
                         </VisualBrush.Visual>
-                    </VisualBrush>
-                    <VisualBrush x:Key="CueBannerBrushNoneText"
-                                     AlignmentX="Left"
-                                     AlignmentY="Center"
-                                     Stretch="None">
-                        <VisualBrush.Visual>
-                            <Grid Background="White"
-                                              Margin="50 0 0 0"
-                                              Height="70"
-                                              Width="1275">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Image Margin="5 0 0 0"                                      
-                                       Width="20"
-                                       Stretch="UniformToFill"
-                                       Height="20"
-                                                    Source="/Assets/ic_search.png" 
-                                                  />
-                            </Grid>
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius"    Value="5 5 5 5" />
-                        <Setter Property="Padding" Value="60 0 0 0"/>
-                        <Setter Property="Background"
-                                    Value="{StaticResource CueBannerBrush}" />
+                    </VisualBrush>                  
+                    <Style TargetType="{x:Type Border}">                        
+                        <Setter Property="CornerRadius"
+                                Value="5 5 5 5" />
+                        <Setter Property="Padding" Value="50 0 0 0"/>                       
                     </Style>
+                   
                 </Style.Resources>
                 <Style.Triggers >
                     <Trigger  Property="Text"
@@ -87,12 +90,8 @@
                                  Value="{x:Null}">
                         <Setter Property="Background"
                                     Value="{StaticResource CueBannerBrush}" />
-                    </Trigger>
-                    <Trigger Property="IsSelectionActive"
-                                 Value="True">
-                        <Setter Property="Background"
-                                    Value="{StaticResource CueBannerBrushNoneText}" />
-                    </Trigger>
+                    </Trigger>                                   
+
                 </Style.Triggers>
             </Style>
         </ResourceDictionary>

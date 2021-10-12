@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:QLCHBD_OOAD.view.rental"
       mc:Ignorable="d" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="985"
+      d:DesignWidth="1580"
       Title="RentalMainPage">
 
     <Grid Background="#E6EBEE">
@@ -40,7 +41,7 @@
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.2*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="1"
@@ -49,7 +50,9 @@
                            HorizontalAlignment="Center"
                            FontSize="20"
                            />
-                <ComboBox Margin="0 5 0 5" 
+                <ComboBox SelectedItem="{Binding selectedStatus}"
+                          ItemsSource="{Binding selectedStatuses}"
+                          Margin="0 5 0 5" 
                           Height="40"
                           FontSize="20"
                           HorizontalContentAlignment="Left"
@@ -59,11 +62,8 @@
                           BorderBrush="Gray"
                           BorderThickness="1"
                           Padding="10 0 10 0"                            
-                          >
-                    <ComboBoxItem IsSelected="True" FontSize="20" Content="All bill"/>
-                    <ComboBoxItem FontSize="20" Content="Over due bill"/>
-                    <ComboBoxItem FontSize="20" Content="Reserved item bill"/>
-                    <ComboBoxItem FontSize="20" Content="Checked out bill"/>
+                          >                   
+                                     
                 </ComboBox>
             </Grid>
             <Grid Grid.Column="3">
@@ -76,15 +76,136 @@
                            Text="Seach:"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
                            FontSize="20"
                            />
-                <TextBox VerticalContentAlignment="Center"
-                        Height="40"
+                <TextBox TextWrapping="Wrap"     
+                        
+                         MaxLines="1"
+                         VerticalContentAlignment="Center"
+                         Height="40"
+                         Text="{Binding seachKey, UpdateSourceTrigger=PropertyChanged}"
                          Margin="0 0 10 0"  
                          FontSize="20"
                          Style="{DynamicResource seach}"
                          Grid.Column="1"/>
             </Grid>
         </Grid>
+        <ScrollViewer Margin="10" Grid.Row="1">
+            <StackPanel>
+                <ItemsControl x:Name="ListViewRentalBill" ItemsSource="{Binding filterListRentalBill}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="10">
+                                <Border Width="390"
+                    Background="{Binding backgroundStatus}"
+                    CornerRadius="15 15 15 15"
+                    BorderThickness="1"
+                    BorderBrush="Gray"
+                    Height="300">
+                                    <Grid Margin="20 10 10 10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="33"/>
+                                        </Grid.RowDefinitions>
+                                        <Label FontSize="30"
+                           ContentStringFormat="ID: {0}"
+                           Padding="0 0 0 0"
+                           Margin="0 0 20 0"
+                           VerticalContentAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           Content="{Binding id}"
+                           >
+                                        </Label>
+                                        <Grid Grid.Row="1" Margin="0 0 0 15">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0"
+                               VerticalAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Content="{Binding guestName}"
+                               FontSize="20"
+                               ContentStringFormat="Name: {0}"                               
+                               />
+                                            <Label Grid.Row="1"
+                               VerticalAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Content="{Binding guestId}"
+                               FontSize="20"
+                               ContentStringFormat="ID: {0}"                               
+                               />
+                                            <Label Grid.Row="2"
+                               VerticalAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Content="{Binding createTime}"
+                               FontSize="20"
+                               ContentStringFormat="Date: {0}"                               
+                               />
+                                            <Label Grid.Row="3"
+                               VerticalAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Content="{Binding totalPrice}"
+                               FontSize="20"
+                               ContentStringFormat="Total bill: {0} VNĐ"                               
+                               />
+                                            <Label Grid.Row="4"
+                               VerticalAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Content="{Binding stringStatus}"
+                               FontSize="20"
+                               ContentStringFormat="Status: {0}"                               
+                               />
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="80"/>
+                                                <ColumnDefinition Width="80"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="1"
+                                Width="70"
+                                Height="33"                                
+                                FontSize="20"                               
+                                Background="#FF003D"
+                                >
+                                                <Image Source="/Assets/img_confirm (2).png" />
+
+                                            </Button>
+                                            <Button Grid.Column="2"
+                                Width="70"
+                                Height="33"
+                                Background="#259D45"
+                                >
+                                                <Image Source="/Assets/img_delete (2).png" />
+
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                           
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

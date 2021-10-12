@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLCHBD_OOAD.viewmodel.rental;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace QLCHBD_OOAD.view.rental
         public RentalMainPage()
         {
             InitializeComponent();
+            DataContext = RentalPageViewModel.getIntance();
         }
     }
 }

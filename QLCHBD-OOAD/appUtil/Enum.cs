@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace QLCHBD_OOAD.appUtil
 {
-    //public enum Enum
-    //{
-    //    Enum1, Enum2 
-    //}
+    public enum RentalBillStatus
+    {
+        OVERDUE, RECEIVEDALL, WAITING
+    }
 }
