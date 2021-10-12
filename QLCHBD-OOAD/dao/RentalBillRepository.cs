@@ -47,6 +47,19 @@ namespace QLCHBD_OOAD.dao
                 }
             }
         }
+        public ObservableCollection<RentalBill> getRentalBillsById(string id)
+        {
+            ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
+            string command = "SELECT * FROM `rental_bill` WHERE ID = "+ id;
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
+                rentalBills.Add(rentalBill);
+            }
+            database.closeConnection();
+            return rentalBills;
+        }
         private String getNameById(long id)
         {
             String name = "";

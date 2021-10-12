@@ -7,14 +7,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace QLCHBD_OOAD.viewmodel.rental
 {
-    class RentalPageViewModel: BaseViewModel
+    class RentalPageViewModel : BaseViewModel
     {
 
-        
         public ObservableCollection<RentalBill> filterListRentalBill
         {
             get => filterByInfo();
@@ -51,7 +51,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
             get => _seachKey;
             set
             {
-                _seachKey = value;               
+                _seachKey = value;
                 OnPropertyChanged("filterListRentalBill");
                 OnPropertyChanged("seachKey");
             }
@@ -60,7 +60,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
         private static RentalPageViewModel _intance;
         public static RentalPageViewModel getIntance()
         {
-            if(_intance == null)
+            if (_intance == null)
             {
                 _intance = new RentalPageViewModel();
             }
@@ -108,43 +108,56 @@ namespace QLCHBD_OOAD.viewmodel.rental
         {
             seachKey = "";
             _rentalBills = new ObservableCollection<RentalBill>();
-            rentalBillReponsitory = RentalBillRepository.getIntance();                      
-            setUpStatuses(); 
-            
+            rentalBillReponsitory = RentalBillRepository.getIntance();
+            setUpStatuses();
+
         }
         private ObservableCollection<RentalBill> filterByInfo()
         {
             ObservableCollection<RentalBill> filterList = new ObservableCollection<RentalBill>();
 
-            foreach (var rentalBill in rentalBills)
+            if (seachKey == "" || seachKey[0] != '#')
             {
-
-                foreach (PropertyInfo prop in rentalBill.GetType().GetProperties())
+                foreach (var rentalBill in rentalBills)
                 {
-                    var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
 
-                    if (type == typeof(string) || type == typeof(int) || type == typeof(DateTime))
+                    foreach (PropertyInfo prop in rentalBill.GetType().GetProperties())
                     {
-                        var rentalBill_field = prop.GetValue(rentalBill, null);
-                        if (rentalBill_field != null)
+                        var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+
+                        if (type == typeof(string) || type == typeof(int) || type == typeof(DateTime))
                         {
-                            String rentalBill_data = rentalBill_field.ToString().Trim().ToLower();
-                            String keyWord = seachKey.ToLower();
-                            if (rentalBill_data != null && keyWord != null)
+                            var rentalBill_field = prop.GetValue(rentalBill, null);
+                            if (rentalBill_field != null)
                             {
-                                if (rentalBill_data.Contains(keyWord))
+                                String rentalBill_data = rentalBill_field.ToString().Trim().ToLower();
+                                String keyWord = seachKey.ToLower();
+                                if (rentalBill_data != null && keyWord != null)
                                 {
-                                    filterList.Add(rentalBill);
-                                    break;
+                                    if (rentalBill_data.Contains(keyWord))
+                                    {
+                                        filterList.Add(rentalBill);
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
 
+                    }
                 }
             }
+            else
+            {
+                string id = Regex.Replace(seachKey, @"[^0-9]", string.Empty);
+                if (id != "")
+                {
+                    filterList = rentalBillReponsitory.getRentalBillsById(id);
+                }
+                
+            }
+
             return filterList;
         }
     }
-    
+
 }
