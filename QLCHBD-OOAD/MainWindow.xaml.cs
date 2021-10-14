@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.dao;
+using QLCHBD_OOAD.view.images;
 using QLCHBD_OOAD.view.rental;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,8 @@ namespace QLCHBD_OOAD
         {
             //Screen content = new Screen();
             //Holder.Content = content;
+            ImagesPage imagesPage = new ImagesPage();
+            Holder.Content = imagesPage;
         }
 
         private void bttDelivering_Click(object sender, RoutedEventArgs e)
@@ -90,5 +93,9 @@ namespace QLCHBD_OOAD
 
         }
 
+        private void Holder_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
     }
 }
