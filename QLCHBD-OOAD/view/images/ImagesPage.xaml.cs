@@ -26,5 +26,6 @@ namespace QLCHBD_OOAD.view.images
             InitializeComponent();
             DataContext = ImagesViewModel.getIntance();
         }
+
     }
 }

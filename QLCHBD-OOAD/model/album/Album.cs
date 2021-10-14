@@ -38,15 +38,15 @@ namespace QLCHBD_OOAD.model.album
         }
 
         private DateTime _createTime;
-        public DateTime createTime
+        public String createTime
         {
-            get => _createTime;
+            get => _createTime.ToShortDateString();
         }
 
         private DateTime _updateTime;
-        public DateTime updateTime
+        public String updateTime
         {
-            get => _updateTime;
+            get => _updateTime.ToShortDateString();
         }
     }
 }

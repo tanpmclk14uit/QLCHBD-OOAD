@@ -8,7 +8,7 @@ namespace QLCHBD_OOAD.model.images
 {
     class Images
     {
-        public Images(long id, string name, long idAlbum, int quantity, string image, string locate, int isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
+        public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
             DateTime createTime, DateTime updateTime, long createBy, long updateBy )
         {
             this._id = id;
@@ -17,7 +17,7 @@ namespace QLCHBD_OOAD.model.images
             this._quantity = quantity;
             this._image = image;
             this._locate = locate;
-            this._isCheck = isCheck == 1;
+            this._isCheck = isCheck;
             this._rentalPrice = rentalPrice;
             this._idProvider = idProvider;
             this._idByProvider = idByProvider;
@@ -28,7 +28,7 @@ namespace QLCHBD_OOAD.model.images
             this._updateBy = updateBy;
         }
 
-        public Images(long id, string name, long idAlbum, int quantity, string image, string locate, int isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
+        public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
             DateTime createTime, long createBy)
         {
             this._id = id;
@@ -37,7 +37,7 @@ namespace QLCHBD_OOAD.model.images
             this._quantity = quantity;
             this._image = image;
             this._locate = locate;
-            this._isCheck = isCheck == 1;
+            this._isCheck = isCheck ;
             this._rentalPrice = rentalPrice;
             this._idProvider = idProvider;
             this._idByProvider = idByProvider;

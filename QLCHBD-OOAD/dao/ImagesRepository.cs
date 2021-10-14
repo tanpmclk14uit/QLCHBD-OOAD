@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.dao
 {
@@ -35,18 +36,20 @@ namespace QLCHBD_OOAD.dao
             var reader = db.executeCommand(commnad);
             while(reader.Read())
             {
-                Images image;
                 if (reader[11] == reader[12])
                 {
-                    image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (int)reader[6], (int)reader[7], (long)reader[8],
+                    Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
                         (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                    images.Add(image);
                 }
                 else
                 {
-                    image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (int)reader[6], (int)reader[7], (long)reader[8],
+                    MessageBox.Show(reader[6].GetType().ToString());
+                    Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
                         (long)reader[9], (int)reader[10], (DateTime)reader[11], (long)reader[13]);
+                    images.Add(image);
                 }    
-                images.Add(image);
+                
             }
             db.closeConnection();
             return images;
@@ -59,7 +62,7 @@ namespace QLCHBD_OOAD.dao
             var reader = db.executeCommand(command);
             while (reader.Read())
             {
-                Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (int)reader[6], (int)reader[7], (long)reader[8],
+                Images image = new Images((Byte)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
                    (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
                 images.Add(image);
             }
@@ -73,9 +76,25 @@ namespace QLCHBD_OOAD.dao
             string command = "SELECT * FROM `disk` WHERE NAME = " + name;
             var reader = db.executeCommand(command);
             while (reader.Read())
-            {
-                Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (int)reader[6], (int)reader[7], (long)reader[8],
+            {               
+          
+                Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
                    (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                images.Add(image);
+            }
+            db.closeConnection();
+            return images;
+        }
+
+        public ObservableCollection<Images> getImagesByAlbum(long id)
+        {
+            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            string command = "SELECT disk.id, disk.name, disk.album, disk.quantity, disk.image, disk.locate, disk.checked, disk.rental_price, disk.provider, disk.id_by_provider, disk.loss_charges, disk.create_time, disk.update_time, disk.create_by, disk.update_by FROM `disk` inner join `album` WHERE disk.album = album.id AND album.ID =" + id.ToString();
+            var reader = db.executeCommand(command);
+            while (reader.Read())
+            {
+                Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
+                      (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
                 images.Add(image);
             }
             db.closeConnection();

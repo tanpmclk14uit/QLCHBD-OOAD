@@ -29,6 +29,19 @@ namespace QLCHBD_OOAD.viewmodel.images
                 OnPropertyChanged("seachKey");
             }
         }
+
+        private String _selectedAlbum;
+        public String selectedAlbum
+        {
+            get => _selectedAlbum;
+            set
+            {
+                _selectedAlbum = value;
+                _images = filterByAlbum(value);
+                OnPropertyChanged("filterListImages");
+                OnPropertyChanged("selectedAlbum");
+            }
+        }
         public ImagesViewModel()
         {
             searchKey = "";
@@ -58,11 +71,44 @@ namespace QLCHBD_OOAD.viewmodel.images
         public ObservableCollection<Album> album
         {
             get => _album;
+            set
+            {
+                _album = value;
+            }
         }
+
+        public ObservableCollection<String> albumName
+        {
+            get => getAlbumName();
+        }
+
+        public ObservableCollection<string> getAlbumName()
+        {
+            ObservableCollection<string> listAlbumName = new ObservableCollection<string>();
+            foreach(Album albums in _album )
+            {
+                listAlbumName.Add(albums.name);
+            }
+            return listAlbumName;
+        }
+
 
         public ObservableCollection<Images> filterListImages
         {
             get => filterByInfo();
+        }
+
+        private ObservableCollection<Images> filterByAlbum(string albumName)
+        {
+            long id = 0;
+            foreach (Album albums in _album)
+            {
+                if (albums.name == albumName)
+                {
+                    id = albums.id;
+                }
+            }
+            return imagesRepository.getImagesByAlbum(id);
         }
 
         private ObservableCollection<Images> filterByInfo()
@@ -71,7 +117,7 @@ namespace QLCHBD_OOAD.viewmodel.images
 
             if (searchKey == "" || searchKey[0] != '#')
             {
-                foreach (var imageItem in images)
+                foreach (var imageItem in _images)
                 {
 
                     foreach (PropertyInfo prop in imageItem.GetType().GetProperties())

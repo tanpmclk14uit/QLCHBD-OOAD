@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.dao
 {
@@ -31,20 +32,21 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<Album> getAllAlbum()
         {
             ObservableCollection<Album> albums = new ObservableCollection<Album>();
-            string commnad = "SELECT * FROM `disk`";
+            string commnad = "SELECT * FROM `album`";
             var reader = db.executeCommand(commnad);
             while (reader.Read())
             {
-                Album album;
                 if (reader[2] != reader[3])
                 {
-                    album = new Album((long)reader[0], (string)reader[1], (DateTime)reader[2], (DateTime)reader[3]);
+                    
+                        Album album = new Album((long)reader[0], reader[1].ToString(), (DateTime)reader[2], (DateTime)reader[3]);
+                        albums.Add(album);                 
                 }
                 else
                 {
-                    album = new Album((long)reader[0], (string)reader[1], (DateTime)reader[2]);
-                }    
-                albums.Add(album);
+                    Album album = new Album((long)reader[0], reader[1].ToString(), (DateTime)reader[2]);
+                    albums.Add(album);
+                }
             }
             db.closeConnection();
             return albums;
