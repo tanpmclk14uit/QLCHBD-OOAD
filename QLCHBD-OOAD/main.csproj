@@ -83,12 +83,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\DeliveryOrder.xaml.cs">
+      <DependentUpon>DeliveryOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="dao\DeliveryOrderRepository.cs" />
     <Compile Include="dao\RentalBillRepository.cs" />
+    <Compile Include="model\delivery\DeliItems.cs" />
+    <Compile Include="model\delivery\DeliOrder.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
+    <Compile Include="viewmodel\delivery\DeliveryPageViewModel.cs" />
     <Compile Include="viewmodel\rental\RentalPageViewModel.cs" />
+    <Compile Include="view\delivery\DeliveryMainPage.xaml.cs">
+      <DependentUpon>DeliveryMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\rental\RentalMainPage.xaml.cs">
       <DependentUpon>RentalMainPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\DeliveryOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\disk.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +217,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="view\delivery\DeliveryMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\rental\RentalMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -267,6 +285,17 @@
   <ItemGroup>
     <Resource Include="Assets\img_confirm %282%29.png" />
     <Resource Include="Assets\img_delete %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_Dashboard.png" />
+    <Resource Include="Assets\img_Delivery.png" />
+    <Resource Include="Assets\img_Image.png" />
+    <Resource Include="Assets\img_Logout.png" />
+    <Resource Include="Assets\img_Rental.png" />
+    <Resource Include="Assets\img_Report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\img_uit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets')" />

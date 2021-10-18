@@ -56,7 +56,9 @@
             Height="40" 
             VerticalAlignment="Top" 
             Background="#1E3C64"
-            Mouse.MouseDown="Header_MouseDown">
+            MouseLeftButtonDown="Header_MouseDown"
+            MouseLeftButtonUp="Header_MouseUp"
+            Mouse.MouseMove="Header_MouseMove">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -103,7 +105,7 @@
                     x:Name="bttMaximize"
                     Style="{StaticResource SpecialKeyStyle}"
                     Click="bttMaximize_Click">
-                    ❐
+                    ⬜
                 </Button>
 
                 <Button 
@@ -128,7 +130,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="https://tuoitre.uit.edu.vn/wp-content/uploads/2015/07/logo-uit.png"
+                <Image Grid.Row="0" Source="/QLCHBD-OOAD;component/assets/img_uit.png"
                        Width="250"></Image>
 
                 <Button x:Name="bttDashBoard" 
@@ -142,7 +144,7 @@
                             Height="40"
                             HorizontalAlignment="Left">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/mahm0udwally/all-flat/256/Home-icon.png" />
+                                <ImageBrush ImageSource="/QLCHBD-OOAD;component/assets/img_Dashboard.png" />
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock VerticalAlignment="Center">Dashboard</TextBlock>
@@ -161,7 +163,7 @@
                             Height="40"
                             HorizontalAlignment="Left">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/vexels/office/1024/disc-icon.png" />
+                                <ImageBrush ImageSource="/QLCHBD-OOAD;component/assets/img_Image.png" />
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock VerticalAlignment="Center">Images</TextBlock>
@@ -181,7 +183,7 @@
                             Height="40"
                             HorizontalAlignment="Left">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/fatcow/farm-fresh/32/lorry-icon.png" />
+                                <ImageBrush ImageSource="/QLCHBD-OOAD;component/assets/img_Delivery.png" />
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock VerticalAlignment="Center">Delivering</TextBlock>
@@ -200,7 +202,7 @@
                             Height="42"
                             HorizontalAlignment="Left">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/streamlineicons/streamline-ux-free/1024/user-male-add-icon.png" />
+                                <ImageBrush ImageSource="/QLCHBD-OOAD;component/assets/img_rental.png" />
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock VerticalAlignment="Center">Rental</TextBlock>
@@ -220,7 +222,7 @@
                             Height="40"
                             HorizontalAlignment="Left">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-5/512/Product-sale-report-icon.png" />
+                                <ImageBrush ImageSource="/QLCHBD-OOAD;component/assets/img_report.png" />
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock VerticalAlignment="Center">Report</TextBlock>
@@ -239,7 +241,7 @@
                             Height="40"
                             HorizontalAlignment="Left">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="https://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Other-Power-Standby-Metro-icon.png" />
+                                <ImageBrush ImageSource="/QLCHBD-OOAD;component/assets/img_Logout.png" />
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock VerticalAlignment="Center">Log out</TextBlock>

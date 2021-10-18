@@ -10,4 +10,8 @@ namespace QLCHBD_OOAD.appUtil
     {
         OVERDUE, RECEIVEDALL, WAITING
     }
+    public enum DeliveryOrderStatus
+    {
+        WATING, DELIVERED, ERROR
+    }
 }
