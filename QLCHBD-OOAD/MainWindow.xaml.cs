@@ -1,6 +1,7 @@
 ﻿using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.view.images;
 using QLCHBD_OOAD.view.rental;
+using QLCHBD_OOAD.view.delivery;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace QLCHBD_OOAD
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool mRestoreIfMove = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,14 +48,14 @@ namespace QLCHBD_OOAD
 
         private void bttDelivering_Click(object sender, RoutedEventArgs e)
         {
-            //Screen content = new Screen();
-            //Holder.Content = content;
+            DeliveryMainPage deliveryMainPage = new DeliveryMainPage();
+            Holder.Content = deliveryMainPage;
         }
 
         private void bttBorrowed_Click(object sender, RoutedEventArgs e)
         {
             RentalMainPage rentalMainPage = new RentalMainPage();
-            Holder.Content = rentalMainPage;       
+            Holder.Content = rentalMainPage;
         }
 
         private void bttReport_Click(object sender, RoutedEventArgs e)
@@ -63,16 +65,6 @@ namespace QLCHBD_OOAD
         }
 
 
-
-
-
-        private void Header_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.DragMove();
-            }
-        }
         private void bttClose_Click(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
@@ -82,17 +74,68 @@ namespace QLCHBD_OOAD
         {
             WindowState = WindowState.Minimized;
         }
-        private void bttMaximize_Click(object sender, RoutedEventArgs e)
+
+
+        private void SwitchWindowState()
         {
             if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
+                bttMaximize.Content = "⬜";
             }
             else
+            {
                 WindowState = WindowState.Maximized;
+                bttMaximize.Content = "❐";
+            }
+        }
+        private void bttMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchWindowState();
+        }
+        private void Header_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if ((ResizeMode == ResizeMode.CanResize) || (ResizeMode == ResizeMode.CanResizeWithGrip))
+                {
+                    SwitchWindowState();
+                }
 
+                return;
+            }
+
+            else if (WindowState == WindowState.Maximized)
+            {
+                mRestoreIfMove = true;
+                return;
+            }
+
+            DragMove();
         }
 
+        private void Header_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mRestoreIfMove)
+            {
+                mRestoreIfMove = false;
+
+                var point = PointToScreen(e.MouseDevice.GetPosition(this));
+
+                Left = point.X - (RestoreBounds.Width * 0.5);
+                Top = point.Y;
+
+                WindowState = WindowState.Normal;
+                bttMaximize.Content = "⬜";
+
+                DragMove();
+            }
+        }
+
+        private void Header_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            mRestoreIfMove = false;
+        }
         private void Holder_Navigated(object sender, NavigationEventArgs e)
         {
 

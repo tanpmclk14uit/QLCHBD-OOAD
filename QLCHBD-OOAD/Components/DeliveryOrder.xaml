@@ -1,0 +1,145 @@
+﻿<Window x:Class="QLCHBD_OOAD.Components.DeliveryOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:QLCHBD_OOAD.Components"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Background="Transparent"
+        Title="DeliveryOrder" Height="300" Width="400">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border
+                                            Grid.ColumnSpan="2"
+                                            BorderThickness="1"
+                                            CornerRadius="10"
+                                            BorderBrush="Black"
+                                            Background="White">
+                                    </Border>
+                                    <Image 
+                                            Grid.Column="0"
+                                            Source="/QLCHBD-OOAD;component/assets/img_netflix.png" 
+                                            Stretch="Fill" Margin="5, 15, 5, 5">
+                                    </Image>
+
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel
+                                                Grid.Row="0" 
+                                                Grid.Column="1"
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Margin="0 0 10 0">
+                                            <TextBlock
+                                                    FontWeight="Bold"
+                                                    FontSize="20"
+                                                    Text="ID: #"></TextBlock>
+                                            <TextBlock
+                                                    x:Name="txtID"
+                                                    FontWeight="Bold"
+                                                    FontSize="20"
+                                                    Text="43"></TextBlock>
+                                        </StackPanel>
+
+                                        <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left">Provider:</TextBlock>
+                                        <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left">Amount:</TextBlock>
+                                        <TextBlock
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left">Date:</TextBlock>
+                                        <TextBlock
+                                                Grid.Row="4"
+                                                Grid.Column="0"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left">Bill:</TextBlock>
+                                        <TextBlock
+                                                Grid.Row="5"
+                                                Grid.Column="0"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left">Status:</TextBlock>
+
+
+                                        <TextBlock
+                                                x:Name="txtProvider"
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left"
+                                                Text="Netflix"></TextBlock>
+                                        <TextBlock
+                                                x:Name="txtAmmount"
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left"
+                                                Text="12"></TextBlock>
+                                        <TextBlock
+                                                x:Name="Date"
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left"
+                                                Text="13/9/2021"></TextBlock>
+                                        <TextBlock
+                                                x:Name="txtBill"
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left"
+                                                Text="Bill"></TextBlock>
+                                        <TextBlock
+                                                x:Name="txtStatus"
+                                                Grid.Row="5"
+                                                Grid.Column="1"
+                                                FontSize="20"
+                                                HorizontalAlignment="Left"
+                                                Text="Delivered"></TextBlock>
+
+                                        <Button
+                                                Grid.Column="0"
+                                                Grid.Row="6"
+                                                FontSize="15"
+                                                FontWeight="Bold"
+                                                Background="#0DBE00"
+                                                >Delivered</Button>
+                                        <Button
+                                                materialDesign:ButtonAssist.CornerRadius="5"
+                                                Grid.Column="1"
+                                                Grid.Row="6"
+                                                FontSize="15"
+                                                FontWeight="Bold"
+                                                Background="#E6343A"
+                                                Margin="5 0 10 0"
+                                                >Cancel</Button>
+                                    </Grid>
+                                </Grid>
+</Window>
