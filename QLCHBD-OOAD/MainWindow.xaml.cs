@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QLCHBD_OOAD.viewmodel;
 
 namespace QLCHBD_OOAD
 {
@@ -42,7 +43,7 @@ namespace QLCHBD_OOAD
         {
             //Screen content = new Screen();
             //Holder.Content = content;
-            ImagesPage imagesPage = new ImagesPage();
+            ImageFunctionPage imagesPage = new ImageFunctionPage();
             Holder.Content = imagesPage;
         }
 
@@ -140,5 +141,6 @@ namespace QLCHBD_OOAD
         {
 
         }
+
     }
 }

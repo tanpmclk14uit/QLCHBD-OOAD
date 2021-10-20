@@ -1,6 +1,8 @@
 ﻿using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.album;
 using QLCHBD_OOAD.model.images;
+using QLCHBD_OOAD.model.retal;
+using QLCHBD_OOAD.view.images;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.viewmodel.images
 {
@@ -17,6 +20,7 @@ namespace QLCHBD_OOAD.viewmodel.images
         private ImagesRepository imagesRepository;
         private AlbumRepository albumRepository;
         private static ImagesViewModel _intance;
+       
 
         private String _searchKey;
         public String searchKey
@@ -40,6 +44,19 @@ namespace QLCHBD_OOAD.viewmodel.images
                 _images = filterByAlbum(value);
                 OnPropertyChanged("filterListImages");
                 OnPropertyChanged("selectedAlbum");
+            }
+        }
+
+        private Images _selectedImage;
+        public Images selectedImage
+        {
+            get => _selectedImage;
+            set
+            {
+                
+                _selectedImage = value;
+                OnPropertyChanged("selectedImage");
+                openImageDetailPage();
             }
         }
         public ImagesViewModel()
@@ -109,6 +126,12 @@ namespace QLCHBD_OOAD.viewmodel.images
                 }
             }
             return imagesRepository.getImagesByAlbum(id);
+        }
+
+        public void openImageDetailPage()
+        {
+            ImageFunctionViewModel.getIntance().SlideFrame = new ImageDetailPage();
+            ImageDetailViewModel.selectedDisk = selectedImage;
         }
 
         private ObservableCollection<Images> filterByInfo()

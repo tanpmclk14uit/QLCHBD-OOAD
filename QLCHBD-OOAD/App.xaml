@@ -33,7 +33,7 @@
                                        Stretch="UniformToFill"                                       
                                        Margin="5 0 0 0"                                                    
                                        Source="/Assets/ic_search.png" 
-                                    />                                    
+                                    />
                                 </Grid>
                             </VisualBrush.Visual>
                         </VisualBrush>
@@ -71,13 +71,13 @@
                                                    />
                             </Grid>
                         </VisualBrush.Visual>
-                    </VisualBrush>                  
-                    <Style TargetType="{x:Type Border}">                        
+                    </VisualBrush>
+                    <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius"
                                 Value="5 5 5 5" />
-                        <Setter Property="Padding" Value="50 0 0 0"/>                       
+                        <Setter Property="Padding" Value="50 0 0 0"/>
                     </Style>
-                   
+
                 </Style.Resources>
                 <Style.Triggers >
                     <Trigger  Property="Text"
@@ -90,7 +90,7 @@
                                  Value="{x:Null}">
                         <Setter Property="Background"
                                     Value="{StaticResource CueBannerBrush}" />
-                    </Trigger>                                   
+                    </Trigger>
 
                 </Style.Triggers>
             </Style>

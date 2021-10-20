@@ -255,7 +255,8 @@
             <Frame 
                 x:Name="Holder"
                 Background="White"
-                NavigationUIVisibility="Hidden">
+                NavigationUIVisibility="Hidden"
+                Content="{Binding SlideFrame, UpdateSourceTrigger=PropertyChanged}">
             </Frame>
 
         </DockPanel>

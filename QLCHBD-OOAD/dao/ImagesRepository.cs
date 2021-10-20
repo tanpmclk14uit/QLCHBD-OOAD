@@ -44,7 +44,7 @@ namespace QLCHBD_OOAD.dao
                 }
                 else
                 {
-                    MessageBox.Show(reader[6].GetType().ToString());
+                    
                     Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
                         (long)reader[9], (int)reader[10], (DateTime)reader[11], (long)reader[13]);
                     images.Add(image);
