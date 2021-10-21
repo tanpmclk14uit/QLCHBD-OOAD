@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace QLCHBD_OOAD.appUtil
 {
      public delegate void ChangePageHandler(string page);
+     public delegate void BackHandler();
 }

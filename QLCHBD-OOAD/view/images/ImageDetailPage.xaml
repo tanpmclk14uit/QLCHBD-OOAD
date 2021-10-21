@@ -17,7 +17,8 @@
             <RowDefinition Height="14*"/>
         </Grid.RowDefinitions>
         <Border HorizontalAlignment="Left">
-            <Button x:Name="btn_back" Height="30" Width="30">
+            <Button x:Name="btn_back" Height="30" Width="30" 
+                    Command="{Binding backCommand}">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>

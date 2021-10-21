@@ -202,7 +202,7 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Border Padding="20 0 20 0">
-            <ComboBox Name="cb_album"
+                <ComboBox Name="cb_album"
                       ItemsSource="{Binding albumName, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding selectedAlbum}"
                       Style="{StaticResource theComboBox}"
@@ -215,7 +215,7 @@
             </Border>
             <Border Grid.Column="1" 
                     Padding="10 0 10 0">
-            <Button 
+                <Button 
                     Content="ADD DISK"
                     FontSize="30"
                     FontWeight="Light"
@@ -244,7 +244,7 @@
                         <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
                     <Border Padding="10 0 0 0">
-                    <TextBlock Text="Search: "
+                        <TextBlock Text="Search: "
                                FontSize="30"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center"/>
@@ -265,9 +265,11 @@
                 </Grid>
             </Border>
         </Grid>
-        <ListView Margin="10" Grid.Row="1" HorizontalAlignment="Left" 
+        <ScrollViewer Grid.Row="1" >
+            <StackPanel x:Name="ListImagesPanel" >
+            <ListView 
                   x:Name="ListImages" ItemsSource="{Binding filterListImages}" SelectedItem="{Binding selectedImage}">
-            <ListView.ItemTemplate >
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border Height="300" Width="200"
                                     Margin="10 0 10 0"
@@ -316,13 +318,15 @@
                         </Grid>
                     </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ItemsControl.ItemTemplate>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate >
-                    <WrapPanel>
+                    <WrapPanel Width="{Binding ActualWidth, ElementName=ListImagesPanel}">
                     </WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

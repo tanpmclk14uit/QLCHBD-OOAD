@@ -1,6 +1,8 @@
-﻿using QLCHBD_OOAD.dao;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.model.retal;
+using QLCHBD_OOAD.view.images;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.images
 {
@@ -29,7 +32,22 @@ namespace QLCHBD_OOAD.viewmodel.images
             }
         }
 
-        
+        public ICommand backCommand { get; set; }
+
+        public static event BackHandler back;
+
+        private ImageDetailViewModel()
+        {
+            backCommand = new RelayCommand<object>((p) => { return true; }, (p) => { back(); });
+            back += backToImages;
+        }
+
+
+        public void backToImages()
+        {
+            ImageFunctionViewModel.getIntance().SlideFrame = new ImagesPage();
+        }
+
         public string name
         {     
             get => selectedDisk.name;
@@ -84,10 +102,7 @@ namespace QLCHBD_OOAD.viewmodel.images
             return _instance;
         }
 
-        private ImageDetailViewModel()
-        {
-
-        }
+       
 
 
     }

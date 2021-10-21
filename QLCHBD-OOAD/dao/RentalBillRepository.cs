@@ -66,11 +66,10 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<ImageRentalInformation> getWaitingRentalBillsByDiskId(string id)
         {
             ObservableCollection<ImageRentalInformation> rentalBills = new ObservableCollection<ImageRentalInformation>();
-            string command = "SELECT rental_bill_item.rental_id, disk.name, rental_bill_item.quantity, rental_bill_item.rental_price, rental_bill_item.due_date FROM `rental_bill` inner join `disk` inner join `rental_bill_item` WHERE disk.id = 1 and disk.id = rental_bill.id and rental_bill.status = \"WAITING\" and disk.id = rental_bill_item.disk_id";
+            string command = "SELECT rental_bill_item.rental_id, disk.name, rental_bill_item.quantity, rental_bill_item.rental_price, rental_bill_item.due_date FROM `rental_bill` inner join `disk` inner join `rental_bill_item` WHERE disk.id = " + id + " and disk.id = rental_bill.id and rental_bill.status = \"WAITING\" and disk.id = rental_bill_item.disk_id";
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                MessageBox.Show(((DateTime)reader[4]).ToString());
                 ImageRentalInformation rentalBill = new ImageRentalInformation((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4]);
                 rentalBills.Add(rentalBill);
                 

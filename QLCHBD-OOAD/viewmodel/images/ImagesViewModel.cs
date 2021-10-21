@@ -41,6 +41,7 @@ namespace QLCHBD_OOAD.viewmodel.images
             set
             {
                 _selectedAlbum = value;
+                _selectedImage = null;
                 _images = filterByAlbum(value);
                 OnPropertyChanged("filterListImages");
                 OnPropertyChanged("selectedAlbum");
@@ -53,10 +54,13 @@ namespace QLCHBD_OOAD.viewmodel.images
             get => _selectedImage;
             set
             {
-                
                 _selectedImage = value;
+                if (selectedImage != null)
+                {
+                    openImageDetailPage();
+                }
                 OnPropertyChanged("selectedImage");
-                openImageDetailPage();
+                _selectedImage = null;
             }
         }
         public ImagesViewModel()
@@ -131,7 +135,11 @@ namespace QLCHBD_OOAD.viewmodel.images
         public void openImageDetailPage()
         {
             ImageFunctionViewModel.getIntance().SlideFrame = new ImageDetailPage();
-            ImageDetailViewModel.selectedDisk = selectedImage;
+            if (selectedImage != null)
+            {
+                ImageDetailViewModel.selectedDisk = selectedImage;
+            }
+
         }
 
         private ObservableCollection<Images> filterByInfo()
