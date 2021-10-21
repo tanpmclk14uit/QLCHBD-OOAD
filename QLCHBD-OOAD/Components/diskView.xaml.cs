@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLCHBD_OOAD.appUtil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace QLCHBD_OOAD.Components
     /// </summary>
     public partial class diskView : Window
     {
+        public static event ToggleFormDialogNotifyHandler ToggleForm;
         public diskView()
         {
             InitializeComponent();
+            ToggleForm();
         }
 
         private void bttDivorce_Click(object sender, RoutedEventArgs e)

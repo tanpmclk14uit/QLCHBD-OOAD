@@ -1,4 +1,6 @@
-﻿using QLCHBD_OOAD.dao;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.album;
 using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.model.retal;
@@ -12,15 +14,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.images
 {
     class ImagesViewModel: BaseViewModel
     {
+ 
         private ImagesRepository imagesRepository;
         private AlbumRepository albumRepository;
         private static ImagesViewModel _intance;
-       
 
         private String _searchKey;
         public String searchKey

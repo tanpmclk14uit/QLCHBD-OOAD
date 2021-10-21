@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using QLCHBD_OOAD.viewmodel;
+using QLCHBD_OOAD.viewmodel.images;
+using QLCHBD_OOAD.Components;
 
 namespace QLCHBD_OOAD
 {
@@ -31,6 +33,7 @@ namespace QLCHBD_OOAD
             InitializeComponent();
             //HomeScreen content = new HomeScreen();
             //Holder.Content = content;
+            diskView.ToggleForm += ToggleForm;
         }
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)
@@ -141,6 +144,20 @@ namespace QLCHBD_OOAD
         {
 
         }
+        private void ToggleForm()
+        {
+            if (this.Opacity == 1)
+            {
+                this.Opacity = 0.3;
+                this.IsEnabled = false;
 
+
+            }
+            else
+            {
+                this.Opacity = 1;
+                this.IsEnabled = true;
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using QLCHBD_OOAD.viewmodel.images;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.viewmodel.images;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +29,10 @@ namespace QLCHBD_OOAD.view.images
             DataContext = ImagesViewModel.getIntance();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            diskView newDiskView = new diskView();
+            newDiskView.Show();
+        }
     }
 }

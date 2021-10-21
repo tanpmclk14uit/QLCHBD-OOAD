@@ -9,4 +9,6 @@ namespace QLCHBD_OOAD.appUtil
 {
      public delegate void ChangePageHandler(string page);
      public delegate void BackHandler();
+     public delegate void OpenAddDiskHandler();
+    public delegate void ToggleFormDialogNotifyHandler();
 }
