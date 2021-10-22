@@ -9,12 +9,28 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.rental
 {
     class RentalPageViewModel : BaseViewModel
     {
+        public static TurnToDetailPageHandler turnAllRentalToDetailRental;
 
+        private RentalBill _selectedRentalBill;
+        public RentalBill selectedRentalBill
+        {
+            get => _selectedRentalBill;
+            set
+            {
+                _selectedRentalBill = value;
+                if(value != null)
+                {
+                    turnAllRentalToDetailRental(_selectedRentalBill.id, _selectedRentalBill.guestId);
+                    _selectedRentalBill = null;
+                }               
+            }
+        }
         public ObservableCollection<RentalBill> filterListRentalBill
         {
             get => filterByInfo();

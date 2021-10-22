@@ -52,7 +52,7 @@ namespace QLCHBD_OOAD.dao
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
             string command = "SELECT * FROM `rental_bill` WHERE ID = "+ id;
             var reader = database.executeCommand(command);
-            while (reader.Read())
+            while (reader != null && reader.Read())
             {
                 RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
                 rentalBills.Add(rentalBill);
@@ -65,7 +65,7 @@ namespace QLCHBD_OOAD.dao
             String name = "";
             string command = "SELECT name FROM `guest` WHERE ID = " + id.ToString();
             var reader = database.executeCommand(command);
-            while (reader.Read())
+            while (reader != null && reader.Read())
             {
                 name = reader[0].ToString();
             }
@@ -77,7 +77,7 @@ namespace QLCHBD_OOAD.dao
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
             string command = "SELECT * FROM `rental_bill` WHERE STATUS = '" + status+"'";
             var reader = database.executeCommand(command);
-            while (reader.Read())
+            while (reader != null && reader.Read())
             {
                 RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long) reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
                 rentalBills.Add(rentalBill);
@@ -90,7 +90,7 @@ namespace QLCHBD_OOAD.dao
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
             string command = "SELECT * FROM `rental_bill`";
             var reader = database.executeCommand(command);
-            while (reader.Read())
+            while (reader!=null && reader.Read())
             {               
                 
                 RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
@@ -99,5 +99,7 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return rentalBills;
         }
+
+       
     }
 }

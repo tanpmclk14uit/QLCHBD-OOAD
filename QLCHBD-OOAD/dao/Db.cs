@@ -38,7 +38,7 @@ namespace QLCHBD_OOAD.dao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Server error");
             }
             return reader;
         }

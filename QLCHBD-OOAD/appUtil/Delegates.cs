@@ -7,5 +7,7 @@ using System.Threading.Tasks;
 //this is use for define delegate
 namespace QLCHBD_OOAD.appUtil
 {
-     public delegate void ChangePageHandler(string page);
+    public delegate void ChangePageHandler(string page);
+    public delegate void TurnToDetailPageHandler(long rentalId, long guestId);
+    public delegate void TurnBackPageHandler();
 }

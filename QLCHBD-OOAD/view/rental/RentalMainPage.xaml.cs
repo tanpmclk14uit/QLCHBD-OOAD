@@ -25,6 +25,18 @@ namespace QLCHBD_OOAD.view.rental
         {
             InitializeComponent();
             DataContext = RentalPageViewModel.getIntance();
+            retalHolder.Content = new RentalAllOrder();
+            RentalPageViewModel.turnAllRentalToDetailRental += RentalNavigation_ChangePage;
+            DetailRentalPageViewModel.turnBackPageHandler += turnBackToAllRentalPage;
+        }
+
+        private void RentalNavigation_ChangePage(long rentalId, long guestId)
+        {
+            retalHolder.Content = new RentalDetailOrder(rentalId, guestId);
+        }
+        private void turnBackToAllRentalPage()
+        {
+            retalHolder.Content = new RentalAllOrder();
         }
     }
 }
