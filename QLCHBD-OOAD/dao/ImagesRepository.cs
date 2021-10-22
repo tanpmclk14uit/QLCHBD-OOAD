@@ -141,5 +141,19 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return result;
         }
-    }
-}
+
+        public bool updateImage(long id, string image, bool isCheck, string name, int quantity, long provider, long idByProvider, string createDate, int loss, int price, string locate, long album)
+        {
+            bool result = false;
+            string command = $"UPDATE `disk` SET disk.album= {album} , disk.checked={isCheck}, disk.name = '{name}', disk.quantity = {quantity}, disk.provider = {provider}, disk.image= '{image}', disk.locate = '{locate}', disk.create_time = CURRENT_TIMESTAMP, disk.update_time= CURRENT_TIMESTAMP	, disk.loss_charges = {loss}, disk.rental_price= {price}, disk.id_by_provider = {idByProvider} WHERE disk.id = {id}";
+            var reader = db.executeCommand(command);
+            if (reader != null)
+            {
+                result = true;
+            }
+            db.closeConnection();
+            return result;
+
+        }
+    }                           
+}                               

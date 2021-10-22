@@ -13,4 +13,5 @@ namespace QLCHBD_OOAD.appUtil
      public delegate void AddImageHandler(Images newImages);
     public delegate void ToggleFormDialogNotifyHandler();
     public delegate void DeleteImageHandler(long id);
+    public delegate void SaveImagesHandler(Images newInfo);
 }

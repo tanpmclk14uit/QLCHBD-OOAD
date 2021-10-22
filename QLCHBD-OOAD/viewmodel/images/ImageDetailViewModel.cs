@@ -48,50 +48,42 @@ namespace QLCHBD_OOAD.viewmodel.images
             ImageFunctionViewModel.getIntance().SlideFrame = new ImagesPage();
         }
 
+        public void onChange()
+        {
+            OnPropertyChanged("name");
+            OnPropertyChanged("image");
+            OnPropertyChanged("nameProvider");
+            OnPropertyChanged("createDate");
+            OnPropertyChanged("quantity");
+        }
+
         public string name
         {     
             get => selectedDisk.name;
-            set
-            {
-                OnPropertyChanged("selectedDisk");
-            }
+
         }
    
         public string image
         {
             get => selectedDisk.image;
-            set
-            {
-                
-                OnPropertyChanged("selectedDisk");
-            }
+
         }
 
     
         public string nameProvider
         {
             get => selectedDisk.idProvider.ToString();
-            set
-            {
-                OnPropertyChanged("selectedDisk");
-            }
+
         }
 
         public string createDate
         {
             get => selectedDisk.createTime.ToString();
-            set
-            {               
-                OnPropertyChanged("selectedDisk");
-            }
+
         }
         public string quantity
         {
             get => selectedDisk.quantity.ToString();
-            set
-            {
-                OnPropertyChanged("selectedDisk");
-            }
         }
         public static ImageDetailViewModel getIntance()
         {
@@ -101,8 +93,6 @@ namespace QLCHBD_OOAD.viewmodel.images
             }
             return _instance;
         }
-
-       
 
 
     }

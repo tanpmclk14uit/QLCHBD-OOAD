@@ -81,7 +81,7 @@ namespace QLCHBD_OOAD.model.images
         public string _locate;
         public string locate
         {
-            get => _name;
+            get => _locate;
         }
 
         private Boolean _isCheck;

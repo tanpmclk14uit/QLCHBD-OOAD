@@ -33,5 +33,11 @@ namespace QLCHBD_OOAD.view.images
             DeleteImageForm deleteImageForm = new DeleteImageForm(ImageDetailViewModel.selectedDisk.id);
             deleteImageForm.Show();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ChangeImageInformationForm changeImageInformationForm = new ChangeImageInformationForm(ImageDetailViewModel.selectedDisk);
+            changeImageInformationForm.Show();
+        }
     }
 }

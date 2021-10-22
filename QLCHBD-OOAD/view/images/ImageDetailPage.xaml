@@ -56,7 +56,7 @@
                         Margin="0 8 7 0"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5"
-                        Background="White">
+                        Background="White" Click="Button_Click_2">
                         <TextBlock Text="CHANGE INFO"
                                FontSize="25"
                                FontFamily="Roboto"
