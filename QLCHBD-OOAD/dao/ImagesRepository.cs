@@ -100,5 +100,46 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return images;
         }
+
+        public bool uploadNewImage(Images images)
+        {
+            int isCheck = 0;
+            if (images.isCheck == true) isCheck = 1;
+            bool result = false;
+            string command = $"INSERT INTO `disk` (`id`, `name`, `album`, `quantity`, `image`, `locate`, `checked`, `rental_price`, `provider`, `id_by_provider`, `loss_charges`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES ('{images.id}','{images.name}','{images.idAlbum}','{images.quantity}','{images.image}','{images.locate}','{isCheck}','{images.rentalPrice}','{images.idProvider}','{images.idByProvider}','{images.lostCharges}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1')";
+            var reader = db.executeCommand(command);
+            if (reader != null)
+            {
+                result = true;
+            }
+            db.closeConnection();
+            return result;
+        }
+
+        public bool deleteDisk(long id)
+        {
+            bool result = false;
+            string command = $"DELETE FROM `disk` WHERE ID = {id}";
+            var reader = db.executeCommand(command);
+            if (reader != null)
+            {
+                result = true;
+            }
+            db.closeConnection();
+            return result;
+        }
+
+        public long getNumberOfImage()
+        {
+            string command = "Select count(*) from `disk`";
+            var reader = db.executeCommand(command);
+            long result = 0;
+             while (reader.Read())
+            {
+                result = (long)reader[0];
+            }
+            db.closeConnection();
+            return result;
+        }
     }
 }

@@ -83,6 +83,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\DeleteImageForm.xaml.cs">
+      <DependentUpon>DeleteImageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="dao\AlbumRepository.cs" />
     <Compile Include="dao\ImagesRepository.cs" />
     <Compile Include="Components\DeliveryOrder.xaml.cs">
@@ -97,6 +100,8 @@
     <Compile Include="model\images\Images.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="viewmodel\delivery\DeliveryPageViewModel.cs" />
+    <Compile Include="viewmodel\images\DeleteImageViewModel.cs" />
+    <Compile Include="viewmodel\images\DiskViewViewModel.cs" />
     <Compile Include="viewmodel\images\ImageDetailViewModel.cs" />
     <Compile Include="viewmodel\images\ImageFunctionViewModel.cs" />
     <Compile Include="viewmodel\images\ImagesViewModel.cs" />
@@ -116,6 +121,10 @@
     <Compile Include="view\rental\RentalMainPage.xaml.cs">
       <DependentUpon>RentalMainPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\DeleteImageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\DeliveryOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

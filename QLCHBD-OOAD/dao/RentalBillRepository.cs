@@ -66,7 +66,7 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<ImageRentalInformation> getWaitingRentalBillsByDiskId(string id)
         {
             ObservableCollection<ImageRentalInformation> rentalBills = new ObservableCollection<ImageRentalInformation>();
-            string command = "SELECT rental_bill_item.rental_id, disk.name, rental_bill_item.quantity, rental_bill_item.rental_price, rental_bill_item.due_date FROM `rental_bill` inner join `disk` inner join `rental_bill_item` WHERE disk.id = " + id + " and disk.id = rental_bill.id and rental_bill.status = \"WAITING\" and disk.id = rental_bill_item.disk_id";
+            string command = "SELECT rental_bill_item.rental_id, disk.name, rental_bill_item.quantity, rental_bill_item.rental_price, rental_bill_item.due_date FROM `rental_bill` inner join `disk` inner join `rental_bill_item` WHERE disk.id = " + id + " and rental_bill_item.rental_id = rental_bill.id and rental_bill.status = \"WAITING\" and disk.id = rental_bill_item.disk_id";
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
@@ -89,6 +89,20 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return name;
         }
+
+        public long getNumberOfBillById(long id)
+        {
+            long number = 0;
+            string command = "SELECT count(*) FROM `rental_bill` inner join `rental_bill_item` WHERE rental_bill.id = rental_bill_item.rental_id and rental_bill_item.disk_id = " + id.ToString() + " and rental_bill_item.quantity != rental_bill_item.receive_quantity";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                number = Convert.ToInt64(reader[0]);
+            }
+            database.closeConnection();
+            return number;
+        }
+
         public ObservableCollection<RentalBill> getRentalBillsByFilterStatus(String status)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();

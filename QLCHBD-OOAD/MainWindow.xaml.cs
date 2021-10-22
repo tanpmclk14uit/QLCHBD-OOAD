@@ -34,6 +34,7 @@ namespace QLCHBD_OOAD
             //HomeScreen content = new HomeScreen();
             //Holder.Content = content;
             diskView.ToggleForm += ToggleForm;
+            DeleteImageForm.ToggleForm += ToggleForm;
         }
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)

@@ -145,6 +145,7 @@
                         <Button Width="175"
                         Height="62"
                         Margin="0 0 7 0"
+                        Click="Button_Click"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         Background="#707070">

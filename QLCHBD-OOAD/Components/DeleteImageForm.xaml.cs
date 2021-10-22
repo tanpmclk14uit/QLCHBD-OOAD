@@ -1,4 +1,4 @@
-﻿using QLCHBD_OOAD.Components;
+﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.viewmodel.images;
 using System;
 using System.Collections.Generic;
@@ -12,26 +12,35 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLCHBD_OOAD.view.images
+namespace QLCHBD_OOAD.Components
 {
     /// <summary>
-    /// Interaction logic for ImageDetailPage.xaml
+    /// Interaction logic for DeleteImageForm.xaml
     /// </summary>
-    public partial class ImageDetailPage : Page
+    public partial class DeleteImageForm : Window
     {
-        public ImageDetailPage()
+
+        public static event ToggleFormDialogNotifyHandler ToggleForm;
+        public DeleteImageForm(long id)
         {
             InitializeComponent();
-            DataContext = ImageDetailViewModel.getIntance();
+            ToggleForm();
+            DataContext = new DeleteImageViewModel(id);
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DeleteImageForm deleteImageForm = new DeleteImageForm(ImageDetailViewModel.selectedDisk.id);
-            deleteImageForm.Show();
+            this.Close();
+            ToggleForm();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            ToggleForm();
         }
     }
 }

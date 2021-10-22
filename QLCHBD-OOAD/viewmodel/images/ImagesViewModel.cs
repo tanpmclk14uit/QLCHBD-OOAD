@@ -80,10 +80,16 @@ namespace QLCHBD_OOAD.viewmodel.images
         {
             if (_intance == null)
             {
-                _intance = new ImagesViewModel();
+                return _intance = new ImagesViewModel();
             }
             return _intance;
         }
+
+        public void onChange()
+        {
+            _images = imagesRepository.getAllImages();
+            OnPropertyChanged("filterListImages");
+        }    
 
         private ObservableCollection<Images> _images;
         public ObservableCollection<Images> images
@@ -116,12 +122,10 @@ namespace QLCHBD_OOAD.viewmodel.images
             return listAlbumName;
         }
 
-
         public ObservableCollection<Images> filterListImages
         {
             get => filterByInfo();
         }
-
         private ObservableCollection<Images> filterByAlbum(string albumName)
         {
             long id = 0;
