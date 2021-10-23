@@ -26,15 +26,41 @@
                     Stretch="Fill" ImageSource="https://www.indiewire.com/wp-content/uploads/2019/12/us-1.jpg?w=758"/>
             </Border.Background>
         </Border>
-
-        <TextBlock
-            x:Name="txtCount"
-            FontSize="18"
-            FontWeight="Bold"
+        <Grid            
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Margin="0,0,5,0"
-            >90/200</TextBlock>
+            Margin="0,0,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Width="auto"
+            x:Name="txtCount"
+            FontSize="18"
+             
+                
+            FontWeight="Bold"            
+            >90</TextBlock>
+            <TextBlock
+                Width="auto"
+           
+            FontSize="18"
+             Grid.Column="1"
+                
+            FontWeight="Bold"            
+            >/</TextBlock>
+            
+            <TextBlock
+              
+            Grid.Column="2"
+            FontSize="18"
+            Text="200"
+            FontWeight="Bold"           
+            />
+        </Grid>
+        
 
         <TextBlock
             x:Name="txtName"

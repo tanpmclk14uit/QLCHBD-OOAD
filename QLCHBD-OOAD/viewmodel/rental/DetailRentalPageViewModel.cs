@@ -17,7 +17,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
     {
    
 
-        public static TurnBackPageHandler turnBackPageHandler;
+        public static event TurnBackPageHandler turnBackPageHandler;
 
         private DetailRentalBillReponsitory detailRentalBillReponsitory;
 

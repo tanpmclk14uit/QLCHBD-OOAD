@@ -184,6 +184,7 @@
                     Command="{Binding Cancel}"
                     Content="CANCEL"              
                     Height="60"
+                    Grid.Column="1"
                     FontSize="30"
                     Background="#FF003D"     
                     BorderThickness="1px"
@@ -193,7 +194,7 @@
                     />
                 <Button    
                     Command="{Binding Confirm}"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     Content="CONFIRM"   
                     FontSize="30"
                     Foreground="White"
@@ -225,10 +226,10 @@
                            FontSize="20"
                            />
                 <TextBox TextWrapping="Wrap"                          
-                         MaxLines="1"
+                         MaxLines="1"                         
                          VerticalContentAlignment="Center"
                          Height="40"
-                         Text="{Binding seachKey, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding keyword, UpdateSourceTrigger=PropertyChanged}"
                          Margin="0 0 10 0"  
                          FontSize="20"
                          Style="{DynamicResource seach}"
@@ -236,12 +237,14 @@
             </Grid>
             <ScrollViewer Grid.Row="1" >
                 <StackPanel Margin="20 5 0 0"  x:Name="panel">
-                    <ListView x:Name="listImage">
+                    <ListView  SelectedItem="{Binding selectedDisk, Mode=TwoWay}"
+                               SelectionMode="Single"
+                               x:Name="listImage"
+                               ItemsSource="{Binding allImages}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="300" Width="185">
-                                    <Border
-                                    
+                                    <Border                                    
                                     BorderThickness="1"
                                     CornerRadius="5"
                                     BorderBrush="Black"
@@ -256,26 +259,49 @@
                                             <ImageBrush
                                             x:Name="imgDisk"
                                             Stretch="UniformToFill"
-                                            ImageSource="/Assets/us-1.jpg"/>
+                                            ImageSource="{Binding image}"/>
                                         </Border.Background>
 
                                     </Border>
-                                    <TextBlock
-                                         x:Name="txtCount"
-                                         FontSize="18"                                    
-                                         FontWeight="Bold"
+
+                                    <Grid            
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Top"
-                                         Margin="0,3,7,0"
-                                         >90/200</TextBlock>
-                                    <TextBlock
+                                         Margin="0,3,7,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                             Width="auto"                                             
+                                             FontSize="18"           
+                                             FontWeight="Bold"    
+                                            Text="{Binding remaining}"
+                                            ></TextBlock>
+                                        <TextBlock
+                                            Width="auto"
+                                            FontSize="18"
+                                            Grid.Column="1"                
+                                            FontWeight="Bold"            
+                                            >/</TextBlock>
+                                        <TextBlock              
+                                            Grid.Column="2"
+                                            FontSize="18"
+                                            Text="{Binding quantity}"
+                                          
+                                            FontWeight="Bold"           
+                                            />
+                                    </Grid>
+                                    <Label
+                                        Content="{Binding name}"
                                         x:Name="txtName"
                                         FontSize="18"
                                         FontWeight="Bold"
-                                        Margin="0 0 0 3"
+                                        Margin="0 0 0 0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
-                                        >US</TextBlock>
+                                        />
 
                                 </Grid>
                             </DataTemplate>

@@ -8,9 +8,7 @@
         WindowStyle="None"
         MinHeight="900"
         WindowStartupLocation="CenterScreen"
-        MinWidth="1600"
-        WindowState="Maximized"
-        AllowsTransparency="True"
+        MinWidth="1600"        
         ResizeMode="CanResizeWithGrip">
     <Window.Resources>
 

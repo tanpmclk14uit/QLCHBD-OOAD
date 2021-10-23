@@ -25,32 +25,12 @@ namespace QLCHBD_OOAD.view.rental
         {
             InitializeComponent();
             DataContext = new RentalAddPageViewModel();
-            var list = new List<String>();
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            list.Add("hihi");
-            listImage.ItemsSource = list;
+            RenalDiskDetailForm.clearListViewSelected += RenalDiskDetailForm_clearListViewSelected;
+        }
+
+        private void RenalDiskDetailForm_clearListViewSelected()
+        {
+            listImage.UnselectAll();
         }
     }
 }

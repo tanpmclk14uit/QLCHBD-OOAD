@@ -54,6 +54,58 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return images;
         }
+        public ObservableCollection<Images> getAllImagesForRental()
+        {
+            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            string command = "Select id, name, image, quantity, rented from disk";
+            var reader = db.executeCommand(command);
+            while(reader!= null && reader.Read())
+            {
+                images.Add(new Images((long)reader[0], (string)reader[1], (string)reader[2], (int)reader[3], (int)reader[4]));
+            }
+            return images;
+        }
+        public string getProviderNameById(long id)
+        {
+            string providerName = null;
+            string command = "SELECT provider.name FROM provider INNER JOIN disk WHERE disk.provider = provider.id && disk.id = " + id;
+            var reader = db.executeCommand(command);
+            if(reader != null && reader.Read())
+            {
+                providerName = reader[0].ToString();
+            }
+            return providerName;
+        }
+        public int getPriceById(long id)
+        {
+            int price = 0;
+            string command = "SELECT rental_price FROM disk WHERE disk.id = " + id;
+            var reader = db.executeCommand(command);
+            if (reader != null && reader.Read())
+            {
+                price = (int)reader[0];
+            }
+            return price;
+        }
+        public ObservableCollection<Images> getAllImagesForRentalLikeKeywordAndMatchId(string key)
+        {
+            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            string command = "Select id, name, image, quantity, rented from disk where name like '%" + key +"%'";
+            var reader = db.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                images.Add(new Images((long)reader[0], (string)reader[1], (string)reader[2], (int)reader[3], (int)reader[4]));
+            }
+            command = "Select id, name, image, quantity, rented from disk where id like '%" + key + "%'";
+            reader = db.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                images.Add(new Images((long)reader[0], (string)reader[1], (string)reader[2], (int)reader[3], (int)reader[4]));
+            }
+            return images;
+        }
+
+
 
         public ObservableCollection<Images> getImagesById(string id)
         {

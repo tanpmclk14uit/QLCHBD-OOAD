@@ -114,6 +114,7 @@
     <Compile Include="viewmodel\images\ImagesViewModel.cs" />
     <Compile Include="viewmodel\rental\DetailRentalPageViewModel.cs" />
     <Compile Include="viewmodel\rental\RentalAddPageViewModel.cs" />
+    <Compile Include="viewmodel\rental\RentalDiskDetailFormViewModel.cs" />
     <Compile Include="viewmodel\rental\RentalPageViewModel.cs" />
     <Compile Include="view\delivery\DeliveryMainPage.xaml.cs">
       <DependentUpon>DeliveryMainPage.xaml</DependentUpon>
@@ -126,6 +127,9 @@
     </Compile>
     <Compile Include="view\images\ImagesPage.xaml.cs">
       <DependentUpon>ImagesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\rental\RenalDiskDetailForm.xaml.cs">
+      <DependentUpon>RenalDiskDetailForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\rental\RentalAddPage.xaml.cs">
       <DependentUpon>RentalAddPage.xaml</DependentUpon>
@@ -278,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\images\ImagesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\rental\RenalDiskDetailForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
