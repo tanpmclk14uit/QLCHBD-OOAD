@@ -17,6 +17,10 @@ namespace QLCHBD_OOAD.viewmodel.rental
     {
         public static TurnToDetailPageHandler turnAllRentalToDetailRental;
 
+        public static ChangePageHandler turnToAddPage;
+
+        public ICommand NewOrder { get; set; }
+
         private RentalBill _selectedRentalBill;
         public RentalBill selectedRentalBill
         {
@@ -125,8 +129,8 @@ namespace QLCHBD_OOAD.viewmodel.rental
             seachKey = "";
             _rentalBills = new ObservableCollection<RentalBill>();
             rentalBillReponsitory = RentalBillRepository.getIntance();
+            NewOrder = new RelayCommand<object>((p) => { return true; }, (p) => { turnToAddPage(); });
             setUpStatuses();
-
         }
         private ObservableCollection<RentalBill> filterByInfo()
         {

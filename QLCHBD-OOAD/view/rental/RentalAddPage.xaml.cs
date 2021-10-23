@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLCHBD_OOAD.viewmodel.rental;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,33 @@ namespace QLCHBD_OOAD.view.rental
         public RentalAddPage()
         {
             InitializeComponent();
+            DataContext = new RentalAddPageViewModel();
+            var list = new List<String>();
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            list.Add("hihi");
+            listImage.ItemsSource = list;
         }
     }
 }

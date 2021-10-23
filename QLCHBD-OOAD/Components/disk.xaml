@@ -16,8 +16,6 @@
             BorderBrush="Black"
             Background="White">
         </Border>
-
-
         <Border
             Height="260"
             Width="180"
