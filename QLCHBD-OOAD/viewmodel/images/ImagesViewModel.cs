@@ -1,6 +1,10 @@
-﻿using QLCHBD_OOAD.dao;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.album;
 using QLCHBD_OOAD.model.images;
+using QLCHBD_OOAD.model.retal;
+using QLCHBD_OOAD.view.images;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,11 +13,14 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.images
 {
     class ImagesViewModel: BaseViewModel
     {
+ 
         private ImagesRepository imagesRepository;
         private AlbumRepository albumRepository;
         private static ImagesViewModel _intance;
@@ -37,9 +44,26 @@ namespace QLCHBD_OOAD.viewmodel.images
             set
             {
                 _selectedAlbum = value;
+                _selectedImage = null;
                 _images = filterByAlbum(value);
                 OnPropertyChanged("filterListImages");
                 OnPropertyChanged("selectedAlbum");
+            }
+        }
+
+        private Images _selectedImage;
+        public Images selectedImage
+        {
+            get => _selectedImage;
+            set
+            {
+                _selectedImage = value;
+                if (selectedImage != null)
+                {
+                    openImageDetailPage();
+                }
+                OnPropertyChanged("selectedImage");
+                _selectedImage = null;
             }
         }
         public ImagesViewModel()
@@ -56,10 +80,16 @@ namespace QLCHBD_OOAD.viewmodel.images
         {
             if (_intance == null)
             {
-                _intance = new ImagesViewModel();
+                return _intance = new ImagesViewModel();
             }
             return _intance;
         }
+
+        public void onChange()
+        {
+            _images = imagesRepository.getAllImages();
+            OnPropertyChanged("filterListImages");
+        }    
 
         private ObservableCollection<Images> _images;
         public ObservableCollection<Images> images
@@ -92,12 +122,10 @@ namespace QLCHBD_OOAD.viewmodel.images
             return listAlbumName;
         }
 
-
         public ObservableCollection<Images> filterListImages
         {
             get => filterByInfo();
         }
-
         private ObservableCollection<Images> filterByAlbum(string albumName)
         {
             long id = 0;
@@ -109,6 +137,16 @@ namespace QLCHBD_OOAD.viewmodel.images
                 }
             }
             return imagesRepository.getImagesByAlbum(id);
+        }
+
+        public void openImageDetailPage()
+        {
+            ImageFunctionViewModel.getIntance().SlideFrame = new ImageDetailPage();
+            if (selectedImage != null)
+            {
+                ImageDetailViewModel.selectedDisk = selectedImage;
+            }
+
         }
 
         private ObservableCollection<Images> filterByInfo()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QLCHBD_OOAD.model.images
 {
-    class Images
+    public class Images
     {
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
             DateTime createTime, DateTime updateTime, long createBy, long updateBy )
@@ -81,7 +81,7 @@ namespace QLCHBD_OOAD.model.images
         public string _locate;
         public string locate
         {
-            get => _name;
+            get => _locate;
         }
 
         private Boolean _isCheck;

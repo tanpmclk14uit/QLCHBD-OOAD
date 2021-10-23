@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.model.retal;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.dao
 {
@@ -60,6 +62,21 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return rentalBills;
         }
+
+        public ObservableCollection<ImageRentalInformation> getWaitingRentalBillsByDiskId(string id)
+        {
+            ObservableCollection<ImageRentalInformation> rentalBills = new ObservableCollection<ImageRentalInformation>();
+            string command = "SELECT rental_bill_item.rental_id, disk.name, rental_bill_item.quantity, rental_bill_item.rental_price, rental_bill_item.due_date FROM `rental_bill` inner join `disk` inner join `rental_bill_item` WHERE disk.id = " + id + " and rental_bill_item.rental_id = rental_bill.id and rental_bill.status = \"WAITING\" and disk.id = rental_bill_item.disk_id";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                ImageRentalInformation rentalBill = new ImageRentalInformation((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4]);
+                rentalBills.Add(rentalBill);
+                
+            }
+            database.closeConnection();
+            return rentalBills;
+        }
         private String getNameById(long id)
         {
             String name = "";
@@ -72,6 +89,20 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return name;
         }
+
+        public long getNumberOfBillById(long id)
+        {
+            long number = 0;
+            string command = "SELECT count(*) FROM `rental_bill` inner join `rental_bill_item` WHERE rental_bill.id = rental_bill_item.rental_id and rental_bill_item.disk_id = " + id.ToString() + " and rental_bill_item.quantity != rental_bill_item.receive_quantity";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                number = Convert.ToInt64(reader[0]);
+            }
+            database.closeConnection();
+            return number;
+        }
+
         public ObservableCollection<RentalBill> getRentalBillsByFilterStatus(String status)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();

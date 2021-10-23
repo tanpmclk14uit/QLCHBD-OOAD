@@ -1,5 +1,4 @@
-﻿using QLCHBD_OOAD.appUtil;
-using QLCHBD_OOAD.Components;
+﻿using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.viewmodel.images;
 using System;
 using System.Collections.Generic;
@@ -19,20 +18,26 @@ using System.Windows.Shapes;
 namespace QLCHBD_OOAD.view.images
 {
     /// <summary>
-    /// Interaction logic for ImagesPage.xaml
+    /// Interaction logic for ImageDetailPage.xaml
     /// </summary>
-    public partial class ImagesPage : Page
+    public partial class ImageDetailPage : Page
     {
-        public ImagesPage()
+        public ImageDetailPage()
         {
             InitializeComponent();
-            DataContext = ImagesViewModel.getIntance();
+            DataContext = ImageDetailViewModel.getIntance();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            diskView newDiskView = new diskView();
-            newDiskView.Show();
+            DeleteImageForm deleteImageForm = new DeleteImageForm(ImageDetailViewModel.selectedDisk.id);
+            deleteImageForm.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ChangeImageInformationForm changeImageInformationForm = new ChangeImageInformationForm(ImageDetailViewModel.selectedDisk);
+            changeImageInformationForm.Show();
         }
     }
 }
