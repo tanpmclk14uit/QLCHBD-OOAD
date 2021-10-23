@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.appUtil;
+﻿using MySqlConnector;
+using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.model.retal;
 using System;
@@ -19,7 +20,7 @@ namespace QLCHBD_OOAD.dao
 
         public static RentalBillRepository getIntance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new RentalBillRepository();
             }
@@ -33,13 +34,13 @@ namespace QLCHBD_OOAD.dao
 
         private RentalBillStatus stringToRentalBillStatus(String status)
         {
-            if(status == RentalBillStatus.OVERDUE.ToString())
+            if (status == RentalBillStatus.OVERDUE.ToString())
             {
                 return RentalBillStatus.OVERDUE;
             }
             else
             {
-                if(status == RentalBillStatus.RECEIVEDALL.ToString())
+                if (status == RentalBillStatus.RECEIVEDALL.ToString())
                 {
                     return RentalBillStatus.RECEIVEDALL;
                 }
@@ -52,7 +53,7 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<RentalBill> getRentalBillsById(string id)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
-            string command = "SELECT * FROM `rental_bill` WHERE ID = "+ id;
+            string command = "SELECT * FROM `rental_bill` WHERE ID = " + id;
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
@@ -72,7 +73,7 @@ namespace QLCHBD_OOAD.dao
             {
                 ImageRentalInformation rentalBill = new ImageRentalInformation((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4]);
                 rentalBills.Add(rentalBill);
-                
+
             }
             database.closeConnection();
             return rentalBills;
@@ -106,11 +107,11 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<RentalBill> getRentalBillsByFilterStatus(String status)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
-            string command = "SELECT * FROM `rental_bill` WHERE STATUS = '" + status+"'";
+            string command = "SELECT * FROM `rental_bill` WHERE STATUS = '" + status + "'";
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long) reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
+                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
                 rentalBills.Add(rentalBill);
             }
             database.closeConnection();
@@ -121,16 +122,52 @@ namespace QLCHBD_OOAD.dao
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
             string command = "SELECT * FROM `rental_bill`";
             var reader = database.executeCommand(command);
-            while (reader!=null && reader.Read())
-            {               
-                
+            while (reader != null && reader.Read())
+            {
+
                 RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
                 rentalBills.Add(rentalBill);
             }
             database.closeConnection();
             return rentalBills;
         }
+        private MySqlConnection connection { get; set; }
+        private const string connectionString = "server=localhost;user id=root;database=ooad_qlchbd;port=3306;password=123456";
+        public void createNewRentalBill(RentalBill rental, long staffID, ObservableCollection<RentalBillItem> rentalBillItems)
+        {
+            long lastInsertId = -1;
+            string command = $"INSERT INTO `rental_bill`(`guess_id`, `create_by`, `total_price`, `status`) VALUES ('{rental.guestId}','{staffID}','{rental.totalPrice}','{rental.status}')";
+           
+            try
+            {
+                connection = new MySqlConnection(connectionString);
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand(command, connection);
+                cmd.ExecuteNonQuery();
+                lastInsertId = long.Parse(cmd.LastInsertedId.ToString());
+                connection.Close();
+                if (lastInsertId != -1)
+                {
+                    foreach (RentalBillItem rentalBill in rentalBillItems)
+                    {
+                        createNewRentalBillItem(rentalBill, lastInsertId);
+                    }
+                }
 
-       
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                database.closeConnection();
+            }
+        }
+        private void createNewRentalBillItem(RentalBillItem rentalBillItem, long rentalId)
+        {
+            string format = "yyyy-MM-dd HH:mm:ss";
+            string command = $"INSERT INTO `rental_bill_item`(`rental_id`, `quantity`, `rental_price`, `disk_name`, `disk_image`, `disk_id`, `due_date`, `receive_quantity`) VALUES ('{rentalId}','{rentalBillItem.amount}','{rentalBillItem.rentalPrice}','{rentalBillItem.diskName}','{rentalBillItem.image}','{rentalBillItem.diskId}','{rentalBillItem.getDueDate().ToString(format)}','{rentalBillItem.returned}')";
+           
+            var reader = database.executeCommand(command);
+            database.closeConnection();
+        }
     }
 }

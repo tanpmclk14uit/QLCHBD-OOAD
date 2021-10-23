@@ -11,6 +11,7 @@ namespace QLCHBD_OOAD.viewmodel
 {
     public class BaseViewModel: INotifyPropertyChanged
     {
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -91,5 +92,6 @@ namespace QLCHBD_OOAD.viewmodel
             remove { CommandManager.RequerySuggested -= value; }
         }
     }
+
 
 }

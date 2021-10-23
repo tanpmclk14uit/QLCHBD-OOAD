@@ -10,5 +10,5 @@
       d:DesignWidth="1580"
       Title="RentalMainPage">
 
-    <Frame Background="#E6EBEE" NavigationUIVisibility="Hidden" x:Name="retalHolder"/>
+    <Frame  Background="#E6EBEE" NavigationUIVisibility="Hidden" x:Name="retalHolder"/>
 </Page>

@@ -29,22 +29,24 @@ namespace QLCHBD_OOAD.view.rental
             RentalPageViewModel.turnAllRentalToDetailRental += RentalNavigation_ChangePage;
             DetailRentalPageViewModel.turnBackPageHandler += turnBackToAllRentalPage;
             RentalPageViewModel.turnToAddPage += turnToAddPage;
-            RentalAddPageViewModel.turnBackToRentalAllOrders += turnBackToAllRentalPage;
+            RentalAddPageViewModel.turnBackToRentalAllOrders += turnBackToAllRentalPage;            
         }
-
         
-
         private void turnToAddPage(string page)
         {
+            
             retalHolder.Content = new RentalAddPage();
         }
 
         private void RentalNavigation_ChangePage(long rentalId, long guestId)
         {
+
             retalHolder.Content = new RentalDetailOrder(rentalId, guestId);
+            
         }
         private void turnBackToAllRentalPage()
         {
+            retalHolder.ClearValue(UidProperty);
             retalHolder.Content = new RentalAllOrder();
         }
     }

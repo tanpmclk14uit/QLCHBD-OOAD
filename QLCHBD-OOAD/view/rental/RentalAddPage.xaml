@@ -51,7 +51,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label ContentStringFormat="ID: {0}"
-                               Content="12345"
+                               Content="1"
                                FontSize="20"
                                FontWeight="Bold"   
                                VerticalAlignment="Center"
@@ -69,13 +69,13 @@
                 </Grid>
             </Grid>
             <Grid Margin="10 10 10 0" Grid.Row="1" Background="White">
-                <DataGrid ItemsSource="{Binding rentalBillItems}"
+                <DataGrid ItemsSource="{Binding rentalBillItems, Mode=OneWay}"
                       x:Name="rentalItem"
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
                       >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding diskId}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="25">
+                        <DataGridTextColumn Binding="{Binding diskId}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">
                             <DataGridTextColumn.Header>
                                 <TextBlock  Text="Id" FontSize="25" HorizontalAlignment="Center"/>
                             </DataGridTextColumn.Header>
@@ -91,7 +91,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding diskName}" CanUserSort="True" Width="2.5*" IsReadOnly="True" FontSize="25">
+                        <DataGridTextColumn Binding="{Binding diskName}" CanUserSort="True" Width="2.5*" IsReadOnly="True" FontSize="20">
                             <DataGridTextColumn.Header>
                                 <TextBlock Text="Disk name" FontSize="25" HorizontalAlignment="Center"/>
                             </DataGridTextColumn.Header>
@@ -107,7 +107,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding rentalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="25">
+                        <DataGridTextColumn Binding="{Binding rentalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
                             <DataGridTextColumn.Header>
                                 <TextBlock Text="Price" FontSize="25" TextAlignment="Right"/>
                             </DataGridTextColumn.Header>
@@ -123,7 +123,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding amount}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="25">
+                        <DataGridTextColumn Binding="{Binding amount}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
                             <DataGridTextColumn.Header>
                                 <TextBlock Text="Amount" FontSize="25" HorizontalAlignment="Center"/>
                             </DataGridTextColumn.Header>
@@ -140,7 +140,7 @@
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Binding="{Binding dueDate}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="25">
+                        <DataGridTextColumn Binding="{Binding dueDate}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
                             <DataGridTextColumn.Header>
                                 <TextBlock Text="Due date" FontSize="25" HorizontalAlignment="Center"/>
                             </DataGridTextColumn.Header>
@@ -173,7 +173,7 @@
                        ContentStringFormat=" {0} VNĐ"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Content="2500000"/>
+                       Content="{Binding totalPrice}"/>
             </Grid>
             <Grid Grid.Row="3" Margin="10">
                 <Grid.ColumnDefinitions>

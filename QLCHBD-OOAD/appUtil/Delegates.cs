@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.model.images;
+using QLCHBD_OOAD.model.retal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,4 +18,6 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void TurnToDetailPageHandler(long rentalId, long guestId);
     public delegate void TurnBackPageHandler();
     public delegate void ClearListViewSelected();
+    public delegate void CloseFormHandler();
+    public delegate void AddNewRentalBillItem(RentalBillItem rentalBillItem);
 }

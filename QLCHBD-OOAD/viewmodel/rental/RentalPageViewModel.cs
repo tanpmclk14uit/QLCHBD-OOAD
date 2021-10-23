@@ -131,7 +131,15 @@ namespace QLCHBD_OOAD.viewmodel.rental
             rentalBillReponsitory = RentalBillRepository.getIntance();
             NewOrder = new RelayCommand<object>((p) => { return true; }, (p) => { turnToAddPage(); });
             setUpStatuses();
+            RentalAddPageViewModel.turnBackToRentalAllOrders += RentalAddPageViewModel_turnBackToRentalAllOrders;
         }
+
+        private void RentalAddPageViewModel_turnBackToRentalAllOrders()
+        {
+            selectedStatus = "All";
+            OnPropertyChanged("filterListRentalBill");
+        }
+
         private ObservableCollection<RentalBill> filterByInfo()
         {
             ObservableCollection<RentalBill> filterList = new ObservableCollection<RentalBill>();

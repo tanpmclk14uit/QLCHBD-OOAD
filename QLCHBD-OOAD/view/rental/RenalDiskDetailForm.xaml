@@ -111,14 +111,14 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Returned date: "
-                               
+                    <TextBlock Text="Returned date: "                               
                                FontSize="30"
                                FontWeight="Bold"
                                FontFamily="Roboto"
                                VerticalAlignment="Center"></TextBlock>
                     <DatePicker Grid.Column="1"                                
-                                Height="50"               
+                                Height="50"     
+                                SelectedDate="{Binding returnDate}"
                                  Focusable="False"
                                 FontSize="30"                                
                                 IsTodayHighlighted="True"                               
@@ -151,7 +151,7 @@
                                FontWeight="Bold"
                                FontFamily="Roboto"></TextBlock>
                     <Button x:Name="btnReduce"
-                            
+                            Command="{Binding ReduceAmount}"
                             Grid.Column="1"
                             BorderThickness="0"
                             Height="55.86"
@@ -163,12 +163,12 @@
                             Background="#D9D7D7"></Button>
                     <Label x:Name="lbNumber"
                            Grid.Column="2"
-                           Content="0"
+                           Content="{Binding amount}"                           
                            VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              FontSize="36"></Label>
-                    <Button x:Name="btnAdd"
-                           
+                    <Button x:Name="btnAdd"  
+                            Command="{Binding AddMoreAmount}"
                             Grid.Column="3"
                             BorderThickness="0"
                             Height="55.86"
@@ -186,7 +186,7 @@
                     </Grid.ColumnDefinitions>
                     <Button Content="ADD"
                             x:Name="btnSave"                            
-                            Command="{Binding addBookCommand}"
+                            Command="{Binding Add}"
                             FontSize="25"
                             FontWeight="Bold"
                             materialDesign:ButtonAssist.CornerRadius="14"

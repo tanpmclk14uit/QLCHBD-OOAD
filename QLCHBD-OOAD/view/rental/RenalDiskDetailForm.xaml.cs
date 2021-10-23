@@ -29,13 +29,25 @@ namespace QLCHBD_OOAD.view.rental
             InitializeComponent();
             DataContext = new RentalDiskDetailFormViewModel(selectedImage);
             ToggleForm();
+            RentalDiskDetailFormViewModel.closeForm += RentalDiskDetailFormViewModel_closeForm;
+        }
+
+        private void RentalDiskDetailFormViewModel_closeForm()
+        {
+            clearListViewSelected();                      
+            this.Close();            
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            ToggleForm();
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
             clearListViewSelected();
-            ToggleForm();
+            this.Close();        
+            
         }
     }
 }

@@ -30,6 +30,7 @@ namespace QLCHBD_OOAD.view.rental
 
         private void RenalDiskDetailForm_clearListViewSelected()
         {
+
             listImage.UnselectAll();
         }
     }
