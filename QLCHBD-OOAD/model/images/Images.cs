@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLCHBD_OOAD.dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,6 +71,12 @@ namespace QLCHBD_OOAD.model.images
         public int quantity
         {
             get => _quantity;
+        }
+
+        private String _displayQuantity;
+        public String displayQuantity
+        {
+            get => (_quantity - RentalBillRepository.getIntance().getNumberInRentalById(id)).ToString() + "/" + _quantity.ToString();
         }
 
         public string _image;
