@@ -12,6 +12,7 @@ using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.delivery.Add_Order;
+using System.Windows;
 
 namespace QLCHBD_OOAD.viewmodel.delivery
 {
@@ -37,18 +38,19 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         private DeliveryPageViewModel()
         {
             _seachKey = "";
-            _deliOrders = new ObservableCollection<DeliOrder>();
+            deliOrders = new ObservableCollection<DeliOrder>();
             deliOrderlReponsitory = DeliveryOrderRepository.getIntance();
             setUpStatusses();
 
             AddOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrderDelivery(); });
             ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
             AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DeliveryAskForm askForm = new DeliveryAskForm(); askForm.ShowDialog(); });
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
+            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete();  });
         }
 
         private void onDelete()
         {
+            MessageBox.Show("Tetsing");
             deliOrderlReponsitory.deleteFormWithID(selectedDeliOrder.id.ToString());
             deliOrders.Remove(selectedDeliOrder);
         }
@@ -65,7 +67,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         }
         //-------------------------------------------------------------------------------------------------
         private ObservableCollection<DeliOrder> _deliOrders;
-        public ObservableCollection<DeliOrder> deliOrders => _deliOrders;
+        public ObservableCollection<DeliOrder> deliOrders
+        {
+            get => _deliOrders;
+            set
+            {
+                _deliOrders = value;
+            }
+        }
         //-------------------------------------------------------------------------------------------------
         private ObservableCollection<String> _selectedStatuses;
         public ObservableCollection<String> selectedStatuses => _selectedStatuses;

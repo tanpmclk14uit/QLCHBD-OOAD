@@ -10,10 +10,9 @@
         WindowStyle="None"
         Topmost="True"
         ResizeMode="NoResize" 
+        Background="Transparent"
+        AllowsTransparency="True"
         Title="DeleteOrderForm" Height="313" Width="1028">
-    <Window.Background>
-        <SolidColorBrush Color="White" Opacity="0"/>
-    </Window.Background>
     <Border CornerRadius="36" Background="White">
         <Grid>
             <Grid.RowDefinitions>
