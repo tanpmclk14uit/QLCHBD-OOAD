@@ -6,23 +6,55 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
+using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.view.delivery.Add_Order;
 
 namespace QLCHBD_OOAD.viewmodel.delivery
 {
     class DeliveryPageViewModel : BaseViewModel
     {
-        public ObservableCollection<DeliOrder> fillerListDeliOder => filterByInfo();
         private DeliveryOrderRepository deliOrderlReponsitory;
+        public DeliOrder SelectedOrder { get; set; }
+        public ICommand AddOrderCommand { get; set; }
+        private void addOrderDelivery()
+        {
+            NewDeliveryWindow newDeliveryWindow = new NewDeliveryWindow();
+            newDeliveryWindow.ShowDialog();
+        }
+        public ICommand AddProviderCommand { get; set; }
+        private void addProviderDelivery()
+        {
 
+        }
+
+        public ICommand ModifyProviderCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+
+        private DeliveryPageViewModel()
+        {
+            _seachKey = "";
+            _deliOrders = new ObservableCollection<DeliOrder>();
+            deliOrderlReponsitory = DeliveryOrderRepository.getIntance();
+            setUpStatusses();
+
+            AddOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrderDelivery(); });
+            ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+            AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DeliveryAskForm askForm = new DeliveryAskForm(); askForm.ShowDialog(); });
+            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
+        }
+
+        private void onDelete()
+        {
+            deliOrderlReponsitory.deleteFormWithID(selectedDeliOrder.id.ToString());
+            deliOrders.Remove(selectedDeliOrder);
+        }
+
+        //-------------------------------------------------------------------------------------------------
         private static DeliveryPageViewModel _intance;
-        private ObservableCollection<DeliOrder> _deliOrders;
-        private ObservableCollection<String> _selectedStatuses;
-        private String _selectedStatus;
-        private String _seachKey;
-
         public static DeliveryPageViewModel getInstance()
         {
             if (_intance == null)
@@ -31,18 +63,28 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             }
             return _intance;
         }
-
-        private DeliveryPageViewModel()
-        {
-            _seachKey = "";
-            _deliOrders = new ObservableCollection<DeliOrder>();
-            deliOrderlReponsitory = DeliveryOrderRepository.getIntance();
-            setUpStatusses();
-        }
-
+        //-------------------------------------------------------------------------------------------------
+        private ObservableCollection<DeliOrder> _deliOrders;
         public ObservableCollection<DeliOrder> deliOrders => _deliOrders;
-
+        //-------------------------------------------------------------------------------------------------
+        private ObservableCollection<String> _selectedStatuses;
         public ObservableCollection<String> selectedStatuses => _selectedStatuses;
+        //-------------------------------------------------------------------------------------------------
+        private DeliOrder _selectedDeliOrder;
+        public DeliOrder selectedDeliOrder
+        {
+            get => _selectedDeliOrder;
+            set
+            {
+                _selectedDeliOrder = value;
+                if (value != null)
+                {
+                    _selectedDeliOrder = null;
+                }
+            }
+        }
+        //-------------------------------------------------------------------------------------------------
+        private String _selectedStatus;
         public String selectedStatus
         {
             get => _selectedStatus;
@@ -55,6 +97,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 OnPropertyChanged("selectedStatus");
             }
         }
+        //-------------------------------------------------------------------------------------------------
+        private String _seachKey;
         public String seachKey
         {
             get => _seachKey;
@@ -65,6 +109,12 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 OnPropertyChanged("seachKey");
             }
         }
+        //-------------------------------------------------------------------------------------------------
+
+
+
+
+        //-------------------------------------------------------------------------------------------------
 
         private void setUpStatusses()
         {
@@ -107,6 +157,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             return filterDeliOder;
         }
 
+        public ObservableCollection<DeliOrder> fillerListDeliOder => filterByInfo();
         private ObservableCollection<DeliOrder> filterByInfo()
         {
             ObservableCollection<DeliOrder> filterList = new ObservableCollection<DeliOrder>();

@@ -28,6 +28,7 @@ namespace QLCHBD_OOAD.model.images
             this._updateBy = updateBy;
         }
 
+
         public Images(long id, string name, string image, int quantity, int rented)
         {
             _id = id;

@@ -14,4 +14,8 @@ namespace QLCHBD_OOAD.appUtil
     {
         WATING, DELIVERED, ERROR
     }
+    public enum DeliveryBillStatus
+    {
+        UNPAID, PAID
+    }
 }

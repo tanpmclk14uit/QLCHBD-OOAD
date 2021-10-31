@@ -55,8 +55,8 @@ namespace QLCHBD_OOAD
 
         private void bttDelivering_Click(object sender, RoutedEventArgs e)
         {
-            DeliveryMainPage deliveryMainPage = new DeliveryMainPage();
-            Holder.Content = deliveryMainPage;
+            DeliveryPageHolder deliveryHoler = new DeliveryPageHolder();
+            Holder.Content = deliveryHoler;
         }
 
         private void bttBorrowed_Click(object sender, RoutedEventArgs e)
@@ -142,10 +142,6 @@ namespace QLCHBD_OOAD
         private void Header_MouseUp(object sender, MouseButtonEventArgs e)
         {
             mRestoreIfMove = false;
-        }
-        private void Holder_Navigated(object sender, NavigationEventArgs e)
-        {
-
         }
         private void ToggleForm()
         {

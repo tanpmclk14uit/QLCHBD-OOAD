@@ -37,6 +37,7 @@ namespace QLCHBD_OOAD.view.rental
             clearListViewSelected();                      
             this.Close();            
         }
+
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);

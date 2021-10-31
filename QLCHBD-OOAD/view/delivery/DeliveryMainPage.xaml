@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:QLCHBD_OOAD.view.delivery"
+      xmlns:local="clr-namespace:QLCHBD_OOAD.view.delivery.DeliveryPage"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="985"
@@ -26,7 +26,7 @@
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
-                
+
             </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -45,6 +45,7 @@
                 Height="60"
                 Width="200"
                 FontSize="28"
+                Command="{Binding AddOrderCommand}"
                 >NEW ORDER
             </Button>
             <Button 
@@ -56,6 +57,7 @@
                 Height="60"
                 Width="250"
                 FontSize="28"
+                Command="{Binding AddProviderCommand}"
                 >ADD PROVIDER
             </Button>
             <Button 
@@ -67,13 +69,14 @@
                 Height="60"
                 Width="280"
                 FontSize="28"
+                Command="{Binding ModifyProviderCommand}"
                 >MODIFY PROVIDER
             </Button>
             <ComboBox
                 Grid.Column="3"
                 x:Name="cbSortDelivery"
-                FontSize="20"
                 Margin="40, 10, 10, 15"
+                FontSize="20"
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
                 BorderBrush="Gray"
@@ -97,122 +100,137 @@
                 HorizontalContentAlignment="Left"
                 FontSize="25"
                 Template="{StaticResource tbHeaderControlTemplate}"
-                Text="{Binding seachKey, UpdateSourceTrigger=PropertyChanged}">    
+                Text="{Binding seachKey, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Grid>
-        <ScrollViewer Margin="10" Grid.Row="1">
+        <ScrollViewer Margin="10" Grid.Row="1" x:Name="panel" VerticalScrollBarVisibility="Auto">
+
             <StackPanel>
-                <ItemsControl x:Name="ListViewDeliorder" ItemsSource="{Binding fillerListDeliOder}">
+                <ListView  
+                    SelectionMode="Single" 
+                    SelectedItem="{Binding selectedDeliOrder}" 
+                    x:Name="ListViewDeliOrder" 
+                    HorizontalContentAlignment="Center"  
+                    VerticalContentAlignment="Center" 
+                
+                    ItemsSource="{Binding fillerListDeliOder}">
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Width="400" Height="300" Margin="20 0 0 20">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Border
+                            <DataTemplate>
+                                <Grid Width="400" Height="300" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border
                                        Grid.ColumnSpan="2"
                                        BorderThickness="1"
                                        CornerRadius="10"
                                        BorderBrush="Black"
                                        Background="White">
-                                </Border>
-                                <Image 
+                                    </Border>
+                                    <Image 
                                        Grid.Column="0"
                                        Source="/QLCHBD-OOAD;component/assets/img_netflix.png" 
                                        Stretch="Fill" Margin="10">
-                                </Image>
+                                    </Image>
 
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
 
-                                    <StackPanel
+                                        <StackPanel
                                                 Grid.Row="0" 
                                                 Grid.Column="1"
                                                 Orientation="Horizontal"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"
                                                 Margin="0 0 10 0">
-                                        <TextBlock
+                                            <TextBlock
                                                     FontWeight="Bold"
                                                     FontSize="20"
                                                     Text="ID: #"></TextBlock>
-                                        <TextBlock
+                                            <TextBlock
                                                     x:Name="txtID"
                                                     FontWeight="Bold"
                                                     FontSize="20"
                                                     Text="{Binding id}"></TextBlock>
-                                    </StackPanel>
+                                        </StackPanel>
 
-                                    <TextBlock
+                                        <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="0"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left">Provider:</TextBlock>
-                                    <TextBlock
+                                        <TextBlock
                                                 Grid.Row="2"
                                                 Grid.Column="0"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left">Amount:</TextBlock>
-                                    <TextBlock
+                                        <TextBlock
                                                 Grid.Row="3"
                                                 Grid.Column="0"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left">Date:</TextBlock>
-                                    <TextBlock
+                                        <TextBlock
                                                 Grid.Row="4"
                                                 Grid.Column="0"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left">Bill:</TextBlock>
-                                    <TextBlock
+                                        <TextBlock
                                                 Grid.Row="5"
                                                 Grid.Column="0"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left">Status:</TextBlock>
 
 
-                                    <TextBlock
+                                        <TextBlock
                                                 x:Name="txtProvider"
                                                 Grid.Row="1"
                                                 Grid.Column="1"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left"
                                                 Text="{Binding provider}"></TextBlock>
-                                    <TextBlock
+                                        <TextBlock
                                                 x:Name="txtAmmount"
                                                 Grid.Row="2"
                                                 Grid.Column="1"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left"
                                                 Text="{Binding amount}"></TextBlock>
-                                    <TextBlock
+                                        <TextBlock
                                                 x:Name="Date"
                                                 Grid.Row="3"
                                                 Grid.Column="1"
                                                 FontSize="20"
                                                 HorizontalAlignment="Left"
                                                 Text="{Binding createTime}"></TextBlock>
-                                    <TextBlock
-                                                x:Name="txtBill"
+                                        <StackPanel
                                                 Grid.Row="4"
                                                 Grid.Column="1"
-                                                FontSize="20"
                                                 HorizontalAlignment="Left"
-                                                Text="{Binding totalBiills}"></TextBlock>
-                                    <TextBlock
+                                                Orientation="Horizontal">
+                                            <TextBlock
+                                                x:Name="txtBill"
+                                                FontSize="20"
+                                                Text="{Binding totalBills}"></TextBlock>
+                                            <TextBlock
+                                                FontSize="20" Text=" VNĐ"></TextBlock>
+
+                                        </StackPanel>
+
+                                        <TextBlock
                                                 x:Name="txtStatus"
                                                 Grid.Row="5"
                                                 Grid.Column="1"
@@ -220,7 +238,7 @@
                                                 HorizontalAlignment="Left"
                                                 Text="{Binding stringStatus}"></TextBlock>
 
-                                    <Button
+                                        <Button
                                                 Grid.Column="0"
                                                 Grid.Row="6"
                                                 FontSize="15"
@@ -229,7 +247,7 @@
                                                 BorderThickness="1"
 
                                                 >Delivered</Button>
-                                    <Button
+                                        <Button
                                                 materialDesign:ButtonAssist.CornerRadius="5"
                                                 Grid.Column="1"
                                                 Grid.Row="6"
@@ -238,17 +256,20 @@
                                                 Background="#E6343A"
                                                 BorderThickness="1"
                                                 Margin="5 0 10 0"
-                                                >Cancel</Button>
+                                                Command="{Binding DeleteCommand}">Cancel</Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel HorizontalAlignment="Center"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel 
+                                    Width="{Binding ActualWidth, ElementName=panel}"
+                                    HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                </ListView>
+                
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

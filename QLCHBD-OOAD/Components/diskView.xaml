@@ -11,7 +11,7 @@
       Topmost="True"
       ResizeMode="NoResize"
       Title="diskView"
-      d:DesignHeight="480" d:DesignWidth="450">
+      Height="480" Width="450">
     <Window.Resources>
         <Style TargetType="{x:Type CheckBox}" x:Name="checbox_style">
             <Setter Property="Background" Value="White" />
@@ -101,6 +101,7 @@
             Grid.Column="0"
             Height="430"
             Width="220"
+            Margin="10"
             CornerRadius="5">
             <Border.Background>
                 <ImageBrush

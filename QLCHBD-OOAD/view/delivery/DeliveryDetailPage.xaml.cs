@@ -1,7 +1,4 @@
-﻿using QLCHBD_OOAD.appUtil;
-using QLCHBD_OOAD.Components;
-using QLCHBD_OOAD.viewmodel.images;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,24 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QLCHBD_OOAD.viewmodel.delivery;
 
-namespace QLCHBD_OOAD.view.images
+namespace QLCHBD_OOAD.view.delivery.DeliveryPage
 {
     /// <summary>
-    /// Interaction logic for ImagesPage.xaml
+    /// Interaction logic for DeliveryDetailPage.xaml
     /// </summary>
-    public partial class ImagesPage : Page
+    public partial class DeliveryDetailPage : Page
     {
-        public ImagesPage()
+        public DeliveryDetailPage()
         {
             InitializeComponent();
-            DataContext = ImagesViewModel.getIntance();
+            DataContext = new DeliveryDetailPageViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            diskView newDiskView = new diskView();
-            newDiskView.ShowDialog();
+
         }
     }
 }

@@ -43,6 +43,22 @@ namespace QLCHBD_OOAD.dao
             }
         }
 
+        public void createNewImportForm(string billid, string provider, string id)
+        {
+            string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
+                billid + "', '" +
+                provider + "', '" +
+                id + "', '" +
+                id + "');";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void deleteFormWithID(string id)
+        {
+            string command = "DELETE FROM import_form WHERE id = '"+id+"';";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
 
         public ObservableCollection<DeliOrder> getDeliOrderById(string id)
         {
@@ -84,15 +100,14 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return deliOrders;
         }
-        public long getTotalBillByID(long id)
+        public int getTotalBillByID(long id)
         {
-            long value = 0;
-            ObservableCollection<DeliOrder> deliOrders = new ObservableCollection<DeliOrder>();
+            int value = 0;
             string command = "SELECT disk_price FROM import_form_item WHERE import_form_id = " + id.ToString();
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                value += (long)reader[0];
+                value += (int)reader[0];
             }
             database.closeConnection();
             return value;
@@ -100,7 +115,6 @@ namespace QLCHBD_OOAD.dao
         public long getAmountByID(long id)
         {
             long value = 0;
-            ObservableCollection<DeliOrder> deliOrders = new ObservableCollection<DeliOrder>();
             string command = "SELECT COUNT(*) FROM import_form_item WHERE import_form_id = " + id.ToString();
             var reader = database.executeCommand(command);
             while (reader.Read())
