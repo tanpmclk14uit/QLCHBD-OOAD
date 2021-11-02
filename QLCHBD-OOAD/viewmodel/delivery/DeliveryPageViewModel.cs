@@ -28,7 +28,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         private DeliveryPageViewModel()
         {
             _seachKey = "";
-            _deliOrders = new ObservableCollection<DeliOrder>();
+            deliOrders = new ObservableCollection<DeliOrder>();
             deliOrderlReponsitory = DeliveryOrderRepository.getIntance();
             setUpStatusses();
 
@@ -73,7 +73,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         }
         //-------------------------------------------------------------------------------------------------
         private ObservableCollection<DeliOrder> _deliOrders;
-        public ObservableCollection<DeliOrder> deliOrders => _deliOrders;
+        public ObservableCollection<DeliOrder> deliOrders
+        {
+            get => _deliOrders;
+            set
+            {
+                _deliOrders = value;
+            }
+        }
         //-------------------------------------------------------------------------------------------------
         private ObservableCollection<String> _selectedStatuses;
         public ObservableCollection<String> selectedStatuses => _selectedStatuses;

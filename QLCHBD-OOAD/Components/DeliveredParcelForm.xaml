@@ -9,11 +9,10 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStyle="None"
         Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent"
         ResizeMode="NoResize" 
         Title="DeliveredParcelForm" Height="313" Width="1028">
-    <Window.Background>
-        <SolidColorBrush Color="White" Opacity="0"/>
-    </Window.Background>
     <Border CornerRadius="36" Background="White">
         <Grid>
             <Grid.RowDefinitions>
