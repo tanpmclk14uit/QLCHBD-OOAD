@@ -40,6 +40,17 @@ namespace QLCHBD_OOAD.model.delivery
             _createID = createID;
             _updateID = updateID;
         }
+        public DeliBills(long id, string providerName, string paymentDate, long createID)
+        {
+            _id = id;
+            _providerName = providerName;
+            _paymentDate = paymentDate;
+            _status = DeliveryBillStatus.UNPAID;
+            _createTime = DateTime.Now;
+            _updateTime = DateTime.Now;
+            _createID = createID;
+            _updateID = createID;
+        }
 
         public long id => _id;
         public string providerName => _providerName;

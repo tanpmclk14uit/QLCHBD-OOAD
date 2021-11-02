@@ -35,6 +35,7 @@ namespace QLCHBD_OOAD.dao
                 items.amount + "'," +
                 "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
             database.executeCommand(command);
+            database.closeConnection();
         }
         public void insertItems(string id, string billID, string diskName, string price, string diskID, string amount)
         {
@@ -46,7 +47,8 @@ namespace QLCHBD_OOAD.dao
                 diskID + "', '" +
                 amount + "'," +
                 "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
-            var reader = database.executeCommand(command);
+            database.executeCommand(command);
+            database.closeConnection();
         }
         public ObservableCollection<DeliBillsItems> getItemsbyBillsID(string id)
         {
@@ -68,15 +70,9 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
 
         }
-        public void removeItemByID(long id)
+        public void removeItemByBillsID(string id)
         {
-            string command = "DELETE FROM import_billing_item WHERE id =" + id.ToString() + " ;";
-            database.executeCommand(command);
-            database.closeConnection();
-        }
-        public void removeItemByBillsID(long id)
-        {
-            string command = "DELETE FROM import_billing_item WHERE import_bill =" + id.ToString() + " ;";
+            string command = "DELETE FROM import_billing_item WHERE import_bill =" + id + " ;";
             database.executeCommand(command);
             database.closeConnection();
         }

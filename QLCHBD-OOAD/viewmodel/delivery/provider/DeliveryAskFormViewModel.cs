@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using QLCHBD_OOAD.view.delivery.DeliveryPage;
 using QLCHBD_OOAD.view.delivery.component;
-
+using System.Windows;
 
 namespace QLCHBD_OOAD.viewmodel.delivery.Component
 {
@@ -21,12 +21,12 @@ namespace QLCHBD_OOAD.viewmodel.delivery.Component
         public DeliveryAskFormViewModel()
         {
             CancleCommand = new RelayCommand<object>((p) => { return true; }, (p) => { closeForm(); });
-            ImportCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+            ImportCommand = new RelayCommand<object>((p) => { return true; }, (p) => { UseFile(); });
             ByHandCommand = new RelayCommand<object>((p) => { return true; }, (p) => { UseHand(); });
         }
         private void UseFile()
         {
-
+            MessageBox.Show("Use hand still being making color process, try again another time", "Error");
         }
         private void UseHand()
         {

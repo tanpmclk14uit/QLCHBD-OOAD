@@ -103,7 +103,7 @@
                 Text="{Binding seachKey, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Grid>
-        <ScrollViewer Margin="10" Grid.Row="1" x:Name="panel" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" x:Name="panel" VerticalScrollBarVisibility="Auto">
 
             <StackPanel>
                 <ListView  
@@ -152,7 +152,8 @@
 
                                         <StackPanel
                                                 Grid.Row="0" 
-                                                Grid.Column="1"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
                                                 Orientation="Horizontal"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"

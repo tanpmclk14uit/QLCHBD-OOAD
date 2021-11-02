@@ -31,6 +31,19 @@ namespace QLCHBD_OOAD.model.delivery
             _update_Time = update_Time;
         }
 
+        public DeliBillsItems(long id, long billID, string diskName, long price, long diskID, int amount)
+        {
+            _id = id;
+            _billID = billID;
+            _diskName = diskName;
+            _price = price;
+            _diskID = diskID;
+            _amount = amount;
+            _value = (int)(price * amount);
+            _createTime = DateTime.Now;
+            _update_Time = DateTime.Now;
+        }
+
         public long id { get => _id;}
         public long billID { get => _billID;}
         public string diskName { get => _diskName;}

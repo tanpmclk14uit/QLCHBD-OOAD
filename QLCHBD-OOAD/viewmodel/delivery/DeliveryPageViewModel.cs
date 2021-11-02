@@ -12,6 +12,7 @@ using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.delivery.Add_Order;
+using System.Windows;
 
 namespace QLCHBD_OOAD.viewmodel.delivery
 {
@@ -20,17 +21,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         private DeliveryOrderRepository deliOrderlReponsitory;
         public DeliOrder SelectedOrder { get; set; }
         public ICommand AddOrderCommand { get; set; }
-        private void addOrderDelivery()
-        {
-            NewDeliveryWindow newDeliveryWindow = new NewDeliveryWindow();
-            newDeliveryWindow.ShowDialog();
-        }
         public ICommand AddProviderCommand { get; set; }
-        private void addProviderDelivery()
-        {
-
-        }
-
         public ICommand ModifyProviderCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
@@ -42,9 +33,26 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             setUpStatusses();
 
             AddOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrderDelivery(); });
-            ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
-            AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DeliveryAskForm askForm = new DeliveryAskForm(); askForm.ShowDialog(); });
+            ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onModifyProvider(); });
+            AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addProviderDelivery(); });
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
+        }
+
+        private void onModifyProvider()
+        {
+            MessageBox.Show("Modify Providers still being making color process, try again another time", "Error");
+        }
+
+        private void addOrderDelivery()
+        {
+            NewDeliveryWindow newDeliveryWindow = new NewDeliveryWindow();
+            newDeliveryWindow.ShowDialog();
+        }
+
+        private void addProviderDelivery()
+        {
+            DeliveryAskForm askForm = new DeliveryAskForm();
+            askForm.ShowDialog();
         }
 
         private void onDelete()

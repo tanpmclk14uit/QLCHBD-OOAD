@@ -42,7 +42,7 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
-        public void DeleteTemporaryBills(long id)
+        public void DeleteTemporaryBills(string id)
         {
             string command = "DELETE FROM import_bill WHERE (id = '" + id + "');";
             database.executeCommand(command);
@@ -50,7 +50,7 @@ namespace QLCHBD_OOAD.dao
         }
         public void updateTemporaryBills(long id, string provider)
         {
-            string command = "UPDATE import_bill SET provider_name = '" + provider + "' WHERE (`id` = '" + id + "');";
+            string command = "UPDATE import_bill SET provider_name = '" + provider + "' WHERE id = '" + id + "';";
             database.executeCommand(command);
             database.closeConnection();
         }

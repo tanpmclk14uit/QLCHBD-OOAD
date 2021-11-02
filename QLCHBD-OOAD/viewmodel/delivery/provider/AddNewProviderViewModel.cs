@@ -45,22 +45,22 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
             else
                 if (!int.TryParse(tbIDProvider, out int n))
             {
-                MessageBox.Show("ID Provider accept only number", "Error");
+                MessageBox.Show("Format accepted: " + "123456790", "ID Provider");
             }
             else
                 if (!int.TryParse(tbNumber, out int m))
             {
-                MessageBox.Show("Number accepted: "+"123456790", "Error");
+                MessageBox.Show("Format accepted: "+"123456790", "Number");
             }
             else
                 if (tbMail.IndexOf("@") == -1)
             {
-                MessageBox.Show("Email not found", "Error");
+                MessageBox.Show("Email not found", "Mail");
             }
             else
-                if (deliveryProviderRepository.isProviderNull(tbIDProvider))
+                if (tbName.Length > 10)
             {
-                MessageBox.Show("Provider is existed", "Error");
+                MessageBox.Show("Max length: 10", "Provider");
             }
             else
             {

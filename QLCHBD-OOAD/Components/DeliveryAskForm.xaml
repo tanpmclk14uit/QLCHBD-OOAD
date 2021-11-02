@@ -11,6 +11,7 @@
         Topmost="True"
         ResizeMode="NoResize" 
         Background="Transparent"
+        
         Title="DeliveryAskForm" Height="313" Width="1028">
     <Border CornerRadius="36" Background="White" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid Background="Transparent">

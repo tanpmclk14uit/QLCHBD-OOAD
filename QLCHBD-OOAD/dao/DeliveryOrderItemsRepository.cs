@@ -1,6 +1,7 @@
 ﻿using QLCHBD_OOAD.model.delivery;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,14 +24,16 @@ namespace QLCHBD_OOAD.dao
             return instance;
         }
 
-        public bool DeliOrderItemsIDisNotNULL(long id)
+        public bool DeliOrderItemsIDisNotNULL(string id)
         {
             string command = "SELECT * FROM import_form_item WHERE ID = " + id;
             var reader = database.executeCommand(command);
             if (reader.Read())
             {
+                database.closeConnection();
                 return true;
             }
+            database.closeConnection();
             return false;
         }
 
@@ -60,20 +63,46 @@ namespace QLCHBD_OOAD.dao
                 "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
             database.executeCommand(command);
             database.closeConnection();
-        }
-        public void insertItems(string id, string deliID, string Amount, string diskID, string diskName, string imPrice, string providerID)
+        }        
+        public void insertItems(string imporFormID, string amount, string diskID, string name, string price, string providerID)
         {
-            string command = "INSERT INTO import_form_item (`id`, `import_form_id`, `quantity`, `disk_id`, `disk_name`, `disk_price`, `id_by_provider`, `create_time`, `update_time`) VALUES ('" +
-                id + "', '" +
-                deliID + "', '" +
-                Amount + "', '" +
+            string command = "INSERT INTO import_form_item (`import_form_id`, `quantity`, `disk_id`, `disk_name`, `disk_price`, `id_by_provider`) VALUES ('" +
+                imporFormID + "', '" +
+                amount + "', '" +
                 diskID + "', '" +
-                diskName + "', '" +
-                imPrice + "'," +
-                providerID + "'," +
-                "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+                name + "', '" +
+                price + "', '" +
+                providerID + "');";
             database.executeCommand(command);
             database.closeConnection();
         }
+        public void removeItemByID(string id)
+        {
+            string command = "DELETE FROM import_form_item WHERE id =" + id + " ;";
+            database.executeCommand(command);
+            database.closeConnection();
+
+        }
+        public void removeItemByImportFormsID(string id)
+        {
+            string command = "DELETE FROM import_form_item WHERE import_form_id =" + id + " ;";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public ObservableCollection<DeliOrderItems> getItemsbyImportFormsID(string id)
+        {
+            ObservableCollection<DeliOrderItems> Items = new ObservableCollection<DeliOrderItems>();
+            string command = "SELECT * FROM import_form_item WHERE import_form_id =" + id;
+            var reader = database.executeCommand(command);
+
+            while (reader.Read())
+            {
+                DeliOrderItems item = new DeliOrderItems((long)reader[0], (long)reader[1], (int)reader[2], (long)reader[3], (string)reader[4], (int)reader[5], (long)reader[6]);
+                Items.Add(item);
+            }
+            return Items;
+        }
+
+
     }
 }

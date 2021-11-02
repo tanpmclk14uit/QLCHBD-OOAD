@@ -94,6 +94,20 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
+        public void insertProvider(DeliProviders providers)
+        {
+            string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
+                providers.id + ", '"
+                + providers.providerName + "', '"
+                + providers.providerNumber + "', '"
+                + providers.providerMail + "', '"
+                + providers.providerAddres + "', "
+                + "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "
+                + providers.createID + ", "
+                + providers.updateID + ");";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
 
         public ObservableCollection<DeliProviders> providerList()
         {

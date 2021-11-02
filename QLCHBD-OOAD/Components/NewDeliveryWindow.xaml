@@ -88,15 +88,15 @@
                     </Grid.RowDefinitions>
                     <ListView 
                         Grid.Row="0"
-                        ItemsSource="{Binding billItems, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding importItems, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding SelectedItems}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID Store" DisplayMemberBinding="{Binding id}"></GridViewColumn>
-                                <GridViewColumn Header="ID Provider" DisplayMemberBinding="{Binding diskID}"></GridViewColumn>
+                                <GridViewColumn Header="ID Provider" DisplayMemberBinding="{Binding providerID}"></GridViewColumn>
                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding diskName}"></GridViewColumn>
-                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding price}"></GridViewColumn>
-                                <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding amount}"></GridViewColumn>
+                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding imPrice}"></GridViewColumn>
+                                <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount}"></GridViewColumn>
                                 <GridViewColumn Header="Value" DisplayMemberBinding="{Binding value}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
