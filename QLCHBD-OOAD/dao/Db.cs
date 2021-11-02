@@ -14,7 +14,7 @@ namespace QLCHBD_OOAD.dao
         private Db() { }
         private static Db _instance;
         private MySqlConnection connection { get; set; }
-        private const string connectionString = "server=localhost;user id=root;database=test;port=3306;password=123456";
+        private const string connectionString = "server=localhost;user id=root;database=ooad_qlchbd;port=3306;password=123456";
 
         public static Db getInstace()
         {
