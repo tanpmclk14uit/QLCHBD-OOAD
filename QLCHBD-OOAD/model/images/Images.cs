@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QLCHBD_OOAD.model.images
 {
-    class Images
+    public class Images
     {
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
             DateTime createTime, DateTime updateTime, long createBy, long updateBy )
@@ -28,6 +28,16 @@ namespace QLCHBD_OOAD.model.images
             this._updateBy = updateBy;
         }
 
+
+        public Images(long id, string name, string image, int quantity, int rented)
+        {
+            _id = id;
+            _name = name;
+            _image = image;
+            _quantity = quantity;
+            _rented = rented;
+        }
+
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
             DateTime createTime, long createBy)
         {
@@ -47,6 +57,7 @@ namespace QLCHBD_OOAD.model.images
             this._createBy = createBy;
             this._updateBy = createBy;
         }
+
 
         private long _id;
         public long id
@@ -77,11 +88,20 @@ namespace QLCHBD_OOAD.model.images
         {
             get => _image;
         }
+        
+
+        public int remaining { get {
+                return quantity - rented;
+            } }
+
+        private int _rented;
+
+        public int rented { get => _rented; }
 
         public string _locate;
         public string locate
         {
-            get => _name;
+            get => _locate;
         }
 
         private Boolean _isCheck;
@@ -94,6 +114,17 @@ namespace QLCHBD_OOAD.model.images
         public int rentalPrice
         {
             get => _rentalPrice;
+            set => _rentalPrice = value;
+        }
+        private string _providerName;
+
+        public string providerName
+        {
+            get => _providerName;
+            set
+            {
+                _providerName = value;
+            }
         }
 
         private long _idProvider;

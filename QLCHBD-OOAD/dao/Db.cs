@@ -23,6 +23,7 @@ namespace QLCHBD_OOAD.dao
             return _instance;
         }
 
+
         public MySqlDataReader executeCommand(string command)
         {
             MySqlDataReader reader = null;
@@ -38,7 +39,7 @@ namespace QLCHBD_OOAD.dao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Server error");
             }
             return reader;
         }

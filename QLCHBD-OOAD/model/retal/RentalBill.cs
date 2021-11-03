@@ -99,6 +99,12 @@ namespace QLCHBD_OOAD.model.retal
             this.stringStatus = status.ToString();
             this.backgroundStatus = status.ToString();
         }
+        public RentalBill(long guestId, int totalPrice, RentalBillStatus status)
+        {
+            this._guestId = guestId;
+            this._totalPrice = totalPrice;
+            this._status = status;
+        }
 
     }
 }

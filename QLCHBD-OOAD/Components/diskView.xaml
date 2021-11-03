@@ -3,12 +3,54 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:QLCHBD_OOAD"
       mc:Ignorable="d" 
       WindowStyle="None"
+      WindowStartupLocation="CenterScreen"
+      Topmost="True"
+      ResizeMode="NoResize"
       Title="diskView"
-      d:DesignHeight="300" d:DesignWidth="450">
-
+      Height="480" Width="450">
+    <Window.Resources>
+        <Style TargetType="{x:Type CheckBox}" x:Name="checbox_style">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#FF262E34"/>
+            <Setter Property="Foreground" Value="#FF262E34"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Width="15" Height="15">
+                                <!--                                   your color here -->
+                                <Path Width="15" Height="10"  Stroke="Green" StrokeThickness="3" Name="eliCheck" Data="M 2,4 C 2,4 3,5 5,13 C 5,13 5,3 12,0" Visibility="Collapsed"/>
+                            </Border>
+                            <TextBlock Margin="5,0,0,0"  VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Content}"></TextBlock>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="LightGray" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF9C9E9F" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="LightGray" />
+                                <Setter Property="Foreground" Value="Gray" />
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter TargetName="eliCheck" Property="Opacity" Value="0.5" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="eliCheck" Property="Visibility" Value="Visible"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid>
 
@@ -57,8 +99,9 @@
 
         <Border
             Grid.Column="0"
-            Height="250"
-            Width="180"
+            Height="430"
+            Width="220"
+            Margin="10"
             CornerRadius="5">
             <Border.Background>
                 <ImageBrush
@@ -84,34 +127,51 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
-            <TextBlock
+            <TextBlock FontSize="15"
                 Style="{StaticResource txtTitle}">Name:</TextBlock>
             <TextBox x:Name="tbName"
+                     Height="25"
+                     Text="{Binding name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource tbInfo}"></TextBox>
             <Line X1="200" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
 
+            <TextBlock FontSize="15"
+                Style="{StaticResource txtTitle}">Album:</TextBlock>
+            <TextBox x:Name="tbAlbum" Height="25"
+                     Text="{Binding album, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource tbInfo}"></TextBox>
+            <Line X1="200" Y1="0" 
+                  Stroke="#0F52BA" StrokeThickness="0.5"></Line>
 
-
-            <TextBlock
+            <TextBlock FontSize="15"
                 Style="{StaticResource txtTitle}">Provider:</TextBlock>
-            <TextBox x:Name="tbProvider"
+            <TextBox x:Name="tbProvider" Height="25"
+                     Text="{Binding provider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource tbInfo}"></TextBox>
             <Line X1="200" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
 
+            <TextBlock FontSize="15"
+                Style="{StaticResource txtTitle}">Locate:</TextBlock>
+            <TextBox x:Name="tbLocate" Height="25"
+                     Text="{Binding locate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource tbInfo}"></TextBox>
+            <Line X1="200" Y1="0" 
+                  Stroke="#0F52BA" StrokeThickness="0.5"></Line>
 
             <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
-                <TextBlock
+                <TextBlock  VerticalAlignment="Bottom"
                     Style="{StaticResource txtTitle}"
-                    FontSize="18">Price:</TextBlock>
+                    FontSize="15">Id by provider:</TextBlock>
 
-                <Grid>
+                <Grid Margin="5 0 0 0">
                     <TextBox
-                        x:Name="tbPrice"
+                        Text="{Binding idByProvider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        x:Name="tbIdByProvider"
                         FontSize="18"
                         Style="{StaticResource tbInfo}"></TextBox>
-                    <Line X1="153" Y1="0" 
+                    <Line X1="100" Y1="0" 
                         Stroke="#0F52BA" 
                         StrokeThickness="0.5"
                         VerticalAlignment="Bottom"></Line>
@@ -120,16 +180,54 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
-                <TextBlock
+                <TextBlock  VerticalAlignment="Bottom"
                     Style="{StaticResource txtTitle}"
-                    FontSize="18">Publishing date:</TextBlock>
+                    FontSize="15">Price:</TextBlock>
 
-                <TextBox 
-                    x:Name="tbPublish" FontSize="15" VerticalAlignment="Top" Margin="5, 0, 0, 0"
-                    Style="{StaticResource tbInfo}">23/3/2021</TextBox>
+                <Grid Margin="5 0 0 0">
+                    <TextBox
+                        x:Name="tbPrice"
+                        FontSize="18"
+                        Text="{Binding price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource tbInfo}"></TextBox>
+                    <Line X1="153" Y1="0" 
+                        Stroke="#0F52BA" 
+                        StrokeThickness="0.5"
+                        VerticalAlignment="Bottom"></Line>
+                </Grid>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+                <TextBlock  VerticalAlignment="Bottom"
+                    Style="{StaticResource txtTitle}"
+                    FontSize="15">Loss:</TextBlock>
+
+                <Grid Margin="5 0 0 0">
+                    <TextBox
+                        Text="{Binding loss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        x:Name="tbLoss"
+                        FontSize="18"
+                        Style="{StaticResource tbInfo}"></TextBox>
+                    <Line X1="156" Y1="0" 
+                        Stroke="#0F52BA" 
+                        StrokeThickness="0.5"
+                        VerticalAlignment="Bottom"></Line>
+                </Grid>
+
             </StackPanel>
 
-            <Grid Margin="0, 0, 10, 0">
+            <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0">
+                <TextBlock
+                    Style="{StaticResource txtTitle}"
+                    FontSize="15">Publishing date:</TextBlock>
+
+                <TextBox Width="110"
+                    Text="{Binding createDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    x:Name="tbPublish" FontSize="15" VerticalAlignment="Top" Margin="5, 0, 0, 0"
+                    Style="{StaticResource tbInfo}"></TextBox>
+            </StackPanel>
+
+            <Grid Margin="0, 10, 10, 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"></ColumnDefinition>
                     <ColumnDefinition Width="20"></ColumnDefinition>
@@ -138,9 +236,10 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Grid.ColumnSpan="2"
-                Style="{StaticResource txtTitle}" VerticalAlignment="Center" FontSize="18">Total copies:</TextBlock>
+                Style="{StaticResource txtTitle}" VerticalAlignment="Center" FontSize="15">Total copies:</TextBlock>
 
-                <TextBlock Grid.Column="2" FontSize="20" HorizontalAlignment="Center">123</TextBlock>
+                <TextBlock x:Name="tb_quantity" Grid.Column="2" FontSize="18" HorizontalAlignment="Center"
+                           Text="{Binding quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
 
                 <Button
                     x:Name="bttDivorce"
@@ -156,6 +255,19 @@
                     Click="bttPlus_Click">+</Button>
 
             </Grid>
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2.2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="IsCheck: " Style="{StaticResource txtTitle}"
+                           FontSize="15"/>
+                <CheckBox Grid.Column="1"    
+                          materialDesign:CheckBoxAssist.CheckBoxSize="20"
+                          IsChecked="{Binding isCheck, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    
+                </CheckBox>
+            </Grid>
 
             <Grid Margin="0,40, 0, 0">
                 <Grid.ColumnDefinitions>
@@ -168,6 +280,7 @@
 
                 <Button 
                     x:Name="bttSave"
+                    Command="{Binding addImageCommand}"
                     Height="28"
                     Background="#28A745"
                     FontWeight="Bold"

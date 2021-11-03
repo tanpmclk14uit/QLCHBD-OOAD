@@ -9,12 +9,32 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.rental
 {
     class RentalPageViewModel : BaseViewModel
     {
+        public static TurnToDetailPageHandler turnAllRentalToDetailRental;
 
+        public static ChangePageHandler turnToAddPage;
+
+        public ICommand NewOrder { get; set; }
+
+        private RentalBill _selectedRentalBill;
+        public RentalBill selectedRentalBill
+        {
+            get => _selectedRentalBill;
+            set
+            {
+                _selectedRentalBill = value;
+                if(value != null)
+                {
+                    turnAllRentalToDetailRental(_selectedRentalBill.id, _selectedRentalBill.guestId);
+                    _selectedRentalBill = null;
+                }               
+            }
+        }
         public ObservableCollection<RentalBill> filterListRentalBill
         {
             get => filterByInfo();
@@ -109,9 +129,17 @@ namespace QLCHBD_OOAD.viewmodel.rental
             seachKey = "";
             _rentalBills = new ObservableCollection<RentalBill>();
             rentalBillReponsitory = RentalBillRepository.getIntance();
+            NewOrder = new RelayCommand<object>((p) => { return true; }, (p) => { turnToAddPage(); });
             setUpStatuses();
-
+            RentalAddPageViewModel.turnBackToRentalAllOrders += RentalAddPageViewModel_turnBackToRentalAllOrders;
         }
+
+        private void RentalAddPageViewModel_turnBackToRentalAllOrders()
+        {
+            selectedStatus = "All";
+            OnPropertyChanged("filterListRentalBill");
+        }
+
         private ObservableCollection<RentalBill> filterByInfo()
         {
             ObservableCollection<RentalBill> filterList = new ObservableCollection<RentalBill>();

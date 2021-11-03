@@ -43,6 +43,64 @@ namespace QLCHBD_OOAD.dao
             }
         }
 
+        public bool DeliOrderIDisNotNULL(long id)
+        {
+            string command = "SELECT * FROM import_form WHERE ID = " + id;
+            var reader = database.executeCommand(command);
+            if (reader.Read())
+            {
+                return true;
+            }
+            return false;
+        }
+        public void addTemporaryImportForm(long id, string providerName, long createID)
+        {
+            string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
+                id + "', '" +
+                providerName + "', '" +
+                createID + "', '" +
+                createID + "');";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void updateTemporaryImportForm(long id, string provider)
+        {
+            string command = "UPDATE import_form SET provider_name = '" + provider + "' WHERE id = '" + id + "';";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void DeleteImportFormByID(string id)
+        {
+            string command = "DELETE FROM import_form WHERE (id = '" + id + "');";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void createNewImportForm(string billid, string provider, string id)
+        {
+            string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
+                billid + "', '" +
+                provider + "', '" +
+                id + "', '" +
+                id + "');";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void createNewImportForm(DeliProviders providers)
+        {
+            string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
+                providers.id + "', '" +
+                providers.providerName + "', '" +
+                providers.createID + "', '" +
+                providers.updateID + "');";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void deleteFormWithID(string id)
+        {
+            string command = "DELETE FROM import_form WHERE id = '"+id+"';";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
 
         public ObservableCollection<DeliOrder> getDeliOrderById(string id)
         {
@@ -51,7 +109,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder DeliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), getAmountByID((long)reader[0]), (DateTime)reader[2], (DateTime)reader[3], (long)reader[4], (long)reader[5], stringToDeliveryOrderStatus(reader[6].ToString()), getTotalBillByID((long)reader[0]));
+                DeliOrder DeliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
                 DeliOrders.Add(DeliOrder);
             }
             database.closeConnection();
@@ -65,7 +123,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), getAmountByID((long)reader[0]), (DateTime)reader[2], (DateTime)reader[3], (long)reader[4], (long)reader[5], stringToDeliveryOrderStatus(reader[6].ToString()), getTotalBillByID((long)reader[0]));
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
@@ -78,34 +136,32 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), getAmountByID((long)reader[0]), (DateTime)reader[2], (DateTime)reader[3], (long)reader[4], (long)reader[5], stringToDeliveryOrderStatus(reader[6].ToString()), getTotalBillByID((long)reader[0]));
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
             return deliOrders;
         }
-        public long getTotalBillByID(long id)
+        public int getTotalBillByID(string id)
         {
-            long value = 0;
-            ObservableCollection<DeliOrder> deliOrders = new ObservableCollection<DeliOrder>();
-            string command = "SELECT disk_price FROM import_form_item WHERE import_form_id = " + id.ToString();
+            int value = 0;
+            string command = "SELECT disk_price FROM import_form_item WHERE import_form_id = " + id;
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                value += (long)reader[0];
+                value += (int)reader[0];
             }
             database.closeConnection();
             return value;
         }
-        public long getAmountByID(long id)
+        public long getAmountByID(string id)
         {
             long value = 0;
-            ObservableCollection<DeliOrder> deliOrders = new ObservableCollection<DeliOrder>();
-            string command = "SELECT COUNT(*) FROM import_form_item WHERE import_form_id = " + id.ToString();
+            string command = "SELECT quantity FROM import_form_item WHERE import_form_id = " + id;
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                value += (long)reader[0];
+                value += (int)reader[0];
             }
             database.closeConnection();
             return value;
