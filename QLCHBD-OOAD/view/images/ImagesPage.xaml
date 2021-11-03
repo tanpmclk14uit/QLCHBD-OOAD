@@ -230,6 +230,7 @@
                     Padding="10 0 10 0">
                 <Button Name="btn_new_order"
                     Content="NEW ORDER"
+                    Command="{Binding addOrderCommand}"
                     FontSize="30"
                     FontWeight="Light"
                     Height="58"
@@ -268,16 +269,21 @@
         </Grid>
         <ScrollViewer Grid.Row="1" >
             <StackPanel x:Name="ListImagesPanel" >
-            <ListView 
-                  x:Name="ListImages" ItemsSource="{Binding filterListImages}" SelectedItem="{Binding selectedImage}">
-            <ItemsControl.ItemTemplate>
+                <ListBox
+                    Focusable="True"
+                    SelectionChanged="ListImages_SelectionChanged"
+                    FocusManager.IsFocusScope="True"
+                MouseDoubleClick="ListImages_MouseDoubleClick"
+                  x:Name="ListImages" ItemsSource="{Binding filterListImages}" 
+                SelectionMode="Multiple">
+                    <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border Height="300" Width="200"
                                     Margin="5 0 0 0"
                                      BorderThickness="1"
                                      CornerRadius="5"
                                      BorderBrush="Black"
-                                     Background="White">
+                                     Background="{Binding background, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <Grid >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
@@ -320,13 +326,18 @@
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate >
-                    <WrapPanel Width="{Binding ActualWidth, ElementName=ListImagesPanel}">
-                    </WrapPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate >
+                            <WrapPanel Width="{Binding ActualWidth, ElementName=ListImagesPanel}">
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Setter Property="IsSelected" Value="{Binding isSelected, Mode=TwoWay}" />
+                    </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
             </StackPanel>
         </ScrollViewer>
     </Grid>

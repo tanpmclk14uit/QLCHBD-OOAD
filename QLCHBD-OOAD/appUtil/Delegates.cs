@@ -23,5 +23,6 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void CloseFormHandler();
     public delegate void AddNewRentalBillItem(RentalBillItem rentalBillItem);
     public delegate void AddNewDeliveryOrderItem(string delivery);
-
+    public delegate void SelectedImageChangeHandler();
+    public delegate void AddOrderHandler();
 }

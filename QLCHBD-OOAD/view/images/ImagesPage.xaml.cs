@@ -1,5 +1,6 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.viewmodel.images;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,20 @@ namespace QLCHBD_OOAD.view.images
         {
             diskView newDiskView = new diskView();
             newDiskView.ShowDialog();
+        }
+
+        private void ListImages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = ((FrameworkElement)e.OriginalSource).DataContext as Images;
+            if (item != null)
+            {
+                ImagesViewModel.getIntance().selectedImage = item;
+            }
+        }
+
+        private void ListImages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ImagesViewModel.getIntance().selectedImageChange();
         }
     }
 }

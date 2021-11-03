@@ -66,14 +66,38 @@ namespace QLCHBD_OOAD.viewmodel.images
                 _selectedImage = null;
             }
         }
+
+        public ICommand addOrderCommand { get; set; }
+
+        public static event AddOrderHandler addOrder;
+
         public ImagesViewModel()
         {
-            searchKey = "";
+            searchKey = "";          
             _images = new ObservableCollection<Images>();
             imagesRepository = ImagesRepository.getInstance();
             albumRepository = AlbumRepository.getInstance();
             _album = albumRepository.getAllAlbum();
             _images = imagesRepository.getAllImages();
+            addOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrder(); });
+            addOrder += addNewOrder;
+        }
+
+        public void selectedImageChange()
+        {
+            OnPropertyChanged("filterListImages");
+        }
+
+
+        private void addNewOrder()
+        {
+            foreach (Images item in images)
+            {
+                if (item.isSelected)
+                {
+                    MessageBox.Show(item.name);
+                }
+            }
         }
 
         public static ImagesViewModel getIntance()

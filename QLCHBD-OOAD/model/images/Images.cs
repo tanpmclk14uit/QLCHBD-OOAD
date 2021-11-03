@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace QLCHBD_OOAD.model.images
 {
@@ -58,6 +59,27 @@ namespace QLCHBD_OOAD.model.images
             this._updateBy = createBy;
         }
 
+        private Boolean _isSelected;
+        public Boolean isSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                if (_isSelected) _background = new SolidColorBrush(Colors.Gray);
+                else _background = new SolidColorBrush(Colors.White);
+            }
+        }
+
+        private SolidColorBrush _background = new SolidColorBrush(Colors.White);
+        public SolidColorBrush background
+        {
+            get => _background;
+            set
+            {
+                _background = value;
+            }
+        }
 
         private long _id;
         public long id
