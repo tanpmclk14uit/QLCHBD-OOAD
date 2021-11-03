@@ -17,7 +17,18 @@ namespace QLCHBD_OOAD.viewmodel.rental
 {
     class RentalAddPageViewModel: BaseViewModel
     {
+
+        private static RentalAddPageViewModel intance;
         
+        public static RentalAddPageViewModel getIntance()
+        {
+            if(intance == null)
+            {
+                intance = new RentalAddPageViewModel();
+            }
+            return intance;
+        }
+
         private ImagesRepository imagesRepository;
 
         private Images _selectedDisk;
@@ -43,7 +54,8 @@ namespace QLCHBD_OOAD.viewmodel.rental
         public ObservableCollection<RentalBillItem> rentalBillItems
         {
             get 
-            {               
+            {
+               
                 return _rentalBillItems; 
             }
         }
@@ -74,12 +86,11 @@ namespace QLCHBD_OOAD.viewmodel.rental
         public ICommand Cancel { get; set; }
         public ICommand Confirm { get; set; }
 
-        public RentalAddPageViewModel()
-        {
-            
+        private RentalAddPageViewModel()
+        {            
             _rentalBillItems = new ObservableCollection<RentalBillItem>();            
-            Cancel = new RelayCommand<object>((p) => { return true; }, (p) => { turnBackToRentalAllOrders(); });
-            Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmClick(); turnBackToRentalAllOrders(); });
+            Cancel = new RelayCommand<object>((p) => { return true; }, (p) => {_rentalBillItems.Clear() ; turnBackToRentalAllOrders(); });
+            Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { _rentalBillItems.Clear(); onConfirmClick(); turnBackToRentalAllOrders(); });
             imagesRepository = ImagesRepository.getInstance();
             _allImages = imagesRepository.getAllImagesForRental();
             _keyword = "";
