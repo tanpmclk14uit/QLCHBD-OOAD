@@ -86,6 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\AddNewOrderImageWindow.xaml.cs">
+      <DependentUpon>AddNewOrderImageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\ChangeImageInformationForm.xaml.cs">
       <DependentUpon>ChangeImageInformationForm.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,7 @@
     <Compile Include="viewmodel\delivery\add order\DeliveryAddOrderFormViewModel.cs" />
     <Compile Include="viewmodel\delivery\detail order\DeliveryDetailPageViewModel.cs" />
     <Compile Include="viewmodel\delivery\DeliveryPageViewModel.cs" />
+    <Compile Include="viewmodel\images\AddNewOrderImageViewModel.cs" />
     <Compile Include="viewmodel\images\ChangeImagesInformationViewModel.cs" />
     <Compile Include="viewmodel\images\DeleteImageViewModel.cs" />
     <Compile Include="viewmodel\images\DiskViewViewModel.cs" />
@@ -176,6 +180,10 @@
     <Compile Include="view\rental\RentalMainPage.xaml.cs">
       <DependentUpon>RentalMainPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\AddNewOrderImageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\ChangeImageInformationForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

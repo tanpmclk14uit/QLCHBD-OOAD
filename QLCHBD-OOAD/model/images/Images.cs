@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace QLCHBD_OOAD.model.images
@@ -66,13 +67,37 @@ namespace QLCHBD_OOAD.model.images
             set
             {
                 _isSelected = value;
-                if (_isSelected) _background = new SolidColorBrush(Colors.Gray);
-                else _background = new SolidColorBrush(Colors.White);
+                if (_isSelected) _background = Brushes.Gray;
+                else _background = Brushes.White;
             }
         }
 
-        private SolidColorBrush _background = new SolidColorBrush(Colors.White);
-        public SolidColorBrush background
+        private String _orderAmount = "0";
+        public String orderAmount
+        {
+            get => _orderAmount;
+            set
+            {
+                _orderAmount = value;
+                if (_orderAmount != "")
+                {
+                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                }
+            }
+        }
+
+        private int _value = 0; 
+        public int value
+        {
+            get => _value;
+            set
+            {
+                _value= Convert.ToInt32(orderAmount) * lostCharges;
+            }
+        }
+
+        private Brush _background = Brushes.White;
+        public Brush background
         {
             get => _background;
             set
@@ -91,6 +116,10 @@ namespace QLCHBD_OOAD.model.images
         public string name
         {
             get => _name;
+            set
+            {
+                name = _name;
+            }
         }
 
         public long _idAlbum;
@@ -166,6 +195,10 @@ namespace QLCHBD_OOAD.model.images
         public int lostCharges
         {
             get => _lostCharges;
+            set
+            {
+                lostCharges = value;
+            }
         }
 
         private DateTime _createTime;

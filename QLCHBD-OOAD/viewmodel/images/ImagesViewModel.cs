@@ -91,13 +91,21 @@ namespace QLCHBD_OOAD.viewmodel.images
 
         private void addNewOrder()
         {
+            List<Images> lstOrder = new List<Images>();
             foreach (Images item in images)
             {
                 if (item.isSelected)
                 {
-                    MessageBox.Show(item.name);
+                    lstOrder.Add(item);
                 }
             }
+            openAddOrderWindow(lstOrder);
+        }
+
+        private void openAddOrderWindow(List<Images> lstOrder)
+        {
+            AddNewOrderImageWindow addNewOrderImageWindow = new AddNewOrderImageWindow(lstOrder);
+            addNewOrderImageWindow.ShowDialog();
         }
 
         public static ImagesViewModel getIntance()
@@ -186,16 +194,16 @@ namespace QLCHBD_OOAD.viewmodel.images
                     {
                         var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
 
-                        if (type == typeof(string) || type == typeof(int))
+                        if (type == typeof(string) || type == typeof(int) || imageItem.isSelected)
                         {
                             var rentalBill_field = prop.GetValue(imageItem, null);
                             if (rentalBill_field != null)
                             {
                                 String rentalBill_data = rentalBill_field.ToString().Trim().ToLower();
                                 String keyWord = searchKey.ToLower();
-                                if (rentalBill_data != null && keyWord != null)
+                                if (rentalBill_data != null && keyWord != null || imageItem.isSelected)
                                 {
-                                    if (rentalBill_data.Contains(keyWord))
+                                    if (rentalBill_data.Contains(keyWord) || imageItem.isSelected)
                                     {
                                         resultList.Add(imageItem);
                                         break;
