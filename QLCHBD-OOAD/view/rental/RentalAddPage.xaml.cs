@@ -24,7 +24,7 @@ namespace QLCHBD_OOAD.view.rental
         public RentalAddPage()
         {
             InitializeComponent();
-            DataContext = new RentalAddPageViewModel();
+            DataContext = RentalAddPageViewModel.getIntance();
             RenalDiskDetailForm.clearListViewSelected += RenalDiskDetailForm_clearListViewSelected;
         }
 
