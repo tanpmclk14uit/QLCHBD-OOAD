@@ -109,7 +109,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder DeliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), getAmountByID(((long)reader[0]).ToString()), (DateTime)reader[2], (DateTime)reader[3], (long)reader[4], (long)reader[5], stringToDeliveryOrderStatus(reader[6].ToString()), getTotalBillByID(((long)reader[0]).ToString()));
+                DeliOrder DeliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
                 DeliOrders.Add(DeliOrder);
             }
             database.closeConnection();
@@ -123,7 +123,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), getAmountByID(((long)reader[0]).ToString()), (DateTime)reader[2], (DateTime)reader[3], (long)reader[4], (long)reader[5], stringToDeliveryOrderStatus(reader[6].ToString()), getTotalBillByID(((long)reader[0]).ToString()));
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
@@ -136,7 +136,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), getAmountByID(((long)reader[0]).ToString()), (DateTime)reader[2], (DateTime)reader[3], (long)reader[4], (long)reader[5], stringToDeliveryOrderStatus(reader[6].ToString()), getTotalBillByID(((long)reader[0]).ToString()));
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
@@ -157,11 +157,11 @@ namespace QLCHBD_OOAD.dao
         public long getAmountByID(string id)
         {
             long value = 0;
-            string command = "SELECT COUNT(*) FROM import_form_item WHERE import_form_id = " + id;
+            string command = "SELECT quantity FROM import_form_item WHERE import_form_id = " + id;
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                value += (long)reader[0];
+                value += (int)reader[0];
             }
             database.closeConnection();
             return value;

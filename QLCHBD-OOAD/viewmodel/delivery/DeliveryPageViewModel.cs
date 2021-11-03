@@ -38,29 +38,6 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
         }
 
-        private void onModifyProvider()
-        {
-            MessageBox.Show("Modify Providers still being making color process, try again another time", "Error");
-        }
-
-        private void addOrderDelivery()
-        {
-            NewDeliveryWindow newDeliveryWindow = new NewDeliveryWindow();
-            newDeliveryWindow.ShowDialog();
-        }
-
-        private void addProviderDelivery()
-        {
-            DeliveryAskForm askForm = new DeliveryAskForm();
-            askForm.ShowDialog();
-        }
-
-        private void onDelete()
-        {
-            deliOrderlReponsitory.deleteFormWithID(selectedDeliOrder.id.ToString());
-            deliOrders.Remove(selectedDeliOrder);
-        }
-
         //-------------------------------------------------------------------------------------------------
         private static DeliveryPageViewModel _intance;
         public static DeliveryPageViewModel getInstance()
@@ -125,12 +102,6 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             }
         }
         //-------------------------------------------------------------------------------------------------
-
-
-
-
-        //-------------------------------------------------------------------------------------------------
-
         private void setUpStatusses()
         {
             _selectedStatuses = new ObservableCollection<string>();
@@ -219,7 +190,31 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
             return filterList;
         }
+        //-------------------------------------------------------------------------------------------------
 
+        private void onModifyProvider()
+        {
+            MessageBox.Show("Modify Providers still being making color process, try again another time", "Error");
+        }
+
+        private void addOrderDelivery()
+        {
+            NewDeliveryWindow newDeliveryWindow = new NewDeliveryWindow();
+            newDeliveryWindow.ShowDialog();
+            OnPropertyChanged();
+        }
+
+        private void addProviderDelivery()
+        {
+            DeliveryAskForm askForm = new DeliveryAskForm();
+            askForm.ShowDialog();
+        }
+
+        private void onDelete()
+        {
+            deliOrderlReponsitory.deleteFormWithID(selectedDeliOrder.id.ToString());
+            deliOrders.Remove(selectedDeliOrder);
+        }
 
     }
 }
