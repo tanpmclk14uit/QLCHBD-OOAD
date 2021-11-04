@@ -28,6 +28,7 @@ namespace QLCHBD_OOAD.model.images
             this._updateTime = updateTime;
             this._createBy = createBy;
             this._updateBy = updateBy;
+            this._providerPrice = lostCharges.ToString();
         }
 
 
@@ -58,6 +59,7 @@ namespace QLCHBD_OOAD.model.images
             this._updateTime = createTime;
             this._createBy = createBy;
             this._updateBy = createBy;
+            this._providerPrice = lostCharges.ToString();
         }
 
         private Boolean _isSelected;
@@ -191,13 +193,33 @@ namespace QLCHBD_OOAD.model.images
             get => _idByProvider;
         }
 
-        public int _lostCharges;
+        private int _lostCharges;
         public int lostCharges
         {
             get => _lostCharges;
             set
             {
-                lostCharges = value;
+                _lostCharges = value;
+
+                if (_lostCharges.ToString() != "")
+                {
+                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                }
+            }
+        }
+
+        private String _providerPrice;
+        public String providerPrice
+        {
+            get => _providerPrice;
+            set
+            {
+                _providerPrice = value;
+
+                if (_providerPrice != "")
+                {
+                    _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(providerPrice);
+                }
             }
         }
 

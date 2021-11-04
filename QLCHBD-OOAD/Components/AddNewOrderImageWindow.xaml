@@ -33,39 +33,104 @@
             <Button Content="Remove"
                     FontWeight="Bold"
                     FontSize="25"
+                    Background="White"
                     Height="45"
+                    Padding="0 0 0 5"
+                    VerticalAlignment="Center"
                     Width="140"
                     BorderBrush="Black"/>
             <Button Content="Add book"
                     FontWeight="Bold"
                     FontSize="25"
+                    VerticalAlignment="Center"
                     Height="45"
+                    Background="White"
                     Width="160"
                     Margin="50 0 80 0"
                     BorderBrush="Black"/>
         </StackPanel>
         <Border Grid.Row="2" Background="White"
+                x:Name="borderList"
                 Margin="10 0 10 0"
+                Padding="0 0 0 40"
                 BorderBrush="Black" BorderThickness="1">
-            <DataGrid Margin="10 10 10 10" 
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Margin="10 10 10 0" 
                       x:Name="orderTable"
+                      CanUserAddRows="True"
+                      LostKeyboardFocus="orderTable_LostKeyboardFocus"
                           CanUserResizeColumns="False"  
                       AutoGenerateColumns="False"
                       CurrentCellChanged="DataGrid_CurrentCellChanged"
                           ItemsSource="{Binding lstOnOrder, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
                       BorderBrush="Black"
                       BorderThickness="1">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID Store" Width="1*" Binding="{Binding Path=id}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="ID Provider" Width="4*" Binding="{Binding Path=idProvider}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Path=name, Mode=TwoWay}"/>
-                    <DataGridTextColumn Header="Price" Width="2*" Binding="{Binding Path=lostCharges, Mode=TwoWay}"/>
-                    <DataGridTextColumn Header="Amount" Width="3*" Binding="{Binding Path=orderAmount , Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Value" Width="3*" Binding="{Binding Path=value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                    
-                </DataGrid.Columns>
-            </DataGrid>
-        </Border> 
-       
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID Store" Width="1*" Binding="{Binding Path=id}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="ID Provider" Width="4*" Binding="{Binding Path=idProvider}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Path=name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="Price" Width="2*" Binding="{Binding Path=providerPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="Amount" Width="3*" Binding="{Binding Path=orderAmount , Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="Value" Width="3*" Binding="{Binding Path=value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Border BorderBrush="Black" BorderThickness="1"
+                            Grid.Row="1"
+                            Margin="10 0 10 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Text="In Total"
+                                           FontSize="17"
+                                           FontWeight="Bold"
+                                           Foreground="Gray"
+                                           Margin="0 0 20 0"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="Black" BorderThickness="1"
+                                    Grid.Column="1">
+                                <TextBlock Text="{Binding totalAmount, UpdateSourceTrigger=PropertyChanged}"
+                                           x:Name="totalAmount"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="Gray"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="Black" BorderThickness="1"
+                                    Grid.Column="2">
+                                <TextBlock Text="{Binding totalValue, UpdateSourceTrigger=PropertyChanged}"
+                                           Name="totalValue"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="Gray"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+                
+            </Grid>
+        </Border>
+        <Button Content="Confirm"
+                Width="400"
+                Height="37"
+                Grid.Row="3"
+                BorderBrush="Black"
+                Margin="0 0 10 0"
+                BorderThickness="1"
+                HorizontalAlignment="Right"/>
     </Grid>
 </Window>
