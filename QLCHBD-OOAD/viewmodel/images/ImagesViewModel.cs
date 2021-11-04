@@ -99,12 +99,17 @@ namespace QLCHBD_OOAD.viewmodel.images
                     lstOrder.Add(item);
                 }
             }
+            OnPropertyChanged("filterListImages");
             openAddOrderWindow(lstOrder);
         }
 
         private void openAddOrderWindow(List<Images> lstOrder)
         {
             AddNewOrderImageWindow addNewOrderImageWindow = new AddNewOrderImageWindow(lstOrder);
+            foreach (Images item in images)
+            {
+                item.isSelected = false;
+            }    
             addNewOrderImageWindow.ShowDialog();
         }
 
