@@ -66,16 +66,25 @@ namespace QLCHBD_OOAD.viewmodel.rental
             AddMoreAmount = new RelayCommand<object>((p) => { return true; }, (p) => { addMoreAmount(); });
             ReduceAmount = new RelayCommand<object>((p) => { return true; }, (p) => { reduceAmount(); });
             Add = new RelayCommand<object>((p) => { return true; }, (p) => { onAddClick(); });
-            amount = 1;
+            if(images.remaining == 0)
+            {
+                amount = 0;
+            }
+            else
+            {
+                amount = 1;
+            }            
             returnDate = DateTime.Now.AddDays(1);
             selectedRentalBillItem = new RentalBillItem(images.id, images.name, amount, returnDate, images.rentalPrice, images.image);
-            
         }
-
         private void onAddClick()
-        {
+        {            
             closeForm();
-            addNewRentalBillItem(selectedRentalBillItem);            
+            if(amount != 0)
+            {
+                addNewRentalBillItem(selectedRentalBillItem);
+            }
+                       
         }
 
 

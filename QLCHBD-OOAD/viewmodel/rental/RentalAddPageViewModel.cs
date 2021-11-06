@@ -53,10 +53,9 @@ namespace QLCHBD_OOAD.viewmodel.rental
         private ObservableCollection<RentalBillItem> _rentalBillItems;
         public ObservableCollection<RentalBillItem> rentalBillItems
         {
-            get 
+            get
             {
-               
-                return _rentalBillItems; 
+                return _rentalBillItems;
             }
         }
 
@@ -89,13 +88,20 @@ namespace QLCHBD_OOAD.viewmodel.rental
         private RentalAddPageViewModel()
         {            
             _rentalBillItems = new ObservableCollection<RentalBillItem>();            
-            Cancel = new RelayCommand<object>((p) => { return true; }, (p) => {_rentalBillItems.Clear() ; turnBackToRentalAllOrders(); });
-            Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { _rentalBillItems.Clear(); onConfirmClick(); turnBackToRentalAllOrders(); });
+            Cancel = new RelayCommand<object>((p) => { return true; }, (p) => {clearData() ; turnBackToRentalAllOrders(); });
+            Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmClick(); clearData(); turnBackToRentalAllOrders();  });
             imagesRepository = ImagesRepository.getInstance();
             _allImages = imagesRepository.getAllImagesForRental();
             _keyword = "";
             RentalDiskDetailFormViewModel.addNewRentalBillItem += RentalDiskDetailFormViewModel_addNewRentalBillItem;
             rentalBillReponsitory = RentalBillRepository.getIntance();
+
+        }
+        private void clearData()
+        {
+            _rentalBillItems.Clear();
+            _totalPrice = 0;
+            keyword = "";
 
         }
         private void onConfirmClick()
@@ -118,12 +124,10 @@ namespace QLCHBD_OOAD.viewmodel.rental
  
         private void RentalDiskDetailFormViewModel_addNewRentalBillItem(RentalBillItem rentalBillItem)
         {
-                
             caculateTotalPrice(rentalBillItem);
             _rentalBillItems.Add(rentalBillItem);
             OnPropertyChanged("rentalBillItems");
         }
       
-
     }
 }

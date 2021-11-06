@@ -124,7 +124,6 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-
                 RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
                 rentalBills.Add(rentalBill);
             }
@@ -144,16 +143,16 @@ namespace QLCHBD_OOAD.dao
                 connection.Open();
                 MySqlCommand cmd = new MySqlCommand(command, connection);
                 cmd.ExecuteNonQuery();
-                lastInsertId = long.Parse(cmd.LastInsertedId.ToString());
+                lastInsertId = long.Parse(cmd.LastInsertedId.ToString());               
                 connection.Close();
                 if (lastInsertId != -1)
                 {
                     foreach (RentalBillItem rentalBill in rentalBillItems)
                     {
                         createNewRentalBillItem(rentalBill, lastInsertId);
+                        updateDiskRented(rentalBill);
                     }
                 }
-
             }
             catch (Exception e)
             {
@@ -162,10 +161,15 @@ namespace QLCHBD_OOAD.dao
             }
         }
         private void createNewRentalBillItem(RentalBillItem rentalBillItem, long rentalId)
-        {
+        {   
             string format = "yyyy-MM-dd HH:mm:ss";
             string command = $"INSERT INTO `rental_bill_item`(`rental_id`, `quantity`, `rental_price`, `disk_name`, `disk_image`, `disk_id`, `due_date`, `receive_quantity`) VALUES ('{rentalId}','{rentalBillItem.amount}','{rentalBillItem.rentalPrice}','{rentalBillItem.diskName}','{rentalBillItem.image}','{rentalBillItem.diskId}','{rentalBillItem.getDueDate().ToString(format)}','{rentalBillItem.returned}')";
-           
+            var reader = database.executeCommand(command);
+            database.closeConnection();
+        }
+        private void updateDiskRented(RentalBillItem rentalBillItem)
+        {
+            string command = $"UPDATE `disk` SET rented=rented+{rentalBillItem.amount} WHERE id = {rentalBillItem.diskId};";
             var reader = database.executeCommand(command);
             database.closeConnection();
         }
