@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QLCHBD_OOAD.model.Guest
 {
-    class Guest
+    public class Guest
     {
         private long _id;
         public long id

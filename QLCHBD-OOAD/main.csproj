@@ -101,6 +101,7 @@
     <Compile Include="dao\DeliveryOrderItemsRepository.cs" />
     <Compile Include="dao\DeliveryProviderRepository.cs" />
     <Compile Include="dao\DetailRentalBillReponsitory.cs" />
+    <Compile Include="dao\GuestReponsitory.cs" />
     <Compile Include="dao\ImagesRepository.cs" />
     <Compile Include="Components\DeliveryOrder.xaml.cs">
       <DependentUpon>DeliveryOrder.xaml</DependentUpon>
@@ -131,6 +132,7 @@
     <Compile Include="viewmodel\images\ImageFunctionViewModel.cs" />
     <Compile Include="viewmodel\images\ImagesViewModel.cs" />
     <Compile Include="viewmodel\rental\DetailRentalPageViewModel.cs" />
+    <Compile Include="viewmodel\rental\RentalAddMemberViewModel.cs" />
     <Compile Include="viewmodel\rental\RentalAddPageViewModel.cs" />
     <Compile Include="viewmodel\rental\RentalDiskDetailFormViewModel.cs" />
     <Compile Include="viewmodel\rental\RentalPageViewModel.cs" />
@@ -163,6 +165,9 @@
     </Compile>
     <Compile Include="view\rental\RenalDiskDetailForm.xaml.cs">
       <DependentUpon>RenalDiskDetailForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\rental\RentalAddMember.xaml.cs">
+      <DependentUpon>RentalAddMember.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\rental\RentalAddPage.xaml.cs">
       <DependentUpon>RentalAddPage.xaml</DependentUpon>
@@ -343,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\rental\RenalDiskDetailForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\rental\RentalAddMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
