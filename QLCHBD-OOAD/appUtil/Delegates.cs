@@ -26,4 +26,6 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void AddNewDeliveryOrderItem(string delivery);
     public delegate void GuestTranferInformation(Guest guest);
 
+    public delegate void SelectedImageChangeHandler();
+    public delegate void AddOrderHandler();
 }

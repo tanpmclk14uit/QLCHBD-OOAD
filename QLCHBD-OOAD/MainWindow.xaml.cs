@@ -38,6 +38,7 @@ namespace QLCHBD_OOAD
             ChangeImageInformationForm.ToggleForm += ToggleForm;
             RenalDiskDetailForm.ToggleForm += ToggleForm;
             RentalAddMember.ToggleForm += ToggleForm;
+            AddNewOrderImageWindow.ToggleForm += ToggleForm;
         }
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)

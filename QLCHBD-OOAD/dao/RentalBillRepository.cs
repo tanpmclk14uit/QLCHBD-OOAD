@@ -104,6 +104,22 @@ namespace QLCHBD_OOAD.dao
             return number;
         }
 
+        public long getNumberInRentalById(long id)
+        {
+            long number = 0;
+            string command = "SELECT sum(rental_bill_item.receive_quantity) FROM `rental_bill` inner join `rental_bill_item` WHERE rental_bill.id = rental_bill_item.rental_id and rental_bill_item.disk_id = " + id.ToString() + " and rental_bill_item.quantity != rental_bill_item.receive_quantity";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                if (!Convert.IsDBNull(reader[0]))
+                {
+                    number = Convert.ToInt64(reader[0]);
+                }
+            }
+            database.closeConnection();
+            return number;
+        }
+
         public ObservableCollection<RentalBill> getRentalBillsByFilterStatus(String status)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();

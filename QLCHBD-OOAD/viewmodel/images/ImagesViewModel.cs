@@ -66,14 +66,51 @@ namespace QLCHBD_OOAD.viewmodel.images
                 _selectedImage = null;
             }
         }
+
+        public ICommand addOrderCommand { get; set; }
+
+        public static event AddOrderHandler addOrder;
+
         public ImagesViewModel()
         {
-            searchKey = "";
+            searchKey = "";          
             _images = new ObservableCollection<Images>();
             imagesRepository = ImagesRepository.getInstance();
             albumRepository = AlbumRepository.getInstance();
             _album = albumRepository.getAllAlbum();
             _images = imagesRepository.getAllImages();
+            addOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrder(); });
+            addOrder += addNewOrder;
+        }
+
+        public void selectedImageChange()
+        {
+            OnPropertyChanged("filterListImages");
+        }
+
+
+        private void addNewOrder()
+        {
+            List<Images> lstOrder = new List<Images>();
+            foreach (Images item in images)
+            {
+                if (item.isSelected)
+                {
+                    lstOrder.Add(item);
+                }
+            }
+            OnPropertyChanged("filterListImages");
+            openAddOrderWindow(lstOrder);
+        }
+
+        private void openAddOrderWindow(List<Images> lstOrder)
+        {
+            AddNewOrderImageWindow addNewOrderImageWindow = new AddNewOrderImageWindow(lstOrder);
+            foreach (Images item in images)
+            {
+                item.isSelected = false;
+            }    
+            addNewOrderImageWindow.ShowDialog();
         }
 
         public static ImagesViewModel getIntance()
@@ -162,16 +199,16 @@ namespace QLCHBD_OOAD.viewmodel.images
                     {
                         var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
 
-                        if (type == typeof(string) || type == typeof(int))
+                        if (type == typeof(string) || type == typeof(int) || imageItem.isSelected)
                         {
                             var rentalBill_field = prop.GetValue(imageItem, null);
                             if (rentalBill_field != null)
                             {
                                 String rentalBill_data = rentalBill_field.ToString().Trim().ToLower();
                                 String keyWord = searchKey.ToLower();
-                                if (rentalBill_data != null && keyWord != null)
+                                if (rentalBill_data != null && keyWord != null || imageItem.isSelected)
                                 {
-                                    if (rentalBill_data.Contains(keyWord))
+                                    if (rentalBill_data.Contains(keyWord) || imageItem.isSelected)
                                     {
                                         resultList.Add(imageItem);
                                         break;

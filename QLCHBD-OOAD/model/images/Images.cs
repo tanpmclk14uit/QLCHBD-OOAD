@@ -1,8 +1,11 @@
-﻿using System;
+﻿using QLCHBD_OOAD.dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace QLCHBD_OOAD.model.images
 {
@@ -26,6 +29,7 @@ namespace QLCHBD_OOAD.model.images
             this._updateTime = updateTime;
             this._createBy = createBy;
             this._updateBy = updateBy;
+            this._providerPrice = lostCharges.ToString();
         }
 
 
@@ -56,8 +60,54 @@ namespace QLCHBD_OOAD.model.images
             this._updateTime = createTime;
             this._createBy = createBy;
             this._updateBy = createBy;
+            this._providerPrice = lostCharges.ToString();
         }
 
+        private Boolean _isSelected;
+        public Boolean isSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                if (_isSelected) _background = Brushes.Gray;
+                else _background = Brushes.White;
+            }
+        }
+
+        private String _orderAmount = "0";
+        public String orderAmount
+        {
+            get => _orderAmount;
+            set
+            {
+                _orderAmount = value;
+                if (_orderAmount != "")
+                {
+                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                }
+            }
+        }
+
+        private int _value = 0; 
+        public int value
+        {
+            get => _value;
+            set
+            {
+                _value= Convert.ToInt32(orderAmount) * lostCharges;
+            }
+        }
+
+        private Brush _background = Brushes.White;
+        public Brush background
+        {
+            get => _background;
+            set
+            {
+                _background = value;
+            }
+        }
 
         private long _id;
         public long id
@@ -69,6 +119,10 @@ namespace QLCHBD_OOAD.model.images
         public string name
         {
             get => _name;
+            set
+            {
+                name = _name;
+            }
         }
 
         public long _idAlbum;
@@ -81,6 +135,12 @@ namespace QLCHBD_OOAD.model.images
         public int quantity
         {
             get => _quantity;
+        }
+
+        private String _displayQuantity;
+        public String displayQuantity
+        {
+            get => (_quantity - RentalBillRepository.getIntance().getNumberInRentalById(id)).ToString() + "/" + _quantity.ToString();
         }
 
         public string _image;
@@ -140,10 +200,34 @@ namespace QLCHBD_OOAD.model.images
             get => _idByProvider;
         }
 
-        public int _lostCharges;
+        private int _lostCharges;
         public int lostCharges
         {
             get => _lostCharges;
+            set
+            {
+                _lostCharges = value;
+
+                if (_lostCharges.ToString() != "")
+                {
+                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                }
+            }
+        }
+
+        private String _providerPrice;
+        public String providerPrice
+        {
+            get => _providerPrice;
+            set
+            {
+                _providerPrice = value;
+
+                if (_providerPrice != "")
+                {
+                    _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(providerPrice);
+                }
+            }
         }
 
         private DateTime _createTime;
