@@ -1,5 +1,6 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
+using QLCHBD_OOAD.model.Guest;
 using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.model.retal;
 using QLCHBD_OOAD.view.rental;
@@ -49,6 +50,16 @@ namespace QLCHBD_OOAD.viewmodel.rental
                 
             }
         }
+        private Guest _guest;
+        public Guest guest
+        {
+            get => _guest;
+            set 
+            {
+                _guest = value;
+                OnPropertyChanged("guest");
+            }
+        }
 
         private ObservableCollection<RentalBillItem> _rentalBillItems;
         public ObservableCollection<RentalBillItem> rentalBillItems
@@ -84,18 +95,32 @@ namespace QLCHBD_OOAD.viewmodel.rental
 
         public ICommand Cancel { get; set; }
         public ICommand Confirm { get; set; }
+        public ICommand AddMember { get; set; }
 
         private RentalAddPageViewModel()
         {            
             _rentalBillItems = new ObservableCollection<RentalBillItem>();            
             Cancel = new RelayCommand<object>((p) => { return true; }, (p) => {clearData() ; turnBackToRentalAllOrders(); });
             Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmClick(); clearData(); turnBackToRentalAllOrders();  });
+            AddMember = new RelayCommand<object>((p) => { return true; }, (p) => { onAddMemberClick(); });
             imagesRepository = ImagesRepository.getInstance();
             _allImages = imagesRepository.getAllImagesForRental();
             _keyword = "";
             RentalDiskDetailFormViewModel.addNewRentalBillItem += RentalDiskDetailFormViewModel_addNewRentalBillItem;
+            RentalAddMemberViewModel.guestTranferInformation += RentalAddMemberViewModel_guestTranferInformation;
             rentalBillReponsitory = RentalBillRepository.getIntance();
 
+        }
+
+        private void RentalAddMemberViewModel_guestTranferInformation(Guest guest)
+        {
+            this.guest = guest;
+        }
+
+        private void onAddMemberClick()
+        {
+            RentalAddMember rentalAddMember = new RentalAddMember();
+            rentalAddMember.Show();
         }
         private void clearData()
         {
@@ -106,8 +131,17 @@ namespace QLCHBD_OOAD.viewmodel.rental
         }
         private void onConfirmClick()
         {
-            RentalBill rentalBill = new RentalBill(1, Convert.ToInt32(totalPrice), RentalBillStatus.WAITING);
-            rentalBillReponsitory.createNewRentalBill(rentalBill, 1, rentalBillItems);           
+            if(guest != null)
+            {
+                RentalBill rentalBill = new RentalBill(guest.id, Convert.ToInt32(totalPrice), RentalBillStatus.WAITING);
+                rentalBillReponsitory.createNewRentalBill(rentalBill, 1, rentalBillItems);
+            }
+            else
+            {
+                MessageBox.Show("Please select guest");
+            }
+
+                     
         }
         private double _totalPrice;
         private RentalBillRepository rentalBillReponsitory;

@@ -36,7 +36,8 @@ namespace QLCHBD_OOAD
             diskView.ToggleForm += ToggleForm;
             DeleteImageForm.ToggleForm += ToggleForm;
             ChangeImageInformationForm.ToggleForm += ToggleForm;
-            RenalDiskDetailForm.ToggleForm += ToggleForm;           
+            RenalDiskDetailForm.ToggleForm += ToggleForm;
+            RentalAddMember.ToggleForm += ToggleForm;
         }
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)

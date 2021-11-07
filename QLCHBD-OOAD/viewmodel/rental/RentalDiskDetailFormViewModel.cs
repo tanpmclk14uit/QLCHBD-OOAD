@@ -83,10 +83,8 @@ namespace QLCHBD_OOAD.viewmodel.rental
             if(amount != 0)
             {
                 addNewRentalBillItem(selectedRentalBillItem);
-            }
-                       
+            }              
         }
-
 
         private void addMoreAmount()
         {

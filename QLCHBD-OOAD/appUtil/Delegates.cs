@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QLCHBD_OOAD.model.Guest;
 
 //this is use for define delegate
 namespace QLCHBD_OOAD.appUtil
@@ -23,5 +24,6 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void CloseFormHandler();
     public delegate void AddNewRentalBillItem(RentalBillItem rentalBillItem);
     public delegate void AddNewDeliveryOrderItem(string delivery);
+    public delegate void GuestTranferInformation(Guest guest);
 
 }

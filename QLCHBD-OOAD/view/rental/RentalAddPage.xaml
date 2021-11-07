@@ -27,7 +27,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button                     
-                    Content="ADD GUEST"              
+                    Content="ADD GUEST" 
+                    Command="{Binding AddMember}"
                     Height="40"
                     Background="White"     
                     BorderThickness="1px"
@@ -45,20 +46,22 @@
                             <ImageBrush ImageSource="/Assets/img_user.png" Stretch="UniformToFill"/>
                         </Border.Background>
                     </Border>
-                    <Grid Grid.Column="1" Margin="10 10 0 10">
+                    <Grid Grid.Column="1" Margin="10 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label ContentStringFormat="ID: {0}"
-                               Content="1"
+                               Content="{Binding guest.id}"
                                FontSize="20"
+                               Height="auto"
                                FontWeight="Bold"   
                                VerticalAlignment="Center"
                                />
                         <Label ContentStringFormat="Name: {0}"
-                               Content="Pham Minh Tan"
+                               Content="{Binding guest.name}"
                                Grid.Row="1"
+                               Height="auto"
                                FontSize="20"
                                FontWeight="Bold"   
                                VerticalAlignment="Center"
