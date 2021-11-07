@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using QLCHBD_OOAD.appUtil;
@@ -22,7 +24,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         private DeliveryOrderRepository deliveryOrderRepository;
         private DeliveryOrderItemsRepository deliveryOrderItemsRepository;
         private DeliveryProviderRepository deliveryProviderRepository;
-        public DeliBillsItems SelectedItems { get; set; }
+        public DeliOrderItems SelectedItems { get; set; }
 
         public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -31,12 +33,30 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
 
         private ObservableCollection<DeliOrderItems> _importItems;
-        public ObservableCollection<DeliOrderItems> importItems { get => _importItems; set { _importItems = value; OnPropertyChanged(); } }
+        public ObservableCollection<DeliOrderItems> importItems { get => _importItems; set { _importItems = value; OnPropertyChanged("importItems"); } }
         public ObservableCollection<DeliOrderItems> filterBillItems()
         {
             importItems = deliveryOrderItemsRepository.getItemsbyImportFormsID(id.ToString());
-            OnPropertyChanged();
+            getTotalImportForm(importItems);
+            OnPropertyChanged("importItems");
             return importItems;
+        }
+
+        private long _totalBills;
+        private int _totalAmount;
+        public long totalBills => _totalBills;
+        public int totalAmount => _totalAmount;
+        private void getTotalImportForm(ObservableCollection<DeliOrderItems> orderItems)
+        {
+            _totalBills = 0;
+            _totalAmount = 0;
+            foreach (var item in orderItems)
+            {
+                _totalAmount += item.Amount;
+                _totalBills += item.imPrice*item.Amount;
+            }
+            OnPropertyChanged("totalBills");
+            OnPropertyChanged("totalAmount");
         }
         public DeliveryaAddOrderFormViewModel()
         {
@@ -109,6 +129,10 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             deliveryOrderRepository.addTemporaryImportForm(id, selectedStatus, 1);
         }
         //-------------------------------------------------------------------------------------------------
+        
+
+        //-------------------------------------------------------------------------------------------------
+
         private void openAddWindow()
         {
             AddNewDiskDeliveryWindow window = new AddNewDiskDeliveryWindow(id);
@@ -118,8 +142,15 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void onRemove()
         {
-            deliveryOrderItemsRepository.removeItemByID(SelectedItems.id.ToString());
-            filterBillItems();
+            if (SelectedItems == null)
+            {
+                MessageBox.Show("Nothing to delete", "Error");
+            }
+            else
+            {
+                deliveryOrderItemsRepository.removeItemByID(SelectedItems.id.ToString());
+                filterBillItems();
+            }
         }
 
         private void onConfirm()

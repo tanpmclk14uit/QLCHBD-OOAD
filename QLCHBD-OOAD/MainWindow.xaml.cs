@@ -41,6 +41,7 @@ namespace QLCHBD_OOAD
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("DashBoard Screen still being making color process, try again another time", "Error");
             //Screen content = new Screen();
             //Holder.Content = content;
         }
@@ -67,6 +68,14 @@ namespace QLCHBD_OOAD
 
         private void bttReport_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Report Screen still being making color process, try again another time", "Error");
+            //Screen content = new Screen();
+            //Holder.Content = content;
+        }
+        private void bttLogout_Click(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show("Logout Screen still being making color process, try again another time", "Error");
             //Screen content = new Screen();
             //Holder.Content = content;
         }
@@ -158,5 +167,7 @@ namespace QLCHBD_OOAD
                 this.IsEnabled = true;
             }
         }
+
+
     }
 }

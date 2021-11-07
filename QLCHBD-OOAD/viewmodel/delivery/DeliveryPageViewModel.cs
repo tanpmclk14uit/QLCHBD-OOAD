@@ -201,7 +201,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             NewDeliveryWindow newDeliveryWindow = new NewDeliveryWindow();
             newDeliveryWindow.ShowDialog();
-            OnPropertyChanged();
+            selectedStatus = selectedStatuses[0];
         }
 
         private void addProviderDelivery()
@@ -214,6 +214,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             deliOrderlReponsitory.deleteFormWithID(selectedDeliOrder.id.ToString());
             deliOrders.Remove(selectedDeliOrder);
+            OnPropertyChanged("seachKey");
+            OnPropertyChanged("fillerListDeliOder");
+            OnPropertyChanged("selectedStatus");
         }
 
     }

@@ -26,7 +26,9 @@ namespace QLCHBD_OOAD.view.delivery.Add_Order
             DataContext = new DeliveryaAddOrderFormViewModel();
             DeliveryaAddOrderFormViewModel.closeForm += closeWindow;
 
+        
         }
+
 
         private void closeWindow()
         {

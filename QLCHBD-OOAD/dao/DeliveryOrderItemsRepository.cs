@@ -100,6 +100,7 @@ namespace QLCHBD_OOAD.dao
                 DeliOrderItems item = new DeliOrderItems((long)reader[0], (long)reader[1], (int)reader[2], (long)reader[3], (string)reader[4], (int)reader[5], (long)reader[6]);
                 Items.Add(item);
             }
+            database.closeConnection();
             return Items;
         }
 
