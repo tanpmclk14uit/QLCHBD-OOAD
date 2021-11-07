@@ -231,7 +231,8 @@
 
                 <Button x:Name="bttLogout" 
                         Style="{StaticResource MyButtonStyle}"
-                        Grid.Row="6">
+                        Grid.Row="6"
+                        Click="bttLogout_Click">
 
 
                     <DockPanel>

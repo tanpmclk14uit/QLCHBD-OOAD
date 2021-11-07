@@ -71,14 +71,14 @@ namespace QLCHBD_OOAD.dao
         }
         public void DeleteImportFormByID(string id)
         {
-            string command = "DELETE FROM import_form WHERE (id = '" + id + "');";
+            string command = "DELETE FROM import_form WHERE id = " + id;
             database.executeCommand(command);
             database.closeConnection();
         }
-        public void createNewImportForm(string billid, string provider, string id)
+        public void createNewImportForm(string formID, string provider, string id)
         {
             string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
-                billid + "', '" +
+                formID + "', '" +
                 provider + "', '" +
                 id + "', '" +
                 id + "');";
@@ -145,7 +145,7 @@ namespace QLCHBD_OOAD.dao
         public int getTotalBillByID(string id)
         {
             int value = 0;
-            string command = "SELECT disk_price FROM import_form_item WHERE import_form_id = " + id;
+            string command = "SELECT sum_value FROM import_form WHERE id = " + id;
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
@@ -157,7 +157,7 @@ namespace QLCHBD_OOAD.dao
         public long getAmountByID(string id)
         {
             long value = 0;
-            string command = "SELECT quantity FROM import_form_item WHERE import_form_id = " + id;
+            string command = "SELECT sum_amount FROM import_form WHERE id = " + id;
             var reader = database.executeCommand(command);
             while (reader.Read())
             {

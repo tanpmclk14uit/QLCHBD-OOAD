@@ -113,7 +113,7 @@
                     HorizontalContentAlignment="Center"  
                     VerticalContentAlignment="Center" 
                 
-                    ItemsSource="{Binding fillerListDeliOder}">
+                    ItemsSource="{Binding fillerListDeliOder, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Width="400" Height="300" >
