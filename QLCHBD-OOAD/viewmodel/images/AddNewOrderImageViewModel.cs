@@ -1,15 +1,30 @@
-﻿using QLCHBD_OOAD.model.images;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.images;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.images
 {
     class AddNewOrderImageViewModel: BaseViewModel
     {
+        public ICommand removeCommand { get; set; }
+
+        public static event DeleteOrderDiskItemHandler deleteOrderItem;
+
+        private Images _selectedItem;
+        public  Images selectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+            }
+        }
 
         private List<Images> _lstOnOrder;
         public List<Images> lstOnOrder
@@ -19,6 +34,16 @@ namespace QLCHBD_OOAD.viewmodel.images
             {
                 _lstOnOrder = value;
                 OnPropertyChanged("lstOnOrder");
+            }
+        }
+
+        public List<Images> _lstOnOrderBackup;
+        public List<Images> lstOnOrderBackup
+        {
+            get => _lstOnOrderBackup;
+            set
+            {
+                _lstOnOrderBackup = value;
             }
         }
 
@@ -54,7 +79,16 @@ namespace QLCHBD_OOAD.viewmodel.images
         {
             this.lstOnOrder = lstOnOrder;
             this.defaultList = lstOnOrder;
+            removeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { deleteOrderItem(selectedItem); });
+            deleteOrderItem += DeleteOrderDiskItem;
         }
+
+        private void DeleteOrderDiskItem(Images selectedItem)
+        {
+            _lstOnOrder.Remove(selectedItem);
+            OnPropertyChanged("lstOnOrder");
+        }
+
 
         public void updateList()
         {

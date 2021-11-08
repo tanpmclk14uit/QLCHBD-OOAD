@@ -39,14 +39,14 @@ namespace QLCHBD_OOAD.dao
                 if (reader[11] == reader[12])
                 {
                     Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                     images.Add(image);
                 }
                 else
                 {
                     
                     Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (long)reader[13]);
+                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (long)reader[13], (int)reader[15]);
                     images.Add(image);
                 }    
                 
@@ -115,7 +115,7 @@ namespace QLCHBD_OOAD.dao
             while (reader.Read())
             {
                 Images image = new Images((Byte)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -131,7 +131,7 @@ namespace QLCHBD_OOAD.dao
             {               
           
                 Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -146,7 +146,7 @@ namespace QLCHBD_OOAD.dao
             while (reader.Read())
             {
                 Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                      (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                      (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();

@@ -143,7 +143,7 @@ namespace QLCHBD_OOAD.viewmodel.images
         public DiskViewViewModel()
         {
             addImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                newImages = new Images(imagesRepository.getNumberOfImage()+1, name, Convert.ToInt64(album), Convert.ToInt32(quantity), image, locate, isCheck, Convert.ToInt32(price), Convert.ToInt64(provider), Convert.ToInt64(idByProvider), Convert.ToInt32(loss), DateTime.Now, DateTime.Now, 1, 1);
+                newImages = new Images(imagesRepository.getNumberOfImage()+1, name, Convert.ToInt64(album), Convert.ToInt32(quantity), image, locate, isCheck, Convert.ToInt32(price), Convert.ToInt64(provider), Convert.ToInt64(idByProvider), Convert.ToInt32(loss), DateTime.Now, DateTime.Now, 1, 1, 0);
                 addImage(newImages); });
             addImage += addNewImage;
         }

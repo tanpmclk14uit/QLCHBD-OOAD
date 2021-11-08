@@ -38,7 +38,7 @@ namespace QLCHBD_OOAD.viewmodel.images
         private void onSaveImages(Images images)
         {
             imagesRepository.updateImage(images.id, image, isCheck, name, Convert.ToInt32(quantity), Convert.ToInt64(provider), Convert.ToInt64(idByProvider), createDate, Convert.ToInt32(loss), Convert.ToInt32(price), locate, Convert.ToInt64(album));
-            Images newImage = new Images(images.id, name,Convert.ToInt64(album), Convert.ToInt32(quantity), image, locate, isCheck, Convert.ToInt32(price), Convert.ToInt64(provider), Convert.ToInt64(idByProvider), Convert.ToInt32(loss), DateTime.Parse(ImageDetailViewModel.selectedDisk.createTime), DateTime.Now, 1, 1);
+            Images newImage = new Images(images.id, name,Convert.ToInt64(album), Convert.ToInt32(quantity), image, locate, isCheck, Convert.ToInt32(price), Convert.ToInt64(provider), Convert.ToInt64(idByProvider), Convert.ToInt32(loss), DateTime.Parse(ImageDetailViewModel.selectedDisk.createTime), DateTime.Now, 1, 1, images.rented);
             ImageDetailViewModel.selectedDisk = newImage;
             ImagesViewModel.getIntance().onChange();
             ImageDetailViewModel.getIntance().onChange();

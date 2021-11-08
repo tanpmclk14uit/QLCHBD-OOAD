@@ -31,6 +31,7 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Content="Remove"
+                    Command="{Binding removeCommand}"
                     FontWeight="Bold"
                     FontSize="25"
                     Background="White"
@@ -63,6 +64,7 @@
                     <DataGrid Margin="10 10 10 0" 
                       x:Name="orderTable"
                       CanUserAddRows="True"
+                       SelectedValue="{Binding selectedItem, UpdateSourceTrigger=PropertyChanged}"
                       LostKeyboardFocus="orderTable_LostKeyboardFocus"
                           CanUserResizeColumns="False"  
                       AutoGenerateColumns="False"
