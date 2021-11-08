@@ -79,14 +79,13 @@ namespace QLCHBD_OOAD.viewmodel.images
         {
             this.lstOnOrder = lstOnOrder;
             this.defaultList = lstOnOrder;
-            removeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { deleteOrderItem(selectedItem); });
-            deleteOrderItem += DeleteOrderDiskItem;
+            removeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteOrderDiskItem(selectedItem); deleteOrderItem(); });
         }
 
         private void DeleteOrderDiskItem(Images selectedItem)
         {
             _lstOnOrder.Remove(selectedItem);
-            OnPropertyChanged("lstOnOrder");
+            updateList();
         }
 
 

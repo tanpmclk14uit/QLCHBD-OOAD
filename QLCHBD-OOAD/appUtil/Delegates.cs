@@ -28,5 +28,5 @@ namespace QLCHBD_OOAD.appUtil
 
     public delegate void SelectedImageChangeHandler();
     public delegate void AddOrderHandler();
-    public delegate void DeleteOrderDiskItemHandler(Images orderItem);
+    public delegate void DeleteOrderDiskItemHandler();
 }
