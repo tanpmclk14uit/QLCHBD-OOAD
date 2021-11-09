@@ -75,23 +75,15 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
-        public void createNewImportForm(string formID, string provider, string id)
+        public void createNewImportForm(string formID, string provider, int totalAmount, long totalPrice, long id)
         {
-            string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
-                formID + "', '" +
-                provider + "', '" +
-                id + "', '" +
-                id + "');";
-            database.executeCommand(command);
-            database.closeConnection();
-        }
-        public void createNewImportForm(DeliProviders providers)
-        {
-            string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
-                providers.id + "', '" +
-                providers.providerName + "', '" +
-                providers.createID + "', '" +
-                providers.updateID + "');";
+            string command = "INSERT INTO import_form (`id`, `provider_name`, `sum_amount`, `sum_value`, `create_by`, `update_by`) VALUES ('" +
+                 formID + "', '" +
+                 provider + "', '" +
+                 totalAmount + "', '" +
+                 totalPrice + "', '" +
+                 id + "', '" +
+                 id + "');";
             database.executeCommand(command);
             database.closeConnection();
         }
@@ -142,29 +134,29 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return deliOrders;
         }
-        public int getTotalBillByID(string id)
-        {
-            int value = 0;
-            string command = "SELECT sum_value FROM import_form WHERE id = " + id;
-            var reader = database.executeCommand(command);
-            while (reader.Read())
-            {
-                value += (int)reader[0];
-            }
-            database.closeConnection();
-            return value;
-        }
-        public long getAmountByID(string id)
-        {
-            long value = 0;
-            string command = "SELECT sum_amount FROM import_form WHERE id = " + id;
-            var reader = database.executeCommand(command);
-            while (reader.Read())
-            {
-                value += (int)reader[0];
-            }
-            database.closeConnection();
-            return value;
-        }
+        //public int getTotalBillByID(string id)
+        //{
+        //    int value = 0;
+        //    string command = "SELECT sum_value FROM import_form WHERE id = " + id;
+        //    var reader = database.executeCommand(command);
+        //    while (reader.Read())
+        //    {
+        //        value += (int)reader[0];
+        //    }
+        //    database.closeConnection();
+        //    return value;
+        //}
+        //public long getAmountByID(string id)
+        //{
+        //    long value = 0;
+        //    string command = "SELECT sum_amount FROM import_form WHERE id = " + id;
+        //    var reader = database.executeCommand(command);
+        //    while (reader.Read())
+        //    {
+        //        value += (int)reader[0];
+        //    }
+        //    database.closeConnection();
+        //    return value;
+        //}
     }
 }
