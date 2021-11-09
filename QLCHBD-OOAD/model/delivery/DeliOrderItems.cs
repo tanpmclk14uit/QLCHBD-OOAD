@@ -46,7 +46,7 @@ namespace QLCHBD_OOAD.model.delivery
             this._diskID = diskID;
             this._amount = amount;
             this._value = (int)(amount * imPrice);
-            _providerID = providerID;
+            this._providerID = providerID;
             this._createTime = DateTime.Now;
             this._updateTime = DateTime.Now;
         }

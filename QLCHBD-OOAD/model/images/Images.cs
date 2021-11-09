@@ -31,6 +31,7 @@ namespace QLCHBD_OOAD.model.images
             this._updateBy = updateBy;
             this._providerPrice = lostCharges.ToString();
             this._rented = rented;
+            this._idByProviderForEdit = idByProvider.ToString();
         }
 
 
@@ -41,6 +42,16 @@ namespace QLCHBD_OOAD.model.images
             _image = image;
             _quantity = quantity;
             _rented = rented;
+        }
+
+        public Images(long id, string name, long idProvider, String idByProvider, String orderAmount, String providerPrice)
+        {
+            this._id = id;
+            this._idByProviderForEdit = idByProvider;
+            this._orderAmount = orderAmount;
+            this._providerPrice = providerPrice;
+            this._name = name;
+            this._idProvider = idProvider;
         }
 
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
@@ -63,6 +74,7 @@ namespace QLCHBD_OOAD.model.images
             this._updateBy = createBy;
             this._providerPrice = lostCharges.ToString();
             this._rented = rented;
+            this._idByProviderForEdit = idByProvider.ToString();
         }
 
         private Boolean _isSelected;
@@ -83,12 +95,14 @@ namespace QLCHBD_OOAD.model.images
             get => _orderAmount;
             set
             {
-                _orderAmount = value;
+                if (value == "" || Convert.ToInt32(value) < 0) _orderAmount = "0";
+                else _orderAmount = value;
                 if (_orderAmount != "")
                 {
                     _value = Convert.ToInt32(orderAmount) * lostCharges;
                 }
             }
+            
         }
 
         private int _value = 0; 
@@ -195,6 +209,15 @@ namespace QLCHBD_OOAD.model.images
             get => _idProvider;
         }
 
+        private String _idByProviderForEdit;
+        public String idByProviderForEdit
+        {
+            get => _idByProviderForEdit;
+            set
+            {
+                _idByProviderForEdit = value;
+            }
+        }
 
         private long _idByProvider;
         public long idByProvider
@@ -223,8 +246,8 @@ namespace QLCHBD_OOAD.model.images
             get => _providerPrice;
             set
             {
-                _providerPrice = value;
-
+                if (value == "" || Convert.ToInt32(value) < 0) _providerPrice = "0";
+                else _providerPrice = value;
                 if (_providerPrice != "")
                 {
                     _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(providerPrice);

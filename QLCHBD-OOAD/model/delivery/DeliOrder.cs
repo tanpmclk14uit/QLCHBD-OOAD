@@ -83,7 +83,6 @@ namespace QLCHBD_OOAD.model.delivery
             this._idCreate_By = idCreate_By;
             this._idUpdate_By = idUpdate_By;
             this._status = status;
-            this._totalBills = totalBills;
             this._stringStatus = status.ToString();
         }
         public DeliOrder(long id, string provide, long amount, long idCreate_By, long idUpdate_By, DeliveryOrderStatus status)
@@ -97,6 +96,20 @@ namespace QLCHBD_OOAD.model.delivery
             this._idUpdate_By = idUpdate_By;
             this._status = status;
             this._totalBills = 0;
+            this._stringStatus = status.ToString();
+        }
+
+        public DeliOrder(long id, string provide, long amount, long value, long idCreate_By, long idUpdate_By, DeliveryOrderStatus status)
+        {
+            this._id = id;
+            this._provider = provide;
+            this._amount = amount;
+            this._createTime = DateTime.Now;
+            this._updateTime = DateTime.Now;
+            this._idCreate_By = idCreate_By;
+            this._idUpdate_By = idUpdate_By;
+            this._status = status;
+            this._totalBills = value;
             this._stringStatus = status.ToString();
         }
 

@@ -32,6 +32,7 @@ namespace QLCHBD_OOAD.Components
             addNewOrderImageViewModel = new AddNewOrderImageViewModel(lstOnOrder);
             this.DataContext = addNewOrderImageViewModel;
             AddNewOrderImageViewModel.deleteOrderItem += updateList;
+            AddNewOrderImageViewModel.confirmOrderImage += CloseForm;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -59,6 +60,12 @@ namespace QLCHBD_OOAD.Components
             this.orderTable.CancelEdit();
             this.orderTable.CancelEdit();
             orderTable.Items.Refresh();
+        }
+
+        private void CloseForm()
+        {
+            this.Close();
+            ToggleForm();
         }
     }
 }
