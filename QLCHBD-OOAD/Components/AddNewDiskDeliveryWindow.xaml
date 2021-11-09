@@ -11,7 +11,7 @@
         ResizeMode="NoResize"
         BorderThickness="1"
         BorderBrush="Black"
-        Title="AddNewDiskDeliveryWindow" Height="400" Width="400">
+        Title="AddNewDiskDeliveryWindow" Height="400" Width="500">
     <Grid>
         <Grid.Resources>
             <Style x:Key="txtStyle" TargetType="TextBlock">
@@ -44,7 +44,7 @@
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
-            Style="{StaticResource txtStyle}">ID Provider:</TextBlock>
+            Style="{StaticResource txtStyle}">ID by Provider:</TextBlock>
         <TextBlock
             Grid.Row="2"
             Grid.Column="0"

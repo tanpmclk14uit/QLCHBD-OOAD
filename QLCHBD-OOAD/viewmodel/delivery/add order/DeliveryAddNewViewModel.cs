@@ -15,21 +15,22 @@ namespace QLCHBD_OOAD.viewmodel.delivery.Component
     {
         public static event CloseFormHandler closeForm;
         private DeliveryOrderItemsRepository deliveryItemsRepository;
+        public static event GetImportItems GetItemsFromAddWindow;
 
 
         public ICommand ConfirmCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
 
-        public DeliveryAddNewViewModel(long id)
+        public DeliveryAddNewViewModel(int count)
         {
             deliveryItemsRepository = DeliveryOrderItemsRepository.getIntance();
-            ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(id); });
+            ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(count); });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onCancel(); });
         }
 
 
-        private void onConfirm(long id)
+        private void onConfirm(int count)
         {
             if (BoxIsNotEmptyorNull(tbIDStore) ||
                 BoxIsNotEmptyorNull(tbIDProvider) ||
@@ -61,10 +62,19 @@ namespace QLCHBD_OOAD.viewmodel.delivery.Component
             }
             else
             {
-                deliveryItemsRepository.insertItems(id.ToString(), tbAmount, tbIDStore, tbName, tbPrice, _tbIDProvider);
-                OnPropertyChanged();
+                GetItemsFromAddWindow(getImportItem(count));
                 closeForm();
             }
+        }
+        private DeliOrderItems getImportItem(int count)
+        {
+            return new DeliOrderItems(count,
+                                        -1,
+                                        int.Parse(tbAmount),
+                                        long.Parse(tbIDStore),
+                                        tbName,
+                                        long.Parse(tbPrice),
+                                        long.Parse(tbIDProvider));
         }
         private bool BoxIsNotEmptyorNull(string box)
         {
@@ -75,15 +85,11 @@ namespace QLCHBD_OOAD.viewmodel.delivery.Component
         {
             closeForm();
         }
-        private string _tbIDStore;
-        private string _tbIDProvider;
-        private string _tbName;
-        private string _tbPrice;
-        private string _tbAmount;
-        public string tbIDStore { get => _tbIDStore; set => _tbIDStore = value; }
-        public string tbIDProvider { get => _tbIDProvider; set => _tbIDProvider = value; }
-        public string tbName { get => _tbName; set => _tbName = value; }
-        public string tbPrice { get => _tbPrice; set => _tbPrice = value; }
-        public string tbAmount { get => _tbAmount; set => _tbAmount = value; }
+
+        public string tbIDStore { get; set; }
+        public string tbIDProvider { get; set; }
+        public string tbName { get; set; }
+        public string tbPrice { get; set; }
+        public string tbAmount { get; set; }
     }
 }
