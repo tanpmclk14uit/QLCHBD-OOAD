@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -61,8 +62,8 @@ namespace QLCHBD_OOAD.viewmodel.images
                 if (selectedImage != null)
                 {
                     openImageDetailPage();
+                    OnPropertyChanged("selectedImage");
                 }
-                OnPropertyChanged("selectedImage");
                 _selectedImage = null;
             }
         }
@@ -71,20 +72,24 @@ namespace QLCHBD_OOAD.viewmodel.images
 
         public static event AddOrderHandler addOrder;
 
-        public ImagesViewModel()
+        private ImagesViewModel()
         {
             searchKey = "";          
-            _images = new ObservableCollection<Images>();
+            _images = new List<Images>();
             imagesRepository = ImagesRepository.getInstance();
             albumRepository = AlbumRepository.getInstance();
             _album = albumRepository.getAllAlbum();
+            imagesBackup = imagesRepository.getAllImages();
             _images = imagesRepository.getAllImages();
             addOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrder(); });
             addOrder += addNewOrder;
+            _filterListImages = filterByInfo();
+            ImagesPage.onchange += selectedImageChange;
         }
 
-        public void selectedImageChange()
+        private void selectedImageChange()
         {
+            //NotifyPropertyChanged(nameof(filterListImages));
             OnPropertyChanged("filterListImages");
         }
 
@@ -125,10 +130,23 @@ namespace QLCHBD_OOAD.viewmodel.images
             OnPropertyChanged("filterListImages");
         }    
 
-        private ObservableCollection<Images> _images;
-        public ObservableCollection<Images> images
+        private List<Images> _images;
+        public List<Images> images
         {
             get => _images;
+            set
+            {
+                _images = value;
+            }
+        }
+
+        private  List<Images> _imagesBackup;
+        public  List<Images> imagesBackup
+        {
+            get => _imagesBackup;
+            set {
+                _imagesBackup = value;
+            }
         }
 
         private ObservableCollection<Album> _album;
@@ -156,11 +174,12 @@ namespace QLCHBD_OOAD.viewmodel.images
             return listAlbumName;
         }
 
-        public ObservableCollection<Images> filterListImages
+        public List<Images> _filterListImages;
+        public List<Images> filterListImages
         {
-            get => filterByInfo();
+            get => _filterListImages = filterByInfo();
         }
-        private ObservableCollection<Images> filterByAlbum(string albumName)
+        private List<Images> filterByAlbum(string albumName)
         {
             long id = 0;
             foreach (Album albums in _album)
@@ -175,22 +194,25 @@ namespace QLCHBD_OOAD.viewmodel.images
 
         public void openImageDetailPage()
         {
-            ImageFunctionViewModel.getIntance().SlideFrame = new ImageDetailPage();
+            
             if (selectedImage != null)
             {
                 ImageDetailViewModel.selectedDisk = selectedImage;
+                ImageFunctionViewModel.getIntance().SlideFrame = new ImageDetailPage();
             }
 
         }
 
-        private ObservableCollection<Images> filterByInfo()
+        private List<Images> filterByInfo()
         {
-            ObservableCollection<Images> resultList = new ObservableCollection<Images>();       
+            List<Images> resultList = new List<Images>();       
 
             if (searchKey == "" || searchKey[0] != '#')
             {
+
                 foreach (var imageItem in _images)
                 {
+
 
                     foreach (PropertyInfo prop in imageItem.GetType().GetProperties())
                     {
@@ -207,6 +229,7 @@ namespace QLCHBD_OOAD.viewmodel.images
                                 {
                                     if (rentalBill_data.Contains(keyWord) || imageItem.isSelected)
                                     {
+
                                         resultList.Add(imageItem);
                                         break;
                                     }

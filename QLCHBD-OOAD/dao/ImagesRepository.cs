@@ -29,9 +29,9 @@ namespace QLCHBD_OOAD.dao
             db = Db.getInstace();
         }
 
-        public ObservableCollection<Images> getAllImages()
+        public List<Images> getAllImages()
         {
-            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            List<Images> images = new List<Images>();
             string commnad = "SELECT * FROM `disk`";
             var reader = db.executeCommand(commnad);
             while(reader.Read())
@@ -107,9 +107,9 @@ namespace QLCHBD_OOAD.dao
 
 
 
-        public ObservableCollection<Images> getImagesById(string id)
+        public List<Images> getImagesById(string id)
         {
-            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            List<Images> images = new List<Images>();
             string command = "SELECT * FROM `disk` WHERE ID = " + id;
             var reader = db.executeCommand(command);
             while (reader.Read())
@@ -138,10 +138,10 @@ namespace QLCHBD_OOAD.dao
             return images;
         }
 
-        public ObservableCollection<Images> getImagesByAlbum(long id)
+        public List<Images> getImagesByAlbum(long id)
         {
-            ObservableCollection<Images> images = new ObservableCollection<Images>();
-            string command = "SELECT disk.id, disk.name, disk.album, disk.quantity, disk.image, disk.locate, disk.checked, disk.rental_price, disk.provider, disk.id_by_provider, disk.loss_charges, disk.create_time, disk.update_time, disk.create_by, disk.update_by FROM `disk` inner join `album` WHERE disk.album = album.id AND album.ID =" + id.ToString();
+            List<Images> images = new List<Images>();
+            string command = "SELECT disk.id, disk.name, disk.album, disk.quantity, disk.image, disk.locate, disk.checked, disk.rental_price, disk.provider, disk.id_by_provider, disk.loss_charges, disk.create_time, disk.update_time, disk.create_by, disk.update_by, rented FROM `disk` inner join `album` WHERE disk.album = album.id AND album.ID =" + id.ToString();
             var reader = db.executeCommand(command);
             while (reader.Read())
             {

@@ -46,6 +46,7 @@ namespace QLCHBD_OOAD.viewmodel.images
         public void backToImages()
         {
             ImageFunctionViewModel.getIntance().SlideFrame = new ImagesPage();
+            selectedDisk = null;
         }
 
         public void onChange()

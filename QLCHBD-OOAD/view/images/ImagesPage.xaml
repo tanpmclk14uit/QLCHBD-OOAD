@@ -188,6 +188,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+
     </Page.Resources>
     <Grid Background="#E6EBEE">
         <Grid.RowDefinitions>
@@ -253,6 +255,7 @@
                     </Border>
                     <Border Grid.Column="1" Padding="0 0 20 0">
                         <TextBox TextWrapping="Wrap"     
+                                 
                          MaxLines="1"
                          VerticalContentAlignment="Center"
                          BorderBrush="#707070"
@@ -274,19 +277,20 @@
                     Focusable="True"
                     SelectionChanged="ListImages_SelectionChanged"
                     FocusManager.IsFocusScope="True"
-                MouseDoubleClick="ListImages_MouseDoubleClick"
-                  x:Name="ListImages" ItemsSource="{Binding filterListImages}" 
+                    
+                  x:Name="ListImages" ItemsSource="{Binding filterListImages, UpdateSourceTrigger=PropertyChanged}" 
                 SelectionMode="Multiple">
                     <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Height="300" Width="200"
+
+                        <DataTemplate>
+                            <Border Height="300" Width="200"
                                      BorderThickness="1"
                                      CornerRadius="5"
                                      BorderBrush="Black"
                             Background="{Binding background, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    >
                              
-                                <Grid >
+                                <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="9*"/>
@@ -336,8 +340,11 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                        <Setter Property="IsSelected" Value="{Binding isSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Style>
+                            <Setter Property="IsSelected" Value="{Binding isSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
             </StackPanel>

@@ -64,8 +64,9 @@ namespace QLCHBD_OOAD.Components
 
         private void CloseForm()
         {
-            this.Close();
             ToggleForm();
+            AddNewOrderImageViewModel.confirmOrderImage -= CloseForm;
+            this.Close();
         }
     }
 }

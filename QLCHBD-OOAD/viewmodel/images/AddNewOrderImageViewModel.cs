@@ -3,6 +3,7 @@ using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.model.images;
+using QLCHBD_OOAD.view.images;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,6 +96,7 @@ namespace QLCHBD_OOAD.viewmodel.images
             confirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { pushList(); confirmOrderImage(); });
             addCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openAddNewItemForm(); });
             AddNewOrderItemImageViewModel.confirm += AddNewItemToListOrder;
+
         }
         
         private void AddNewItemToListOrder(Images images)
@@ -140,9 +142,7 @@ namespace QLCHBD_OOAD.viewmodel.images
                 if (listOfProvider.Count != 0)
                 {
                     DeliOrder newDeliOrder = new DeliOrder(currentMaxImportFormId+1, imagesRepository.getProviderNameById(providerItem), totalAmount, totalValue, 1, 1, DeliveryOrderStatus.WATING);
-                    if (deliveryOrderRepository.pushNewOrder(newDeliOrder))
-                    { MessageBox.Show("Add new order successfully"); }
-                    else { MessageBox.Show("Add new order failed"); }
+                    deliveryOrderRepository.pushNewOrder(newDeliOrder);
                     foreach (DeliOrderItems item in listOfProvider)
                     {
                         deliveryOrderItemsRepository.insertItems(item);
