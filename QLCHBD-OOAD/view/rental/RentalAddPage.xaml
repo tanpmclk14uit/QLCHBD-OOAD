@@ -78,7 +78,8 @@
                       AutoGenerateColumns="False"
                       >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding diskId}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">
+                        <DataGridTextColumn Binding="{Binding diskId}" CanUserSort="True" Width="*" IsReadOnly="True" 
+                                            FontSize="20">
                             <DataGridTextColumn.Header>
                                 <TextBlock  Text="Id" FontSize="25" HorizontalAlignment="Center"/>
                             </DataGridTextColumn.Header>
@@ -126,7 +127,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding amount}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+                        <DataGridTextColumn Binding="{Binding amount, NotifyOnSourceUpdated=True}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
                             <DataGridTextColumn.Header>
                                 <TextBlock Text="Amount" FontSize="25" HorizontalAlignment="Center"/>
                             </DataGridTextColumn.Header>
@@ -189,7 +190,7 @@
                     Height="60"
                     Grid.Column="1"
                     FontSize="30"
-                    Background="#FF003D"     
+                    Background="Red"     
                     BorderThickness="1px"
                     BorderBrush="Gray"
                     materialDesign:ButtonAssist.CornerRadius="5"

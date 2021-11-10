@@ -40,5 +40,13 @@ namespace QLCHBD_OOAD.view.rental
             this.Close();
             ToggleForm();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = false;                       
+            RentalAddNewMember rental = new RentalAddNewMember();
+            rental.ShowDialog();
+        }
+        
     }
 }

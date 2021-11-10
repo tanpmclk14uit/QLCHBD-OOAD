@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.dao
 {
@@ -36,7 +37,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3]);                
+                guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3]);
             }
             database.closeConnection();
             return guest;

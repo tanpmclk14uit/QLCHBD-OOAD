@@ -109,7 +109,6 @@ namespace QLCHBD_OOAD.viewmodel.rental
             RentalDiskDetailFormViewModel.addNewRentalBillItem += RentalDiskDetailFormViewModel_addNewRentalBillItem;
             RentalAddMemberViewModel.guestTranferInformation += RentalAddMemberViewModel_guestTranferInformation;
             rentalBillReponsitory = RentalBillRepository.getIntance();
-
         }
 
         private void RentalAddMemberViewModel_guestTranferInformation(Guest guest)
@@ -158,8 +157,22 @@ namespace QLCHBD_OOAD.viewmodel.rental
  
         private void RentalDiskDetailFormViewModel_addNewRentalBillItem(RentalBillItem rentalBillItem)
         {
-            caculateTotalPrice(rentalBillItem);
+            
+            foreach (var rental in _rentalBillItems)
+            {
+                if(rental.diskId == rentalBillItem.diskId && rental.dueDate == rentalBillItem.dueDate)
+                {
+                    int amount = rental.amount + rentalBillItem.amount;
+                    _rentalBillItems.Remove(rental);
+                    caculateTotalPrice(rentalBillItem);
+                    rentalBillItem.amount = amount;
+                    _rentalBillItems.Add(rentalBillItem);                   
+                    OnPropertyChanged("renalBillItems");
+                    return;
+                }
+            }
             _rentalBillItems.Add(rentalBillItem);
+            caculateTotalPrice(rentalBillItem);
             OnPropertyChanged("rentalBillItems");
         }
       

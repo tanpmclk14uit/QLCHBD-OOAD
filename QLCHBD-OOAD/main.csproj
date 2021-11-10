@@ -128,6 +128,7 @@
     <Compile Include="viewmodel\delivery\add order\DeliveryAddOrderFormViewModel.cs" />
     <Compile Include="viewmodel\delivery\detail order\DeliveryDetailPageViewModel.cs" />
     <Compile Include="viewmodel\delivery\DeliveryPageViewModel.cs" />
+    <Compile Include="viewmodel\guest\GuestViewModel.cs" />
     <Compile Include="viewmodel\images\AddNewOrderImageViewModel.cs" />
     <Compile Include="viewmodel\images\ChangeImagesInformationViewModel.cs" />
     <Compile Include="viewmodel\images\DeleteImageViewModel.cs" />
@@ -172,6 +173,9 @@
     </Compile>
     <Compile Include="view\rental\RentalAddMember.xaml.cs">
       <DependentUpon>RentalAddMember.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\rental\RentalAddNewMember.xaml.cs">
+      <DependentUpon>RentalAddNewMember.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\rental\RentalAddPage.xaml.cs">
       <DependentUpon>RentalAddPage.xaml</DependentUpon>
@@ -360,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\rental\RentalAddMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\rental\RentalAddNewMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
