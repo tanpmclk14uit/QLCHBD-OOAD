@@ -22,7 +22,7 @@ namespace QLCHBD_OOAD.model.delivery
 
 
         public long id => _id;
-        public long IDbyProvider => _IDbyProvider;
+        public long IDbyProvider { get => _IDbyProvider; set { _IDbyProvider = value; } }
         public long deliID => _deliID;
         public string diskName => _diskName;
         public long diskID => _diskID;
@@ -46,7 +46,7 @@ namespace QLCHBD_OOAD.model.delivery
             this._diskID = diskID;
             this._amount = amount;
             this._value = (int)(amount * imPrice);
-            this._providerID = providerID;
+            this.IDbyProvider = providerID;
             this._createTime = DateTime.Now;
             this._updateTime = DateTime.Now;
         }
