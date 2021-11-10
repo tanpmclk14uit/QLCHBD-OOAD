@@ -36,8 +36,11 @@ namespace QLCHBD_OOAD.model.Guest
         }
 
         public Guest() 
-        {            
-            _birthDate = DateTime.Now;
+        {
+            _cmnd = "";
+            _address = "";
+            _name = "";
+            _birthDate = new DateTime(2005,01,01);
         }
         public Guest(long id, string cmnd, string address, string name, DateTime birthDate)
         {
@@ -55,5 +58,6 @@ namespace QLCHBD_OOAD.model.Guest
             _address = address;
             _name = name;
         }
+
     }
 }

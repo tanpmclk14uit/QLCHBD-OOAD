@@ -13,6 +13,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
 {
     class RentalAddMemberViewModel: BaseViewModel
     {
+        
         private static RentalAddMemberViewModel instance;
         public static RentalAddMemberViewModel getIntance()
         {
@@ -23,6 +24,8 @@ namespace QLCHBD_OOAD.viewmodel.rental
             return instance;
         }
         public static event GuestTranferInformation guestTranferInformation;
+
+       
         private Guest _guest;
         public Guest guest
         {

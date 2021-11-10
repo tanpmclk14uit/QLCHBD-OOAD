@@ -38,6 +38,15 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return guest;
         }
+       
+        public long createGuest(Guest guest)
+        {
+            long resultId = -1;
+            string format = "yyyy-MM-dd";
+            string command = $"INSERT INTO `guest`( `cmnd_cccd`, `address`, `birth_date`, `name`) VALUES ('{guest.cmnd}','{guest.address}','{guest.birthDate.ToString(format)}','{guest.name}')";            
+            resultId = db.excuteInsertCommand(command);
+            return resultId;
+        }
 
     }
 }

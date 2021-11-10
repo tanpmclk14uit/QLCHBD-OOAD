@@ -23,6 +23,27 @@ namespace QLCHBD_OOAD.dao
             return _instance;
         }
 
+        public long excuteInsertCommand(string command)
+        {
+            long lastInsertId = -1;
+            try
+            {
+                connection = new MySqlConnection(connectionString);
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand(command, connection);
+                cmd.ExecuteNonQuery();
+                lastInsertId = long.Parse(cmd.LastInsertedId.ToString());
+                connection.Close();
+               
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                closeConnection();
+            }
+            return lastInsertId;
+        }
+
 
         public MySqlDataReader executeCommand(string command)
         {
