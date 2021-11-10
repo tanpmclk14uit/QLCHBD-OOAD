@@ -143,7 +143,19 @@
             BorderThickness="1.5"
             BorderBrush="Black"
             Margin="10 20 20 20">
-            <ListView FontSize="30">
+            <DataGrid 
+                FontSize="30" 
+                FontStyle="Normal"
+                CanUserSortColumns="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="1*" Binding="{Binding }"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk ID" Width="1*" Binding="{Binding }"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk Name" Width="3*" Binding="{Binding }"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Amount" Width="1*" Binding="{Binding }"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Import price" Width="2*" Binding="{Binding }"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--<ListView FontSize="30">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding deliID}" Width="auto"></GridViewColumn>
@@ -152,7 +164,7 @@
                         <GridViewColumn Header="Disk ID" DisplayMemberBinding="{Binding diskID}" Width="auto"></GridViewColumn>
                     </GridView>
                 </ListView.View>
-            </ListView>
+            </ListView>-->
         </Border>
 
     </Grid>
