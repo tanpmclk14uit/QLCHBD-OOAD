@@ -11,7 +11,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize" 
-        Title="RentalAddMember" Height="400" Width="700">
+        Title="RentalAddMember" Height="400" Width="1000">
     <Window.Background>
         <SolidColorBrush Color="Transparent" />
     </Window.Background>
@@ -32,7 +32,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock 
                            Grid.Column="0"
-                           Text="MEMBER ID:"
+                           Text="SEARCH MEMBER:"
                            FontWeight="Bold"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"

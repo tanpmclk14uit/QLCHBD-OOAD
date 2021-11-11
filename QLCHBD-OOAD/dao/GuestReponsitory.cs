@@ -38,6 +38,18 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return guest;
         }
+        public Guest findRentalGuestByIdCard(string cardId)
+        {
+            Guest guest = null;
+            string command = $"SELECT `id`, `cmnd_cccd`, `address`, `name`, birth_date, membership FROM `guest` WHERE cmnd_cccd = {cardId}";
+            var reader = db.executeCommand(command);
+            if (reader != null && reader.Read())
+            {
+                guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (DateTime)reader[4], (bool)reader[5]);
+            }
+            db.closeConnection();
+            return guest;
+        }
        
         public long createGuest(Guest guest)
         {

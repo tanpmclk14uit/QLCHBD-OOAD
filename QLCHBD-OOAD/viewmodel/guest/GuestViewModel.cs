@@ -73,6 +73,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
             }
             
         }
+        
 
         private bool isValidIdentityCard(string identityCard)
         {
@@ -84,7 +85,16 @@ namespace QLCHBD_OOAD.viewmodel.guest
                     bool isValid = objAlphaPattern.IsMatch(identityCard);
                     if (isValid)
                     {
-                        return true;
+                        if (guestReponsitory.findRentalGuestByIdCard(identityCard) == null)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Identity card is exist!");
+                            return false;
+                        }                 
+                        
                     }
                     else
                     {

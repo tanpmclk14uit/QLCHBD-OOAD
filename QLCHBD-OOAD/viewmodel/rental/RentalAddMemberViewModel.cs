@@ -53,6 +53,10 @@ namespace QLCHBD_OOAD.viewmodel.rental
                     if (id != "")
                     {
                         guest = findGuestById(id);
+                        if (guest == null)
+                        {
+                            guest = findGuestByIdCard(id);
+                        }
                     }
                 }                
             }
@@ -75,7 +79,10 @@ namespace QLCHBD_OOAD.viewmodel.rental
             Guest guest = guestReponsitory.findRentalGuestById(id);
             return guest;
         }
-
+        public Guest findGuestByIdCard(string cardId)
+        {
+            return guestReponsitory.findRentalGuestByIdCard(cardId);
+        }
 
     }
 }
