@@ -1,6 +1,7 @@
 ﻿using QLCHBD_OOAD.model.Guest;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,18 @@ namespace QLCHBD_OOAD.dao
             string command = $"INSERT INTO `guest`( `cmnd_cccd`, `address`, `birth_date`, `name`,`membership` ) VALUES ('{guest.cmnd}','{guest.address}','{guest.birthDate.ToString(format)}','{guest.name}','{isMember}')";            
             resultId = db.excuteInsertCommand(command);
             return resultId;
+        }
+        public ObservableCollection<Guest> getAllGuest()
+        {
+            ObservableCollection<Guest> guests = new ObservableCollection<Guest>();
+            string command = $"SELECT `id`, `cmnd_cccd`, `address`, `name`, birth_date, membership FROM `guest`";
+            var reader = db.executeCommand(command);
+            while (reader.Read())
+            {
+                Guest guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (DateTime)reader[4], (bool)reader[5]);
+                guests.Add(guest);
+            }
+            return guests;
         }
 
     }

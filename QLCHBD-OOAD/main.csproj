@@ -189,6 +189,12 @@
     <Compile Include="view\rental\RentalMainPage.xaml.cs">
       <DependentUpon>RentalMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="view\report\ReportGuestPage.xaml.cs">
+      <DependentUpon>ReportGuestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\report\ReportMainPage.xaml.cs">
+      <DependentUpon>ReportMainPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Components\AddNewOrderImageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -384,6 +390,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\rental\RentalMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\report\ReportGuestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\report\ReportMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

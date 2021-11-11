@@ -4,7 +4,9 @@ using QLCHBD_OOAD.model.Guest;
 using QLCHBD_OOAD.viewmodel.rental;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,7 +20,13 @@ namespace QLCHBD_OOAD.viewmodel.guest
 
         private GuestReponsitory guestReponsitory;
         public static event CloseForm closeForm;
-        
+
+        private ObservableCollection<Guest> _guests;
+        public ObservableCollection<Guest> guests
+        {
+            get => _guests;
+        }
+
 
         public ICommand Cancel { get; set; }
         public ICommand Confirm { get; set; }
@@ -34,6 +42,54 @@ namespace QLCHBD_OOAD.viewmodel.guest
                 OnPropertyChanged("guest");
             }
         }
+        private String _seachKey;
+        public String seachKey
+        {
+            get => _seachKey;
+            set
+            {
+                _seachKey = value;
+                OnPropertyChanged("filterListGuest");
+                OnPropertyChanged("seachKey");
+            }
+        }
+        public ObservableCollection<Guest> filterListGuest
+        {
+            get => filterByInfo();
+        }
+
+        private ObservableCollection<Guest> filterByInfo()
+        {
+            ObservableCollection<Guest> filterList = new ObservableCollection<Guest>();
+              foreach (var guest in guests)
+              {
+
+                  foreach (PropertyInfo prop in guest.GetType().GetProperties())
+                  {
+                      var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+
+                      if (type == typeof(string) || type == typeof(int) || type == typeof(DateTime))
+                      {
+                          var guest_field = prop.GetValue(guest, null);
+                          if (guest_field != null)
+                          {
+                              String guest_data = guest_field.ToString().Trim().ToLower();
+                              String keyWord = seachKey.ToLower();
+                              if (guest_data != null && keyWord != null)
+                              {
+                                  if (guest_data.Contains(keyWord))
+                                  {
+                                      filterList.Add(guest);
+                                      break;
+                                  }
+                              }
+                          }
+                      }
+
+                  }
+              }
+            return filterList;
+        }
 
         public GuestViewModel( Guest guest)
         {
@@ -47,8 +103,8 @@ namespace QLCHBD_OOAD.viewmodel.guest
             }
             Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmClick(_guest); });
             guestReponsitory = GuestReponsitory.getInstance();
-
-
+            _guests = guestReponsitory.getAllGuest();
+            seachKey = "";
         }
         private bool isValidName(string name)
         {
@@ -166,4 +222,5 @@ namespace QLCHBD_OOAD.viewmodel.guest
             return guestReponsitory.createGuest(guest);
         }
     }
+
 }
