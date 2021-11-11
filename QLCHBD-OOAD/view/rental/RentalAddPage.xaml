@@ -43,20 +43,27 @@
                     </Grid.ColumnDefinitions>
                     <Border Margin="10 13 10 7" CornerRadius="50" BorderThickness="0">
                         <Border.Background>
-                            <ImageBrush ImageSource="/Assets/img_user.png" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="/Assets/guest.png" 
+                                        Stretch="UniformToFill"/>
                         </Border.Background>
                     </Border>
-                    <Grid Grid.Column="1" Margin="10 0 0 0">
+                    <Border  Visibility="{Binding isMember}" Margin="10 13 10 7" CornerRadius="50" BorderThickness="0">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Assets/member-icon-png-8.jpg" 
+                                        Stretch="UniformToFill"/>
+                        </Border.Background>
+                    </Border>
+                    <Grid Grid.Column="1" Margin="10 5 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label ContentStringFormat="ID: {0}"
                                Content="{Binding guest.id}"
-                               FontSize="20"
+                               FontSize="20"                               
                                Height="auto"
                                FontWeight="Bold"   
-                               VerticalAlignment="Center"
+                               VerticalAlignment="Bottom"
                                />
                         <Label ContentStringFormat="Name: {0}"
                                Content="{Binding guest.name}"
@@ -64,7 +71,7 @@
                                Height="auto"
                                FontSize="20"
                                FontWeight="Bold"   
-                               VerticalAlignment="Center"
+                               VerticalAlignment="Top"
                                />
                     </Grid>
 

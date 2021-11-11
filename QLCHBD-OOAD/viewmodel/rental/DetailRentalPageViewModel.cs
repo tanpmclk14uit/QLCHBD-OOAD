@@ -47,14 +47,35 @@ namespace QLCHBD_OOAD.viewmodel.rental
             get => _orderId;
         }
         public ICommand Back { get; set; }
+        private Visibility _isMember;
+        public Visibility isMember
+        {
+            get
+            {
+                return _isMember;
+            }
+            set
+            {
+                _isMember = value;
+                OnPropertyChanged("isMember");
+            }
+        }
 
-      
+
         public DetailRentalPageViewModel(long rentalId, long guestId)
         {
             Back =  new RelayCommand<object>((p) => { return true; }, (p) => { backToALlRentalPage(); });
             _orderId = rentalId.ToString();
             detailRentalBillReponsitory = DetailRentalBillReponsitory.getIntance();           
             _guest = detailRentalBillReponsitory.getGuestById(guestId);
+            if (_guest.isMember)
+            {
+                isMember = Visibility.Visible;
+            }
+            else
+            {
+                isMember = Visibility.Hidden;
+            }
             _createBy = detailRentalBillReponsitory.getOrderCreateBy(rentalId);
             _createDate = detailRentalBillReponsitory.getOrderCreateDate(rentalId);
             _rentalBillItems = new ObservableCollection<RentalBillItem>();

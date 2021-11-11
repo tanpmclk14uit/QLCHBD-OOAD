@@ -1,12 +1,14 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
+using QLCHBD_OOAD.viewmodel.guest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.rental
@@ -33,6 +35,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
             set
             {
                 _guest = value;
+                
                 OnPropertyChanged("guest");
             }
         }
@@ -55,11 +58,18 @@ namespace QLCHBD_OOAD.viewmodel.rental
             }
         }
         private GuestReponsitory guestReponsitory;
+
+        public void setGuest(string id)
+        {
+            guest = findGuestById(id);
+        }
         private RentalAddMemberViewModel()
         {
-            guestReponsitory = GuestReponsitory.getInstance();
+            guestReponsitory = GuestReponsitory.getInstance();            
             Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { guestTranferInformation(guest); });
         }
+
+
         public Guest findGuestById(string id)
         {
             Guest guest = guestReponsitory.findRentalGuestById(id);

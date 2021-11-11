@@ -33,11 +33,11 @@ namespace QLCHBD_OOAD.dao
         public Guest getGuestById(long id)
         {
             Guest guest = null;
-            string command = "SELECT id, cmnd_cccd, address, name  FROM guest WHERE ID = " + id;
+            string command = "SELECT id, cmnd_cccd, address, name, membership  FROM guest WHERE ID = " + id;
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3]);
+                guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (bool)reader[4]);
             }
             database.closeConnection();
             return guest;

@@ -173,7 +173,7 @@
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         Background="YellowGreen" Click="Button_Click_2" >
-                    <TextBlock Text="Create new"
+                    <TextBlock Text="New guest"
                                FontSize="20"
                                FontFamily="Roboto"
                                FontWeight="Medium"

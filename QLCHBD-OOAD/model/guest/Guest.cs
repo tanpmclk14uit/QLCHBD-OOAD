@@ -34,30 +34,40 @@ namespace QLCHBD_OOAD.model.Guest
             get => _birthDate;
             set => _birthDate = value;
         }
+        private bool _isMember;
+        public bool isMember
+        {
+            get => _isMember;
+            set => _isMember = value;
+        }
 
         public Guest() 
         {
             _cmnd = "";
             _address = "";
             _name = "";
+            _isMember = false;
             _birthDate = new DateTime(2005,01,01);
         }
-        public Guest(long id, string cmnd, string address, string name, DateTime birthDate)
+        public Guest(long id, string cmnd, string address, string name, DateTime birthDate, bool isMember)
         {
             _id = id;
             _cmnd = cmnd;
             _address = address;
             _name = name;           
             _birthDate = birthDate;
+            _isMember = isMember;
 
         }
-        public Guest(long id, string cmnd, string address, string name)
+        public Guest(long id, string cmnd, string address, string name, bool isMember)
         {
             _id = id;
             _cmnd = cmnd;
             _address = address;
             _name = name;
+            _isMember = isMember;
         }
+
 
     }
 }

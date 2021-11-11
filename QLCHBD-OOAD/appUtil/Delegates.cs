@@ -30,4 +30,5 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void AddOrderHandler();
 
     public delegate void CloseForm();
+    
 }

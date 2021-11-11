@@ -1,6 +1,7 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
+using QLCHBD_OOAD.viewmodel.rental;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace QLCHBD_OOAD.viewmodel.guest
 
         private GuestReponsitory guestReponsitory;
         public static event CloseForm closeForm;
+        
+
         public ICommand Cancel { get; set; }
         public ICommand Confirm { get; set; }
 
@@ -27,7 +30,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
             set 
             {
                 _guest = value;
-                MessageBox.Show("");
+                
                 OnPropertyChanged("guest");
             }
         }
@@ -132,27 +135,25 @@ namespace QLCHBD_OOAD.viewmodel.guest
         {
             if (isValidName(guest.name) && isValidIdentityCard(guest.cmnd) && isValidAddress(guest.address) && isValidBirthDate(guest.birthDate))
             {
-                if (createNewGuest(guest))
+                long createdId = createNewGuest(guest);   
+                if (createdId != -1)
                 {
-                    //Truyền lại guest đã tạo thành công
+                    RentalAddMemberViewModel.getIntance().setGuest(createdId.ToString());
+                    MessageBox.Show("Create guest success!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     closeForm();
                 }
                 else
                 {
-                    MessageBox.Show("There are some server error! turn back later!");
+                    MessageBox.Show("There are some server error! turn back later!", "Success", MessageBoxButton.OK, MessageBoxImage.Error);
                 }            
                 
             }
         }
             
            
-        private bool createNewGuest(Guest guest)
+        private long createNewGuest(Guest guest)
         {
-            if(guestReponsitory.createGuest(guest) != -1)
-            {
-                return true;
-            }
-            return false;
+            return guestReponsitory.createGuest(guest);
         }
     }
 }
