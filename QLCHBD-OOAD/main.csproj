@@ -98,6 +98,9 @@
     <Compile Include="Components\DeliveryAskForm.xaml.cs">
       <DependentUpon>DeliveryAskForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\DeliveryProviderListWindow.xaml.cs">
+      <DependentUpon>DeliveryProviderListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="dao\AlbumRepository.cs" />
     <Compile Include="dao\DeliveryBilingItemsRepository.cs" />
     <Compile Include="dao\DeliveryBillRepository.cs" />
@@ -128,6 +131,8 @@
     <Compile Include="viewmodel\delivery\add order\DeliveryAddOrderFormViewModel.cs" />
     <Compile Include="viewmodel\delivery\detail order\DeliveryDetailPageViewModel.cs" />
     <Compile Include="viewmodel\delivery\DeliveryPageViewModel.cs" />
+    <Compile Include="viewmodel\delivery\provider\DeliveryProviderDetailViewModel.cs" />
+    <Compile Include="viewmodel\delivery\provider\ProviderListWindowViewModel.cs" />
     <Compile Include="viewmodel\images\AddNewOrderImageViewModel.cs" />
     <Compile Include="viewmodel\images\ChangeImagesInformationViewModel.cs" />
     <Compile Include="viewmodel\images\DeleteImageViewModel.cs" />
@@ -157,6 +162,9 @@
     </Compile>
     <Compile Include="view\delivery\DeliveryMainPage.xaml.cs">
       <DependentUpon>DeliveryMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\delivery\DeliveryProviderDetailPage.xaml.cs">
+      <DependentUpon>DeliveryProviderDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\images\ImageDetailPage.xaml.cs">
       <DependentUpon>ImageDetailPage.xaml</DependentUpon>
@@ -202,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\DeliveryOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\DeliveryProviderListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -340,6 +352,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\delivery\DeliveryMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\delivery\DeliveryProviderDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

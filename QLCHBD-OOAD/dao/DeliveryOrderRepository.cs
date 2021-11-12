@@ -94,20 +94,33 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
         }
 
-        public ObservableCollection<DeliOrder> getDeliOrderById(string id)
+        public DeliOrder getDeliOrderById(string id)
         {
-            ObservableCollection<DeliOrder> DeliOrders = new ObservableCollection<DeliOrder>();
+            DeliOrder DeliOrders;
             string command = "SELECT * FROM import_form WHERE ID = " + id;
             var reader = database.executeCommand(command);
-            while (reader.Read())
+            if (reader.Read())
             {
-                DeliOrder DeliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
-                DeliOrders.Add(DeliOrder);
+                DeliOrders = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
+                database.closeConnection();
+                return DeliOrders;
             }
             database.closeConnection();
-            return DeliOrders;
+            return null;
         }
-
+        public ObservableCollection<DeliOrder> filterDeliOrderByID(string id)
+        {
+            ObservableCollection<DeliOrder> deliOrders = new ObservableCollection<DeliOrder>();
+            string command = "SELECT * FROM import_form WHERE ID = " + id;
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()));
+                deliOrders.Add(deliOrder);
+            }
+            database.closeConnection();
+            return deliOrders;
+        }
         public ObservableCollection<DeliOrder> getDeliOrderByFilterStatus(String status)
         {
             ObservableCollection<DeliOrder> deliOrders = new ObservableCollection<DeliOrder>();

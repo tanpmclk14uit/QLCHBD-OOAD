@@ -16,6 +16,7 @@ using QLCHBD_OOAD.view.delivery.DeliveryPage;
 using QLCHBD_OOAD.view.delivery.Add_Order;
 using QLCHBD_OOAD.viewmodel.delivery;
 using QLCHBD_OOAD.viewmodel.delivery.Component;
+using QLCHBD_OOAD.viewmodel.delivery.provider;
 
 namespace QLCHBD_OOAD.view.delivery
 {
@@ -29,19 +30,26 @@ namespace QLCHBD_OOAD.view.delivery
             InitializeComponent();
             DataContext = DeliveryPageViewModel.getInstance();
             deliveryHolder.Content = new DeliveryMainPage();
-            DeliveryDetailPageViewModel.turnToDeliveryPage += turnDeliveryDetailPage;
+            DeliveryDetailPageViewModel.turnToDeliveryPage += turnBackToDeliveryMainPage;
+            ProviderListWindowViewModel.turnToProviderDetailPage += turnToProviderDetailPage;
+            DeliveryProviderDetailViewModel.turnToDeliveryDetailPage += turnBackToDeliveryMainPage;
+            DeliveryPageViewModel.turnToImportFormDetailPage += turnDeliveryDetailPage;
         }
 
-        private void turnDeliveryDetailPage(string page)
+        private void turnDeliveryDetailPage(string id)
         {
-            deliveryHolder.Content = new DeliveryDetailPage();
+            deliveryHolder.Content = new DeliveryDetailPage(id);
         }
 
 
-        private void turnBackToDeliveryMainPage()
+        private void turnBackToDeliveryMainPage(string page)
         {
             deliveryHolder.ClearValue(UidProperty);
             deliveryHolder.Content = new DeliveryMainPage();
+        }
+        private void turnToProviderDetailPage(string id)
+        {
+            deliveryHolder.Content = new DeliveryProviderDetailPage(id);
         }
     }
 }

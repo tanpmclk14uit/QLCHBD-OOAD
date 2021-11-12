@@ -80,7 +80,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             deliveryOrderRepository.updateTemporaryImportForm(id, provider);
         }
         //-------------------------------------------------------------------------------------------------
-        private ObservableCollection<DeliProviders> _providerCombobox;
+        private List<DeliProviders> _providerCombobox;
         private void setUpStatusses()
         {
             _selectedStatuses = new ObservableCollection<string>();
@@ -92,9 +92,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             selectedStatus = _selectedStatuses[0];
             OnPropertyChanged("selectedStatuses");
         }
-        private ObservableCollection<DeliProviders> getProviderList()
+        private List<DeliProviders> getProviderList()
         {
-            ObservableCollection<DeliProviders> deliProviders = deliveryProviderRepository.providerList();
+            List<DeliProviders> deliProviders = deliveryProviderRepository.providerList();
             return deliProviders;
         }
         //-------------------------------------------------------------------------------------------------

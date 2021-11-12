@@ -7,7 +7,7 @@ using QLCHBD_OOAD.appUtil;
 
 namespace QLCHBD_OOAD.model.delivery
 {
-    class DeliOrder
+    public class DeliOrder
     {
         private long _id;
         private string _provider;
