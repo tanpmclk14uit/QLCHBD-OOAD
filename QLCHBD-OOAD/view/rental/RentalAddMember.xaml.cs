@@ -22,10 +22,14 @@ namespace QLCHBD_OOAD.view.rental
     public partial class RentalAddMember : Window
     {
         public static event ToggleFormDialogNotifyHandler ToggleForm;
-        public RentalAddMember()
+        public RentalAddMember(long id=-1)
         {
             InitializeComponent();
-            DataContext = RentalAddMemberViewModel.getIntance();
+            if (id != -1)
+            {
+                RentalAddMemberViewModel.getIntance().setGuest(id.ToString());
+            }
+            DataContext = RentalAddMemberViewModel.getIntance();            
             ToggleForm();
         }
 
@@ -40,5 +44,14 @@ namespace QLCHBD_OOAD.view.rental
             this.Close();
             ToggleForm();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = false;                       
+            RentalAddNewMember rental = new RentalAddNewMember();                    
+            rental.ShowDialog();          
+
+        }
+        
     }
 }
