@@ -28,4 +28,7 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void SelectedImageChangeHandler();
     public delegate void AddOrderHandler();
     public delegate void GetImportItems(DeliOrderItems items);
+
+    public delegate void CloseForm();
+    
 }
