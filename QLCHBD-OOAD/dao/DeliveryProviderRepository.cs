@@ -39,11 +39,12 @@ namespace QLCHBD_OOAD.dao
         }
         public void insertProvider(string ID, string name, string number, string mail, string address)
         {
-            string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
+            string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `image`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
                 ID + ", '"
                 + name + "', '"
                 + number + "', '"
                 + mail + "', '"
+                + "'/QLCHBD-OOAD;component/assets/img_noImage.png'" + "', '"
                 + address + "', "
                 + "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "
                 + 1 + ", "

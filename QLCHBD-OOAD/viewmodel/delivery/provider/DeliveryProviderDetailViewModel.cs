@@ -64,10 +64,18 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
             //        linkToAssets = Path.GetDirectoryName(linkToAssets);
             //    }
             //    linkToAssets += @"\Assets\";
-            //    var fileName = "img_Provider" + id + ".png";
-            //    File.Copy(image, linkToAssets + fileName, true);
-            //    image = linkToAssets + fileName;
-            //    image = image.Replace("\\", "/");
+            //    string fileName = "img_Provider" + id + ".png";
+            //    string assetsPath = linkToAssets + fileName;
+            //    try
+            //    {
+            //        File.Copy(image, assetsPath, true);
+            //    }
+            //    catch (IOException copyError)
+            //    {
+            //        File.Delete(assetsPath);
+            //        File.Move(image, assetsPath);
+            //    }
+            //    image = assetsPath;
             //}
 
         }
