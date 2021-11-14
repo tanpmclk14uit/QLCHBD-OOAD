@@ -1,6 +1,6 @@
-﻿using System;
+﻿using QLCHBD_OOAD.viewmodel.delivery.provider;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,22 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QLCHBD_OOAD.model.delivery;
-using QLCHBD_OOAD.viewmodel.delivery;
 
-namespace QLCHBD_OOAD.view.delivery.DeliveryPage
+namespace QLCHBD_OOAD.view.delivery
 {
     /// <summary>
-    /// Interaction logic for DeliveryDetailPage.xaml
+    /// Interaction logic for DeliveryProviderDetailPage.xaml
     /// </summary>
-    public partial class DeliveryDetailPage : Page
+    public partial class DeliveryProviderDetailPage : Page
     {
-
-        public DeliveryDetailPage(string id)
+        public DeliveryProviderDetailPage(string id)
         {
             InitializeComponent();
-            DataContext = new DeliveryDetailPageViewModel(id);
+            DataContext = new DeliveryProviderDetailViewModel(id);
         }
 
+       
     }
 }

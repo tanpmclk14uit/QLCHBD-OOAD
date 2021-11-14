@@ -18,6 +18,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 {
     class DeliveryPageViewModel : BaseViewModel
     {
+        public static ChangePageHandler turnToImportFormDetailPage;
         private DeliveryOrderRepository deliOrderlReponsitory;
         public DeliOrder SelectedOrder { get; set; }
         public ICommand AddOrderCommand { get; set; }
@@ -71,7 +72,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 _selectedDeliOrder = value;
                 if (value != null)
                 {
-                    _selectedDeliOrder = null;
+                    turnToImportFormDetailPage(_selectedDeliOrder.id.ToString());
                 }
             }
         }
@@ -183,7 +184,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 string id = Regex.Replace(seachKey, @"[^0-9]", string.Empty);
                 if (id != "")
                 {
-                    filterList = deliOrderlReponsitory.getDeliOrderById(id);
+                    filterList = deliOrderlReponsitory.filterDeliOrderByID(id);
                 }
 
             }
@@ -194,7 +195,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void onModifyProvider()
         {
-            MessageBox.Show("Modify Providers still being making color process, try again another time", "Error");
+            DeliveryProviderListWindow providerList = new DeliveryProviderListWindow();
+            providerList.ShowDialog();
         }
 
         private void addOrderDelivery()

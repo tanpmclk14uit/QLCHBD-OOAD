@@ -86,36 +86,35 @@
             CornerRadius="20"
             BorderThickness="1"
             BorderBrush="Black"
-            Margin="5">
-            <ScrollViewer>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition ></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <ListView 
+            Margin="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ListView 
                         Grid.Row="0"
                         ItemsSource="{Binding importItems, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding SelectedItems}"
-                        Margin="18 0 0 0">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="ID Store" Width="85" DisplayMemberBinding="{Binding id}"></GridViewColumn>
-                                <GridViewColumn Header="ID Provider" Width="110" DisplayMemberBinding="{Binding providerID}"></GridViewColumn>
-                                <GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding diskName}"></GridViewColumn>
-                                <GridViewColumn Header="Price" Width="100" DisplayMemberBinding="{Binding imPrice}"></GridViewColumn>
-                                <GridViewColumn Header="Amount" Width="100" DisplayMemberBinding="{Binding Amount}"></GridViewColumn>
-                                <GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding value}"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        
-                    </ListView>
-                    <!--<DataGrid 
+                        HorizontalAlignment="Right">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID Store" Width="85" DisplayMemberBinding="{Binding diskID}"></GridViewColumn>
+                            <GridViewColumn Header="ID by Provider" Width="135" DisplayMemberBinding="{Binding providerID}"></GridViewColumn>
+                            <GridViewColumn Header="Name" Width="230" DisplayMemberBinding="{Binding diskName}"></GridViewColumn>
+                            <GridViewColumn Header="Price" Width="100" DisplayMemberBinding="{Binding imPrice}"></GridViewColumn>
+                            <GridViewColumn Header="Amount" Width="100" DisplayMemberBinding="{Binding Amount}"></GridViewColumn>
+                            <GridViewColumn Header="Value" Width="135" DisplayMemberBinding="{Binding value}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                </ListView>
+                <!--<DataGrid 
                         x:Name="DataGridCart"
                         Grid.Row="0"
                         
@@ -123,90 +122,91 @@
                         CanUserAddRows="True"
                         CanUserDeleteRows="True"
                         IsReadOnly="True"
+                        AutoGenerateColumns="False"
+                        HorizontalContentAlignment="Center"
                         SelectedItem="{Binding Path=SelectedItems, Mode=TwoWay}"
                         ItemsSource="{Binding importItems, UpdateSourceTrigger=PropertyChanged}" Margin="18,0,0,0">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID Store" Width="1*" Binding="{Binding id}" CanUserSort="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="ID Provider" Width="1*" Binding="{Binding diskID}" CanUserSort="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding diskName}" CanUserSort="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Price" Width="1*" Binding="{Binding price}" CanUserSort="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Amount" Width="1*" Binding="{Binding amount}" CanUserSort="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding value}" CanUserSort="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>-->
-                    <Grid
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID Store" Width="1*" Binding="{Binding id}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="ID Provider" Width="1*" Binding="{Binding diskID}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding diskName}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Price" Width="1*" Binding="{Binding price}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Amount" Width="1*" Binding="{Binding amount}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding value}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>-->
+                <Grid
                         Grid.Row="1" Margin="18,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
                             Grid.Column="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="18"
                             FontWeight="Bold">In Total</TextBlock>
-                        <TextBlock
+                    <TextBlock
                             Grid.Column="1"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="18"
                             FontWeight="Bold"
                             Text="{Binding totalAmount, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        <TextBlock
+                    <TextBlock
                             Grid.Column="2"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="18"
                             FontWeight="Bold"
                             Text="{Binding totalBills, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                    </Grid>
                 </Grid>
-            </ScrollViewer>
-            
+            </Grid>
+
 
         </Border>
 

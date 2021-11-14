@@ -7,7 +7,7 @@ using QLCHBD_OOAD.appUtil;
 
 namespace QLCHBD_OOAD.model.delivery
 {
-    class DeliOrder
+    public class DeliOrder
     {
         private long _id;
         private string _provider;
@@ -83,7 +83,6 @@ namespace QLCHBD_OOAD.model.delivery
             this._idCreate_By = idCreate_By;
             this._idUpdate_By = idUpdate_By;
             this._status = status;
-            this._totalBills = totalBills;
             this._stringStatus = status.ToString();
         }
         public DeliOrder(long id, string provide, long amount, long idCreate_By, long idUpdate_By, DeliveryOrderStatus status)

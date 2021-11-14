@@ -67,7 +67,7 @@
                           CanUserResizeColumns="False"  
                       AutoGenerateColumns="False"
                       CurrentCellChanged="DataGrid_CurrentCellChanged"
-                          ItemsSource="{Binding lstOnOrder, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding lstOnOrder, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
                       BorderBrush="Black"
                       BorderThickness="1">
                         <DataGrid.Columns>

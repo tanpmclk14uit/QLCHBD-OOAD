@@ -112,7 +112,7 @@
                     x:Name="ListViewDeliOrder" 
                     HorizontalContentAlignment="Center"  
                     VerticalContentAlignment="Center" 
-                
+                    
                     ItemsSource="{Binding fillerListDeliOder, UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.ItemTemplate>
                             <DataTemplate>

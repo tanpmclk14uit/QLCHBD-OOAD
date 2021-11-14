@@ -37,42 +37,14 @@ namespace QLCHBD_OOAD.dao
             return false;
 
         }
-
-        //public void insertProvider(DeliProviders providers)
-        //{
-        //    string command = "INSERT INTO provider (id, name, number, mail, address, create_time, update_time, create_by, update_by) VALUES (" +
-        //        providers.id.ToString() + ", " 
-        //        + providers.providerName + ", " 
-        //        + providers.providerNumber.ToString() + ", " 
-        //        + providers.providerMail + ", " 
-        //        + providers.providerAddres + ", " 
-        //        + DateTime.Now.ToString() + ", " 
-        //        + DateTime.Now.ToString() + ", " 
-        //        + providers.createID.ToString() + ", " 
-        //        + providers.updateID.ToString() + " );";
-        //    database.executeCommand(command);
-        //}
-        //public void insertProvider(string ID, string name, string number, string mail, string address, string id)
-        //{
-        //    string command = "INSERT INTO provider (id, name, number, mail, address, create_time, update_time, create_by, update_by) VALUES (" +
-        //        ID + ", "
-        //        + name + ", "
-        //        + number.ToString() + ", "
-        //        + mail + ", "
-        //        + address + ", "
-        //        + DateTime.Now.ToString() + ", "
-        //        + DateTime.Now.ToString() + ", "
-        //        + id.ToString() + ", "
-        //        + id.ToString() + " );";
-        //    database.executeCommand(command);
-        //}
         public void insertProvider(string ID, string name, string number, string mail, string address)
         {
-            string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
+            string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `image`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
                 ID + ", '"
                 + name + "', '"
                 + number + "', '"
                 + mail + "', '"
+                + "'/QLCHBD-OOAD;component/assets/img_noImage.png'" + "', '"
                 + address + "', "
                 + "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "
                 + 1 + ", "
@@ -101,22 +73,56 @@ namespace QLCHBD_OOAD.dao
                 + providers.providerName + "', '"
                 + providers.providerNumber + "', '"
                 + providers.providerMail + "', '"
-                + providers.providerAddres + "', "
+                + providers.providerAddress + "', "
                 + "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "
                 + providers.createID + ", "
                 + providers.updateID + ");";
             database.executeCommand(command);
             database.closeConnection();
         }
-
-        public ObservableCollection<DeliProviders> providerList()
+        public void removeProviderByID(string id)
         {
-            ObservableCollection<DeliProviders> providersLists = new ObservableCollection<DeliProviders>();
+            string command = "DELETE FROM provider WHERE id = " + id;
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+
+        public DeliProviders getProviderbyID(string id)
+        {
+            string command = "SELECT * FROM provider WHERE id =" + id;
+            var reader = database.executeCommand(command);
+            DeliProviders provider;
+            if (reader.Read())
+            {
+                provider = new DeliProviders((long)reader[0], (string)reader[1], (int)reader[2], (string)reader[3], (string)reader[4], (DateTime)reader[5], (DateTime)reader[6], (long)reader[7], (long)reader[8], (string)reader[9]);
+                database.closeConnection();
+                return provider;
+            }
+            database.closeConnection();
+            return null;
+        }
+        public void updateByProvider(DeliProviders providers)
+        {
+            string command = "UPDATE provider SET " +
+                "`number` = '"+ providers.providerNumber +"', " +
+                "`mail` = '" + providers.providerMail + "', " +
+                "`address` = '" + providers.providerAddress + "', " +
+                "`update_time` = CURRENT_TIMESTAMP, " +
+                "`update_by` = '" + 1 + "', " +
+                "`image` = '" + providers.image + "'" +
+                " WHERE id =" + providers.id;
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+
+        public List<DeliProviders> providerList()
+        {
+            List<DeliProviders> providersLists = new List<DeliProviders>();
             string command = "SELECT * FROM provider";
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliProviders provider = new DeliProviders((long)reader[0], (string)reader[1], (int)reader[2], (string)reader[3], (string)reader[4], -100);
+                DeliProviders provider = new DeliProviders((long)reader[0], (string)reader[1], (int)reader[2], (string)reader[3], (string)reader[4], (DateTime)reader[5], (DateTime)reader[6], (long)reader[7], (long)reader[8], (string)reader[9]);
                 providersLists.Add(provider);
             }
             database.closeConnection();
@@ -130,7 +136,7 @@ namespace QLCHBD_OOAD.dao
 
             while (reader.Read())
             {
-                DeliProviders providers = new DeliProviders((long)reader[0], (string)reader[1], (int)reader[2], (string)reader[3], (string)reader[4], (DateTime)reader[2], (DateTime)reader[3], (long)reader[4], (long)reader[5]);
+                DeliProviders providers = new DeliProviders((long)reader[0], (string)reader[1], (int)reader[2], (string)reader[3], (string)reader[4], (DateTime)reader[5], (DateTime)reader[6], (long)reader[7], (long)reader[8], (string)reader[9]);
                 deliProviders.Add(providers);
             }
             database.closeConnection();

@@ -13,6 +13,7 @@ using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.view.delivery.Add_Order;
+using QLCHBD_OOAD.viewmodel.delivery.Component;
 using static QLCHBD_OOAD.dao.DeliveryProviderRepository;
 
 namespace QLCHBD_OOAD.viewmodel.delivery
@@ -26,59 +27,37 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         private DeliveryProviderRepository deliveryProviderRepository;
         public DeliOrderItems SelectedItems { get; set; }
 
+        private ObservableCollection<DeliOrderItems> _importItems;
+        public ObservableCollection<DeliOrderItems> importItems { get => _importItems; set { _importItems = value; OnPropertyChanged("importItems"); } }
         public ICommand RemoveCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
-
-        private ObservableCollection<DeliOrderItems> _importItems;
-        public ObservableCollection<DeliOrderItems> importItems { get => _importItems; set { _importItems = value; OnPropertyChanged("importItems"); } }
-        public ObservableCollection<DeliOrderItems> filterBillItems()
-        {
-            importItems = deliveryOrderItemsRepository.getItemsbyImportFormsID(id.ToString());
-            getTotalImportForm(importItems);
-            OnPropertyChanged("importItems");
-            return importItems;
-        }
-
-        private long _totalBills;
-        private int _totalAmount;
-        public long totalBills => _totalBills;
-        public int totalAmount => _totalAmount;
-        private void getTotalImportForm(ObservableCollection<DeliOrderItems> orderItems)
-        {
-            _totalBills = 0;
-            _totalAmount = 0;
-            foreach (var item in orderItems)
-            {
-                _totalAmount += item.Amount;
-                _totalBills += item.imPrice*item.Amount;
-            }
-            OnPropertyChanged("totalBills");
-            OnPropertyChanged("totalAmount");
-        }
         public DeliveryaAddOrderFormViewModel()
         {
+            importItems = new ObservableCollection<DeliOrderItems>();
+
             deliveryProviderRepository = getIntance();
             deliveryOrderRepository = DeliveryOrderRepository.getIntance();
             deliveryOrderItemsRepository = DeliveryOrderItemsRepository.getIntance();
+            DeliveryAddNewViewModel.GetItemsFromAddWindow += AddItemToFilterList;
             setUpStatusses();
             generateID();
             RemoveCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onRemove(); });
             AddCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openAddWindow(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onCancel(); });
-
         }
         //-------------------------------------------------------------------------------------------------
 
+        //-------------------------------------------------------------------------------------------------
+        private long _totalBills = 0;
+        private int _totalAmount = 0;
+        public long totalBills => _totalBills;
+        public int totalAmount => _totalAmount;
 
         //-------------------------------------------------------------------------------------------------
-        private void ChangeProvider(string provider)
-        {
-            deliveryOrderRepository.updateTemporaryImportForm(id, provider);
-        }
 
         //-------------------------------------------------------------------------------------------------
         private ObservableCollection<String> _selectedStatuses;
@@ -92,13 +71,16 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             {
                 _selectedStatus = value;
                 ChangeProvider(value);
-                OnPropertyChanged("ChangeProvider");
                 OnPropertyChanged("selectedStatus");
-                OnPropertyChanged("onConfirm");
             }
         }
         //-------------------------------------------------------------------------------------------------
-        private ObservableCollection<DeliProviders> _providerCombobox;
+        private void ChangeProvider(string provider)
+        {
+            deliveryOrderRepository.updateTemporaryImportForm(id, provider);
+        }
+        //-------------------------------------------------------------------------------------------------
+        private List<DeliProviders> _providerCombobox;
         private void setUpStatusses()
         {
             _selectedStatuses = new ObservableCollection<string>();
@@ -110,58 +92,74 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             selectedStatus = _selectedStatuses[0];
             OnPropertyChanged("selectedStatuses");
         }
-        private ObservableCollection<DeliProviders> getProviderList()
+        private List<DeliProviders> getProviderList()
         {
-            ObservableCollection<DeliProviders> deliProviders = deliveryProviderRepository.providerList();
+            List<DeliProviders> deliProviders = deliveryProviderRepository.providerList();
             return deliProviders;
         }
         //-------------------------------------------------------------------------------------------------
-        private long _id;
-        public long id => _id;
+        private int _id;
+        public int id => _id;
         private void generateID()
         {
             Random random = new Random();
-            _id = (long)random.Next();
+            _id = (int)random.Next();
             while (deliveryOrderRepository.DeliOrderIDisNotNULL(_id))
             {
-                _id = (long)random.Next();
+                _id = (int)random.Next();
             }
-            deliveryOrderRepository.addTemporaryImportForm(id, selectedStatus, 1);
         }
         //-------------------------------------------------------------------------------------------------
-        
+        private void AddItemToFilterList(DeliOrderItems item)
+        {
+            _totalAmount += item.Amount;
+            _totalBills += item.imPrice*item.Amount;
+            OnPropertyChanged("totalAmount");
+            OnPropertyChanged("totalBills");
+            importItems.Add(new DeliOrderItems(item.id,
+                                                id,
+                                                item.Amount,
+                                                item.diskID, item.diskName,
+                                                item.imPrice,
+                                                item.IDbyProvider));
+        }
 
         //-------------------------------------------------------------------------------------------------
 
         private void openAddWindow()
         {
-            AddNewDiskDeliveryWindow window = new AddNewDiskDeliveryWindow(id);
+            AddNewDiskDeliveryWindow window = new AddNewDiskDeliveryWindow(importItems.Count);
             window.ShowDialog();
-            filterBillItems();
         }
+
 
         private void onRemove()
         {
-            if (SelectedItems == null)
-            {
-                MessageBox.Show("Nothing to delete", "Error");
-            }
+            if (SelectedItems == null) {}
             else
             {
-                deliveryOrderItemsRepository.removeItemByID(SelectedItems.id.ToString());
-                filterBillItems();
+                _totalAmount -= SelectedItems.Amount;
+                _totalBills -= SelectedItems.imPrice*SelectedItems.Amount;
+                importItems.Remove(SelectedItems);
             }
         }
 
         private void onConfirm()
         {
+            if (totalAmount != 0)
+            {
+                deliveryOrderRepository.createNewImportForm(id.ToString(), selectedStatus, totalAmount, totalBills, 1);
+                foreach (var item in importItems)
+                {
+                    deliveryOrderItemsRepository.insertItems(item);
+                }
+            }
+
             closeForm();
         }
 
         private void onCancel()
         {
-            deliveryOrderItemsRepository.removeItemByImportFormsID(id.ToString());
-            deliveryOrderRepository.DeleteImportFormByID(id.ToString());
             closeForm();
         }
 

@@ -21,10 +21,10 @@ namespace QLCHBD_OOAD.view.delivery.Add_Order
     /// </summary>
     public partial class AddNewDiskDeliveryWindow : Window
     {
-        public AddNewDiskDeliveryWindow(long id)
+        public AddNewDiskDeliveryWindow(int count)
         {
             InitializeComponent();
-            DataContext = new DeliveryAddNewViewModel(id);
+            DataContext = new DeliveryAddNewViewModel(count);
             DeliveryAddNewViewModel.closeForm += closeWindow;
         }
 

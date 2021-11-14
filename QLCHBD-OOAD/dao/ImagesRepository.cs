@@ -138,6 +138,22 @@ namespace QLCHBD_OOAD.dao
             return images;
         }
 
+        public ObservableCollection<Images> getImagesByProviderID(string id)
+        {
+            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            string command = "SELECT * FROM `disk` WHERE provider = " + id;
+            var reader = db.executeCommand(command);
+            while (reader.Read())
+            {
+
+                Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
+                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                images.Add(image);
+            }
+            db.closeConnection();
+            return images;
+        }
+
         public ObservableCollection<Images> getImagesByAlbum(long id)
         {
             ObservableCollection<Images> images = new ObservableCollection<Images>();
