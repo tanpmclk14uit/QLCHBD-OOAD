@@ -32,6 +32,7 @@ namespace QLCHBD_OOAD.model.images
             this._providerPrice = lostCharges.ToString();
             this._rented = rented;
             this._idByProviderForEdit = idByProvider.ToString();
+            this._value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
         }
 
 
@@ -52,6 +53,7 @@ namespace QLCHBD_OOAD.model.images
             this._providerPrice = providerPrice;
             this._name = name;
             this._idProvider = idProvider;
+            this._value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
         }
 
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
@@ -75,6 +77,7 @@ namespace QLCHBD_OOAD.model.images
             this._providerPrice = lostCharges.ToString();
             this._rented = rented;
             this._idByProviderForEdit = idByProvider.ToString();
+            this._value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
         }
 
         private Boolean _isSelected;
@@ -99,19 +102,19 @@ namespace QLCHBD_OOAD.model.images
                 else _orderAmount = value;
                 if (_orderAmount != "")
                 {
-                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                    _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
                 }
             }
             
         }
 
-        private int _value = 0; 
+        private int _value ; 
         public int value
         {
             get => _value;
             set
             {
-                _value= Convert.ToInt32(orderAmount) * lostCharges;
+                _value= Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
             }
         }
 
@@ -235,7 +238,7 @@ namespace QLCHBD_OOAD.model.images
 
                 if (_lostCharges.ToString() != "")
                 {
-                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                    _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
                 }
             }
         }
