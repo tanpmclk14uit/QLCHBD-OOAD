@@ -12,7 +12,7 @@ namespace QLCHBD_OOAD.model.images
     public class Images
     {
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
-            DateTime createTime, DateTime updateTime, long createBy, long updateBy )
+            DateTime createTime, DateTime updateTime, long createBy, long updateBy, int rented )
         {
             this._id = id;
             this._name = name;
@@ -30,6 +30,9 @@ namespace QLCHBD_OOAD.model.images
             this._createBy = createBy;
             this._updateBy = updateBy;
             this._providerPrice = lostCharges.ToString();
+            this._rented = rented;
+            this._idByProviderForEdit = idByProvider.ToString();
+            this._value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
         }
 
 
@@ -42,8 +45,19 @@ namespace QLCHBD_OOAD.model.images
             _rented = rented;
         }
 
+        public Images(long id, string name, long idProvider, String idByProvider, String orderAmount, String providerPrice)
+        {
+            this._id = id;
+            this._idByProviderForEdit = idByProvider;
+            this._orderAmount = orderAmount;
+            this._providerPrice = providerPrice;
+            this._name = name;
+            this._idProvider = idProvider;
+            this._value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
+        }
+
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
-            DateTime createTime, long createBy)
+            DateTime createTime, long createBy, int rented)
         {
             this._id = id;
             this._name = name;
@@ -61,6 +75,9 @@ namespace QLCHBD_OOAD.model.images
             this._createBy = createBy;
             this._updateBy = createBy;
             this._providerPrice = lostCharges.ToString();
+            this._rented = rented;
+            this._idByProviderForEdit = idByProvider.ToString();
+            this._value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
         }
 
         private Boolean _isSelected;
@@ -81,21 +98,23 @@ namespace QLCHBD_OOAD.model.images
             get => _orderAmount;
             set
             {
-                _orderAmount = value;
+                if (value == "" || Convert.ToInt32(value) < 0) _orderAmount = "0";
+                else _orderAmount = value;
                 if (_orderAmount != "")
                 {
-                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                    _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
                 }
             }
+            
         }
 
-        private int _value = 0; 
+        private int _value ; 
         public int value
         {
             get => _value;
             set
             {
-                _value= Convert.ToInt32(orderAmount) * lostCharges;
+                _value= Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
             }
         }
 
@@ -140,7 +159,7 @@ namespace QLCHBD_OOAD.model.images
         private String _displayQuantity;
         public String displayQuantity
         {
-            get => (_quantity - RentalBillRepository.getIntance().getNumberInRentalById(id)).ToString() + "/" + _quantity.ToString();
+            get => remaining + "/" + _quantity.ToString();
         }
 
         public string _image;
@@ -156,7 +175,7 @@ namespace QLCHBD_OOAD.model.images
 
         private int _rented;
 
-        public int rented { get => _rented; }
+        public int rented { get => _rented; set { _rented = value; } }
 
         public string _locate;
         public string locate
@@ -193,6 +212,15 @@ namespace QLCHBD_OOAD.model.images
             get => _idProvider;
         }
 
+        private String _idByProviderForEdit;
+        public String idByProviderForEdit
+        {
+            get => _idByProviderForEdit;
+            set
+            {
+                _idByProviderForEdit = value;
+            }
+        }
 
         private long _idByProvider;
         public long idByProvider
@@ -210,7 +238,7 @@ namespace QLCHBD_OOAD.model.images
 
                 if (_lostCharges.ToString() != "")
                 {
-                    _value = Convert.ToInt32(orderAmount) * lostCharges;
+                    _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(_providerPrice);
                 }
             }
         }
@@ -221,8 +249,8 @@ namespace QLCHBD_OOAD.model.images
             get => _providerPrice;
             set
             {
-                _providerPrice = value;
-
+                if (value == "" || Convert.ToInt32(value) < 0) _providerPrice = "0";
+                else _providerPrice = value;
                 if (_providerPrice != "")
                 {
                     _value = Convert.ToInt32(orderAmount) * Convert.ToInt32(providerPrice);
@@ -253,5 +281,6 @@ namespace QLCHBD_OOAD.model.images
         {
             get => _updateBy;
         }
+
     }
 }

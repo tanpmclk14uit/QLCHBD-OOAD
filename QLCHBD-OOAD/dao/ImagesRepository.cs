@@ -29,9 +29,9 @@ namespace QLCHBD_OOAD.dao
             db = Db.getInstace();
         }
 
-        public ObservableCollection<Images> getAllImages()
+        public List<Images> getAllImages()
         {
-            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            List<Images> images = new List<Images>();
             string commnad = "SELECT * FROM `disk`";
             var reader = db.executeCommand(commnad);
             while(reader.Read())
@@ -39,14 +39,14 @@ namespace QLCHBD_OOAD.dao
                 if (reader[11] == reader[12])
                 {
                     Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                     images.Add(image);
                 }
                 else
                 {
                     
                     Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (long)reader[13]);
+                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (long)reader[13], (int)reader[15]);
                     images.Add(image);
                 }    
                 
@@ -107,15 +107,15 @@ namespace QLCHBD_OOAD.dao
 
 
 
-        public ObservableCollection<Images> getImagesById(string id)
+        public List<Images> getImagesById(string id)
         {
-            ObservableCollection<Images> images = new ObservableCollection<Images>();
+            List<Images> images = new List<Images>();
             string command = "SELECT * FROM `disk` WHERE ID = " + id;
             var reader = db.executeCommand(command);
             while (reader.Read())
             {
                 Images image = new Images((Byte)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -131,7 +131,7 @@ namespace QLCHBD_OOAD.dao
             {               
           
                 Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -156,13 +156,13 @@ namespace QLCHBD_OOAD.dao
 
         public ObservableCollection<Images> getImagesByAlbum(long id)
         {
-            ObservableCollection<Images> images = new ObservableCollection<Images>();
-            string command = "SELECT disk.id, disk.name, disk.album, disk.quantity, disk.image, disk.locate, disk.checked, disk.rental_price, disk.provider, disk.id_by_provider, disk.loss_charges, disk.create_time, disk.update_time, disk.create_by, disk.update_by FROM `disk` inner join `album` WHERE disk.album = album.id AND album.ID =" + id.ToString();
+            List<Images> images = new List<Images>();
+            string command = "SELECT disk.id, disk.name, disk.album, disk.quantity, disk.image, disk.locate, disk.checked, disk.rental_price, disk.provider, disk.id_by_provider, disk.loss_charges, disk.create_time, disk.update_time, disk.create_by, disk.update_by, rented FROM `disk` inner join `album` WHERE disk.album = album.id AND album.ID =" + id.ToString();
             var reader = db.executeCommand(command);
             while (reader.Read())
             {
                 Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                      (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14]);
+                      (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
