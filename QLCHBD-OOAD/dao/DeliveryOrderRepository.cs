@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.model.delivery;
 
@@ -147,29 +148,58 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return deliOrders;
         }
-        //public int getTotalBillByID(string id)
-        //{
-        //    int value = 0;
-        //    string command = "SELECT sum_value FROM import_form WHERE id = " + id;
-        //    var reader = database.executeCommand(command);
-        //    while (reader.Read())
-        //    {
-        //        value += (int)reader[0];
-        //    }
-        //    database.closeConnection();
-        //    return value;
-        //}
-        //public long getAmountByID(string id)
-        //{
-        //    long value = 0;
-        //    string command = "SELECT sum_amount FROM import_form WHERE id = " + id;
-        //    var reader = database.executeCommand(command);
-        //    while (reader.Read())
-        //    {
-        //        value += (int)reader[0];
-        //    }
-        //    database.closeConnection();
-        //    return value;
-        //}
+        public int getTotalBillByID(string id)
+        {
+            int value = 0;
+            string command = "SELECT sum_value FROM import_form WHERE id = " + id;
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                value += (int)reader[0];
+            }
+            database.closeConnection();
+            return value;
+        }
+        public long getAmountByID(string id)
+        {
+            long value = 0;
+            string command = "SELECT sum_amount FROM import_form WHERE id = " + id;
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                value += (int)reader[0];
+            }
+            database.closeConnection();
+            return value;
+        }
+
+        public long findCurrentMaxId()
+        {
+            long max = 0;
+            string command = "SELECT MAX(id) FROM import_form LIMIT 1";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                if (Convert.ToString(reader[0]) != "")
+                {
+                    max = (long)reader[0];
+                }
+            }
+            database.closeConnection();
+            return max;
+        }
+
+        public bool pushNewOrder(DeliOrder deliOrder)
+        {
+            bool result = false;
+            string command = $"INSERT INTO import_form (`id`, `provider_name`,`sum_amount`,`sum_value`,`create_time`,`update_time`, `create_by`, `update_by`, `status`) VALUES ('{deliOrder.id}', '{deliOrder.provider}', '{deliOrder.amount}', '{deliOrder.totalBills}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1', '{DeliveryOrderStatus.WATING}');";
+            var reader = database.executeCommand(command);
+            if (reader != null)
+            {
+                result = true;
+            }
+            database.closeConnection();
+            return result;
+        }
     }
 }

@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -16,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace QLCHBD_OOAD.view.images
 {
@@ -24,6 +27,7 @@ namespace QLCHBD_OOAD.view.images
     /// </summary>
     public partial class ImagesPage : Page
     {
+        public static event onChangeListImages onchange;
         public ImagesPage()
         {
             InitializeComponent();
@@ -36,9 +40,9 @@ namespace QLCHBD_OOAD.view.images
             newDiskView.ShowDialog();
         }
 
-        private void ListImages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var item = ((FrameworkElement)e.OriginalSource).DataContext as Images;
+            var item = ((ListBoxItem)sender).Content as Images;
             if (item != null)
             {
                 ImagesViewModel.getIntance().selectedImage = item;
@@ -47,7 +51,11 @@ namespace QLCHBD_OOAD.view.images
 
         private void ListImages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ImagesViewModel.getIntance().selectedImageChange();
+            if (this.IsLoaded)
+            {
+                onchange();
+            }
         }
     }
+
 }
