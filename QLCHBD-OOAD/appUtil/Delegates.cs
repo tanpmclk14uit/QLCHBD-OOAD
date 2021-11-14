@@ -27,8 +27,11 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void GuestTranferInformation(Guest guest);
     public delegate void SelectedImageChangeHandler();
     public delegate void AddOrderHandler();
+    public delegate void DeleteOrderDiskItemHandler();
+    public delegate void ConfirmAddOrderImage();
+    public delegate void ConfirmAddOrderItemImage(Images images);
     public delegate void GetImportItems(DeliOrderItems items);
-
     public delegate void CloseForm();
-    
+    public delegate void onChangeListImages();
+
 }

@@ -31,6 +31,7 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Content="Remove"
+                    Command="{Binding removeCommand}"
                     FontWeight="Bold"
                     FontSize="25"
                     Background="White"
@@ -39,9 +40,10 @@
                     VerticalAlignment="Center"
                     Width="140"
                     BorderBrush="Black"/>
-            <Button Content="Add book"
+            <Button Content="Add disk"
                     FontWeight="Bold"
                     FontSize="25"
+                    Command="{Binding addCommand}"
                     VerticalAlignment="Center"
                     Height="45"
                     Background="White"
@@ -63,6 +65,7 @@
                     <DataGrid Margin="10 10 10 0" 
                       x:Name="orderTable"
                       CanUserAddRows="True"
+                       SelectedValue="{Binding selectedItem, UpdateSourceTrigger=PropertyChanged}"
                       LostKeyboardFocus="orderTable_LostKeyboardFocus"
                           CanUserResizeColumns="False"  
                       AutoGenerateColumns="False"
@@ -72,7 +75,8 @@
                       BorderThickness="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID Store" Width="1*" Binding="{Binding Path=id}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="ID Provider" Width="4*" Binding="{Binding Path=idProvider}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="ID Provider" Width="1*" Binding="{Binding Path=idProvider}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="ID By Provider" Width="2*" Binding="{Binding Path=idByProviderForEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTextColumn Header="Name" Width="1.5*" Binding="{Binding Path=name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTextColumn Header="Price" Width="2*" Binding="{Binding Path=providerPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTextColumn Header="Amount" Width="3*" Binding="{Binding Path=orderAmount , Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
@@ -128,6 +132,7 @@
                 Width="400"
                 Height="37"
                 Grid.Row="3"
+                Command ="{Binding confirmCommand}"
                 BorderBrush="Black"
                 Margin="0 0 10 0"
                 BorderThickness="1"
