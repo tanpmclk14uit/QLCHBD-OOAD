@@ -4,6 +4,7 @@ using QLCHBD_OOAD.model.Guest;
 using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.model.retal;
 using QLCHBD_OOAD.view.rental;
+using QLCHBD_OOAD.viewmodel.guest;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -97,6 +98,20 @@ namespace QLCHBD_OOAD.viewmodel.rental
         public ICommand Confirm { get; set; }
         public ICommand AddMember { get; set; }
 
+        private Visibility _isMember;
+        public Visibility isMember
+        {
+            get
+            {
+                return _isMember;
+            }
+            set
+            {
+                _isMember = value;
+                OnPropertyChanged("isMember");
+            }
+        }
+
         private RentalAddPageViewModel()
         {            
             _rentalBillItems = new ObservableCollection<RentalBillItem>();            
@@ -105,22 +120,45 @@ namespace QLCHBD_OOAD.viewmodel.rental
             AddMember = new RelayCommand<object>((p) => { return true; }, (p) => { onAddMemberClick(); });
             imagesRepository = ImagesRepository.getInstance();
             _allImages = imagesRepository.getAllImagesForRental();
+            isMember = Visibility.Hidden;
             _keyword = "";
             RentalDiskDetailFormViewModel.addNewRentalBillItem += RentalDiskDetailFormViewModel_addNewRentalBillItem;
             RentalAddMemberViewModel.guestTranferInformation += RentalAddMemberViewModel_guestTranferInformation;
+            
             rentalBillReponsitory = RentalBillRepository.getIntance();
-
         }
+
+      
 
         private void RentalAddMemberViewModel_guestTranferInformation(Guest guest)
         {
-            this.guest = guest;
+            if(guest != null)
+            {
+                this.guest = guest;
+                if (guest.isMember)
+                {
+                    isMember = Visibility.Visible;
+                }
+                else
+                {
+                    isMember = Visibility.Hidden;
+                }
+            }           
         }
 
         private void onAddMemberClick()
         {
-            RentalAddMember rentalAddMember = new RentalAddMember();
-            rentalAddMember.Show();
+            if(guest != null)
+            {
+                RentalAddMember rentalAddMember = new RentalAddMember(guest.id);
+                rentalAddMember.Show();
+            }
+            else
+            {
+                RentalAddMember rentalAddMember = new RentalAddMember();
+                rentalAddMember.Show();
+            }
+           
         }
         private void clearData()
         {
@@ -158,8 +196,22 @@ namespace QLCHBD_OOAD.viewmodel.rental
  
         private void RentalDiskDetailFormViewModel_addNewRentalBillItem(RentalBillItem rentalBillItem)
         {
-            caculateTotalPrice(rentalBillItem);
+            
+            foreach (var rental in _rentalBillItems)
+            {
+                if(rental.diskId == rentalBillItem.diskId && rental.dueDate == rentalBillItem.dueDate)
+                {
+                    int amount = rental.amount + rentalBillItem.amount;
+                    _rentalBillItems.Remove(rental);
+                    caculateTotalPrice(rentalBillItem);
+                    rentalBillItem.amount = amount;
+                    _rentalBillItems.Add(rentalBillItem);                   
+                    OnPropertyChanged("renalBillItems");
+                    return;
+                }
+            }
             _rentalBillItems.Add(rentalBillItem);
+            caculateTotalPrice(rentalBillItem);
             OnPropertyChanged("rentalBillItems");
         }
       

@@ -30,6 +30,7 @@ namespace QLCHBD_OOAD.view.rental
             DataContext = new RentalDiskDetailFormViewModel(selectedImage);
             ToggleForm();
             RentalDiskDetailFormViewModel.closeForm += RentalDiskDetailFormViewModel_closeForm;
+            
         }
 
         private void RentalDiskDetailFormViewModel_closeForm()
