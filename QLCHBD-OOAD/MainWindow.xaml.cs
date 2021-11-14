@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using QLCHBD_OOAD.viewmodel;
 using QLCHBD_OOAD.viewmodel.images;
 using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.view.report;
 
 namespace QLCHBD_OOAD
 {
@@ -70,9 +71,9 @@ namespace QLCHBD_OOAD
 
         private void bttReport_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Report Screen still being making color process, try again another time", "Error");
-            //Screen content = new Screen();
-            //Holder.Content = content;
+
+            ReportMainPage content = new ReportMainPage();
+            Holder.Content = content;
         }
         private void bttLogout_Click(object sender, RoutedEventArgs e)
         {
