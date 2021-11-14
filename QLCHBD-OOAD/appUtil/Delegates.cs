@@ -35,4 +35,5 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void CloseForm();
     
     public delegate void onChangeListImages();
+>>>>>>>>> Temporary merge branch 2
 }
