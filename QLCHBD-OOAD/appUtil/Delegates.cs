@@ -31,11 +31,7 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void ConfirmAddOrderImage();
     public delegate void ConfirmAddOrderItemImage(Images images);
     public delegate void GetImportItems(DeliOrderItems items);
-
     public delegate void CloseForm();
-    
     public delegate void onChangeListImages();
 
-    public delegate void CloseForm();
-    
 }
