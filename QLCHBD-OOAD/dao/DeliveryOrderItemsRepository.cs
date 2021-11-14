@@ -52,14 +52,7 @@ namespace QLCHBD_OOAD.dao
 
         public void insertItems(DeliOrderItems items)
         {
-            string command = "INSERT INTO import_form_item (`import_form_id`, `quantity`, `disk_id`, `disk_name`, `disk_price`, `id_by_provider`, `create_time`, `update_time`) VALUES ('" +
-                items.deliID + "', '" +
-                items.Amount + "', '" +
-                items.diskID + "', '" +
-                items.diskName + "', '" +
-                items.imPrice + "', '" +
-                items.IDbyProvider + "'," +
-                "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+            string command = $"INSERT INTO import_form_item ( `import_form_id`, `quantity`, `disk_id`, `disk_name`, `disk_price`, `id_by_provider`, `create_time`, `update_time`) VALUES ( '{items.deliID}','{items.Amount}', '{items.diskID}', '{items.diskName}', '{items.imPrice}', '{items.IDbyProvider}',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
             database.executeCommand(command);
             database.closeConnection();
         }        
@@ -91,6 +84,21 @@ namespace QLCHBD_OOAD.dao
             return Items;
         }
 
+        public long findCurrentMaxId()
+        {
+            long max = 0;
+            string command = "SELECT MAX(id) FROM import_form_item LIMIT 1";
+            var reader = database.executeCommand(command);
+            while(reader.Read())
+            {
+                if (Convert.ToString(reader[0]) != "")
+                {
+                    max = (long)reader[0];
+                }
+            }
+            database.closeConnection();
+            return max;
+        }
 
     }
 }

@@ -31,6 +31,8 @@ namespace QLCHBD_OOAD.Components
             ToggleForm();
             addNewOrderImageViewModel = new AddNewOrderImageViewModel(lstOnOrder);
             this.DataContext = addNewOrderImageViewModel;
+            AddNewOrderImageViewModel.deleteOrderItem += updateList;
+            AddNewOrderImageViewModel.confirmOrderImage += CloseForm;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,11 +50,23 @@ namespace QLCHBD_OOAD.Components
         private void orderTable_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             addNewOrderImageViewModel.updateList();
+            updateList();
+        }
+
+        private void updateList()
+        {
             this.orderTable.CommitEdit();
             this.orderTable.CommitEdit();
             this.orderTable.CancelEdit();
             this.orderTable.CancelEdit();
             orderTable.Items.Refresh();
+        }
+
+        private void CloseForm()
+        {
+            ToggleForm();
+            AddNewOrderImageViewModel.confirmOrderImage -= CloseForm;
+            this.Close();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace QLCHBD_OOAD.viewmodel
 {
@@ -14,9 +15,22 @@ namespace QLCHBD_OOAD.viewmodel
         
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+        public event PropertyChangedEventHandler havingPropertyChanged;
+        public void NotifyPropertyChanged(String info)
+        {
+            if (havingPropertyChanged != null)
+            {
+                havingPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
+            }
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+            
         }
 
         public class RelayCommand<T> : ICommand
