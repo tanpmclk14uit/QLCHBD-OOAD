@@ -173,7 +173,7 @@ namespace QLCHBD_OOAD.dao
             int isCheck = 0;
             if (images.isCheck == true) isCheck = 1;
             bool result = false;
-            string command = $"INSERT INTO `disk` (`id`, `name`, `album`, `quantity`, `image`, `locate`, `checked`, `rental_price`, `provider`, `id_by_provider`, `loss_charges`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES ('{images.id}','{images.name}','{images.idAlbum}','{images.quantity}','{images.image}','{images.locate}','{isCheck}','{images.rentalPrice}','{images.idProvider}','{images.idByProvider}','{images.lostCharges}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1')";
+            string command = $"INSERT INTO `disk` (`id`, `name`, `album`, `quantity`, `image`, `locate`, `checked`, `rental_price`, `provider`, `id_by_provider`, `loss_charges`, `create_time`, `update_time`, `create_by`, `update_by`, `rented`) VALUES ('{images.id}','{images.name}','{images.idAlbum}','{images.quantity}','{images.image}','{images.locate}','{isCheck}','{images.rentalPrice}','{images.idProvider}','{images.idByProvider}','{images.lostCharges}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1', '0')";
             var reader = db.executeCommand(command);
             if (reader != null)
             {

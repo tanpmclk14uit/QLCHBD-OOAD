@@ -20,7 +20,6 @@ namespace QLCHBD_OOAD.viewmodel.images
             get { return _slideFrame; }
             set
             {
-                _slideFrame.NavigationService.Refresh();
                 _slideFrame = value;
                 OnPropertyChanged("SlideFrame");
             }
