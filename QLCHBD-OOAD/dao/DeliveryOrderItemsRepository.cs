@@ -88,9 +88,13 @@ namespace QLCHBD_OOAD.dao
                 Items.Add(item);
             }
             database.closeConnection();
-            return Items;
+            return Items
         }
 
+        //Làm gì có Bug, commit chơi thôi
 
+        //HAPPY BIRTHDAY m nhá
+
+        //Dậy thôi :v
     }
 }
