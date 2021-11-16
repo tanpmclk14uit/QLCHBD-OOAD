@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.viewmodel.guest;
+﻿using QLCHBD_OOAD.model.Guest;
+using QLCHBD_OOAD.viewmodel.guest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace QLCHBD_OOAD.view.rental
     /// </summary>
     public partial class RentalAddNewMember : Window
     {
-        public RentalAddNewMember()
+        public RentalAddNewMember(Guest guest = null)
         {
             InitializeComponent();
-            this.DataContext = new GuestViewModel(null);
+            this.DataContext = new GuestViewModel(guest);
             GuestViewModel.closeForm += this.Close;
         }
 

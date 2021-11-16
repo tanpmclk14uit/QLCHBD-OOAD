@@ -61,6 +61,23 @@ namespace QLCHBD_OOAD.dao
             resultId = db.excuteInsertCommand(command);
             return resultId;
         }
+        public long updateGuest(Guest guest)
+        {
+            long resultId = -1;
+            string format = "yyyy-MM-dd";
+            int isMember = guest.isMember ? 1 : 0;
+            string command = $"UPDATE `guest` SET `cmnd_cccd`='{guest.cmnd}',`address`='{guest.address}',`birth_date`='{guest.birthDate.ToString(format)}',`name`='{guest.name}',`membership`='{isMember}' WHERE id = '{guest.id}'";
+            try
+            {
+                var reader = db.executeCommand(command);
+                resultId = guest.id;              
+            }
+            catch
+            {
+                resultId = -1;
+            }
+            return resultId;
+        }
         public ObservableCollection<Guest> getAllGuest()
         {
             ObservableCollection<Guest> guests = new ObservableCollection<Guest>();

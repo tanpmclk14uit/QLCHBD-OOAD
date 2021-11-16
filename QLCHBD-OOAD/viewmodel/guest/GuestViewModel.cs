@@ -30,6 +30,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
 
         public ICommand Cancel { get; set; }
         public ICommand Confirm { get; set; }
+      
 
         private Guest _guest;
         public Guest guest
@@ -90,16 +91,19 @@ namespace QLCHBD_OOAD.viewmodel.guest
               }
             return filterList;
         }
+        private bool isUpdate;
 
         public GuestViewModel( Guest guest)
         {
             if (guest != null)
             {
                 this.guest = guest;
+                isUpdate = true;
             }
             else
             {
                 _guest = new Guest();
+                isUpdate = false;
             }
             Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmClick(_guest); });
             guestReponsitory = GuestReponsitory.getInstance();
@@ -141,7 +145,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
                     bool isValid = objAlphaPattern.IsMatch(identityCard);
                     if (isValid)
                     {
-                        if (guestReponsitory.findRentalGuestByIdCard(identityCard) == null)
+                        if (guestReponsitory.findRentalGuestByIdCard(identityCard) == null || isUpdate)
                         {
                             return true;
                         }
@@ -201,25 +205,45 @@ namespace QLCHBD_OOAD.viewmodel.guest
         {
             if (isValidName(guest.name) && isValidIdentityCard(guest.cmnd) && isValidAddress(guest.address) && isValidBirthDate(guest.birthDate))
             {
-                long createdId = createNewGuest(guest);   
-                if (createdId != -1)
+                if (!isUpdate)
                 {
-                    RentalAddMemberViewModel.getIntance().setGuest(createdId.ToString());
-                    MessageBox.Show("Create guest success!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    closeForm();
+                    createNewGuest(guest);
                 }
                 else
                 {
-                    MessageBox.Show("There are some server error! turn back later!", "Success", MessageBoxButton.OK, MessageBoxImage.Error);
-                }            
-                
+                    updateGuest(guest);
+                }
+                                     
+            }
+        }
+        private void updateGuest(Guest guest)
+        {
+            long updateId = guestReponsitory.updateGuest(guest);
+            if (updateId != -1)
+            {
+                RentalAddMemberViewModel.getIntance().setGuest(updateId.ToString());
+                MessageBox.Show("Update guest success!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                closeForm();
+            }
+            else
+            {
+                MessageBox.Show("There are some server error! turn back later!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
             
-           
-        private long createNewGuest(Guest guest)
+        private void createNewGuest(Guest guest)
         {
-            return guestReponsitory.createGuest(guest);
+            long createdId = guestReponsitory.createGuest(guest);
+            if (createdId != -1)
+            {
+                RentalAddMemberViewModel.getIntance().setGuest(createdId.ToString());
+                MessageBox.Show("Create guest success!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                closeForm();
+            }
+            else
+            {
+                MessageBox.Show("There are some server error! turn back later!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }           
         }
     }
 
