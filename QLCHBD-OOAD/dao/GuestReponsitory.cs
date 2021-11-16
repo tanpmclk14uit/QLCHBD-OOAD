@@ -51,6 +51,33 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return guest;
         }
+        public Guest findDetailGuestById(string id)
+        {
+            Guest guest = null;
+            string command = $"SELECT `id`, `cmnd_cccd`, `address`, `name`, birth_date, membership, create_time, create_by FROM `guest` WHERE id = {id}";
+            var reader = db.executeCommand(command);
+            if (reader != null && reader.Read())
+            {
+                guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (DateTime)reader[4], (bool)reader[5])
+                    .buildWithCreaterId(reader[7].ToString())
+                    .buildWithCreatTime((DateTime)reader[6]);
+            }
+            db.closeConnection();
+            return guest;
+        }
+        //select COUNT(*) from rental_bill_item rbi join rental_bill rb where rb.guess_id = 1 and rb.id = rbi.rental_id;
+        public string findStaffNameById(string id)
+        {
+            string staffName = "";
+            string command = $"select name from staff where id = 1";
+            var reader = db.executeCommand(command);           
+            if(reader!=null && reader.Read())
+            {
+                staffName = reader[0].ToString();
+            }            
+            db.closeConnection();
+            return staffName;
+        }
        
         public long createGuest(Guest guest)
         {

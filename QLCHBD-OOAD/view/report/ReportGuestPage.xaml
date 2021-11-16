@@ -51,106 +51,42 @@
                          Style="{DynamicResource seach}"
                          Grid.Column="2"/>            
         </Grid>
-        <Grid Grid.Row="1" Margin="20" Background="White">            
+        
+        <Grid  Grid.Row="1" Margin="20" Background="White">            
             <DataGrid ItemsSource="{Binding filterListGuest}"
-                      SelectionMode="Single"       
-                     
+                      SelectionMode="Single"     
+                       IsReadOnly="True"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="False"
+                      CanUserReorderColumns="False"                      
                       SelectedItem="{Binding guest}"
-                      x:Name="rentalItem"                      
+                      x:Name="rentalItem"   
+                      FontSize="20"                      
                       CanUserAddRows="False"
-                      AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn CanUserReorder="False" CanUserResize="False" Binding="{Binding id}" CanUserSort="True" Width="0.4*" IsReadOnly="True" FontSize="30">
-                        <DataGridTextColumn.Header>
-                            <TextBlock  Text="Id" FontSize="30" HorizontalAlignment="Center"/>
-                        </DataGridTextColumn.Header>
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                      AutoGenerateColumns="False">                
+                <DataGrid.Columns>                    
+                    <DataGridTextColumn Header="Id"                                        
+                                        CanUserReorder="False"
+                                        CanUserResize="False"
+                                        Binding="{Binding id}"
+                                        CanUserSort="True"
+                                        Width="0.4*"
+                                        IsReadOnly="True">                        
                     </DataGridTextColumn>
-                    <DataGridTextColumn CanUserResize="False" Binding="{Binding name}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="25">
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="Name" FontSize="25" HorizontalAlignment="Center"/>
-                        </DataGridTextColumn.Header>
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn   Header="Name" CanUserResize="False" Binding="{Binding name}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+                        
                     </DataGridTextColumn>
-                    <DataGridTextColumn CanUserResize="False" Binding="{Binding cmnd}" CanUserSort="True" Width="1.2*" IsReadOnly="True" FontSize="25">
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="Identity card" FontSize="25" TextAlignment="Right"/>
-                        </DataGridTextColumn.Header>
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Id card number" CanUserResize="False" Binding="{Binding cmnd}" CanUserSort="True" Width="1.2*" IsReadOnly="True" FontSize="20">
+                        
                     </DataGridTextColumn>
-                    <DataGridTextColumn CanUserResize="False" Binding="{Binding birthDateString}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="25">
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="Birth date" FontSize="25" HorizontalAlignment="Center"/>
-                        </DataGridTextColumn.Header>
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Birth date" CanUserResize="False" Binding="{Binding birthDateString}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">
+                        
                     </DataGridTextColumn>
-                    <DataGridTextColumn CanUserResize="False" Binding="{Binding address}" CanUserSort="True" Width="2*"  IsReadOnly="True" FontSize="25">
-                        <DataGridTextColumn.Header>
-                            <TextBlock Text="Address" FontSize="25" HorizontalAlignment="Center"/>
-                        </DataGridTextColumn.Header>
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Address" CanUserResize="False" Binding="{Binding address}" CanUserSort="True" Width="2*"  IsReadOnly="True" FontSize="20">
+                        
                     </DataGridTextColumn>
-                    <DataGridCheckBoxColumn  CanUserResize="False" Binding="{Binding isMember}" CanUserSort="True" Width="0.7*" IsReadOnly="True">
-                        <DataGridCheckBoxColumn.Header>
-                            <TextBlock Text="Member" FontSize="25" HorizontalAlignment="Center"/>
-                        </DataGridCheckBoxColumn.Header>                        
-
-                        <DataGridCheckBoxColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGridCheckBoxColumn.HeaderStyle>
+                    <DataGridCheckBoxColumn Header="Member"  CanUserResize="False" Binding="{Binding isMember}" CanUserSort="True" Width="0.7*" IsReadOnly="True">
+                        
                     </DataGridCheckBoxColumn>
 
                 </DataGrid.Columns>

@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.model.Guest;
+﻿using QLCHBD_OOAD.dao;
+using QLCHBD_OOAD.model.Guest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
     class GuestDetailViewModel: BaseViewModel
     {
         private static GuestDetailViewModel instance;
+        private GuestReponsitory guestReponsitory;
 
         public static GuestDetailViewModel getInstance()
         {
@@ -20,6 +22,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
             }
             return instance;
         }
+        public string staffName { get; set; }
 
         private Guest _guest;
         public Guest guest
@@ -33,7 +36,8 @@ namespace QLCHBD_OOAD.viewmodel.guest
         }
         public void setGuest(Guest guest)
         {
-            this.guest = guest;
+            this.guest = guestReponsitory.findDetailGuestById(guest.id.ToString());
+            staffName = guestReponsitory.findStaffNameById(guest.createById);
             if (guest != null)
             {
                 if (guest.isMember)
@@ -62,7 +66,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
         }
         private GuestDetailViewModel()
         {
-
+            guestReponsitory = GuestReponsitory.getInstance();
         }
     }
 }

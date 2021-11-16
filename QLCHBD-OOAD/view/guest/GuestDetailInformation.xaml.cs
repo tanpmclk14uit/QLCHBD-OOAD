@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.model.Guest;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.Guest;
 using QLCHBD_OOAD.viewmodel.guest;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace QLCHBD_OOAD.view.guest
     /// </summary>
     public partial class GuestDetailInformation : Window
     {
+
+        public static event ToggleFormDialogNotifyHandler toggleForm;
         public GuestDetailInformation(Guest guest)
         {
             InitializeComponent();
@@ -29,12 +32,14 @@ namespace QLCHBD_OOAD.view.guest
             {
                 GuestDetailViewModel.getInstance().setGuest(guest);
             }
+            toggleForm();
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            toggleForm();
         }
     }
 }

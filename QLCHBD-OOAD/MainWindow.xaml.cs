@@ -20,6 +20,7 @@ using QLCHBD_OOAD.viewmodel;
 using QLCHBD_OOAD.viewmodel.images;
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.report;
+using QLCHBD_OOAD.view.guest;
 
 namespace QLCHBD_OOAD
 {
@@ -40,6 +41,7 @@ namespace QLCHBD_OOAD
             RenalDiskDetailForm.ToggleForm += ToggleForm;
             RentalAddMember.ToggleForm += ToggleForm;
             AddNewOrderImageWindow.ToggleForm += ToggleForm;
+            GuestDetailInformation.toggleForm += ToggleForm;
         }
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)

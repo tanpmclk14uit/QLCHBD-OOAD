@@ -41,6 +41,33 @@ namespace QLCHBD_OOAD.model.Guest
             set => _isMember = value;
         }
 
+        private DateTime _createTime;
+        public DateTime createTime
+        {
+            get => _createTime;
+        }
+        public String createTimeString
+        {
+            get => createTime.ToShortDateString();
+        }
+
+
+        private string _createById;
+        public string createById
+        {
+            get => _createById;
+        }
+        public Guest buildWithCreaterId(string createId)
+        {
+            this._createById = createId;
+            return this;
+        }
+        public Guest buildWithCreatTime(DateTime createDate)
+        {
+            this._createTime = createDate;
+            return this;
+        }
+
         public Guest() 
         {
             _cmnd = "";
@@ -67,6 +94,7 @@ namespace QLCHBD_OOAD.model.Guest
             _name = name;
             _isMember = isMember;
         }
+
 
 
     }
