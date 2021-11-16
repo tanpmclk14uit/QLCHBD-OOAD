@@ -92,6 +92,9 @@
     <Compile Include="Components\AddNewOrderItemImageWindow.xaml.cs">
       <DependentUpon>AddNewOrderItemImageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\AddNewStaffWindow.xaml.cs">
+      <DependentUpon>AddNewStaffWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\ChangeImageInformationForm.xaml.cs">
       <DependentUpon>ChangeImageInformationForm.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,7 @@
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="viewmodel\staff\AddStaffViewModel.cs" />
     <Compile Include="viewmodel\staff\StaffManageViewModel.cs" />
     <Compile Include="view\staff\StaffManagePage.xaml.cs">
       <DependentUpon>StaffManagePage.xaml</DependentUpon>
@@ -218,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\AddNewOrderItemImageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\AddNewStaffWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

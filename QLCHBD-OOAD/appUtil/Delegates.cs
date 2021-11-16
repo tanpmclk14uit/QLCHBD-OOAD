@@ -33,5 +33,6 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void GetImportItems(DeliOrderItems items);
     public delegate void CloseForm();
     public delegate void onChangeListImages();
-
+    public delegate void CancelAddStaffHandler();
+    public delegate void updateAddStaffHandler();
 }

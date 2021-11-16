@@ -9,7 +9,7 @@ namespace QLCHBD_OOAD.model.staff
 {
     class Staff
     {
-        public Staff(long id, String name, String userName, String password, String residentId, bool isManager, bool isLogedIn, StaffStatus status, DateTime birthDay)
+        public Staff(long id, String name, String userName, String password, String residentId, bool isManager, bool isLogedIn, StaffStatus status, DateTime birthday, string image)
         {
             this._id = id;
             this._name = name;
@@ -19,7 +19,8 @@ namespace QLCHBD_OOAD.model.staff
             this._isManager = isManager;
             this._isLogedIn = isLogedIn;
             this._status = status;
-            this._birthDay = birthDay;
+            this._birthday = birthday;
+            this._image = image;
         }
 
         private long _id;
@@ -62,6 +63,12 @@ namespace QLCHBD_OOAD.model.staff
             get => _residentId;
         }
 
+        private String _image;
+        public String image
+        {
+            get => _image;
+        }
+
         private StaffStatus _status;
         public StaffStatus status
         {
@@ -72,16 +79,20 @@ namespace QLCHBD_OOAD.model.staff
             }
         }
 
-        private DateTime _birthDay;
-        public String birthDay
+        private DateTime _birthday;
+        public String birthday
         {
-            get => _birthDay.ToShortDateString();
+            get => _birthday.ToShortDateString();
         }
 
         private bool _isManager;
         public bool isManager
         {
             get => _isManager;
+            set
+            {
+                _isManager = value;
+            }
         }
 
         private bool _isLogedIn;

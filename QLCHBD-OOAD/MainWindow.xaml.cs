@@ -20,6 +20,7 @@ using QLCHBD_OOAD.viewmodel;
 using QLCHBD_OOAD.viewmodel.images;
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.report;
+using QLCHBD_OOAD.view.staff;
 
 namespace QLCHBD_OOAD
 {
@@ -33,13 +34,15 @@ namespace QLCHBD_OOAD
         {
             InitializeComponent();
             //HomeScreen content = new HomeScreen();
-            //Holder.Content = content;
+            StaffManagePage content = new StaffManagePage();
+            Holder.Content = content;
             diskView.ToggleForm += ToggleForm;
             DeleteImageForm.ToggleForm += ToggleForm;
             ChangeImageInformationForm.ToggleForm += ToggleForm;
             RenalDiskDetailForm.ToggleForm += ToggleForm;
             RentalAddMember.ToggleForm += ToggleForm;
             AddNewOrderImageWindow.ToggleForm += ToggleForm;
+            AddNewStaffWindow.Toggle += ToggleForm;
         }
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)

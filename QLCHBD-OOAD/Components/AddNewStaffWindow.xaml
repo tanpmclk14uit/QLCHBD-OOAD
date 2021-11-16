@@ -1,0 +1,124 @@
+﻿<Window x:Class="QLCHBD_OOAD.Components.AddNewStaffWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QLCHBD_OOAD.Components"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:components="clr-namespace:QLCHBD_OOAD.Components"
+        mc:Ignorable="d"
+        WindowStyle="None"
+      WindowStartupLocation="CenterScreen"
+      Topmost="True"
+      ResizeMode="NoResize"
+        Title="AddNewStaffWindow" Height="450" Width="700">
+    <Window.Resources>
+        <Style x:Key="tbStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="5 0 00 5"/>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="40 0 40 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+    <Grid Margin="0 10 0 10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+            <Image Source="https://icons.iconarchive.com/icons/aha-soft/people/256/engineer-icon.png"/>
+            <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+                <TextBlock VerticalAlignment="Center"
+                           Text="Name:"
+                           FontSize="18"/>
+                <TextBlock VerticalAlignment="Center"
+                           Grid.Row="1"
+                           Text="Resident ID:"
+                           FontSize="18"/>
+                <TextBlock VerticalAlignment="Center"
+                           Grid.Row="2"
+                           Text="Birthday:"
+                           FontSize="18"/>
+                <TextBlock VerticalAlignment="Center"
+                           Grid.Row="3"
+                           Text="User name:"
+                           FontSize="18"/>
+                <TextBlock VerticalAlignment="Center"
+                           Grid.Row="4"
+                           Text="Password:"
+                           FontSize="18"/>
+            </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+                <TextBox Text="{Binding name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         FontSize="14"  
+                         Style="{StaticResource tbStyle}"
+                         VerticalAlignment="Center"/>
+                <TextBox Text="{Binding residentId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Grid.Row="1"
+                          FontSize="14"
+                        Style="{StaticResource tbStyle}"
+                          VerticalAlignment="Center"/>
+                <DatePicker Grid.Row="2"                                
+                                Height="auto"     
+                                SelectedDate="{Binding birthday, UpdateSourceTrigger=PropertyChanged}"
+                                 Focusable="False"
+                                FontSize="14"                               
+                                IsTodayHighlighted="True"                               
+                                Name="datePicker"                               
+                                VerticalAlignment="Center" Width="auto" >
+                </DatePicker>
+                <TextBox Text="{Binding userName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="3"
+                        FontSize="14"
+                       Style="{StaticResource tbStyle}"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                           Grid.Row="4"
+                           FontSize="14"
+                         Style="{StaticResource tbStyle}"
+                           VerticalAlignment="Center"/>
+            </Grid>
+    </Grid>
+        <Grid Grid.Row="1" Margin="20 0 20 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Background="#28A745"
+                    Command="{Binding addStaffCommand}"
+                    Height="66"
+                    Width="150"
+                    Content="SAVE"
+                    FontSize="30"
+                    Foreground="White"
+                    materialDesign:ButtonAssist.CornerRadius="8"/>
+            <Button Grid.Column="1"
+                    Command="{Binding cancelCommand}"
+                    Background="#8B8B8B"
+                    Height="66"
+                    Width="150"
+                    Content="CANCEL"
+                    FontSize="30"
+                    Foreground="White"
+                    materialDesign:ButtonAssist.CornerRadius="8"/>
+        </Grid>
+    </Grid>
+</Window>
