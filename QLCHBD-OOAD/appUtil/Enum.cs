@@ -18,4 +18,9 @@ namespace QLCHBD_OOAD.appUtil
     {
         UNPAID, PAID
     }
+
+    public enum StaffStatus
+    {
+        WORKING, FIRED 
+    }
 }

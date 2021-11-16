@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="dao\DeliveryOrderRepository.cs" />
     <Compile Include="dao\RentalBillRepository.cs" />
+    <Compile Include="dao\StaffRepository.cs" />
     <Compile Include="model\delivery\DeliBills.cs" />
     <Compile Include="model\delivery\DeliBillsItems.cs" />
     <Compile Include="model\delivery\DeliOrderItems.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="model\images\Images.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
+    <Compile Include="model\staff\Staff.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddNewViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\AddNewProviderViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\DeliveryAskFormViewModel.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="viewmodel\staff\StaffManageViewModel.cs" />
     <Compile Include="view\staff\StaffManagePage.xaml.cs">
       <DependentUpon>StaffManagePage.xaml</DependentUpon>
     </Compile>
@@ -483,7 +486,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bus\" />
-    <Folder Include="model\staff\" />
     <Folder Include="viewmodel\login\" />
     <Folder Include="view\login\" />
   </ItemGroup>
