@@ -51,9 +51,10 @@
                          Style="{DynamicResource seach}"
                          Grid.Column="2"/>            
         </Grid>
-        <Grid Grid.Row="1" Margin="20" Background="White">
+        <Grid Grid.Row="1" Margin="20" Background="White">            
             <DataGrid ItemsSource="{Binding filterListGuest}"
-                      SelectionMode="Single"          
+                      SelectionMode="Single"       
+                     
                       SelectedItem="{Binding guest}"
                       x:Name="rentalItem"                      
                       CanUserAddRows="False"
