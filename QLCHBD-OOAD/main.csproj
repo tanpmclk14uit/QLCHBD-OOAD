@@ -136,6 +136,7 @@
     <Compile Include="viewmodel\delivery\DeliveryPageViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\DeliveryProviderDetailViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\ProviderListWindowViewModel.cs" />
+    <Compile Include="viewmodel\guest\GuestDetailViewModel.cs" />
     <Compile Include="viewmodel\guest\GuestViewModel.cs" />
     <Compile Include="viewmodel\images\AddNewOrderImageViewModel.cs" />
     <Compile Include="viewmodel\images\AddNewOrderItemImageViewModel.cs" />
@@ -170,6 +171,9 @@
     </Compile>
     <Compile Include="view\delivery\DeliveryProviderDetailPage.xaml.cs">
       <DependentUpon>DeliveryProviderDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\guest\GuestDetailInformation.xaml.cs">
+      <DependentUpon>GuestDetailInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\images\ImageDetailPage.xaml.cs">
       <DependentUpon>ImageDetailPage.xaml</DependentUpon>
@@ -374,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\delivery\DeliveryProviderDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\guest\GuestDetailInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

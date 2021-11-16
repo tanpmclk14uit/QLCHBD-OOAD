@@ -1,6 +1,8 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
+using QLCHBD_OOAD.view.guest;
+using QLCHBD_OOAD.view.rental;
 using QLCHBD_OOAD.viewmodel.rental;
 using System;
 using System.Collections.Generic;
@@ -24,25 +26,40 @@ namespace QLCHBD_OOAD.viewmodel.guest
         private ObservableCollection<Guest> _guests;
         public ObservableCollection<Guest> guests
         {
-            get => _guests;
+            get  {
+                _guests = guestReponsitory.getAllGuest();
+                return _guests;
+            }
         }
 
 
         public ICommand Cancel { get; set; }
-        public ICommand Confirm { get; set; }
-      
+        public ICommand Confirm { get; set; }       
+        public ICommand AddMember { get; set; }
 
         private Guest _guest;
         public Guest guest
         {
             get => _guest;
             set 
-            {
-                _guest = value;
+            {                                    
+                if(value!= null)
+                {
+                   
+                    onGuestSelected(value);
+                }
                 
-                OnPropertyChanged("guest");
             }
         }
+
+        private void onGuestSelected(Guest guest)
+        {
+            GuestDetailInformation guestDetail = new GuestDetailInformation(guest);
+            guestDetail.Show();
+            _guest = null;
+            OnPropertyChanged("guest");
+        }
+
         private String _seachKey;
         public String seachKey
         {
@@ -106,9 +123,16 @@ namespace QLCHBD_OOAD.viewmodel.guest
                 isUpdate = false;
             }
             Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmClick(_guest); });
+            AddMember = new RelayCommand<object>((p) => { return true; }, (p) => { onAddMemberClick(); });
             guestReponsitory = GuestReponsitory.getInstance();
             _guests = guestReponsitory.getAllGuest();
             seachKey = "";
+        }
+        private void onAddMemberClick()
+        {
+            RentalAddNewMember rental = new RentalAddNewMember();
+            rental.ShowDialog();            
+            OnPropertyChanged("filterListGuest");
         }
         private bool isValidName(string name)
         {
