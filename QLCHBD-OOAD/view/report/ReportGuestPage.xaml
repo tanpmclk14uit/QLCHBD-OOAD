@@ -54,12 +54,12 @@
         
         <Grid  Grid.Row="1" Margin="20" Background="White">            
             <DataGrid ItemsSource="{Binding filterListGuest}"
-                      SelectionMode="Single"     
-                       IsReadOnly="True"
+                      SelectionMode="Single"                          
+                      IsReadOnly="True"
                       CanUserDeleteRows="False"
                       CanUserResizeColumns="False"
                       CanUserReorderColumns="False"                      
-                      SelectedItem="{Binding guest}"
+                      SelectedItem="{Binding selectedGuest}"
                       x:Name="rentalItem"   
                       FontSize="20"                      
                       CanUserAddRows="False"

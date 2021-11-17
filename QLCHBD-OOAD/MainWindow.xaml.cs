@@ -42,6 +42,7 @@ namespace QLCHBD_OOAD
             RentalAddMember.ToggleForm += ToggleForm;
             AddNewOrderImageWindow.ToggleForm += ToggleForm;
             GuestDetailInformation.toggleForm += ToggleForm;
+            RentalAddNewMember.toggle += ToggleSecondaryForm;
         }
 
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)
@@ -157,14 +158,33 @@ namespace QLCHBD_OOAD
         {
             mRestoreIfMove = false;
         }
+
+        private void ToggleSecondaryForm()
+        {
+            if(this.Opacity == 1)
+            {
+                this.Opacity = 0.29;
+                this.IsEnabled = false;
+            }
+            else
+            {
+                if (this.Opacity == 0.3)
+                {
+                    return;
+                }
+                else
+                {
+                    this.Opacity = 1;
+                    this.IsEnabled = true;
+                }                
+            }
+        }
         private void ToggleForm()
         {
             if (this.Opacity == 1)
             {
                 this.Opacity = 0.3;
                 this.IsEnabled = false;
-
-
             }
             else
             {

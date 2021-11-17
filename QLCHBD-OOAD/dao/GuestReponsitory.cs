@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.dao
 {
@@ -65,7 +66,31 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return guest;
         }
-        //select COUNT(*) from rental_bill_item rbi join rental_bill rb where rb.guess_id = 1 and rb.id = rbi.rental_id;
+        public long countAllRentedBook(string guestId)
+        {
+            long count = -1;
+            string command = $"select COUNT(*) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id;";
+            var reader = db.executeCommand(command);
+            if(reader != null && reader.Read())
+            {               
+                count = (long)reader[0];
+            }
+            db.closeConnection();
+            return count;            
+        }
+        public long countCurrentRentingBookByStatus(string guestId, string status)
+        {
+            long count = -1;
+            string command = $"select COUNT(*) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id and rbi.status ='{status}';";
+            var reader = db.executeCommand(command);
+            if (reader != null && reader.Read())
+            {
+                count = (long)reader[0];
+            }
+            db.closeConnection();
+            return count;
+        }
+        
         public string findStaffNameById(string id)
         {
             string staffName = "";

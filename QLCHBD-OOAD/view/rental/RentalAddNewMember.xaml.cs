@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.model.Guest;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.Guest;
 using QLCHBD_OOAD.viewmodel.guest;
 using System;
 using System.Collections.Generic;
@@ -21,16 +22,19 @@ namespace QLCHBD_OOAD.view.rental
     /// </summary>
     public partial class RentalAddNewMember : Window
     {
+        public static event ToggleFormDialogNotifyHandler toggle;
         public RentalAddNewMember(Guest guest = null)
         {
             InitializeComponent();
             this.DataContext = new GuestViewModel(guest);
             GuestViewModel.closeForm += this.Close;
+            toggle();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            toggle();
         }
     }
 }

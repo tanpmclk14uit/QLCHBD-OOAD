@@ -146,7 +146,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="2"
+                <Label Content="{Binding allRenting}"
                        Foreground="Black"
                        Margin="0 0 15 0"
                        ContentStringFormat="Total renting: {0}"
@@ -157,7 +157,7 @@
                        FontSize="25"
                        Foreground="Black"
                        Margin="0 0 15 0"
-                       Content="3"
+                       Content="{Binding allCurrentRenting}"
                        VerticalAlignment="Center"
                        FontFamily="Roboto"
                        Grid.Column="1"
@@ -166,7 +166,7 @@
                        FontSize="25"
                        Foreground="Black"
                        Margin="0 0 15 0"
-                       Content="4"
+                       Content="{Binding allOverdueRenting}"
                        VerticalAlignment="Center"
                        FontFamily="Roboto"
                        Grid.Column="2"
@@ -216,7 +216,7 @@
                 </Grid.ColumnDefinitions>
                 <Button
                         Grid.Column="2"
-                        Height="50"
+                        Height="50"                        
                         Background="Red"
                        Margin="10 0"
                          Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -228,7 +228,8 @@
                                Foreground="Black"/>
                 </Button>
                 <Button 
-                        Grid.Column="1"                        
+                        Grid.Column="1"  
+                        Command="{Binding Edit}"
                         Height="50"
                     Margin="10 0"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -246,7 +247,8 @@
                     Margin="10 0"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5"
-                        Background="LightGray" Click="Button_Click">
+                        Background="LightGray"
+                    Click="Button_Click">
                     <TextBlock Text="CANCEL"
                                FontSize="20"
                                FontFamily="Roboto"

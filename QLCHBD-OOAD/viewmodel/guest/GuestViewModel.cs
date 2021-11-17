@@ -22,6 +22,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
 
         private GuestReponsitory guestReponsitory;
         public static event CloseForm closeForm;
+        public static event ClearListViewSelected clearListViewSelected;
 
         private ObservableCollection<Guest> _guests;
         public ObservableCollection<Guest> guests
@@ -42,22 +43,31 @@ namespace QLCHBD_OOAD.viewmodel.guest
         {
             get => _guest;
             set 
-            {                                    
-                if(value!= null)
-                {
-                   
-                    onGuestSelected(value);
-                }
-                
+            {
+                _guest = value;                
             }
         }
+        private Guest _selectedGuest;
+        public Guest selectedGuest
+        {
+            get => _selectedGuest;
+            set
+            {
+                _selectedGuest = value;
+                if (_selectedGuest != null)
+                {
+                    onGuestSelected(_selectedGuest);
+                }                
+            }
+        }
+
 
         private void onGuestSelected(Guest guest)
         {
             GuestDetailInformation guestDetail = new GuestDetailInformation(guest);
-            guestDetail.Show();
-            _guest = null;
-            OnPropertyChanged("guest");
+            guestDetail.ShowDialog();           
+            clearListViewSelected();
+            OnPropertyChanged("filterListGuest");
         }
 
         private String _seachKey;

@@ -23,8 +23,15 @@ namespace QLCHBD_OOAD.view.report
     {
         public ReportGuestPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
             DataContext = new GuestViewModel(null);
+            GuestViewModel.clearListViewSelected += GuestViewModel_clearListViewSelected;
+        }
+
+        private void GuestViewModel_clearListViewSelected()
+        {
+            rentalItem.UnselectAll();
+           
         }
     }
 }
