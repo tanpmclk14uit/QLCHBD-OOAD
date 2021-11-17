@@ -64,9 +64,9 @@ namespace QLCHBD_OOAD.viewmodel.guest
         {
             this.guest = guestReponsitory.findDetailGuestById(guest.id.ToString());
             staffName = guestReponsitory.findStaffNameById(guest.createById);
-            allRenting = guestReponsitory.countAllRentedBook(guest.id.ToString());
-            allCurrentRenting = guestReponsitory.countCurrentRentingBookByStatus(guest.id.ToString(), "WAITING");
-            allOverdueRenting = guestReponsitory.countCurrentRentingBookByStatus(guest.id.ToString(), "OVERDUE");
+            allRenting = guestReponsitory.countAllRentedBook(guest.id.ToString());            
+            allOverdueRenting = guestReponsitory.countCurrentOverDueRenting(guest.id.ToString());
+            allCurrentRenting = guestReponsitory.countCurrentWaitingRenting(guest.id.ToString())+ allOverdueRenting;
 
             if (guest != null)
             {

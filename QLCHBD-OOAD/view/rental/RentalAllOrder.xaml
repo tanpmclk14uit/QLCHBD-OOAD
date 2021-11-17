@@ -99,11 +99,11 @@
                         <DataTemplate>
                             <Grid Margin="5">
                                 <Border Width="380"
-                                        Background="{Binding backgroundStatus}"
+                                        Background="White"
                                         CornerRadius="15 15 15 15"
                                         BorderThickness="1"
                                         BorderBrush="Gray"
-                                        Height="300">
+                                        Height="250">
                                     <Grid Margin="20 10 10 10">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="40"/>
@@ -124,8 +124,7 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="1*"/>
                                                 <RowDefinition Height="1*"/>
-                                                <RowDefinition Height="1*"/>
-                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>                                                
                                                 <RowDefinition Height="1*"/>
                                             </Grid.RowDefinitions>
                                             <Label Grid.Row="0"
@@ -159,14 +158,6 @@
                                Content="{Binding totalPrice}"
                                FontSize="20"
                                ContentStringFormat="Total bill: {0} VNĐ"                               
-                               />
-                                            <Label Grid.Row="4"
-                               VerticalAlignment="Center"
-                               VerticalContentAlignment="Center"
-                               HorizontalAlignment="Left"
-                               Content="{Binding stringStatus}"
-                               FontSize="20"
-                               ContentStringFormat="Status: {0}"                               
                                />
                                         </Grid>
                                         <Grid Grid.Row="2">

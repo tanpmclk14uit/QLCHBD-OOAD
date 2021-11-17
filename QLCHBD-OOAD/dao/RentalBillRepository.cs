@@ -32,24 +32,7 @@ namespace QLCHBD_OOAD.dao
             database = Db.getInstace();
         }
 
-        private RentalBillStatus stringToRentalBillStatus(String status)
-        {
-            if (status == RentalBillStatus.OVERDUE.ToString())
-            {
-                return RentalBillStatus.OVERDUE;
-            }
-            else
-            {
-                if (status == RentalBillStatus.RECEIVEDALL.ToString())
-                {
-                    return RentalBillStatus.RECEIVEDALL;
-                }
-                else
-                {
-                    return RentalBillStatus.WAITING;
-                }
-            }
-        }
+        
         public ObservableCollection<RentalBill> getRentalBillsById(string id)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
@@ -57,7 +40,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
+                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4]);
                 rentalBills.Add(rentalBill);
             }
             database.closeConnection();
@@ -127,7 +110,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
+                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4]);
                 rentalBills.Add(rentalBill);
             }
             database.closeConnection();
@@ -140,7 +123,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], stringToRentalBillStatus(reader[5].ToString()));
+                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4]);
                 rentalBills.Add(rentalBill);
             }
             database.closeConnection();
@@ -151,7 +134,7 @@ namespace QLCHBD_OOAD.dao
         public void createNewRentalBill(RentalBill rental, long staffID, ObservableCollection<RentalBillItem> rentalBillItems)
         {
             long lastInsertId = -1;
-            string command = $"INSERT INTO `rental_bill`(`guess_id`, `create_by`, `total_price`, `status`) VALUES ('{rental.guestId}','{staffID}','{rental.totalPrice}','{rental.status}')";
+            string command = $"INSERT INTO `rental_bill`(`guess_id`, `create_by`, `total_price`) VALUES ('{rental.guestId}','{staffID}','{rental.totalPrice}')";
            
             try
             {
@@ -179,7 +162,7 @@ namespace QLCHBD_OOAD.dao
         private void createNewRentalBillItem(RentalBillItem rentalBillItem, long rentalId)
         {   
             string format = "yyyy-MM-dd HH:mm:ss";
-            string command = $"INSERT INTO `rental_bill_item`(`rental_id`, `quantity`, `rental_price`, `disk_name`, `disk_image`, `disk_id`, `due_date`, `receive_quantity`) VALUES ('{rentalId}','{rentalBillItem.amount}','{rentalBillItem.rentalPrice}','{rentalBillItem.diskName}','{rentalBillItem.image}','{rentalBillItem.diskId}','{rentalBillItem.getDueDate().ToString(format)}','{rentalBillItem.returned}')";
+            string command = $"INSERT INTO `rental_bill_item`(`rental_id`, `quantity`, `rental_price`, `disk_name`, `disk_image`, `disk_id`, `due_date`, `receive_quantity`,`status` ) VALUES ('{rentalId}','{rentalBillItem.amount}','{rentalBillItem.rentalPrice}','{rentalBillItem.diskName}','{rentalBillItem.image}','{rentalBillItem.diskId}','{rentalBillItem.getDueDate().ToString(format)}','{rentalBillItem.returned}')";
             var reader = database.executeCommand(command);
             database.closeConnection();
         }

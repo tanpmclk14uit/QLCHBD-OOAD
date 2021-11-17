@@ -487,6 +487,7 @@
     <Folder Include="model\staff\" />
     <Folder Include="viewmodel\login\" />
     <Folder Include="view\login\" />
+    <Folder Include="view\return\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\ic_search.png" />

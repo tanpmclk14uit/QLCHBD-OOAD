@@ -68,24 +68,47 @@ namespace QLCHBD_OOAD.dao
         }
         public long countAllRentedBook(string guestId)
         {
-            long count = -1;
-            string command = $"select COUNT(*) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id;";
+            long count = 0;
+            string command = $"select SUM(rbi.quantity) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id;";
             var reader = db.executeCommand(command);
             if(reader != null && reader.Read())
-            {               
-                count = (long)reader[0];
+            {
+                if (!Convert.IsDBNull(reader[0]))
+                {
+                    count = Convert.ToInt64(reader[0]);
+                }
             }
             db.closeConnection();
             return count;            
         }
-        public long countCurrentRentingBookByStatus(string guestId, string status)
+        public long countCurrentOverDueRenting(string guestId)
         {
-            long count = -1;
-            string command = $"select COUNT(*) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id and rbi.status ='{status}';";
+            long count = 0;
+            string command = $"select SUM(rbi.quantity-rbi.receive_quantity) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id and rbi.due_date < CURRENT_DATE and rbi.receive_quantity < rbi.quantity;";
             var reader = db.executeCommand(command);
             if (reader != null && reader.Read())
             {
-                count = (long)reader[0];
+                if (!Convert.IsDBNull(reader[0]))
+                {
+                    count = Convert.ToInt64(reader[0]);
+                }
+                
+            }
+            db.closeConnection();
+            return count;
+        }
+        public long countCurrentWaitingRenting(string guestId)
+        {
+            long count = 0;
+            string command = $"select SUM(rbi.quantity-rbi.receive_quantity) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id and rbi.due_date >= CURRENT_DATE";
+            var reader = db.executeCommand(command);
+            if (reader != null && reader.Read())
+            {
+                if (!Convert.IsDBNull(reader[0]))
+                {
+                    count = Convert.ToInt64(reader[0]);
+                }
+
             }
             db.closeConnection();
             return count;
