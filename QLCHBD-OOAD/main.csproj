@@ -159,7 +159,7 @@
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="view\delivery\DeliveryPageHolder.xaml.cs">
+    <Compile Include="view\delivery\page holder\DeliveryPageHolder.xaml.cs">
       <DependentUpon>DeliveryPageHolder.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\delivery\DeliveryDetailPage.xaml.cs">
@@ -361,7 +361,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="view\delivery\DeliveryPageHolder.xaml">
+    <Page Include="view\delivery\page holder\DeliveryPageHolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -73,6 +73,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 if (value != null)
                 {
                     turnToImportFormDetailPage(_selectedDeliOrder.id.ToString());
+                    _selectedDeliOrder = null;
                 }
             }
         }
@@ -197,6 +198,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             DeliveryProviderListWindow providerList = new DeliveryProviderListWindow();
             providerList.ShowDialog();
+            selectedStatus = selectedStatus;
         }
 
         private void addOrderDelivery()

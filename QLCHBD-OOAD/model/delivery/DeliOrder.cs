@@ -19,12 +19,15 @@ namespace QLCHBD_OOAD.model.delivery
         private long _idUpdate_By;
         private DeliveryOrderStatus _status;
         private String _stringStatus;
+        private string _image;
 
         public long id { get => _id; }
         public string provider { get => _provider; }
         public long totalBills { get => _totalBills; }
         public long amount { get => _amount; }
+        public string image => _image;
 
+        public string setImage { set { _image = value; } }
         public long setAmount { set { _amount = value; } }
         public long SetTotalBills { set { _totalBills = value; } }
         public String createTime { get => _createTime.ToShortDateString(); }
@@ -72,7 +75,7 @@ namespace QLCHBD_OOAD.model.delivery
             this._totalBills = totalBills;
             this._stringStatus = status.ToString();
         }
-        public DeliOrder(long id, string provide, long amount, long value, DateTime createTime, DateTime updateTime, long idCreate_By, long idUpdate_By, DeliveryOrderStatus status)
+        public DeliOrder(long id, string provide, long amount, long value, DateTime createTime, DateTime updateTime, long idCreate_By, long idUpdate_By, DeliveryOrderStatus status, string image)
         {
             this._id = id;
             this._provider = provide;
@@ -83,6 +86,7 @@ namespace QLCHBD_OOAD.model.delivery
             this._idCreate_By = idCreate_By;
             this._idUpdate_By = idUpdate_By;
             this._status = status;
+            this._image = image;
             this._stringStatus = status.ToString();
         }
         public DeliOrder(long id, string provide, long amount, long idCreate_By, long idUpdate_By, DeliveryOrderStatus status)

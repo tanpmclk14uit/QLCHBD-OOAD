@@ -23,6 +23,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         public long amount => _importForm.amount;
         public string dayCreate => _importForm.createTime;
         public long idCreate_By => _importForm.idCreate_By;
+        public string image => _importForm.image;
         public String stringStatus => _importForm.stringStatus;
 
         private DeliveryOrderItemsRepository deliveryOrderItemsRepository;

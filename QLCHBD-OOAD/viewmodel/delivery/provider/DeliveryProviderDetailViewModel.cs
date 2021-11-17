@@ -15,12 +15,14 @@ using System.Windows.Media.Imaging;
 
 namespace QLCHBD_OOAD.viewmodel.delivery.provider
 {
-    class DeliveryProviderDetailViewModel :BaseViewModel
+    class DeliveryProviderDetailViewModel : BaseViewModel
     {
         public static ChangePageHandler turnToDeliveryDetailPage;
         DeliveryProviderRepository providerRepository;
+        DeliveryOrderRepository orderRepository;
         ImagesRepository imagesRepository;
         private DeliProviders _provider;
+        private FileStream file;
         public string mail { get => _provider.providerMail; set { _provider.updateMail = value; OnPropertyChanged("mail"); } }
         public string address { get => _provider.providerAddress; set { _provider.updateAddres = value; OnPropertyChanged("address"); } }
         public int number { get => _provider.providerNumber; set { _provider.updateNumber = value; OnPropertyChanged("number"); } }
@@ -38,45 +40,68 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
         public DeliveryProviderDetailViewModel(string id)
         {
             providerRepository = DeliveryProviderRepository.getIntance();
+            orderRepository = DeliveryOrderRepository.getIntance();
             imagesRepository = ImagesRepository.getInstance();
             _provider = providerRepository.getProviderbyID(id);
             _imageList = imagesRepository.getImagesByProviderID(id);
+            checkImageExists(image);
 
             ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onChangeImage(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(id); });
 
         }
+        private void checkImageExists(string imagePath)
+        {
+            if (File.Exists(imagePath))
+            {
+                file = File.OpenRead(imagePath);
+                OnPropertyChanged("image");
+                file.Close();
+            }
+            else
+            {
+                imagePath = "/QLCHBD-OOAD;component/assets/img_noImage.png";
+                OnPropertyChanged("image");
+            }
+        }
+        private string getImageFromDialog(string name)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = "c:\\";
+            dlg.Filter = "Image files (*.jpg)|*.jpg|All Files (*.*)|*.*";
+            dlg.RestoreDirectory = true;
+
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                image = dlg.FileName;
+                string extension = Path.GetExtension(dlg.FileName);
+                string fileName = name + "_" + DateTime.Now.ToString("yymmssfff") + extension;
+                string linkToAssets = Path.GetFullPath("QLCHBD-OOAD/QLCHBD-OOAD/Assets/");
+
+                for (int i = 0; i < 6; ++i)
+                {
+                    linkToAssets = Path.GetDirectoryName(linkToAssets);
+                }
+                linkToAssets += @"\Assets\";
+
+                linkToAssets += fileName;
+
+                file = File.Create(linkToAssets);
+                file.Close();
+
+                File.Copy(image, linkToAssets, true);
+                file.Close();
+                return linkToAssets.Replace(@"\", "/");
+            }
+            return image.Replace(@"\", "/");
+        }
 
         private void onChangeImage()
         {
-            //OpenFileDialog dlg = new OpenFileDialog();
-            //dlg.InitialDirectory = "c:\\";
-            //dlg.Filter = "Image files (*.jpg)|*.jpg|All Files (*.*)|*.*";
-            //dlg.RestoreDirectory = true;
-
-            //if (dlg.ShowDialog() == DialogResult.OK)
-            //{
-            //    image = dlg.FileName;
-            //    var linkToAssets = Path.GetFullPath("QLCHBD-OOAD/QLCHBD-OOAD/Assets/");
-            //    for (int i = 0; i < 6; ++i)
-            //    {
-            //        linkToAssets = Path.GetDirectoryName(linkToAssets);
-            //    }
-            //    linkToAssets += @"\Assets\";
-            //    string fileName = "img_Provider" + id + ".png";
-            //    string assetsPath = linkToAssets + fileName;
-            //    try
-            //    {
-            //        File.Copy(image, assetsPath, true);
-            //    }
-            //    catch (IOException copyError)
-            //    {
-            //        File.Delete(assetsPath);
-            //        File.Move(image, assetsPath);
-            //    }
-            //    image = assetsPath;
-            //}
+            image = getImageFromDialog("provider");
+            OnPropertyChanged("image");
 
         }
 

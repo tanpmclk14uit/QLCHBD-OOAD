@@ -125,7 +125,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         }
 
         //-------------------------------------------------------------------------------------------------
-
+        private string getProviderImage()
+        {
+            foreach (var item in _providerCombobox)
+            {
+                if (item.providerName.Equals(_selectedStatus)) return item.image;
+            }
+            return "/QLCHBD-OOAD;component/assets/img_noImage.png";
+        }
         private void openAddWindow()
         {
             AddNewDiskDeliveryWindow window = new AddNewDiskDeliveryWindow(importItems.Count);
@@ -148,7 +155,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             if (totalAmount != 0)
             {
-                deliveryOrderRepository.createNewImportForm(id.ToString(), selectedStatus, totalAmount, totalBills, 1);
+
+                deliveryOrderRepository.createNewImportForm(id.ToString(), selectedStatus, totalAmount, totalBills, 1, getProviderImage());
                 foreach (var item in importItems)
                 {
                     deliveryOrderItemsRepository.insertItems(item);

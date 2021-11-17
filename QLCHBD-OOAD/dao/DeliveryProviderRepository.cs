@@ -101,6 +101,20 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return null;
         }
+        public string getProviderImageID(string id)
+        {
+            string command = "SELECT image FROM provider WHERE id =" + id;
+            var reader = database.executeCommand(command);
+            string provider;
+            if (reader.Read())
+            {
+                provider = (string)reader[0];
+                database.closeConnection();
+                return provider;
+            }
+            database.closeConnection();
+            return "/QLCHBD-OOAD;component/assets/img_noImage.png";
+        }
         public void updateByProvider(DeliProviders providers)
         {
             string command = "UPDATE provider SET " +
@@ -142,6 +156,11 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return deliProviders;
         }
+
+
+
+
+
     }
 }
 
