@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.dao
 {
@@ -40,6 +41,20 @@ namespace QLCHBD_OOAD.dao
             }
             db.closeConnection();
             return staffs;
+        }
+
+        public int isHaveUserName(String username)
+        {
+            int i = 0;
+            string command = $"SELECT count(*) FROM `staff` WHERE user_name = '{username}'";
+            var reader = db.executeCommand(command);
+            while(reader.Read())
+            {
+                MessageBox.Show(reader[0].GetType().ToString());
+                i = Convert.ToInt32((long)reader[0]);
+            }
+            db.closeConnection();
+            return i;
         }
 
         public void changePassword(String newPassword, long id)

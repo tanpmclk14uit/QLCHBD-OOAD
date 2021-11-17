@@ -124,6 +124,11 @@ namespace QLCHBD_OOAD.viewmodel.staff
                 MessageBox.Show("Please choose staff birthday !");
                 return false;
             }
+            if ( DateTime.Now.Year - birthday.Year < 18)
+            {
+                MessageBox.Show("Staff must be above 18 years old");
+                return false;
+            }    
             return true;
         }
 
@@ -133,7 +138,11 @@ namespace QLCHBD_OOAD.viewmodel.staff
             {
                 MessageBox.Show("Please giving right user name format !");
                 return false;
-            }
+            } else if (StaffRepository.getInstance().isHaveUserName(userName) > 0)
+            {
+                MessageBox.Show("There's already having that user name !");
+                return false;
+            }    
             return true;
         }
 
@@ -153,6 +162,7 @@ namespace QLCHBD_OOAD.viewmodel.staff
             {
                 StaffRepository.getInstance().addStaff(name, residentId, birthday, userName, password);
                 update();
+                MessageBox.Show("Add new staff success !");
                 cancel();
             }
         }    

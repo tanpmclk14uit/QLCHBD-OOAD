@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.Components;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.staff;
 using System;
@@ -17,6 +18,7 @@ namespace QLCHBD_OOAD.viewmodel.staff
         public ICommand deleteStaffCommand { get; set; }
 
         public ICommand addStaffCommand { get; set; }
+
 
         private List<Staff> _lstStaffs;
         public List<Staff> lstStaffs
@@ -97,6 +99,7 @@ namespace QLCHBD_OOAD.viewmodel.staff
                 OnPropertyChanged("newPassword");
             }
         }
+
         private StaffManageViewModel()
         {
             lstStaffs = StaffRepository.getInstance().getAllStaff();
@@ -108,11 +111,13 @@ namespace QLCHBD_OOAD.viewmodel.staff
             deleteStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) => { deleteStaff(); });
             addStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addStaff(); });
             AddStaffViewModel.update += updateList;
+            ChangePasswordViewModel.update += updateList;
         }
 
         private void updateList()
         {
-            OnPropertyChanged("lstStaffs");
+            lstStaffs = StaffRepository.getInstance().getAllStaff();
+            OnPropertyChanged("password");
         }    
 
         private void addStaff()

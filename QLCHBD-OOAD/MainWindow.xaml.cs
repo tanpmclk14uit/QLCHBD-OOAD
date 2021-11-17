@@ -34,8 +34,7 @@ namespace QLCHBD_OOAD
         {
             InitializeComponent();
             //HomeScreen content = new HomeScreen();
-            StaffManagePage content = new StaffManagePage();
-            Holder.Content = content;
+            //Holder.Content = content;
             diskView.ToggleForm += ToggleForm;
             DeleteImageForm.ToggleForm += ToggleForm;
             ChangeImageInformationForm.ToggleForm += ToggleForm;
@@ -43,8 +42,23 @@ namespace QLCHBD_OOAD
             RentalAddMember.ToggleForm += ToggleForm;
             AddNewOrderImageWindow.ToggleForm += ToggleForm;
             AddNewStaffWindow.Toggle += ToggleForm;
+            ChangePasswordWindow.ToggleForm += ToggleForm;
         }
 
+        public bool isOpen = false;
+        private void openCloseManageAccount()
+        {
+            if (!isOpen)
+            {
+                spAccountManage.Visibility = Visibility.Visible;
+                isOpen = true;
+            }
+            else
+            {
+                spAccountManage.Visibility = Visibility.Hidden;
+                isOpen = false;
+            }
+        }
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("DashBoard Screen still being making color process, try again another time", "Error");
@@ -174,6 +188,23 @@ namespace QLCHBD_OOAD
             }
         }
 
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            openCloseManageAccount();
+        }
 
+        private void btnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            changePasswordWindow.Show();
+            openCloseManageAccount();
+        }
+
+        private void btnManageStaff_Click(object sender, RoutedEventArgs e)
+        {
+            StaffManagePage content = new StaffManagePage();
+            Holder.Content = content;
+            openCloseManageAccount();
+        }
     }
 }

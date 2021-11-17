@@ -25,6 +25,9 @@ namespace QLCHBD_OOAD.view.staff
         {
             InitializeComponent();
             this.DataContext = StaffManageViewModel.getIntance();
+
         }
+
+       
     }
 }

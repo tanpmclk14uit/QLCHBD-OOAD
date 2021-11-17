@@ -98,6 +98,9 @@
     <Compile Include="Components\ChangeImageInformationForm.xaml.cs">
       <DependentUpon>ChangeImageInformationForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\DeleteImageForm.xaml.cs">
       <DependentUpon>DeleteImageForm.xaml</DependentUpon>
     </Compile>
@@ -165,6 +168,7 @@
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="viewmodel\staff\AddStaffViewModel.cs" />
+    <Compile Include="viewmodel\staff\ChangePasswordViewModel.cs" />
     <Compile Include="viewmodel\staff\StaffManageViewModel.cs" />
     <Compile Include="view\staff\StaffManagePage.xaml.cs">
       <DependentUpon>StaffManagePage.xaml</DependentUpon>
@@ -230,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\ChangeImageInformationForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

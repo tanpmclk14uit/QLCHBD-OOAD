@@ -35,4 +35,5 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void onChangeListImages();
     public delegate void CancelAddStaffHandler();
     public delegate void updateAddStaffHandler();
+    public delegate void UpdateAddStaffListHandler();
 }
