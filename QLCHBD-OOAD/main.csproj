@@ -160,6 +160,7 @@
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="viewmodel\returning\ReturningViewModel.cs" />
     <Compile Include="view\delivery\DeliveryPageHolder.xaml.cs">
       <DependentUpon>DeliveryPageHolder.xaml</DependentUpon>
     </Compile>
@@ -210,6 +211,9 @@
     </Compile>
     <Compile Include="view\report\ReportMainPage.xaml.cs">
       <DependentUpon>ReportMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\returning\ReturnPage.xaml.cs">
+      <DependentUpon>ReturnPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\AddNewOrderImageWindow.xaml">
       <SubType>Designer</SubType>
@@ -433,6 +437,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="view\returning\ReturnPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -487,7 +495,6 @@
     <Folder Include="model\staff\" />
     <Folder Include="viewmodel\login\" />
     <Folder Include="view\login\" />
-    <Folder Include="view\return\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\ic_search.png" />

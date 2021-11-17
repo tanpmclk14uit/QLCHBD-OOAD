@@ -94,11 +94,17 @@
         <ScrollViewer Margin="10" Grid.Row="1">
 
             <StackPanel x:Name="panel">
-                <ListView  SelectionMode="Single" SelectedItem="{Binding selectedRentalBill}" x:Name="ListViewRentalBill" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" ItemsSource="{Binding filterListRentalBill}">
+                <ListView  SelectionMode="Single"
+                           SelectedItem="{Binding selectedRentalBill}"
+                           x:Name="ListViewRentalBill"
+                           HorizontalContentAlignment="Center"                           
+                           VerticalContentAlignment="Center"
+                           ItemsSource="{Binding filterListRentalBill}">
+                    
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
-                                <Border Width="380"
+                                <Border Width="380"                                        
                                         Background="White"
                                         CornerRadius="15 15 15 15"
                                         BorderThickness="1"
@@ -179,6 +185,8 @@
                                 Width="70"
                                 Height="33"
                                 Background="#259D45"
+                                               
+                                                    Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.ReturnCommand}"
                                 >
                                                 <Image Source="/Assets/img_delete (2).png" />
 
@@ -197,6 +205,17 @@
                                 HorizontalAlignment="Center"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}"
+                               BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                            <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseLeftButtonDown"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                 </ListView>
             </StackPanel>
         </ScrollViewer>

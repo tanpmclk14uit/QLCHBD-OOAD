@@ -1,4 +1,7 @@
-﻿using QLCHBD_OOAD.viewmodel.rental;
+﻿
+using QLCHBD_OOAD.view.returning;
+using QLCHBD_OOAD.viewmodel.rental;
+using QLCHBD_OOAD.viewmodel.returning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +30,18 @@ namespace QLCHBD_OOAD.view.rental
             DataContext = RentalPageViewModel.getIntance();
             retalHolder.Content = new RentalAllOrder();
             RentalPageViewModel.turnAllRentalToDetailRental += RentalNavigation_ChangePage;
+            RentalPageViewModel.turnAllRentalToReturn += RentalPageViewModel_turnAllRentalToReturn;
             DetailRentalPageViewModel.turnBackPageHandler += turnBackToAllRentalPage;
+            ReturningViewModel.turnBackPageHandler += turnBackToAllRentalPage;
             RentalPageViewModel.turnToAddPage += turnToAddPage;
             RentalAddPageViewModel.turnBackToRentalAllOrders += turnBackToAllRentalPage;            
         }
-        
+
+        private void RentalPageViewModel_turnAllRentalToReturn(long rentalId, long guestId)
+        {
+            retalHolder.Content = new ReturnPage(rentalId, guestId);
+        }
+
         private void turnToAddPage(string page)
         {
             
@@ -39,8 +49,7 @@ namespace QLCHBD_OOAD.view.rental
         }
 
         private void RentalNavigation_ChangePage(long rentalId, long guestId)
-        {
-
+        {          
             retalHolder.Content = new RentalDetailOrder(rentalId, guestId);
             
         }

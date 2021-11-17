@@ -1,6 +1,7 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.retal;
+using QLCHBD_OOAD.view.returning;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,11 +16,15 @@ namespace QLCHBD_OOAD.viewmodel.rental
 {
     class RentalPageViewModel : BaseViewModel
     {
-        public static TurnToDetailPageHandler turnAllRentalToDetailRental;
+        public static event TurnToDetailPageHandler turnAllRentalToDetailRental;
+        public static event TurnToDetailPageHandler turnAllRentalToReturn;
+
+
 
         public static ChangePageHandler turnToAddPage;
 
         public ICommand NewOrder { get; set; }
+        public ICommand ReturnCommand { get; set; }
 
         private RentalBill _selectedRentalBill;
         public RentalBill selectedRentalBill
@@ -28,12 +33,15 @@ namespace QLCHBD_OOAD.viewmodel.rental
             set
             {
                 _selectedRentalBill = value;
-                if(value != null)
-                {
-                    turnAllRentalToDetailRental(_selectedRentalBill.id, _selectedRentalBill.guestId);
-                    _selectedRentalBill = null;
-                }               
+                          
             }
+        }
+        public void onItemClick()
+        {
+            if (_selectedRentalBill != null)
+            {
+                turnAllRentalToDetailRental(_selectedRentalBill.id, _selectedRentalBill.guestId);
+            }           
         }
         public ObservableCollection<RentalBill> filterListRentalBill
         {
@@ -93,9 +101,12 @@ namespace QLCHBD_OOAD.viewmodel.rental
             seachKey = "";            
             rentalBillReponsitory = RentalBillRepository.getIntance();
             NewOrder = new RelayCommand<object>((p) => { return true; }, (p) => { turnToAddPage(); });
+            ReturnCommand = new RelayCommand<object>((p) => { return true; }, (p) => { turnAllRentalToReturn(_selectedRentalBill.id, _selectedRentalBill.guestId); });
             setUpStatuses();
             RentalAddPageViewModel.turnBackToRentalAllOrders += RentalAddPageViewModel_turnBackToRentalAllOrders;
         }
+
+       
 
         private void RentalAddPageViewModel_turnBackToRentalAllOrders()
         {
