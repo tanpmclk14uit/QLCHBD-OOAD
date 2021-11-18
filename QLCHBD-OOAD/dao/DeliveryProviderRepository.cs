@@ -37,28 +37,16 @@ namespace QLCHBD_OOAD.dao
             return false;
 
         }
-        public void insertProvider(string ID, string name, string number, string mail, string address)
+
+
+        public void insertProviderWithTextBox(string ID, string name, string number, string mail, string address, string id, string image)
         {
             string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `image`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
                 ID + ", '"
                 + name + "', '"
                 + number + "', '"
                 + mail + "', '"
-                + "'/QLCHBD-OOAD;component/assets/img_noImage.png'" + "', '"
-                + address + "', "
-                + "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "
-                + 1 + ", "
-                + 1 + ");";
-            database.executeCommand(command);
-            database.closeConnection();
-        }
-        public void insertProvider(string ID, string name, string number, string mail, string address, string id)
-        {
-            string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
-                ID + ", '"
-                + name + "', '"
-                + number + "', '"
-                + mail + "', '"
+                + image + "', '"
                 + address + "', "
                 + "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "
                 + id + ", "
@@ -66,7 +54,7 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
-        public void insertProvider(DeliProviders providers)
+        public void insertProviderWithModel(DeliProviders providers)
         {
             string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +
                 providers.id + ", '"

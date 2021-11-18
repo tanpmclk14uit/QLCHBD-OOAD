@@ -44,24 +44,24 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
             imagesRepository = ImagesRepository.getInstance();
             _provider = providerRepository.getProviderbyID(id);
             _imageList = imagesRepository.getImagesByProviderID(id);
-            checkImageExists(image);
+            checkImageExists();
 
             ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onChangeImage(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(id); });
 
         }
-        private void checkImageExists(string imagePath)
+        private void checkImageExists()
         {
-            if (File.Exists(imagePath))
+            if (File.Exists(image))
             {
-                file = File.OpenRead(imagePath);
+                file = File.OpenRead(image);
                 OnPropertyChanged("image");
                 file.Close();
             }
-            else
+            else if (image.Contains(@"\Assets") || image.Contains("QLCHBD"))
             {
-                imagePath = "/QLCHBD-OOAD;component/assets/img_noImage.png";
+                image = "/QLCHBD-OOAD;component/assets/img_noImage.png";
                 OnPropertyChanged("image");
             }
         }
@@ -77,7 +77,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
             {
                 image = dlg.FileName;
                 string extension = Path.GetExtension(dlg.FileName);
-                string fileName = name + "_" + DateTime.Now.ToString("yymmssfff") + extension;
+                string fileName = name + "_" + id + "_" + DateTime.Now.ToString("mmFFFFFFF") + extension;
                 string linkToAssets = Path.GetFullPath("QLCHBD-OOAD/QLCHBD-OOAD/Assets/");
 
                 for (int i = 0; i < 6; ++i)

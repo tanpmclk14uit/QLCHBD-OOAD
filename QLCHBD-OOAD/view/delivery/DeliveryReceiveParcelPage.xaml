@@ -1,13 +1,14 @@
-﻿<Page x:Class="QLCHBD_OOAD.view.delivery.DeliveryProviderDetailPage"
+﻿<Page x:Class="QLCHBD_OOAD.view.delivery.DeliveryCheckinImportForm"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QLCHBD_OOAD.view.delivery"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"  
       d:DesignHeight="985"
       d:DesignWidth="1580"
-      Title="ProviderDetailPage">
+      Title="DeliveryCheckinImportForm">
 
     <Grid Background="#E6EBEE">
         <Grid.ColumnDefinitions>
@@ -85,19 +86,20 @@
                     <TextBlock 
                         Grid.Row="3"
                         Grid.Column="0"
-                        FontSize="30">Number:</TextBlock>
+                        FontSize="30">Provider:</TextBlock>
                     <TextBlock 
                         Grid.Row="4"
                         Grid.Column="0"
-                        FontSize="30">Address:</TextBlock>
+                        FontSize="30">Publishing:</TextBlock>
                     <TextBlock 
                         Grid.Row="5"
                         Grid.Column="0"
-                        FontSize="30">Mail:</TextBlock>
+                        FontSize="30">Total Copies:</TextBlock>
                     <TextBlock 
                         Grid.Row="6"
                         Grid.Column="0"
-                        FontSize="30">Update Date:</TextBlock>
+                        FontSize="30">Import Price:</TextBlock>
+
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                         <TextBlock FontSize="35">#</TextBlock>
                         <TextBlock FontSize="35" Text="{Binding id}"></TextBlock>
@@ -115,7 +117,7 @@
                         <TextBox 
                             FontSize="30" 
                             Style="{StaticResource myTextBoxStyle}"
-                            Text="{Binding Path=number}"></TextBox>
+                            Text="{Binding Path=provider}"></TextBox>
                         <Border BorderThickness="0.6" BorderBrush="Black"></Border>
                     </StackPanel>
                     <StackPanel
@@ -125,7 +127,7 @@
                         <TextBox 
                             FontSize="30" 
                             Style="{StaticResource myTextBoxStyle}"
-                            Text="{Binding Path=address}"></TextBox>
+                            Text="{Binding Path=publishing}"></TextBox>
                         <Border BorderThickness="0.6" BorderBrush="Black"></Border>
                     </StackPanel>
                     <StackPanel
@@ -135,48 +137,36 @@
                         <TextBox 
                             FontSize="30" 
                             Style="{StaticResource myTextBoxStyle}"
-                            Text="{Binding Path=mail}"></TextBox>
+                            Text="{Binding Path=amount}"></TextBox>
                         <Border BorderThickness="0.6" BorderBrush="Black"></Border>
                     </StackPanel>
-                    <TextBlock
+                    <StackPanel
                         Grid.Row="6"
-                        FontSize="30" 
                         Grid.Column="1"
-                        Text="{Binding dayCreate}"></TextBlock>
+                        Orientation="Vertical">
+                        <TextBox 
+                            FontSize="30" 
+                            Style="{StaticResource myTextBoxStyle}"
+                            Text="{Binding Path=importPrice}"></TextBox>
+                        <Border BorderThickness="0.6" BorderBrush="Black"></Border>
+                    </StackPanel>
 
 
-
-                    <Grid
+                        <Button
                         Grid.Row="7"
                         Grid.Column="0"
-                        Grid.ColumnSpan="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button
-                        Grid.Column="1"
-                        Background="Red"
-                        Height="70"
-                        Margin="5 20 0 0"
-                        materialDesign:ButtonAssist.CornerRadius="5 5 15 5"
-                        FontSize="33"
-                        Command="{Binding DeleteCommand}">
-                            Delete
-                        </Button>
-                        <Button
-                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
                         Background="#0DBE00"
                         Height="70"
-                        Margin="0 20 5 0"
+                        Margin="10"
                         materialDesign:ButtonAssist.CornerRadius="5 5 5 15"
                         FontSize="33"
                         Command="{Binding ConfirmCommand}">
                             Confirm
                         </Button>
-                    </Grid>
+
                 </Grid>
-                
+
             </Grid>
         </Border>
 

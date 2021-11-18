@@ -10,7 +10,7 @@
         ResizeMode="NoResize"
         BorderThickness="1"
         BorderBrush="Black"
-        Title="AddNewProvider" Height="400" Width="400">
+        Title="AddNewProvider" Height="500" Width="400">
     <Grid>
         <Grid.Resources>
             <Style x:Key="txtStyle" TargetType="TextBlock">
@@ -29,6 +29,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -56,6 +57,10 @@
             Grid.Row="4"
             Grid.Column="0"
             Style="{StaticResource txtStyle}">Address:</TextBlock>
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="0"
+            Style="{StaticResource txtStyle}">Image URL:</TextBlock>
 
 
         <TextBox
@@ -83,8 +88,29 @@
             Grid.Column="1"
             Style="{StaticResource tbStyle}"
             Text="{Binding tbAddress, Mode=TwoWay}"></TextBox>
+        <Grid
+            Grid.Row="5"
+            Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox
+                Grid.Column="0"
+                Text="{Binding image, Mode=TwoWay}"
+                Style="{StaticResource tbStyle}"></TextBox>
+            <Button
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                BorderBrush="Black"
+                BorderThickness="1"
+                FontWeight="Bold"
+                Margin="0 5 5 0"
+                Background="Gray"
+                Command="{Binding AddImageCommand}">...</Button>
+        </Grid>
 
-        <Grid Grid.Row="5" Grid.Column="1">
+        <Grid Grid.Row="6" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>

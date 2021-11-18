@@ -1,27 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace QLCHBD_OOAD.viewmodel.delivery.provider
 {
     /// <summary>
     /// Interaction logic for AddNewProvider.xaml
     /// </summary>
-    class AddNewProviderViewModel
+    class AddNewProviderViewModel : BaseViewModel
     {
         public static event CloseFormHandler closeForm;
         private DeliveryProviderRepository deliveryProviderRepository;
 
         public ICommand CancelCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
+        public ICommand AddImageCommand { get; set; }
 
 
         public AddNewProviderViewModel()
@@ -29,6 +33,58 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
             deliveryProviderRepository = DeliveryProviderRepository.getIntance();
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { closeForm(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
+            AddImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onAddImage(); });
+        }
+        private string setupImageFromDialog(string name) 
+        {
+            if (File.Exists(image))
+            {
+                string extension = Path.GetExtension(image);
+                string fileName = name + "_" + DateTime.Now.ToString("mmFFFFFFF") + extension;
+                string linkToAssets = Path.GetFullPath("QLCHBD-OOAD/QLCHBD-OOAD/Assets/");
+
+                for (int i = 0; i < 6; ++i)
+                {
+                    linkToAssets = Path.GetDirectoryName(linkToAssets);
+                }
+                linkToAssets += @"\Assets\";
+
+                linkToAssets += fileName;
+
+                var file = File.Create(linkToAssets);
+                file.Close();
+
+                File.Copy(image, linkToAssets, true);
+                file.Close();
+                return linkToAssets.Replace(@"\", "/");
+            }
+            else if (image.Contains(@"C:\") || image.Contains(@"D:\") || image.Contains(@"E:\"))
+            {
+                return "/QLCHBD-OOAD;component/assets/img_noImage.png";
+            }
+            return image;
+        }
+        private string getImageFromDialog()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = "c:\\";
+            dlg.Filter = "Image files (*.jpg)|*.jpg|All Files (*.*)|*.*";
+            dlg.RestoreDirectory = true;
+
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                image = dlg.FileName;
+                return image;
+            }
+            return image;
+        }
+
+        private void onAddImage()
+        {
+            image = getImageFromDialog();
+            OnPropertyChanged("image");
+
         }
 
         private void onConfirm()
@@ -38,6 +94,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
                 BoxIsNotEmptyorNull(tbNumber) ||
                 BoxIsNotEmptyorNull(tbMail) ||
                 BoxIsNotEmptyorNull(tbName) ||
+                BoxIsNotEmptyorNull(image) ||
                 BoxIsNotEmptyorNull(tbAddress))
             {
                 MessageBox.Show("Please fill all before confirm", "Error");
@@ -63,8 +120,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
                 MessageBox.Show("Max length: 10", "Provider");
             }
             else
+                if (deliveryProviderRepository.isProviderNull(tbIDProvider))
             {
-                deliveryProviderRepository.insertProvider(tbIDProvider, tbName, tbNumber, tbMail, tbAddress);
+                MessageBox.Show("Provider ID is existed", "ID");
+            }
+            else
+            {
+                image = setupImageFromDialog("provider");
+                deliveryProviderRepository.insertProviderWithTextBox(tbIDProvider, tbName, tbNumber, tbMail, tbAddress, 1.ToString(), image);
                 MessageBox.Show("Provider is added to Database", "Error");
                 closeForm();
             }
@@ -79,6 +142,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
         private string _tbNumber;
         private string _tbMail;
         private string _tbAddress;
+        private string _image;
+        
+        public string image { get => _image; set => _image = value; }
         public string tbIDProvider { get => _tbIDProvider; set => _tbIDProvider = value; }
         public string tbName { get => _tbName; set => _tbName = value; }
         public string tbNumber { get => _tbNumber; set => _tbNumber = value; }
