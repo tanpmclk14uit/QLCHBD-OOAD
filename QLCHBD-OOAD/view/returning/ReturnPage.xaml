@@ -10,10 +10,19 @@
       d:DesignWidth="1580"
       Background="White"
       Title="ReturnPage">
+    <Page.Resources>
+        <Style x:Key="checkBox" TargetType="CheckBox">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="2"/>
+
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Button
@@ -122,6 +131,52 @@
                            Grid.Row="2"/>
                 </Grid>
             </Grid>
-        </Border>
+        </Border>       
+        <Grid Grid.Row="3" Margin="20" Background="White">
+            <DataGrid ItemsSource="{Binding receiptItems}"
+                      x:Name="rentalItem"
+                      FontSize="20"                      
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <WrapPanel HorizontalAlignment="Center"
+                                           VerticalAlignment="Center">
+                                    <CheckBox Style="{StaticResource checkBox}"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Disk Id"  Binding="{Binding diskId}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk name" Binding="{Binding diskName}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Rental price" Binding="{Binding rentalPrice}" CanUserSort="True" Width="1*" IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Header="Total" Binding="{Binding amount}" CanUserSort="True" Width="auto" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Return" Binding="{Binding returned}" CanUserSort="True" Width="auto" FontSize="20">
+
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Lost" Binding="{Binding lost}" CanUserSort="True" Width="auto" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Over due days" Binding="{Binding overDueDays}" CanUserSort="True" Width="1*" IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Additional fee" Binding="{Binding strAdditionalFee}" CanUserSort="True" Width="*"  IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                   
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Page>

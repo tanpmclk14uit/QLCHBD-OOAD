@@ -23,7 +23,7 @@ namespace QLCHBD_OOAD.model.retal
 
         private DateTime _dueDate;
 
-        
+  
         public string dueDate { get => _dueDate.ToShortDateString();}
 
         public void setDueDate( DateTime date)

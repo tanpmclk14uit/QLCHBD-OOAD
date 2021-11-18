@@ -126,6 +126,7 @@
     <Compile Include="model\images\ImageRentalInformation.cs" />
     <Compile Include="model\guest\Guest.cs" />
     <Compile Include="model\images\Images.cs" />
+    <Compile Include="model\receipt\ReceiptItem.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddNewViewModel.cs" />
