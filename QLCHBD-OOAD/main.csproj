@@ -126,7 +126,7 @@
     <Compile Include="model\images\ImageRentalInformation.cs" />
     <Compile Include="model\guest\Guest.cs" />
     <Compile Include="model\images\Images.cs" />
-    <Compile Include="model\receipt\ReceiptItem.cs" />
+    <Compile Include="viewmodel\returning\ReceiptItemViewModel.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddNewViewModel.cs" />
@@ -493,6 +493,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bus\" />
+    <Folder Include="model\receipt\" />
     <Folder Include="model\staff\" />
     <Folder Include="viewmodel\login\" />
     <Folder Include="view\login\" />

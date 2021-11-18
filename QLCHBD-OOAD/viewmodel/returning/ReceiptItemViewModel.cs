@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.viewmodel;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.viewmodel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace QLCHBD_OOAD.model.receipt
+namespace QLCHBD_OOAD.viewmodel.returning
 {
-    class ReceiptItem: BaseViewModel
+    class ReceiptItemViewModel: BaseViewModel
     {
+        public static event CalculateFee onCalculateFee;
         private long _diskId;
         public long diskId
         {
@@ -46,8 +48,17 @@ namespace QLCHBD_OOAD.model.receipt
             get => _amount;
         }
         private int _returned;
-        
-        public bool isSelected { get; set; }
+
+        private bool _isSelected;
+        public bool isSelected 
+        {   get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                onCalculateFee();
+                OnPropertyChanged("isSelected");
+            }
+        }
 
       
         private int _overDueDays;
@@ -62,6 +73,7 @@ namespace QLCHBD_OOAD.model.receipt
             set
             {
                 _additionalFee = value;
+                onCalculateFee();
                 OnPropertyChanged("strAdditionalFee");
             }
 
@@ -76,6 +88,14 @@ namespace QLCHBD_OOAD.model.receipt
                 if(value <= amount - returned)
                 {
                     _lost = value;
+                    if (_returned == 0 && lost == 0)
+                    {
+                        isSelected = false;
+                    }
+                    else
+                    {
+                        isSelected = true;
+                    }
                     additionalFee = caculatorFee();
                 }
                 else
@@ -92,7 +112,16 @@ namespace QLCHBD_OOAD.model.receipt
                 if(value <= amount - lost)
                 {
                     _returned = value;
+                    if(_returned == 0 && lost == 0)
+                    {
+                        isSelected = false;
+                    }
+                    else
+                    {
+                        isSelected = true;
+                    }
                     additionalFee = caculatorFee();
+                    OnPropertyChanged("returned");
                 }
                 else
                 {
@@ -107,7 +136,7 @@ namespace QLCHBD_OOAD.model.receipt
             double total = lostFee + overDueFee;
             return total;
         }
-        public ReceiptItem(long diskId, string diskName, int rentalPrice, int amount,  DateTime dueDate)
+        public ReceiptItemViewModel(long diskId, string diskName, int rentalPrice, int amount,  DateTime dueDate)
         {
             this._diskId = diskId;
             this._diskName = diskName;

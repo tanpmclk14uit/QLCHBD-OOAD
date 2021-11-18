@@ -1,7 +1,6 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
-using QLCHBD_OOAD.model.receipt;
 using QLCHBD_OOAD.model.retal;
 using System;
 using System.Collections.Generic;
@@ -37,8 +36,8 @@ namespace QLCHBD_OOAD.viewmodel.returning
 
         private ObservableCollection<RentalBillItem> _rentalBillItems;
  
-        private ObservableCollection<ReceiptItem> _receiptItems;
-        public ObservableCollection<ReceiptItem> receiptItems
+        private ObservableCollection<ReceiptItemViewModel> _receiptItems;
+        public ObservableCollection<ReceiptItemViewModel> receiptItems
         {
             get => _receiptItems;
             set => _receiptItems = value;
@@ -81,14 +80,44 @@ namespace QLCHBD_OOAD.viewmodel.returning
             _createDate = detailRentalBillReponsitory.getOrderCreateDate(rentalId);           
             _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(rentalId);
             _receiptItems = mapToReceiptItems(_rentalBillItems);
+            ReceiptItemViewModel.onCalculateFee += ReceiptItemViewModel_onCalculateFee;
+           
         }
-        private ObservableCollection<ReceiptItem> mapToReceiptItems(ObservableCollection<RentalBillItem> rentalBillItems)
+        private double _totalFee;
+
+        public string totalFee
         {
-            ObservableCollection<ReceiptItem> receiptItems = new ObservableCollection<ReceiptItem>();
+            get
+            {
+                if(_totalFee == 0)
+                {
+                    return "0";
+                }
+                return _totalFee.ToString("#,###");
+            }
+        }
+
+        private void ReceiptItemViewModel_onCalculateFee()
+        {
+            double totalFee = 0;
+            foreach (var receipt in receiptItems)
+            {
+                if (receipt.isSelected)
+                {
+                    totalFee += receipt.additionalFee;
+                }
+            }
+            _totalFee = totalFee;
+            OnPropertyChanged("totalFee");
+        }
+
+        private ObservableCollection<ReceiptItemViewModel> mapToReceiptItems(ObservableCollection<RentalBillItem> rentalBillItems)
+        {
+            ObservableCollection<ReceiptItemViewModel> receiptItems = new ObservableCollection<ReceiptItemViewModel>();
             foreach (var rentalItem in rentalBillItems)
             {
                 int amount = rentalItem.amount - rentalItem.returned;
-                ReceiptItem receipt = new ReceiptItem(rentalItem.diskId, rentalItem.diskName, rentalItem.rentalPrice, amount, rentalItem.getDueDate());
+                ReceiptItemViewModel receipt = new ReceiptItemViewModel(rentalItem.diskId, rentalItem.diskName, rentalItem.rentalPrice, amount, rentalItem.getDueDate());
                 receiptItems.Add(receipt);
             }
             return receiptItems;
@@ -96,7 +125,37 @@ namespace QLCHBD_OOAD.viewmodel.returning
         private void backToALlRentalPage()
         {
             turnBackPageHandler();
-
         }
+        public void selectAll()
+        {
+            foreach(var receipt in receiptItems)
+            {
+                receipt.isSelected = true;
+            }
+        }
+        public void unSelectAll()
+        {
+            foreach (var receipt in receiptItems)
+            {
+                receipt.isSelected = false;
+            }
+        }
+        public void returnAll()
+        {
+            foreach (var receipt in receiptItems)
+            {
+                receipt.isSelected = true;
+                receipt.returned = receipt.amount - receipt.lost;
+            }
+        }
+        public void unCheckReturnAll()
+        {
+            foreach (var receipt in receiptItems)
+            {
+                receipt.isSelected = false;
+                receipt.returned = 0;
+            }
+        }
+
     }
 }

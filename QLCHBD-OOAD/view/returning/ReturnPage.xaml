@@ -21,9 +21,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.2*"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Button
                 Command="{Binding Back}"
@@ -131,8 +132,31 @@
                            Grid.Row="2"/>
                 </Grid>
             </Grid>
-        </Border>       
-        <Grid Grid.Row="3" Margin="20" Background="White">
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20 0">
+            <CheckBox Content="Select all"
+                      FontSize="20"                     
+                      Margin="5 0 0 0"
+                      x:Name="selectAll"
+                      Checked="selectAll_Checked"
+                      Unchecked="selectAll_Unchecked"
+                      VerticalContentAlignment="Center"
+                      Style="{StaticResource checkBox}">
+                
+            </CheckBox>
+            <CheckBox Content="Return all"
+                      FontSize="20"      
+                      x:Name="returnAll"
+                      Checked="returnAll_Checked"
+                      Unchecked="returnAll_Unchecked"
+                      Margin="20 0 0 0"
+                      VerticalContentAlignment="Center"
+                      Style="{StaticResource checkBox}">
+
+            </CheckBox>
+
+        </StackPanel>
+        <Grid Grid.Row="3" Margin="20 0 20 0" Background="White">
             <DataGrid ItemsSource="{Binding receiptItems}"
                       x:Name="rentalItem"
                       FontSize="20"                      
@@ -145,7 +169,7 @@
                             <DataTemplate>
                                 <WrapPanel HorizontalAlignment="Center"
                                            VerticalAlignment="Center">
-                                    <CheckBox Style="{StaticResource checkBox}"/>
+                                    <CheckBox IsChecked="{Binding isSelected}" Style="{StaticResource checkBox}"/>
                                 </WrapPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -178,5 +202,28 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="20 0">
+            <Label ContentStringFormat="Total fee: {0} VNĐ"
+                   FontSize="25"
+                   VerticalAlignment="Center"                  
+                   Content="{Binding totalFee}"
+                   />
+            <Button
+                        Margin="20 0"
+                        Width="200"
+                        Grid.Column="2"
+                        Height="40"                        
+                       Background="Green"
+                       
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="5" >
+                <TextBlock Text="Return"
+                               FontSize="25"                           
+                               FontFamily="Roboto"
+                               FontWeight="Medium"
+                               Foreground="White"/>
+            </Button>
+           
+        </StackPanel>
     </Grid>
 </Page>

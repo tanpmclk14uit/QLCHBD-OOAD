@@ -21,10 +21,32 @@ namespace QLCHBD_OOAD.view.returning
     /// </summary>
     public partial class ReturnPage : Page
 {
+     private ReturningViewModel returningViewModel;
     public ReturnPage(long retalOrderId, long guestID)
     {
         InitializeComponent();
-        DataContext = new ReturningViewModel(retalOrderId, guestID);
+            returningViewModel = new ReturningViewModel(retalOrderId, guestID);
+        DataContext = returningViewModel;
     }
-}
+
+        private void selectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            returningViewModel.selectAll();
+        }
+
+        private void selectAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            returningViewModel.unSelectAll();
+        }
+
+        private void returnAll_Checked(object sender, RoutedEventArgs e)
+        {
+            returningViewModel.returnAll();
+        }
+
+        private void returnAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            returningViewModel.unCheckReturnAll();
+        }
+    }
 }
