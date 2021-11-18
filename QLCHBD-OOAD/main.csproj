@@ -129,6 +129,7 @@
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddNewViewModel.cs" />
+    <Compile Include="viewmodel\delivery\detail order\DeliveryCheckOutViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\AddNewProviderViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\DeliveryAskFormViewModel.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddOrderFormViewModel.cs" />
@@ -158,9 +159,6 @@
     </Compile>
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="view\delivery\DeliveryCheckinImportForm.xaml.cs">
-      <DependentUpon>DeliveryCheckinImportForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\delivery\page holder\DeliveryPageHolder.xaml.cs">
       <DependentUpon>DeliveryPageHolder.xaml</DependentUpon>
@@ -361,10 +359,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\NewDeliveryWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="view\delivery\DeliveryCheckinImportForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
