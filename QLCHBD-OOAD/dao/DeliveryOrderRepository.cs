@@ -17,7 +17,7 @@ namespace QLCHBD_OOAD.dao
         private FileStream file;
         private static DeliveryOrderRepository instance;
 
-        public static DeliveryOrderRepository getIntance()
+        public static DeliveryOrderRepository getInstance()
         {
             if (instance == null)
             {
@@ -45,6 +45,24 @@ namespace QLCHBD_OOAD.dao
                     return DeliveryOrderStatus.ERROR;
             }
         }
+        public void updateStatusDELIVERED(string id)
+        {
+            string command = "UPDATE import_form SET status = 'DELIVERED' WHERE id = '" + id + "'";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void updateStatusERROR(string id)
+        {
+            string command = "UPDATE import_form SET status = 'ERROR' WHERE id = '" + id + "'";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void updateStatusWAITING(string id)
+        {
+            string command = "UPDATE import_form SET status = 'WATING' WHERE id = '" + id + "'";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
 
         public bool DeliOrderIDisNotNULL(long id)
         {
@@ -58,23 +76,7 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return false;
         }
-        public void addTemporaryImportForm(long id, string providerName, long createID)
-        {
-            string command = "INSERT INTO import_form (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
-                id + "', '" +
-                providerName + "', '" +
-                createID + "', '" +
-                createID + "');";
-            database.executeCommand(command);
-            database.closeConnection();
-        }
-        public void updateTemporaryImportForm(long id, string provider)
-        {
-            string command = "UPDATE import_form SET provider_name = '" + provider + "' WHERE id = '" + id + "';";
-            database.executeCommand(command);
-            database.closeConnection();
-        }
-        public void DeleteImportFormByID(string id)
+        public void DeleteImportFormByID(long id)
         {
             string command = "DELETE FROM import_form WHERE id = " + id;
             database.executeCommand(command);
@@ -98,6 +100,17 @@ namespace QLCHBD_OOAD.dao
             string command = "DELETE FROM import_form WHERE id = '"+id+"';";
             database.executeCommand(command);
             database.closeConnection();
+        }public string getImportFormStatusWithID(string id)
+        {
+            string command = "SELECT status FROM import_form WHERE ID = " + id;
+            var reader = database.executeCommand(command);
+            if (reader.Read())
+            {
+                return reader[0].ToString();
+                database.closeConnection();
+            }
+            database.closeConnection();
+            return null;
         }
 
         public DeliOrder getDeliOrderById(string id)

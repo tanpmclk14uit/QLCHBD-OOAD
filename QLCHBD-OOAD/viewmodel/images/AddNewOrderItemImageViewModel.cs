@@ -25,7 +25,7 @@ namespace QLCHBD_OOAD.viewmodel.images
 
         public AddNewOrderItemImageViewModel()
         {
-            deliveryItemsRepository = DeliveryOrderItemsRepository.getIntance();
+            deliveryItemsRepository = DeliveryOrderItemsRepository.getInstance();
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onCancel(); });
         }

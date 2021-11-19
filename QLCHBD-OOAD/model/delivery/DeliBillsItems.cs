@@ -53,5 +53,7 @@ namespace QLCHBD_OOAD.model.delivery
         public int value => _value;
         public DateTime createTime { get => _createTime; }
         public DateTime update_Time { get => _update_Time;}
+
+        public int setAmount { set { _amount = value; } }
     }
 }

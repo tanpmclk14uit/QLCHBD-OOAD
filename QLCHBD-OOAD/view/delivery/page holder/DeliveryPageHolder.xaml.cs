@@ -30,17 +30,37 @@ namespace QLCHBD_OOAD.view.delivery
             InitializeComponent();
             DataContext = DeliveryPageViewModel.getInstance();
             deliveryHolder.Content = new DeliveryMainPage();
-            DeliveryDetailPageViewModel.turnToDeliveryPage += turnBackToDeliveryMainPage;
+            DeliveryDetailPageViewModel.turnToDeliveryPage += turnBackToMainPage;
+            DeliveryDetailPageViewModel.turnToDeliveryCheckOutPage += turnDeliveryCheckOutPage;
             ProviderListWindowViewModel.turnToProviderDetailPage += turnToProviderDetailPage;
-            DeliveryProviderDetailViewModel.turnToDeliveryDetailPage += turnBackToDeliveryMainPage;
+            DeliveryProviderDetailViewModel.turnToDeliveryDetailPage += turnBackToMainPage;
             DeliveryPageViewModel.turnToImportFormDetailPage += turnDeliveryDetailPage;
+        }
+
+        private void turnBackToMainPage(string page)
+        {
+            try
+            {
+                deliveryHolder.NavigationService.GoBack();
+            }
+            catch(InvalidOperationException e)
+            {
+                deliveryHolder.ClearValue(UidProperty);
+                deliveryHolder.Content = new DeliveryMainPage();
+            }
+            
         }
 
         private void turnDeliveryDetailPage(string id)
         {
+            deliveryHolder.ClearValue(UidProperty);
             deliveryHolder.Content = new DeliveryDetailPage(id);
         }
-
+        private void turnDeliveryCheckOutPage(string id)
+        {
+            deliveryHolder.ClearValue(UidProperty);
+            deliveryHolder.Content = new DeliveryCheckOutPage(id);
+        }
 
         private void turnBackToDeliveryMainPage(string page)
         {
@@ -49,6 +69,7 @@ namespace QLCHBD_OOAD.view.delivery
         }
         private void turnToProviderDetailPage(string id)
         {
+            deliveryHolder.ClearValue(UidProperty);
             deliveryHolder.Content = new DeliveryProviderDetailPage(id);
         }
     }

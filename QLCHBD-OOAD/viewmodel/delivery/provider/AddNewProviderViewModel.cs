@@ -30,7 +30,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
 
         public AddNewProviderViewModel()
         {
-            deliveryProviderRepository = DeliveryProviderRepository.getIntance();
+            deliveryProviderRepository = DeliveryProviderRepository.getInstance();
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { closeForm(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
             AddImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onAddImage(); });

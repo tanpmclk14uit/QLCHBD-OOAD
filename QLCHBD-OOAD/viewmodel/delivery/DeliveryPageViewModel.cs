@@ -30,7 +30,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             _seachKey = "";
             deliOrders = new ObservableCollection<DeliOrder>();
-            deliOrderlReponsitory = DeliveryOrderRepository.getIntance();
+            deliOrderlReponsitory = DeliveryOrderRepository.getInstance();
             setUpStatusses();
 
             AddOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrderDelivery(); });
@@ -72,8 +72,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 _selectedDeliOrder = value;
                 if (value != null)
                 {
-                    turnToImportFormDetailPage(_selectedDeliOrder.id.ToString());
+                    long selectedID = _selectedDeliOrder.id;
                     _selectedDeliOrder = null;
+                    turnToImportFormDetailPage(selectedID.ToString());
                 }
             }
         }
@@ -109,7 +110,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             _selectedStatuses = new ObservableCollection<string>();
             _selectedStatuses.Add("All");
             _selectedStatuses.Add("Waiting");
-            _selectedStatuses.Add("Delivery");
+            _selectedStatuses.Add("Delivered");
             _selectedStatuses.Add("Cancel");
             selectedStatus = _selectedStatuses[0];
             OnPropertyChanged("selectedStatuses");
@@ -130,7 +131,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                         filterDeliOder = deliOrderlReponsitory.getDeliOrderByFilterStatus(DeliveryOrderStatus.WATING.ToString());
                         break;
                     }
-                case "Delivery":
+                case "Delivered":
                     {
                         filterDeliOder = deliOrderlReponsitory.getDeliOrderByFilterStatus(DeliveryOrderStatus.DELIVERED.ToString());
                         break;

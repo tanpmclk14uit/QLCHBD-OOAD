@@ -25,8 +25,8 @@ namespace QLCHBD_OOAD.viewmodel.images
 
         public static event ConfirmAddOrderImage confirmOrderImage;
 
-        private DeliveryOrderItemsRepository deliveryOrderItemsRepository = DeliveryOrderItemsRepository.getIntance();
-        private DeliveryOrderRepository deliveryOrderRepository = DeliveryOrderRepository.getIntance();
+        private DeliveryOrderItemsRepository deliveryOrderItemsRepository = DeliveryOrderItemsRepository.getInstance();
+        private DeliveryOrderRepository deliveryOrderRepository = DeliveryOrderRepository.getInstance();
         private ImagesRepository imagesRepository = ImagesRepository.getInstance();
 
         private Images _selectedItem;

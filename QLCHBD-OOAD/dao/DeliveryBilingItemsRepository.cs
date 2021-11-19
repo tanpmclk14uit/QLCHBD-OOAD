@@ -17,7 +17,7 @@ namespace QLCHBD_OOAD.dao
         {
             database = Db.getInstace();
         }
-        public static DeliveryBilingItemsRepository getIntance()
+        public static DeliveryBilingItemsRepository getInstance()
         {
             if (instance == null)
                 instance = new DeliveryBilingItemsRepository();
@@ -33,6 +33,18 @@ namespace QLCHBD_OOAD.dao
                 items.price + "', '" +
                 items.diskID + "', '" +
                 items.amount + "'," +
+                "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void insertItems(DeliOrderItems items, string id)
+        {
+            string command = "INSERT INTO import_billing_item (`import_bill`, `disk_name`, `import_price`, `disk_id`, `amount`, `create_time`, `update_time`) VALUES ('" +
+                id + "', '" +
+                items.diskName + "', '" +
+                items.imPrice + "', '" +
+                items.diskID + "', '" +
+                items.Amount + "'," +
                 "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
             database.executeCommand(command);
             database.closeConnection();

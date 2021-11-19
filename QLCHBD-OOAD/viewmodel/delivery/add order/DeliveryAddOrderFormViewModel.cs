@@ -38,9 +38,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             importItems = new ObservableCollection<DeliOrderItems>();
 
-            deliveryProviderRepository = getIntance();
-            deliveryOrderRepository = DeliveryOrderRepository.getIntance();
-            deliveryOrderItemsRepository = DeliveryOrderItemsRepository.getIntance();
+            deliveryProviderRepository = getInstance();
+            deliveryOrderRepository = DeliveryOrderRepository.getInstance();
+            deliveryOrderItemsRepository = DeliveryOrderItemsRepository.getInstance();
             DeliveryAddNewViewModel.GetItemsFromAddWindow += AddItemToFilterList;
             setUpStatusses();
             generateID();
@@ -70,14 +70,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             set
             {
                 _selectedStatus = value;
-                ChangeProvider(value);
                 OnPropertyChanged("selectedStatus");
             }
-        }
-        //-------------------------------------------------------------------------------------------------
-        private void ChangeProvider(string provider)
-        {
-            deliveryOrderRepository.updateTemporaryImportForm(id, provider);
         }
         //-------------------------------------------------------------------------------------------------
         private List<DeliProviders> _providerCombobox;

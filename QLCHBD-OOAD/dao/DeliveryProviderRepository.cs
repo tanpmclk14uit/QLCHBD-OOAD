@@ -12,7 +12,7 @@ namespace QLCHBD_OOAD.dao
         private Db database;
         private static DeliveryProviderRepository instance;
 
-        public static DeliveryProviderRepository getIntance()
+        public static DeliveryProviderRepository getInstance()
         {
             if (instance == null)
             {
@@ -77,7 +77,7 @@ namespace QLCHBD_OOAD.dao
 
         public DeliProviders getProviderbyID(string id)
         {
-            string command = "SELECT * FROM provider WHERE id =" + id;
+            string command = "SELECT provider.nam FROM provider LEFT JOIN import_form WHERE import_form.id =" + id;
             var reader = database.executeCommand(command);
             DeliProviders provider;
             if (reader.Read())
@@ -88,6 +88,19 @@ namespace QLCHBD_OOAD.dao
             }
             database.closeConnection();
             return null;
+        }
+        public long getProviderIDbyImportFormID(string id)
+        {
+            string command = "SELECT provider.id FROM import_form LEFT JOIN provider ON provider.name = import_form.provider_name AND import_form.id = " + id + " IS NOT NULL;";
+            var reader = database.executeCommand(command);
+            if (reader.Read())
+            {
+                return (long)reader[0];
+                database.closeConnection();
+
+            }
+            database.closeConnection();
+            return -1;
         }
         public string getProviderImageID(string id)
         {

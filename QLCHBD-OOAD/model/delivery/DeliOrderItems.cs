@@ -19,10 +19,12 @@ namespace QLCHBD_OOAD.model.delivery
         private long _IDbyProvider;
         private DateTime _createTime;
         private DateTime _updateTime;
+        private bool _isConfirm = false;
 
 
         public long id => _id;
         public long IDbyProvider { get => _IDbyProvider; set { _IDbyProvider = value; } }
+        public bool isConfirm { get => _isConfirm; set { _isConfirm = value; } }
         public long deliID => _deliID;
         public string diskName => _diskName;
         public long diskID => _diskID;

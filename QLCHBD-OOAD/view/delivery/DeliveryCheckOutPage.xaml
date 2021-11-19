@@ -1,17 +1,16 @@
-﻿<Page x:Class="QLCHBD_OOAD.view.delivery.DeliveryProviderDetailPage"
+﻿<Page x:Class="QLCHBD_OOAD.view.delivery.DeliveryCheckOutPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QLCHBD_OOAD.view.delivery"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d"  
+      mc:Ignorable="d" 
       d:DesignHeight="985"
       d:DesignWidth="1580"
-      Title="ProviderDetailPage">
+      Title="DeliveryCheckOutPage">
 
-    
-    
-    
+
     <Grid Background="#E6EBEE">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -28,7 +27,7 @@
                 Grid.Column="0"
                 Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1.1*"></RowDefinition>
+                    <RowDefinition Height="1.2*"></RowDefinition>
                     <RowDefinition Height="1.1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.Resources>
@@ -58,8 +57,8 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition ></RowDefinition>
-                        <RowDefinition Height="auto" ></RowDefinition>
                     </Grid.RowDefinitions>
                     <Button 
                             Grid.Column="0"
@@ -80,38 +79,50 @@
                     <TextBlock 
                         Grid.Row="1"
                         Grid.Column="0"
-                        FontSize="30">ID:</TextBlock>
-                    <TextBlock 
-                        Grid.Row="2"
-                        Grid.Column="0"
                         FontSize="30">Name:</TextBlock>
                     <TextBlock 
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        FontSize="30">Album:</TextBlock>
+                    <TextBlock 
                         Grid.Row="3"
                         Grid.Column="0"
-                        FontSize="30">Number:</TextBlock>
+                        FontSize="30">Locate:</TextBlock>
                     <TextBlock 
                         Grid.Row="4"
                         Grid.Column="0"
-                        FontSize="30">Address:</TextBlock>
+                        FontSize="30">Rental Price:</TextBlock>
                     <TextBlock 
                         Grid.Row="5"
                         Grid.Column="0"
-                        FontSize="30">Mail:</TextBlock>
-                    <TextBlock 
+                        FontSize="30">Total Copies:</TextBlock>
+                    <StackPanel
                         Grid.Row="6"
-                        Grid.Column="0"
-                        FontSize="30"
-                        VerticalAlignment="Top">Update Date:</TextBlock>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock FontSize="35">#</TextBlock>
-                        <TextBlock FontSize="35" Text="{Binding id}"></TextBlock>
+                        Grid.Column="1"
+                        Orientation="Vertical">
+                        
                     </StackPanel>
 
+
                     <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        FontSize ="30"
+                        Text="{Binding name}"></TextBlock>
+                    <ComboBox
                         Grid.Row="2"
                         Grid.Column="1"
-                        FontSize="30"
-                        Text="{Binding name}"></TextBlock>
+                        FontSize="20"
+                        materialDesign:ColorZoneAssist.Background="LightGray"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
+                        BorderBrush="Gray"
+                        BorderThickness="1"
+                        Padding="10 0 10 0" 
+                        Background="White"
+                        ItemsSource="{Binding selectedAlbumList}"
+                        DisplayMemberPath="name"
+                        SelectedItem="{Binding selectedAlbum}"></ComboBox>
                     <StackPanel
                         Grid.Row="3"
                         Grid.Column="1"
@@ -119,7 +130,7 @@
                         <TextBox 
                             FontSize="30" 
                             Style="{StaticResource myTextBoxStyle}"
-                            Text="{Binding Path=number}"></TextBox>
+                            Text="{Binding Path=locate}"></TextBox>
                         <Border BorderThickness="0.6" BorderBrush="Black"></Border>
                     </StackPanel>
                     <StackPanel
@@ -129,7 +140,7 @@
                         <TextBox 
                             FontSize="30" 
                             Style="{StaticResource myTextBoxStyle}"
-                            Text="{Binding Path=address}"></TextBox>
+                            Text="{Binding Path=rentalPrice}"></TextBox>
                         <Border BorderThickness="0.6" BorderBrush="Black"></Border>
                     </StackPanel>
                     <StackPanel
@@ -139,49 +150,23 @@
                         <TextBox 
                             FontSize="30" 
                             Style="{StaticResource myTextBoxStyle}"
-                            Text="{Binding Path=mail}"></TextBox>
+                            Text="{Binding Path=totalCopy}"></TextBox>
                         <Border BorderThickness="0.6" BorderBrush="Black"></Border>
                     </StackPanel>
-                    <TextBlock
-                        Grid.Row="6"
-                        FontSize="30" 
-                        Grid.Column="1"
-                        VerticalAlignment="Top"
-                        Text="{Binding dayCreate}"></TextBlock>
-
-
-
-                    <Grid
+                    <Button
+                        Grid.Column="0"
                         Grid.Row="7"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button
-                        Grid.Column="1"
-                        Background="Red"
-                        Height="70"
-                        Margin="5 10 0 0"
-                        materialDesign:ButtonAssist.CornerRadius="5 5 15 5"
-                        FontSize="33"
-                        Command="{Binding DeleteCommand}">
-                            Delete
-                        </Button>
-                        <Button
-                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
                         Background="#0DBE00"
-                        Height="70"
-                        Margin="0 10 5 0"
-                        materialDesign:ButtonAssist.CornerRadius="5 5 5 15"
-                        FontSize="33"
-                        Command="{Binding ConfirmCommand}">
-                            Confirm
-                        </Button>
-                    </Grid>
+                        Height="50"
+                        Margin="10 10 10 0"
+                        VerticalAlignment="Bottom"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        FontSize="30"
+                        Content="{Binding bttContent}"
+                        Command="{Binding UpdateCommand}"></Button>
                 </Grid>
-                
+
             </Grid>
         </Border>
 
@@ -198,12 +183,37 @@
                 FontSize="30" 
                 FontStyle="Normal"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding imageList}">
+                ItemsSource="{Binding orderItemsList}"
+                SelectedItem="{Binding selectedItems}">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding isConfirm}" Value="true">
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="Background" Value="LightSlateGray"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding isConfirm}" Value="false">
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding isConfirm}" Value="true">
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="Background" Value="LightSlateGray"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding isConfirm}" Value="false">
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Disk ID" Width="0.8*" Binding="{Binding id}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Disk Name" Width="1*" Binding="{Binding name}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Amount" Width="0.8*" Binding="{Binding quantity}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Import price" Width="1*" Binding="{Binding providerPrice}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk Name" Width="1*" Binding="{Binding diskName}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Amount" Width="0.8*" Binding="{Binding Amount}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Import price" Width="1*" Binding="{Binding imPrice}" IsReadOnly="True"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <!--<ListView FontSize="30">

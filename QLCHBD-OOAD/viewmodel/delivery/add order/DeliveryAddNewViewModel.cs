@@ -24,7 +24,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.Component
 
         public DeliveryAddNewViewModel(int count)
         {
-            deliveryItemsRepository = DeliveryOrderItemsRepository.getIntance();
+            deliveryItemsRepository = DeliveryOrderItemsRepository.getInstance();
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(count); });
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onCancel(); });
         }

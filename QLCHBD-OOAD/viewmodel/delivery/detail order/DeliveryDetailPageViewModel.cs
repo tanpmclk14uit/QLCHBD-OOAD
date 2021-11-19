@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
@@ -14,6 +15,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
     class DeliveryDetailPageViewModel : BaseViewModel
     {
         public static ChangePageHandler turnToDeliveryPage;
+        public static ChangePageHandler turnToDeliveryCheckOutPage;
+
 
         private DeliveryOrderRepository deliveryOrderRepository;
         private DeliOrder _importForm;
@@ -30,15 +33,35 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         public ObservableCollection<DeliOrderItems> Items { get;}
 
         public ICommand BackCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand ConfirmCommand { get; set; }
 
         public DeliveryDetailPageViewModel(string id)
         {
-            deliveryOrderItemsRepository = DeliveryOrderItemsRepository.getIntance();
-            deliveryOrderRepository = DeliveryOrderRepository.getIntance();
+            deliveryOrderItemsRepository = DeliveryOrderItemsRepository.getInstance();
+            deliveryOrderRepository = DeliveryOrderRepository.getInstance();
             Items = deliveryOrderItemsRepository.getItemsbyImportFormsID(id);
             _importForm = deliveryOrderRepository.getDeliOrderById(id);
 
             BackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { turnToDeliveryPage(); });
+            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
+            ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
+            if (deliveryOrderRepository.getImportFormStatusWithID(id.ToString()).Equals("DELIVERED"))
+            {
+                turnToDeliveryCheckOutPage(id.ToString());
+            }
+        }
+
+        private void onConfirm()
+        {
+            turnToDeliveryCheckOutPage(id.ToString());
+        }
+
+        private void onDelete()
+        {
+            deliveryOrderItemsRepository.removeItemByImportFormsID(id);
+            deliveryOrderRepository.DeleteImportFormByID(id);
+            turnToDeliveryPage(id.ToString());
         }
     }
 }

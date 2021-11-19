@@ -77,6 +77,7 @@
                 x:Name="cbSortDelivery"
                 Margin="40, 10, 10, 15"
                 FontSize="20"
+                materialDesign:ColorZoneAssist.Background="LightGray"
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
                 BorderBrush="Gray"

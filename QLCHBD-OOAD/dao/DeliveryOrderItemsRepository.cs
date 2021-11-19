@@ -17,7 +17,7 @@ namespace QLCHBD_OOAD.dao
         {
             database = Db.getInstace();
         }
-        public static DeliveryOrderItemsRepository getIntance()
+        public static DeliveryOrderItemsRepository getInstance()
         {
             if (instance == null)
                 instance = new DeliveryOrderItemsRepository();
@@ -56,14 +56,14 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }        
-        public void removeItemByID(string id)
+        public void removeItemByID(long id)
         {
             string command = "DELETE FROM import_form_item WHERE id =" + id + " ;";
             database.executeCommand(command);
             database.closeConnection();
 
         }
-        public void removeItemByImportFormsID(string id)
+        public void removeItemByImportFormsID(long id)
         {
             string command = "DELETE FROM import_form_item WHERE import_form_id =" + id + " ;";
             database.executeCommand(command);

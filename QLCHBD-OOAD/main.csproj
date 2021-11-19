@@ -86,6 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\AddNewAlbumWindow.xaml.cs">
+      <DependentUpon>AddNewAlbumWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\AddNewOrderImageWindow.xaml.cs">
       <DependentUpon>AddNewOrderImageWindow.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,7 @@
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddNewViewModel.cs" />
+    <Compile Include="viewmodel\delivery\detail order\DeliveryAddNewAlbumViewModel.cs" />
     <Compile Include="viewmodel\delivery\detail order\DeliveryCheckOutViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\AddNewProviderViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\DeliveryAskFormViewModel.cs" />
@@ -159,6 +163,9 @@
     </Compile>
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\delivery\DeliveryCheckOutPage.xaml.cs">
+      <DependentUpon>DeliveryCheckOutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\delivery\page holder\DeliveryPageHolder.xaml.cs">
       <DependentUpon>DeliveryPageHolder.xaml</DependentUpon>
@@ -208,6 +215,10 @@
     <Compile Include="view\report\ReportMainPage.xaml.cs">
       <DependentUpon>ReportMainPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\AddNewAlbumWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\AddNewOrderImageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -359,6 +370,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\NewDeliveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\delivery\DeliveryCheckOutPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

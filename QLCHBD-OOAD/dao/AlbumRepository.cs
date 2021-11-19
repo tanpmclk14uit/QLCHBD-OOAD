@@ -28,6 +28,12 @@ namespace QLCHBD_OOAD.dao
         {
             db = Db.getInstace();
         }
+        public void addAlbum(string name)
+        {
+            string command = "INSERT INTO album (`name`) VALUES ('" + name + "');";
+            var reader = db.executeCommand(command);
+            db.closeConnection();
+        }
 
         public ObservableCollection<Album> getAllAlbum()
         {

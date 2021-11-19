@@ -26,7 +26,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
 
         public ProviderListWindowViewModel()
         {
-            deliveryProviderRepository = DeliveryProviderRepository.getIntance();
+            deliveryProviderRepository = DeliveryProviderRepository.getInstance();
             _providerList = deliveryProviderRepository.providerList();
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { closeForm(); });
             SelectCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onSelect(); });

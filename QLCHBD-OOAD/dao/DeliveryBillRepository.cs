@@ -15,7 +15,7 @@ namespace QLCHBD_OOAD.dao
         {
             database = Db.getInstace();
         }
-        public static DeliveryBillRepository getIntance()
+        public static DeliveryBillRepository getInstance()
         {
             if (instance == null)
                 instance = new DeliveryBillRepository();
@@ -32,11 +32,13 @@ namespace QLCHBD_OOAD.dao
             return false;
         }
 
-        public void addTemporaryBills(long id, long createID)
+        public void addTemporaryBills(long id, string providerName, long sumAmount, long sumValue, long createID)
         {
-            string command = "INSERT INTO import_bill (`id`, `provider_name`, `create_by`, `update_by`) VALUES ('" +
+            string command = "INSERT INTO import_bill (`id`, `provider_name`, `sum_amount`, `sum_value`, `create_by`, `update_by`) VALUES ('" +
                 id + "', '" +
-                "JustInTemporary', '" +
+                providerName + "', '" +
+                sumAmount + "', '" +
+                sumValue + "', '" +
                 createID + "', '" +
                 createID +"');";
             database.executeCommand(command);
@@ -48,9 +50,9 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
-        public void updateTemporaryBills(long id, string provider)
+        public void updateTemporaryBills(string id)
         {
-            string command = "UPDATE import_bill SET provider_name = '" + provider + "' WHERE id = '" + id + "';";
+            string command = "UPDATE import_bill SET status = 'PAID' WHERE id = '" + id + "';";
             database.executeCommand(command);
             database.closeConnection();
         }

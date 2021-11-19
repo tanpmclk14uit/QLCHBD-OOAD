@@ -39,8 +39,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
 
         public DeliveryProviderDetailViewModel(string id)
         {
-            providerRepository = DeliveryProviderRepository.getIntance();
-            orderRepository = DeliveryOrderRepository.getIntance();
+            providerRepository = DeliveryProviderRepository.getInstance();
+            orderRepository = DeliveryOrderRepository.getInstance();
             imagesRepository = ImagesRepository.getInstance();
             _provider = providerRepository.getProviderbyID(id);
             _imageList = imagesRepository.getImagesByProviderID(id);

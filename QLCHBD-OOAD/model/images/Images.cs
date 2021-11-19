@@ -148,12 +148,20 @@ namespace QLCHBD_OOAD.model.images
         public long idAlbum
         {
             get => _idAlbum;
+            set
+            {
+                _idAlbum = value;
+            }
         }
 
         private int _quantity;
         public int quantity
         {
             get => _quantity;
+            set
+            {
+                _quantity = value;
+            }
         }
 
         private String _displayQuantity;
@@ -166,6 +174,10 @@ namespace QLCHBD_OOAD.model.images
         public string image
         {
             get => _image;
+            set
+            {
+                _image = value;
+            }
         }
         
 
@@ -181,6 +193,10 @@ namespace QLCHBD_OOAD.model.images
         public string locate
         {
             get => _locate;
+            set
+            {
+                _locate = value;
+            }
         }
 
         private Boolean _isCheck;
