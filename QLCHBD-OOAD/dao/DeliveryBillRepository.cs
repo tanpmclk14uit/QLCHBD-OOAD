@@ -27,15 +27,30 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             if (reader.Read())
             {
+                database.closeConnection();
                 return true;
             }
             return false;
         }
-
-        public void addTemporaryBills(long id, string providerName, long sumAmount, long sumValue, long createID)
+        public string getImportBillStatusByImportFormID(string id)
         {
-            string command = "INSERT INTO import_bill (`id`, `provider_name`, `sum_amount`, `sum_value`, `create_by`, `update_by`) VALUES ('" +
+            string command = "SELECT status FROM import_bill WHERE import_form_id = " + id;
+            var reader = database.executeCommand(command);
+            if (reader.Read())
+            {
+                var billStatus = (string)reader[0];
+                database.closeConnection();
+                return billStatus;
+            }
+            database.closeConnection();
+            return null;
+        }
+
+        public void addTemporaryBills(long id, string importID, string providerName, long sumAmount, long sumValue, long createID)
+        {
+            string command = "INSERT INTO import_bill (`id`, `import_form_id`, `provider_name`, `sum_amount`, `sum_value`, `create_by`, `update_by`) VALUES ('" +
                 id + "', '" +
+                importID + "', '" +
                 providerName + "', '" +
                 sumAmount + "', '" +
                 sumValue + "', '" +
@@ -50,9 +65,9 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
-        public void updateTemporaryBills(string id)
+        public void updateTemporaryBillsWithImportFormID(string id)
         {
-            string command = "UPDATE import_bill SET status = 'PAID' WHERE id = '" + id + "';";
+            string command = "UPDATE import_bill SET status = 'PAID' WHERE import_form_id = '" + id + "';";
             database.executeCommand(command);
             database.closeConnection();
         }

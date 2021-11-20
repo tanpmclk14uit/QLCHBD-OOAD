@@ -256,7 +256,8 @@
                                                 FontWeight="Bold"
                                                 Background="#0DBE00"
                                                 BorderThickness="1"
-
+                                                Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeliveredCommand, Mode=TwoWay}"
+        
                                                 >Delivered</Button>
                                         <Button
                                                 materialDesign:ButtonAssist.CornerRadius="5"
@@ -267,7 +268,7 @@
                                                 Background="#E6343A"
                                                 BorderThickness="1"
                                                 Margin="5 0 10 0"
-                                                Command="{Binding DeleteCommand}">Cancel</Button>
+                                                Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeleteCommand, Mode=TwoWay}">Cancel</Button>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

@@ -33,16 +33,13 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         private AlbumRepository albumRepository;
         private DeliveryProviderRepository providerRepository;
 
-        private DeliOrderItems orderItems;
 
         public ObservableCollection<DeliOrderItems> orderItemsList { get; }
 
-        private Images images;
         private ObservableCollection<Images> imagesItemsList;
 
 
-        private DeliBills _Bill;
-        private DeliBillsItems billItem;
+
         public ObservableCollection<DeliBillsItems> billsItemsList;
 
 
@@ -61,28 +58,45 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
             orderItemsList = orderItemsRepository.getItemsbyImportFormsID(id);
 
+            UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmCommand(id); });
+            ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onChangeImageCommand(); });
 
             setUpStatusses();
             generateID();
             setupItemsList(id);
             selectedItems = orderItemsList[0];
+
+            setupUI(id);
+
+        }
+        //-------------------------------------------------------------------------------------------------
+        private void setupUI(string id)
+        {
             image = "/QLCHBD-OOAD;component/assets/img_noImage.png";
             bttContent = "Update";
 
-
-            UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmCommand(id); });
-            ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onChangeImageCommand(); });
-            
             if (orderRepository.getImportFormStatusWithID(id).Equals("DELIVERED"))
             {
-                image = "/QLCHBD-OOAD;component/assets/img_paid.png";
-                OnPropertyChanged("image");
-                UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
-                ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
-                bttContent = "PAID";
-                OnPropertyChanged("bttContent");
-            }
+                if (billRepository.getImportBillStatusByImportFormID(id).Equals("UNPAID"))
+                {
+                    image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
+                    OnPropertyChanged("image");
+                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onPay(id); });
+                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+                    bttContent = "PAY";
+                    OnPropertyChanged("bttContent");
+                }
+                else if (billRepository.getImportBillStatusByImportFormID(id).Equals("PAID"))
+                {
+                    image = "/QLCHBD-OOAD;component/assets/img_paid.png";
+                    OnPropertyChanged("image");
+                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+                    bttContent = "PAID";
+                    OnPropertyChanged("bttContent");
+                }
 
+            }
         }
         //-------------------------------------------------------------------------------------------------
         public string name { get; set; }
@@ -151,6 +165,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                                 createID, 0));
                 count++;
             }
+            orderItemsList.Add(new DeliOrderItems(-10, -10, -10, -10, "Set Done", -10, -10));
 
         }
 
@@ -205,6 +220,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             else
             if (bttContent.Equals("PAY")) onPay(id);
             else
+            if (bttContent.Equals("PAID")) { }
+            else
             if (count <= 0) onConfirmAll(id);
 
         }
@@ -213,7 +230,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         {
             if (selectedItems != null)
             {
-                if (selectedItems.Amount != 0 && rentalPrice != 0)
+                if (selectedItems.Amount != 0 && rentalPrice != 0 && selectedItems.id != -10)
                 {
                     getImageFromSelectedItem(selectedItems).locate = locate;
                     getImageFromSelectedItem(selectedItems).rentalPrice = rentalPrice;
@@ -226,24 +243,28 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                     OnPropertyChanged("imagesItemsList");
                 }
 
-
                 if (selectedItems.isConfirm == false)
                 {
                     count--;
                     selectedItems.isConfirm = true;
-                    OnPropertyChanged("selectedItems");
+
                     if (count <= 0)
                     {
                         bttContent = "Confirm All";
                         OnPropertyChanged("bttContent");
                     }
+
+                    OnPropertyChanged("selectedItems");
+
                 }
             }
         }
         //-------------------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------------------
         private void onConfirmAll(string id)
         {
-            billRepository.addTemporaryBills(billID, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
+            billRepository.addTemporaryBills(billID, id, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
             foreach (var item in orderItemsList)
             {
                 itemsRepository.insertItems(item, billID.ToString());
@@ -252,22 +273,29 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             {
                 if (imagesRepository.imageIsNotNull(item.id.ToString()) && item.quantity != 0)
                 {
+                    confirmImage(item);
                     imagesRepository.updateImage(item);
                 }
                 else if (item.quantity != 0)
                 {
+                    confirmImage(item);
                     imagesRepository.uploadNewImage(item);
                 }
             }
             orderRepository.updateStatusDELIVERED(id);
+
             bttContent = "PAY";
+            image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
+            OnPropertyChanged("image");
             OnPropertyChanged("bttContent");
         }
         //-------------------------------------------------------------------------------------------------
         private void onPay(string id)
         {
-            billRepository.updateTemporaryBills(id);
+            billRepository.updateTemporaryBillsWithImportFormID(id);
             bttContent = "PAID";
+            image = "/QLCHBD-OOAD;component/assets/img_paid.png";
+            OnPropertyChanged("image");
             OnPropertyChanged("bttContent");
         }
         //-------------------------------------------------------------------------------------------------
@@ -306,26 +334,30 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 image = dlg.FileName;
-                string extension = Path.GetExtension(dlg.FileName);
-                string fileName = name + "_" + DateTime.Now.ToString("mmFFFFFFF") + extension;
-                string linkToAssets = Path.GetFullPath("QLCHBD-OOAD/QLCHBD-OOAD/Assets/");
-
-                for (int i = 0; i < 6; ++i)
-                {
-                    linkToAssets = Path.GetDirectoryName(linkToAssets);
-                }
-                linkToAssets += @"\Assets\";
-
-                linkToAssets += fileName;
-
-                file = File.Create(linkToAssets);
-                file.Close();
-
-                File.Copy(image, linkToAssets, true);
-                file.Close();
-                return linkToAssets.Replace(@"\", "/");
             }
-            return image.Replace(@"\", "/");
+            return image;
+        }
+
+        private void confirmImage(Images images)
+        {
+            string extension = Path.GetExtension(images.image);
+            string fileName = images.name + "_" + DateTime.Now.ToString("mmFFFFFFF") + extension;
+            string linkToAssets = Path.GetFullPath("QLCHBD-OOAD/QLCHBD-OOAD/Assets/");
+
+            for (int i = 0; i < 6; ++i)
+            {
+                linkToAssets = Path.GetDirectoryName(linkToAssets);
+            }
+            linkToAssets += @"\Assets\";
+
+            linkToAssets += fileName;
+
+            file = File.Create(linkToAssets);
+            file.Close();
+
+            File.Copy(images.image, linkToAssets, true);
+            file.Close();
+            images.image = linkToAssets.Replace(@"\", "/");
         }
 
     }

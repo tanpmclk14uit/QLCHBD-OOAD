@@ -19,24 +19,29 @@ namespace QLCHBD_OOAD.viewmodel.delivery
     class DeliveryPageViewModel : BaseViewModel
     {
         public static ChangePageHandler turnToImportFormDetailPage;
+        public static ChangePageHandler turnToPaymentPage;
         private DeliveryOrderRepository deliOrderlReponsitory;
+        private DeliveryOrderItemsRepository orderItemsRepository;
         public DeliOrder SelectedOrder { get; set; }
         public ICommand AddOrderCommand { get; set; }
         public ICommand AddProviderCommand { get; set; }
         public ICommand ModifyProviderCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand DeliveredCommand { get; set; }
 
         private DeliveryPageViewModel()
         {
             _seachKey = "";
             deliOrders = new ObservableCollection<DeliOrder>();
             deliOrderlReponsitory = DeliveryOrderRepository.getInstance();
+            orderItemsRepository = DeliveryOrderItemsRepository.getInstance();
             setUpStatusses();
 
             AddOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrderDelivery(); });
             ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onModifyProvider(); });
             AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addProviderDelivery(); });
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
+            DeleteCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null) return true; return false; }, (p) => { onDelete(); });
+            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null) return true; return false; }, (p) => { turnToPaymentPage(selectedDeliOrder.id.ToString()); });
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -48,6 +53,11 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 _intance = new DeliveryPageViewModel();
             }
             return _intance;
+        }
+        //-------------------------------------------------------------------------------------------------
+        public void resetUI()
+        {
+            selectedStatus = selectedStatuses[0];
         }
         //-------------------------------------------------------------------------------------------------
         private ObservableCollection<DeliOrder> _deliOrders;
@@ -69,12 +79,10 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             get => _selectedDeliOrder;
             set
             {
-                _selectedDeliOrder = value;
                 if (value != null)
                 {
-                    long selectedID = _selectedDeliOrder.id;
-                    _selectedDeliOrder = null;
-                    turnToImportFormDetailPage(selectedID.ToString());
+                    _selectedDeliOrder = value;
+                    turnToImportFormDetailPage(_selectedDeliOrder.id.ToString());
                 }
             }
         }
@@ -217,11 +225,13 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void onDelete()
         {
-            deliOrderlReponsitory.deleteFormWithID(selectedDeliOrder.id.ToString());
-            deliOrders.Remove(selectedDeliOrder);
-            OnPropertyChanged("seachKey");
-            OnPropertyChanged("fillerListDeliOder");
-            OnPropertyChanged("selectedStatus");
+
+                orderItemsRepository.removeItemByImportFormsID(_selectedDeliOrder.id);
+                deliOrderlReponsitory.deleteFormWithID(_selectedDeliOrder.id.ToString());
+                deliOrders.Remove(_selectedDeliOrder);
+                OnPropertyChanged("seachKey");
+                OnPropertyChanged("fillerListDeliOder");
+                OnPropertyChanged("selectedStatus");
         }
 
     }

@@ -235,12 +235,13 @@ namespace QLCHBD_OOAD.dao
             {
                 file = File.OpenRead(imagePath);
                 file.Close();
-                return imagePath;
             }
-            else
+            else if (imagePath.Contains(@"\Assets") || imagePath.Contains("QLCHBD"))
             {
-                return  "/QLCHBD-OOAD;component/assets/img_noImage.png";
+                imagePath = "/QLCHBD-OOAD;component/assets/img_noImage.png";
             }
+
+            return imagePath;
         }
     }
 }

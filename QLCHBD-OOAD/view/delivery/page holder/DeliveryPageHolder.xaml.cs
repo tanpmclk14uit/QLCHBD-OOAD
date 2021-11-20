@@ -35,6 +35,7 @@ namespace QLCHBD_OOAD.view.delivery
             ProviderListWindowViewModel.turnToProviderDetailPage += turnToProviderDetailPage;
             DeliveryProviderDetailViewModel.turnToDeliveryDetailPage += turnBackToMainPage;
             DeliveryPageViewModel.turnToImportFormDetailPage += turnDeliveryDetailPage;
+            DeliveryPageViewModel.turnToPaymentPage += turnDeliveryCheckOutPage;
         }
 
         private void turnBackToMainPage(string page)
