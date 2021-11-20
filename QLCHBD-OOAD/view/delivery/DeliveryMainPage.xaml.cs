@@ -25,6 +25,17 @@ namespace QLCHBD_OOAD.view.delivery
         {
             InitializeComponent();
             DataContext = DeliveryPageViewModel.getInstance();
+            DeliveryPageViewModel.getInstance().resetUI();
+        }
+
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DeliveryPageViewModel.getInstance().onItemClick();
+        }
+
+        private void ListBoxItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

@@ -79,11 +79,15 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             get => _selectedDeliOrder;
             set
             {
-                if (value != null)
-                {
-                    _selectedDeliOrder = value;
-                    turnToImportFormDetailPage(_selectedDeliOrder.id.ToString());
-                }
+                _selectedDeliOrder = value;
+            }
+        }
+        //-------------------------------------------------------------------------------------------------
+        public void onItemClick()
+        {
+            if (_selectedDeliOrder != null)
+            {
+                turnToImportFormDetailPage(_selectedDeliOrder.id.ToString());
             }
         }
         //-------------------------------------------------------------------------------------------------

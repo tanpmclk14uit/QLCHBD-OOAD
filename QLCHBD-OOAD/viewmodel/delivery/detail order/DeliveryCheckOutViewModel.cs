@@ -112,7 +112,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             set
             {
                 _selectedItems = value;
-                image = getImageFromSelectedItem(selectedItems).image;
+                if (_selectedItems.id != -10) image = getImageFromSelectedItem(selectedItems).image;
+                else image = "/QLCHBD-OOAD;component/assets/img_done.png";
                 locate = getImageFromSelectedItem(selectedItems).locate;
                 rentalPrice = getImageFromSelectedItem(selectedItems).rentalPrice;
                 totalCopy = getImageFromSelectedItem(selectedItems).quantity;
