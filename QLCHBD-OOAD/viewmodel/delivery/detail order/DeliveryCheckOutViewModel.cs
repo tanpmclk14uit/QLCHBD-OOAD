@@ -48,34 +48,37 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
         public DeliveryCheckOutViewModel(string id)
         {
+            orderRepository = DeliveryOrderRepository.getInstance();
             billRepository = DeliveryBillRepository.getInstance();
             itemsRepository = DeliveryBilingItemsRepository.getInstance();
             imagesRepository = ImagesRepository.getInstance();
             orderItemsRepository = DeliveryOrderItemsRepository.getInstance();
             albumRepository = AlbumRepository.getInstance();
-            orderRepository = DeliveryOrderRepository.getInstance();
             providerRepository = DeliveryProviderRepository.getInstance();
+
             imagesItemsList = new ObservableCollection<Images>();
             billsItemsList = new ObservableCollection<DeliBillsItems>();
 
             orderItemsList = orderItemsRepository.getItemsbyImportFormsID(id);
-            image = "/QLCHBD-OOAD;component/assets/img_noImage.png";
-
-
-            bttContent = "Update";
 
 
             setUpStatusses();
             generateID();
             setupItemsList(id);
+            selectedItems = orderItemsList[0];
+            image = "/QLCHBD-OOAD;component/assets/img_noImage.png";
+            bttContent = "Update";
+
 
             UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmCommand(id); });
             ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onChangeImageCommand(); });
-
+            
             if (orderRepository.getImportFormStatusWithID(id).Equals("DELIVERED"))
             {
-                UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
-                ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+                image = "/QLCHBD-OOAD;component/assets/img_paid.png";
+                OnPropertyChanged("image");
+                UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+                ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
                 bttContent = "PAID";
                 OnPropertyChanged("bttContent");
             }
@@ -148,7 +151,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                                 createID, 0));
                 count++;
             }
-            
+
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -198,12 +201,12 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
         private void onConfirmCommand(string id)
         {
-                if (count > 0) onUpdate(id);
+            if (count > 0) onUpdate(id);
             else
-                if (bttContent.Equals("PAY")) onPay(id);
+            if (bttContent.Equals("PAY")) onPay(id);
             else
-                if (count <= 0) onConfirmAll(id);
-            
+            if (count <= 0) onConfirmAll(id);
+
         }
         //-------------------------------------------------------------------------------------------------
         private void onUpdate(string id)
@@ -247,7 +250,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             }
             foreach (var item in imagesItemsList)
             {
-                imagesRepository.uploadNewImage(item);
+                if (imagesRepository.imageIsNotNull(item.id.ToString()) && item.quantity != 0)
+                {
+                    imagesRepository.updateImage(item);
+                }
+                else if (item.quantity != 0)
+                {
+                    imagesRepository.uploadNewImage(item);
+                }
             }
             orderRepository.updateStatusDELIVERED(id);
             bttContent = "PAY";

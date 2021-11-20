@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
+using QLCHBD_OOAD.view.delivery.DeliveryPage;
 
 namespace QLCHBD_OOAD.viewmodel.delivery
 {
@@ -46,10 +47,6 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             BackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { turnToDeliveryPage(); });
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
-            if (deliveryOrderRepository.getImportFormStatusWithID(id.ToString()).Equals("DELIVERED"))
-            {
-                turnToDeliveryCheckOutPage(id.ToString());
-            }
         }
 
         private void onConfirm()

@@ -222,5 +222,35 @@ namespace QLCHBD_OOAD.dao
             return result;
 
         }
+        public void updateImage(Images images)
+        {
+            int quantity = 0;
+            string command = "SELECT quantity FROM disk WHERE id = " + images.id;
+            var reader = db.executeCommand(command);
+
+            if (reader.Read())
+            {
+                quantity += (int)reader[0];
+
+            }
+
+            command = $"UPDATE `ooad_qlchbd`.`disk` SET `name` = '{images.name}', `album` = '{images.idAlbum}', `quantity` = '{images.quantity + quantity}', `image` = '{images.image}', `locate` = '{images.locate}', `rental_price` = '{images.rentalPrice}', `provider` = '{images.idProvider}', `id_by_provider` = '{images.idByProvider}', `loss_charges` = '{images.providerPrice}', `update_by` = '{images.updateBy}' WHERE (`id` = '{images.id}');";
+            reader = db.executeCommand(command);
+            db.closeConnection();
+        }
+
+        public bool imageIsNotNull(string id)
+        {
+            List<Images> images = new List<Images>();
+            string command = "SELECT * FROM `disk` WHERE ID = " + id;
+            var reader = db.executeCommand(command);
+            if (reader.Read())
+            {
+                db.closeConnection();
+                return true;
+            }
+            db.closeConnection();
+            return false;
+        }
     }                           
 }                               

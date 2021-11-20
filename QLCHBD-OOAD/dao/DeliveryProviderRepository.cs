@@ -77,7 +77,7 @@ namespace QLCHBD_OOAD.dao
 
         public DeliProviders getProviderbyID(string id)
         {
-            string command = "SELECT provider.nam FROM provider LEFT JOIN import_form WHERE import_form.id =" + id;
+            string command = "SELECT * FROM provider WHERE provider.id =" + id;
             var reader = database.executeCommand(command);
             DeliProviders provider;
             if (reader.Read())
@@ -95,9 +95,8 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             if (reader.Read())
             {
-                return (long)reader[0];
-                database.closeConnection();
-
+                var providerID = (long)reader[0];
+                return providerID;
             }
             database.closeConnection();
             return -1;
