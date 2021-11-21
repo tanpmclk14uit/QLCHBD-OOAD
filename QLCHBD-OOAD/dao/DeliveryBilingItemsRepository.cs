@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.model.delivery;
+using QLCHBD_OOAD.model.images;
+
 namespace QLCHBD_OOAD.dao
 {
     class DeliveryBilingItemsRepository
@@ -45,6 +47,18 @@ namespace QLCHBD_OOAD.dao
                 items.imPrice + "', '" +
                 items.diskID + "', '" +
                 items.Amount + "'," +
+                "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void insertItems(Images items, string id)
+        {
+            string command = "INSERT INTO import_billing_item (`import_bill`, `disk_name`, `import_price`, `disk_id`, `amount`, `create_time`, `update_time`) VALUES ('" +
+                id + "', '" +
+                items.name + "', '" +
+                items.lostCharges + "', '" +
+                items.idByProvider + "', '" +
+                items.quantity + "'," +
                 "CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";
             database.executeCommand(command);
             database.closeConnection();

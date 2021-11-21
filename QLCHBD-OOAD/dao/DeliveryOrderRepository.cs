@@ -100,7 +100,8 @@ namespace QLCHBD_OOAD.dao
             string command = "DELETE FROM import_form WHERE id = '"+id+"';";
             database.executeCommand(command);
             database.closeConnection();
-        }public string getImportFormStatusWithID(string id)
+        }
+        public string getImportFormStatusWithID(string id)
         {
             string command = "SELECT status FROM import_form WHERE ID = " + id;
             var reader = database.executeCommand(command);
@@ -111,6 +112,21 @@ namespace QLCHBD_OOAD.dao
             }
             database.closeConnection();
             return null;
+        }
+        public bool ImportFormWithStatusByID(string id, string status)
+        {
+            string command = "SELECT status FROM import_form WHERE ID = " + id;
+            var reader = database.executeCommand(command);
+            if (reader.Read())
+            {
+                string strStatus = reader[0].ToString();
+                database.closeConnection();
+                if (strStatus.Equals(status)) return true;
+                else return false;
+                
+            }
+            database.closeConnection();
+            return false;
         }
 
         public DeliOrder getDeliOrderById(string id)

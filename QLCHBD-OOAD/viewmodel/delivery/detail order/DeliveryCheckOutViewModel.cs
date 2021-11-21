@@ -58,8 +58,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
             orderItemsList = orderItemsRepository.getItemsbyImportFormsID(id);
 
-            UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmCommand(id); });
-            ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onChangeImageCommand(); });
+            UpdateCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onConfirmCommand(id); });
+            ChangeImageCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onChangeImageCommand(); });
 
             setUpStatusses();
             generateID();
@@ -112,13 +112,17 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             set
             {
                 _selectedItems = value;
-                if (_selectedItems.id != -10) image = getImageFromSelectedItem(selectedItems).image;
-                else image = "/QLCHBD-OOAD;component/assets/img_done.png";
-                locate = getImageFromSelectedItem(selectedItems).locate;
-                rentalPrice = getImageFromSelectedItem(selectedItems).rentalPrice;
-                totalCopy = getImageFromSelectedItem(selectedItems).quantity;
-                selectedAlbum = getAlbumFromID(getImageFromSelectedItem(selectedItems).idAlbum);
-                name = getImageFromSelectedItem(selectedItems).name;
+                if (_selectedItems.id == -10) image = "/QLCHBD-OOAD;component/assets/img_done.png";
+                else
+                {
+                    locate = getImageFromSelectedItem(selectedItems).locate;
+                    rentalPrice = getImageFromSelectedItem(selectedItems).rentalPrice;
+                    totalCopy = getImageFromSelectedItem(selectedItems).quantity;
+                    selectedAlbum = getAlbumFromID(getImageFromSelectedItem(selectedItems).idAlbum);
+                    name = getImageFromSelectedItem(selectedItems).name;
+                }
+
+                
                 OnPropertyChanged("name");
                 OnPropertyChanged("totalCopy");
                 OnPropertyChanged("image");
@@ -166,8 +170,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                                 createID, 0));
                 count++;
             }
-            orderItemsList.Add(new DeliOrderItems(-10, -10, -10, -10, "Set Done", -10, -10));
-
+            orderItemsList.Add(new DeliOrderItems(-10, -10, -10, -10, "Confirm ALL", -10, -10));
+            count++;
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -231,7 +235,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         {
             if (selectedItems != null)
             {
-                if (selectedItems.Amount != 0 && rentalPrice != 0 && selectedItems.id != -10)
+                //if (selectedItems.Amount != 0 && rentalPrice != 0 && selectedItems.id != -10)
+                if (selectedItems.id != -10)
                 {
                     getImageFromSelectedItem(selectedItems).locate = locate;
                     getImageFromSelectedItem(selectedItems).rentalPrice = rentalPrice;
@@ -266,12 +271,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         private void onConfirmAll(string id)
         {
             billRepository.addTemporaryBills(billID, id, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
-            foreach (var item in orderItemsList)
-            {
-                itemsRepository.insertItems(item, billID.ToString());
-            }
             foreach (var item in imagesItemsList)
             {
+                itemsRepository.insertItems(item, billID.ToString());
                 if (imagesRepository.imageIsNotNull(item.id.ToString()) && item.quantity != 0)
                 {
                     confirmImage(item);
@@ -282,6 +284,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                     confirmImage(item);
                     imagesRepository.uploadNewImage(item);
                 }
+
             }
             orderRepository.updateStatusDELIVERED(id);
 
@@ -303,18 +306,18 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         private int sumAmount()
         {
             int sum = 0;
-            foreach (var item in billsItemsList)
+            foreach (var item in imagesItemsList)
             {
-                sum += item.amount;
+                sum += item.quantity;
             }
             return sum;
         }
         private long sumValue()
         {
             int value = 0;
-            foreach (var item in billsItemsList)
+            foreach (var item in imagesItemsList)
             {
-                value += item.value;
+                value += item.lostCharges;
             }
             return value;
         }

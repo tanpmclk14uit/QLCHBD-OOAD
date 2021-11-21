@@ -46,7 +46,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
             BackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { turnToDeliveryPage(); });
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
-            ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
+            ConfirmCommand = new RelayCommand<object>((p) => { return deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING"); }, (p) => { onConfirm(); });
         }
 
         private void onConfirm()

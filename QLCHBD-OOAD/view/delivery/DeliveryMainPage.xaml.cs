@@ -33,9 +33,5 @@ namespace QLCHBD_OOAD.view.delivery
             DeliveryPageViewModel.getInstance().onItemClick();
         }
 
-        private void ListBoxItem_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
     }
 }

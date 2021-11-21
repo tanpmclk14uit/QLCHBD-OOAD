@@ -40,8 +40,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             AddOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrderDelivery(); });
             ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onModifyProvider(); });
             AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addProviderDelivery(); });
-            DeleteCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null) return true; return false; }, (p) => { onDelete(); });
-            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null) return true; return false; }, (p) => { turnToPaymentPage(selectedDeliOrder.id.ToString()); });
+            DeleteCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING")) return true; return false; }, (p) => { onDelete(); });
+            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING")) return true; return false; }, (p) => { turnToPaymentPage(selectedDeliOrder.id.ToString()); });
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -211,7 +211,6 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             DeliveryProviderListWindow providerList = new DeliveryProviderListWindow();
             providerList.ShowDialog();
-            selectedStatus = selectedStatus;
         }
 
         private void addOrderDelivery()
@@ -229,13 +228,12 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void onDelete()
         {
-
-                orderItemsRepository.removeItemByImportFormsID(_selectedDeliOrder.id);
-                deliOrderlReponsitory.deleteFormWithID(_selectedDeliOrder.id.ToString());
-                deliOrders.Remove(_selectedDeliOrder);
-                OnPropertyChanged("seachKey");
-                OnPropertyChanged("fillerListDeliOder");
-                OnPropertyChanged("selectedStatus");
+            if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING"))
+            {
+                deliOrderlReponsitory.updateStatusERROR(selectedDeliOrder.id.ToString());
+                selectedStatus = selectedStatus;
+            }
+            
         }
 
     }
