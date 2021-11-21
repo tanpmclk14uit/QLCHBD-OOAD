@@ -17,6 +17,7 @@ using QLCHBD_OOAD.view.delivery.Add_Order;
 using QLCHBD_OOAD.viewmodel.delivery;
 using QLCHBD_OOAD.viewmodel.delivery.Component;
 using QLCHBD_OOAD.viewmodel.delivery.provider;
+using QLCHBD_OOAD.viewmodel.delivery.detail_order;
 
 namespace QLCHBD_OOAD.view.delivery
 {
@@ -36,6 +37,7 @@ namespace QLCHBD_OOAD.view.delivery
             DeliveryProviderDetailViewModel.turnToDeliveryDetailPage += turnBackToMainPage;
             DeliveryPageViewModel.turnToImportFormDetailPage += turnDeliveryDetailPage;
             DeliveryPageViewModel.turnToPaymentPage += turnDeliveryCheckOutPage;
+            DeliveryCheckOutViewModel.turnToDeliveryMainPage += turnBackToDeliveryMainPage;
         }
 
         private void turnBackToMainPage(string page)

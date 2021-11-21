@@ -27,8 +27,8 @@
                 Grid.Column="0"
                 Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1.2*"></RowDefinition>
-                    <RowDefinition Height="1.1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="0.9*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.Resources>
                     <Style x:Key="myTextBoxStyle" TargetType="TextBox" >
@@ -58,7 +58,7 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition ></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Button 
                             Grid.Column="0"
@@ -96,12 +96,6 @@
                         Grid.Row="5"
                         Grid.Column="0"
                         FontSize="30">Total Copies:</TextBlock>
-                    <StackPanel
-                        Grid.Row="6"
-                        Grid.Column="1"
-                        Orientation="Vertical">
-                        
-                    </StackPanel>
 
 
                     <TextBlock
@@ -153,18 +147,31 @@
                             Text="{Binding Path=totalCopy}"></TextBox>
                         <Border BorderThickness="0.6" BorderBrush="Black"></Border>
                     </StackPanel>
+
                     <Button
                         Grid.Column="0"
-                        Grid.Row="7"
                         Grid.ColumnSpan="2"
-                        Background="#0DBE00"
-                        Height="50"
-                        Margin="10 10 10 0"
-                        VerticalAlignment="Bottom"
-                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Grid.Row="6"
                         FontSize="30"
-                        Content="{Binding bttContent}"
+                        Height="45"
+                        VerticalAlignment="Bottom"
+                        Margin="0 5 0 0"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Background="#0DBE00"
+                        Content="{Binding UpdateContent}"
                         Command="{Binding UpdateCommand}"></Button>
+                    <Button
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="7"
+                        Height="70"
+                        FontSize="30"
+                        Margin="0 5 0 0"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Background="CornflowerBlue"
+                        Content="{Binding ConfirmAllContent}"
+                        Command="{Binding ConfirmAllCommand}">
+                        </Button>
                 </Grid>
 
             </Grid>

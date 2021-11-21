@@ -41,7 +41,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onModifyProvider(); });
             AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addProviderDelivery(); });
             DeleteCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING")) return true; return false; }, (p) => { onDelete(); });
-            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING")) return true; return false; }, (p) => { turnToPaymentPage(selectedDeliOrder.id.ToString()); });
+            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && !deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "ERROR")) return true; return false; }, (p) => { turnToPaymentPage(selectedDeliOrder.id.ToString()); });
         }
 
         //-------------------------------------------------------------------------------------------------

@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.Components;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.album;
 using QLCHBD_OOAD.model.delivery;
@@ -18,11 +19,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
     class DeliveryCheckOutViewModel : BaseViewModel
     {
+        public static ChangePageHandler turnToDeliveryMainPage;
         int createID = 1;
         FileStream file;
         public ICommand UpdateCommand { get; set; }
+        public ICommand ConfirmAllCommand { get; set; }
         public ICommand ChangeImageCommand { get; set; }
-        public string bttContent { get; set; }
+        public string UpdateContent { get; set; }
+        public string ConfirmAllContent { get; set; }
 
 
         private DeliveryBillRepository billRepository;
@@ -58,9 +62,6 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
             orderItemsList = orderItemsRepository.getItemsbyImportFormsID(id);
 
-            UpdateCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onConfirmCommand(id); });
-            ChangeImageCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onChangeImageCommand(); });
-
             setUpStatusses();
             generateID();
             setupItemsList(id);
@@ -73,30 +74,59 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         private void setupUI(string id)
         {
             image = "/QLCHBD-OOAD;component/assets/img_noImage.png";
-            bttContent = "Update";
+            UpdateContent = "UPDATE";
+            ConfirmAllContent = "CONFIRM";
 
             if (orderRepository.getImportFormStatusWithID(id).Equals("DELIVERED"))
             {
+                setSelectedUIAfterConfirmAll();
                 if (billRepository.getImportBillStatusByImportFormID(id).Equals("UNPAID"))
                 {
+                    
+                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onAfterConfirmAll(); });
+                    ConfirmAllCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onPay(id); });
+                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+                    UpdateContent = "🏠";
+                    ConfirmAllContent = "PAY";
                     image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
                     OnPropertyChanged("image");
-                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onPay(id); });
-                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
-                    bttContent = "PAY";
-                    OnPropertyChanged("bttContent");
+                    OnPropertyChanged("UpdateContent");
+                    OnPropertyChanged("ConfirmAllContent");
                 }
                 else if (billRepository.getImportBillStatusByImportFormID(id).Equals("PAID"))
                 {
+                    
+                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onAfterConfirmAll(); });
+                    ConfirmAllCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+                    UpdateContent = "🏠";
+                    ConfirmAllContent = "PAID";
                     image = "/QLCHBD-OOAD;component/assets/img_paid.png";
                     OnPropertyChanged("image");
-                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
-                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
-                    bttContent = "PAID";
-                    OnPropertyChanged("bttContent");
+                    OnPropertyChanged("UpdateContent");
+                    OnPropertyChanged("ConfirmAllContent");
                 }
-
             }
+            else
+            {
+                ConfirmAllCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmCommand(id); });
+                UpdateCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onUpdate(id); });
+                ChangeImageCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onChangeImageCommand(); });
+            }
+        }
+        //-------------------------------------------------------------------------------------------------
+        private void setSelectedUIAfterConfirmAll()
+        {
+            name = "";
+            locate = "";
+            selectedAlbum = null;
+            rentalPrice = 0;
+            totalCopy = 0;
+            OnPropertyChanged("name");
+            OnPropertyChanged("locate");
+            OnPropertyChanged("rentalPrice");
+            OnPropertyChanged("totalCopy");
+            OnPropertyChanged("selectedAlbum");
         }
         //-------------------------------------------------------------------------------------------------
         public string name { get; set; }
@@ -122,7 +152,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                     name = getImageFromSelectedItem(selectedItems).name;
                 }
 
-                
+
                 OnPropertyChanged("name");
                 OnPropertyChanged("totalCopy");
                 OnPropertyChanged("image");
@@ -170,8 +200,6 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                                 createID, 0));
                 count++;
             }
-            orderItemsList.Add(new DeliOrderItems(-10, -10, -10, -10, "Confirm ALL", -10, -10));
-            count++;
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -197,7 +225,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             set
             {
                 _selectedAlbum = value;
-                if (value.name.Equals("Add...")) openAddAlbumWindow();
+                if (value != null && value.name.Equals("Add...")) openAddAlbumWindow();
                 OnPropertyChanged("selectedAlbum");
 
             }
@@ -216,54 +244,37 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             AddNewAlbumWindow window = new AddNewAlbumWindow();
             window.ShowDialog();
             setUpStatusses();
+            selectedAlbum = selectedAlbumList[selectedAlbumList.Count - 2];
         }
         //-------------------------------------------------------------------------------------------------
 
         private void onConfirmCommand(string id)
         {
-            if (count > 0) onUpdate(id);
-            else
-            if (bttContent.Equals("PAY")) onPay(id);
-            else
-            if (bttContent.Equals("PAID")) { }
-            else
-            if (count <= 0) onConfirmAll(id);
-
+            if (ConfirmAllContent.Equals("PAY")) onPay(id);
+            else if (ConfirmAllContent.Equals("PAID")) { }
+            else onConfirmAll(id);
         }
         //-------------------------------------------------------------------------------------------------
         private void onUpdate(string id)
         {
-            if (selectedItems != null)
+            if (ConfirmAllContent.Equals("CONFIRM"))
             {
-                //if (selectedItems.Amount != 0 && rentalPrice != 0 && selectedItems.id != -10)
-                if (selectedItems.id != -10)
-                {
-                    getImageFromSelectedItem(selectedItems).locate = locate;
-                    getImageFromSelectedItem(selectedItems).rentalPrice = rentalPrice;
-                    getImageFromSelectedItem(selectedItems).quantity = totalCopy;
-                    getImageFromSelectedItem(selectedItems).idAlbum = selectedAlbum.id;
-                    getImageFromSelectedItem(selectedItems).image = image;
-                    billsItemsList[orderItemsList.IndexOf(selectedItems)].setAmount = totalCopy;
+                getImageFromSelectedItem(selectedItems).locate = locate;
+                getImageFromSelectedItem(selectedItems).rentalPrice = rentalPrice;
+                getImageFromSelectedItem(selectedItems).quantity = totalCopy;
+                getImageFromSelectedItem(selectedItems).idAlbum = selectedAlbum.id;
+                getImageFromSelectedItem(selectedItems).image = image;
+                billsItemsList[orderItemsList.IndexOf(selectedItems)].setAmount = totalCopy;
 
-                    OnPropertyChanged("billsItemsList");
-                    OnPropertyChanged("imagesItemsList");
-                }
+                OnPropertyChanged("billsItemsList");
+                OnPropertyChanged("imagesItemsList");
 
                 if (selectedItems.isConfirm == false)
                 {
-                    count--;
                     selectedItems.isConfirm = true;
-
-                    if (count <= 0)
-                    {
-                        bttContent = "Confirm All";
-                        OnPropertyChanged("bttContent");
-                    }
-
-                    OnPropertyChanged("selectedItems");
-
                 }
             }
+            else onAfterConfirmAll();
         }
         //-------------------------------------------------------------------------------------------------
 
@@ -288,19 +299,27 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             }
             orderRepository.updateStatusDELIVERED(id);
 
-            bttContent = "PAY";
+            setSelectedUIAfterConfirmAll();
+            ConfirmAllContent = "PAY";
+            UpdateContent = "🏠";
             image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
             OnPropertyChanged("image");
-            OnPropertyChanged("bttContent");
+            OnPropertyChanged("ConfirmAllContent");
+            OnPropertyChanged("UpdateContent");
         }
         //-------------------------------------------------------------------------------------------------
         private void onPay(string id)
         {
             billRepository.updateTemporaryBillsWithImportFormID(id);
-            bttContent = "PAID";
+            ConfirmAllContent = "PAID";
             image = "/QLCHBD-OOAD;component/assets/img_paid.png";
             OnPropertyChanged("image");
             OnPropertyChanged("bttContent");
+        }
+        //-------------------------------------------------------------------------------------------------
+        private void onAfterConfirmAll()
+        {
+            turnToDeliveryMainPage();
         }
         //-------------------------------------------------------------------------------------------------
         private int sumAmount()
