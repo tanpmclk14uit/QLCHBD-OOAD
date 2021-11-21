@@ -228,12 +228,11 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void onDelete()
         {
-            if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING"))
-            {
-                deliOrderlReponsitory.updateStatusERROR(selectedDeliOrder.id.ToString());
-                selectedStatus = selectedStatus;
-            }
-            
+
+            deliOrderlReponsitory.updateStatusERROR(selectedDeliOrder.id.ToString());
+            selectedStatus = selectedStatus;
+
+
         }
 
     }
