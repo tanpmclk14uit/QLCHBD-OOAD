@@ -95,8 +95,14 @@
     <Compile Include="Components\AddNewOrderItemImageWindow.xaml.cs">
       <DependentUpon>AddNewOrderItemImageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\AddNewStaffWindow.xaml.cs">
+      <DependentUpon>AddNewStaffWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\ChangeImageInformationForm.xaml.cs">
       <DependentUpon>ChangeImageInformationForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\DeleteImageForm.xaml.cs">
       <DependentUpon>DeleteImageForm.xaml</DependentUpon>
@@ -120,6 +126,7 @@
     </Compile>
     <Compile Include="dao\DeliveryOrderRepository.cs" />
     <Compile Include="dao\RentalBillRepository.cs" />
+    <Compile Include="dao\StaffRepository.cs" />
     <Compile Include="model\delivery\DeliBills.cs" />
     <Compile Include="model\delivery\DeliBillsItems.cs" />
     <Compile Include="model\delivery\DeliOrderItems.cs" />
@@ -134,6 +141,7 @@
     <Compile Include="viewmodel\returning\ReceiptItemViewModel.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
+    <Compile Include="model\staff\Staff.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddNewViewModel.cs" />
     <Compile Include="viewmodel\delivery\detail order\DeliveryAddNewAlbumViewModel.cs" />
     <Compile Include="viewmodel\delivery\detail order\DeliveryCheckOutViewModel.cs" />
@@ -167,6 +175,12 @@
     </Compile>
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="viewmodel\staff\AddStaffViewModel.cs" />
+    <Compile Include="viewmodel\staff\ChangePasswordViewModel.cs" />
+    <Compile Include="viewmodel\staff\StaffManageViewModel.cs" />
+    <Compile Include="view\staff\StaffManagePage.xaml.cs">
+      <DependentUpon>StaffManagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="viewmodel\returning\ReturningViewModel.cs" />
     <Compile Include="view\delivery\DeliveryCheckOutPage.xaml.cs">
@@ -238,7 +252,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\AddNewStaffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\ChangeImageInformationForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -384,6 +406,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="view\staff\StaffManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\delivery\DeliveryCheckOutPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -511,7 +537,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bus\" />
-    <Folder Include="model\staff\" />
     <Folder Include="viewmodel\login\" />
     <Folder Include="view\login\" />
   </ItemGroup>
@@ -556,6 +581,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\guest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\staff-ava.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\img_paid.png" />

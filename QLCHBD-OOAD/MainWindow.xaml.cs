@@ -20,6 +20,7 @@ using QLCHBD_OOAD.viewmodel;
 using QLCHBD_OOAD.viewmodel.images;
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.report;
+using QLCHBD_OOAD.view.staff;
 using QLCHBD_OOAD.view.guest;
 
 namespace QLCHBD_OOAD
@@ -41,10 +42,26 @@ namespace QLCHBD_OOAD
             RenalDiskDetailForm.ToggleForm += ToggleForm;
             RentalAddMember.ToggleForm += ToggleForm;
             AddNewOrderImageWindow.ToggleForm += ToggleForm;
+            AddNewStaffWindow.Toggle += ToggleForm;
+            ChangePasswordWindow.ToggleForm += ToggleForm;
             GuestDetailInformation.toggleForm += ToggleForm;
             RentalAddNewMember.toggle += ToggleSecondaryForm;
         }
 
+        public bool isOpen = false;
+        private void openCloseManageAccount()
+        {
+            if (!isOpen)
+            {
+                spAccountManage.Visibility = Visibility.Visible;
+                isOpen = true;
+            }
+            else
+            {
+                spAccountManage.Visibility = Visibility.Hidden;
+                isOpen = false;
+            }
+        }
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("DashBoard Screen still being making color process, try again another time", "Error");
@@ -193,6 +210,23 @@ namespace QLCHBD_OOAD
             }
         }
 
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            openCloseManageAccount();
+        }
 
+        private void btnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            changePasswordWindow.Show();
+            openCloseManageAccount();
+        }
+
+        private void btnManageStaff_Click(object sender, RoutedEventArgs e)
+        {
+            StaffManagePage content = new StaffManagePage();
+            Holder.Content = content;
+            openCloseManageAccount();
+        }
     }
 }

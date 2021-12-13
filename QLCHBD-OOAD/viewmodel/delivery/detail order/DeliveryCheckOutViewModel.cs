@@ -375,12 +375,17 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
             linkToAssets += fileName;
 
-            file = File.Create(linkToAssets);
-            file.Close();
 
-            File.Copy(images.image, linkToAssets, true);
-            file.Close();
-            images.image = linkToAssets.Replace(@"\", "/");
+            if (images.image != "/QLCHBD-OOAD;component/assets/img_noImage.png")
+            {
+                file = File.Create(linkToAssets);
+                file.Close();
+
+                File.Copy(images.image, linkToAssets, true);
+                file.Close();
+                images.image = linkToAssets.Replace(@"\", "/");
+            }
+
         }
 
     }
