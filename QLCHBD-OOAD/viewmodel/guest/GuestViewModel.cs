@@ -1,6 +1,8 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
+using QLCHBD_OOAD.view.guest;
+using QLCHBD_OOAD.view.rental;
 using QLCHBD_OOAD.viewmodel.rental;
 using System;
 using System.Collections.Generic;
@@ -20,16 +22,21 @@ namespace QLCHBD_OOAD.viewmodel.guest
 
         private GuestReponsitory guestReponsitory;
         public static event CloseForm closeForm;
+        public static event ClearListViewSelected clearListViewSelected;
 
         private ObservableCollection<Guest> _guests;
         public ObservableCollection<Guest> guests
         {
-            get => _guests;
+            get  {
+                _guests = guestReponsitory.getAllGuest();
+                return _guests;
+            }
         }
 
 
         public ICommand Cancel { get; set; }
-        public ICommand Confirm { get; set; }
+        public ICommand Confirm { get; set; }       
+        public ICommand AddMember { get; set; }
 
         private Guest _guest;
         public Guest guest
@@ -37,11 +44,32 @@ namespace QLCHBD_OOAD.viewmodel.guest
             get => _guest;
             set 
             {
-                _guest = value;
-                
-                OnPropertyChanged("guest");
+                _guest = value;                
             }
         }
+        private Guest _selectedGuest;
+        public Guest selectedGuest
+        {
+            get => _selectedGuest;
+            set
+            {
+                _selectedGuest = value;
+                if (_selectedGuest != null)
+                {
+                    onGuestSelected(_selectedGuest);
+                }                
+            }
+        }
+
+
+        private void onGuestSelected(Guest guest)
+        {
+            GuestDetailInformation guestDetail = new GuestDetailInformation(guest);
+            guestDetail.ShowDialog();           
+            clearListViewSelected();
+            OnPropertyChanged("filterListGuest");
+        }
+
         private String _seachKey;
         public String seachKey
         {
@@ -90,21 +118,31 @@ namespace QLCHBD_OOAD.viewmodel.guest
               }
             return filterList;
         }
+        private bool isUpdate;
 
         public GuestViewModel( Guest guest)
         {
             if (guest != null)
             {
                 this.guest = guest;
+                isUpdate = true;
             }
             else
             {
                 _guest = new Guest();
+                isUpdate = false;
             }
             Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmClick(_guest); });
+            AddMember = new RelayCommand<object>((p) => { return true; }, (p) => { onAddMemberClick(); });
             guestReponsitory = GuestReponsitory.getInstance();
             _guests = guestReponsitory.getAllGuest();
             seachKey = "";
+        }
+        private void onAddMemberClick()
+        {
+            RentalAddNewMember rental = new RentalAddNewMember();
+            rental.ShowDialog();            
+            OnPropertyChanged("filterListGuest");
         }
         private bool isValidName(string name)
         {
@@ -141,7 +179,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
                     bool isValid = objAlphaPattern.IsMatch(identityCard);
                     if (isValid)
                     {
-                        if (guestReponsitory.findRentalGuestByIdCard(identityCard) == null)
+                        if (guestReponsitory.findRentalGuestByIdCard(identityCard) == null || isUpdate)
                         {
                             return true;
                         }
@@ -201,25 +239,45 @@ namespace QLCHBD_OOAD.viewmodel.guest
         {
             if (isValidName(guest.name) && isValidIdentityCard(guest.cmnd) && isValidAddress(guest.address) && isValidBirthDate(guest.birthDate))
             {
-                long createdId = createNewGuest(guest);   
-                if (createdId != -1)
+                if (!isUpdate)
                 {
-                    RentalAddMemberViewModel.getIntance().setGuest(createdId.ToString());
-                    MessageBox.Show("Create guest success!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    closeForm();
+                    createNewGuest(guest);
                 }
                 else
                 {
-                    MessageBox.Show("There are some server error! turn back later!", "Success", MessageBoxButton.OK, MessageBoxImage.Error);
-                }            
-                
+                    updateGuest(guest);
+                }
+                                     
+            }
+        }
+        private void updateGuest(Guest guest)
+        {
+            long updateId = guestReponsitory.updateGuest(guest);
+            if (updateId != -1)
+            {
+                RentalAddMemberViewModel.getIntance().setGuest(updateId.ToString());
+                MessageBox.Show("Update guest success!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                closeForm();
+            }
+            else
+            {
+                MessageBox.Show("There are some server error! turn back later!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
             
-           
-        private long createNewGuest(Guest guest)
+        private void createNewGuest(Guest guest)
         {
-            return guestReponsitory.createGuest(guest);
+            long createdId = guestReponsitory.createGuest(guest);
+            if (createdId != -1)
+            {
+                RentalAddMemberViewModel.getIntance().setGuest(createdId.ToString());
+                MessageBox.Show("Create guest success!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                closeForm();
+            }
+            else
+            {
+                MessageBox.Show("There are some server error! turn back later!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }           
         }
     }
 

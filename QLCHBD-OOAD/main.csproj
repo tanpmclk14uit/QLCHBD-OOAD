@@ -129,6 +129,9 @@
     <Compile Include="model\images\ImageRentalInformation.cs" />
     <Compile Include="model\guest\Guest.cs" />
     <Compile Include="model\images\Images.cs" />
+    <Compile Include="model\receipt\Receipt.cs" />
+    <Compile Include="model\receipt\ReceiptItem.cs" />
+    <Compile Include="viewmodel\returning\ReceiptItemViewModel.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
     <Compile Include="viewmodel\delivery\add order\DeliveryAddNewViewModel.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="viewmodel\delivery\DeliveryPageViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\DeliveryProviderDetailViewModel.cs" />
     <Compile Include="viewmodel\delivery\provider\ProviderListWindowViewModel.cs" />
+    <Compile Include="viewmodel\guest\GuestDetailViewModel.cs" />
     <Compile Include="viewmodel\guest\GuestViewModel.cs" />
     <Compile Include="viewmodel\images\AddNewOrderImageViewModel.cs" />
     <Compile Include="viewmodel\images\AddNewOrderItemImageViewModel.cs" />
@@ -164,6 +168,7 @@
     <Compile Include="Components\NewDeliveryWindow.xaml.cs">
       <DependentUpon>NewDeliveryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="viewmodel\returning\ReturningViewModel.cs" />
     <Compile Include="view\delivery\DeliveryCheckOutPage.xaml.cs">
       <DependentUpon>DeliveryCheckOutPage.xaml</DependentUpon>
     </Compile>
@@ -178,6 +183,9 @@
     </Compile>
     <Compile Include="view\delivery\DeliveryProviderDetailPage.xaml.cs">
       <DependentUpon>DeliveryProviderDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\guest\GuestDetailInformation.xaml.cs">
+      <DependentUpon>GuestDetailInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\images\ImageDetailPage.xaml.cs">
       <DependentUpon>ImageDetailPage.xaml</DependentUpon>
@@ -214,6 +222,9 @@
     </Compile>
     <Compile Include="view\report\ReportMainPage.xaml.cs">
       <DependentUpon>ReportMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\returning\ReturnPage.xaml.cs">
+      <DependentUpon>ReturnPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\AddNewAlbumWindow.xaml">
       <SubType>Designer</SubType>
@@ -393,6 +404,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="view\guest\GuestDetailInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\images\ImageDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -438,6 +453,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\report\ReportMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\returning\ReturnPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

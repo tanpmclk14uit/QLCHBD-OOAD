@@ -15,26 +15,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace QLCHBD_OOAD.view.rental
+namespace QLCHBD_OOAD.view.guest
 {
     /// <summary>
-    /// Interaction logic for RentalAddNewMember.xaml
+    /// Interaction logic for GuestDetailInformation.xaml
     /// </summary>
-    public partial class RentalAddNewMember : Window
+    public partial class GuestDetailInformation : Window
     {
-        public static event ToggleFormDialogNotifyHandler toggle;
-        public RentalAddNewMember(Guest guest = null)
+
+        public static event ToggleFormDialogNotifyHandler toggleForm;
+        public GuestDetailInformation(Guest guest)
         {
             InitializeComponent();
-            this.DataContext = new GuestViewModel(guest);
-            GuestViewModel.closeForm += this.Close;
-            toggle();
+            this.DataContext = GuestDetailViewModel.getInstance();
+            if(guest != null)
+            {
+                GuestDetailViewModel.getInstance().setGuest(guest);
+            }
+            toggleForm();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            toggle();
+            toggleForm();
         }
     }
 }

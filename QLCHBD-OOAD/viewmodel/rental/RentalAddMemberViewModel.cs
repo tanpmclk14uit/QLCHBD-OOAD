@@ -1,6 +1,7 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
+using QLCHBD_OOAD.view.rental;
 using QLCHBD_OOAD.viewmodel.guest;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
             }
         }
         public ICommand Confirm { get; set; }
+        public ICommand Edit { get; set; }
         private string _keyword;
         public string keyword
         {
@@ -71,8 +73,16 @@ namespace QLCHBD_OOAD.viewmodel.rental
         {
             guestReponsitory = GuestReponsitory.getInstance();            
             Confirm = new RelayCommand<object>((p) => { return true; }, (p) => { guestTranferInformation(guest); });
+            Edit = new RelayCommand<object>((p) => { return true; }, (p) => { openGuestEditForm(guest); });
         }
-
+        private void openGuestEditForm(Guest guest)
+        {
+            if(guest != null)
+            {
+                RentalAddNewMember rental = new RentalAddNewMember(guest);
+                rental.ShowDialog();
+            }            
+        }
 
         public Guest findGuestById(string id)
         {

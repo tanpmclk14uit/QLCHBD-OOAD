@@ -160,8 +160,12 @@
             </Border>
             <Border Grid.Column="1" Background="White" Margin="15 0 25 15"
                     BorderBrush="Black" BorderThickness="1" CornerRadius="20">
-                <DataGrid Margin="10 20 10 10" AutoGenerateColumns="False" CanUserAddRows="False"
-                          CanUserResizeColumns="False" CanUserDeleteRows="False" IsReadOnly="True"
+                <DataGrid Margin="10 20 10 10" 
+                          AutoGenerateColumns="False" 
+                          CanUserAddRows="False"
+                          CanUserResizeColumns="False"
+                          CanUserDeleteRows="False"
+                          IsReadOnly="True"
                           ItemsSource="{Binding rentalBills, UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Width="1*" Binding="{Binding Path=rentalId}"/>

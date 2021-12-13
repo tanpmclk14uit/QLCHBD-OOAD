@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLCHBD_OOAD.appUtil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace QLCHBD_OOAD.model.retal
         public int returned { get => _returned; }
 
         private DateTime _dueDate;
+
+  
         public string dueDate { get => _dueDate.ToShortDateString();}
 
         public void setDueDate( DateTime date)
@@ -37,6 +40,36 @@ namespace QLCHBD_OOAD.model.retal
 
         private string _image;
         public string image { get => _image; }
+
+        private RentalBillStatus _rentalBillStatus;
+
+        public void setRentalBIllStatus(RentalBillStatus status)
+        {
+            _rentalBillStatus = status;
+        }
+        public string rentalBillStatus
+        {
+            get
+            {
+                if(_rentalBillStatus == RentalBillStatus.OVERDUE)
+                {
+                    return "#FF0000";
+                }
+                else if(_rentalBillStatus == RentalBillStatus.WAITING)
+                {
+                    return "#FFFF00";
+                }
+                else if(_rentalBillStatus == RentalBillStatus.RETURNED)
+                {
+                    return "#00FF00";
+                }
+                else
+                {
+                    return "#FFFFFF";
+                }
+
+            }
+        }
 
         public RentalBillItem(long diskId, string diskName, int amount, int returned, DateTime dueDate, int rentalPrice) 
         {
@@ -57,6 +90,8 @@ namespace QLCHBD_OOAD.model.retal
             _returned = 0;
             _image = image;
         }
+       
         
+
     }
 }

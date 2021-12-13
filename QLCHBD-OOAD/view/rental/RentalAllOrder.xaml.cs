@@ -24,9 +24,12 @@ namespace QLCHBD_OOAD.view.rental
         public RentalAllOrder()
         {
             InitializeComponent();
-            DataContext = RentalPageViewModel.getIntance();
-            
+            DataContext = RentalPageViewModel.getIntance();            
 
+        }
+        private void ListBoxItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            RentalPageViewModel.getIntance().onItemClick();
         }
     }
 }

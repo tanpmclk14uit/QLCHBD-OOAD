@@ -21,7 +21,7 @@
         </Style>
     </Window.Resources>
     <Border Background="White" CornerRadius="20">
-        <Grid Margin="20">
+        <Grid Margin="20 10 20 0">
             <Grid.Resources>
                 <Style x:Key="txtStyle" TargetType="TextBlock">
                     <Setter Property="FontSize" Value="20"></Setter>

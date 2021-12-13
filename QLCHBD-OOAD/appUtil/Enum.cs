@@ -8,7 +8,7 @@ namespace QLCHBD_OOAD.appUtil
 {
     public enum RentalBillStatus
     {
-        OVERDUE, RECEIVEDALL, WAITING
+        OVERDUE, RETURNED, WAITING
     }
     public enum DeliveryOrderStatus
     {

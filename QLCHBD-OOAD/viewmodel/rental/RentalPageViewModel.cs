@@ -1,6 +1,7 @@
 ﻿using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.retal;
+using QLCHBD_OOAD.view.returning;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,11 +16,15 @@ namespace QLCHBD_OOAD.viewmodel.rental
 {
     class RentalPageViewModel : BaseViewModel
     {
-        public static TurnToDetailPageHandler turnAllRentalToDetailRental;
+        public static event TurnToDetailPageHandler turnAllRentalToDetailRental;
+        public static event TurnToDetailPageHandler turnAllRentalToReturn;
+
+
 
         public static ChangePageHandler turnToAddPage;
 
         public ICommand NewOrder { get; set; }
+        public ICommand ReturnCommand { get; set; }
 
         private RentalBill _selectedRentalBill;
         public RentalBill selectedRentalBill
@@ -28,22 +33,25 @@ namespace QLCHBD_OOAD.viewmodel.rental
             set
             {
                 _selectedRentalBill = value;
-                if(value != null)
-                {
-                    turnAllRentalToDetailRental(_selectedRentalBill.id, _selectedRentalBill.guestId);
-                    _selectedRentalBill = null;
-                }               
+                          
             }
+        }
+        public void onItemClick()
+        {
+            if (_selectedRentalBill != null)
+            {
+                turnAllRentalToDetailRental(_selectedRentalBill.id, _selectedRentalBill.guestId);
+            }           
         }
         public ObservableCollection<RentalBill> filterListRentalBill
         {
             get => filterByInfo();
         }
         private RentalBillRepository rentalBillReponsitory;
-        private ObservableCollection<RentalBill> _rentalBills;
+       
         public ObservableCollection<RentalBill> rentalBills
         {
-            get => _rentalBills;
+            get => rentalBillReponsitory.getAllRentalBill();
         }
         private ObservableCollection<String> _selectedStatuses;
         public ObservableCollection<String> selectedStatuses
@@ -57,14 +65,10 @@ namespace QLCHBD_OOAD.viewmodel.rental
             get => _selectedStatus;
             set
             {
-                _selectedStatus = value;
-                _rentalBills = filterRentalBills(value);
-                OnPropertyChanged("seachKey");
-                OnPropertyChanged("filterListRentalBill");
-                OnPropertyChanged("selectedStatus");
+                _selectedStatus = value;                
+                
             }
         }
-
         private String _seachKey;
         public String seachKey
         {
@@ -86,53 +90,23 @@ namespace QLCHBD_OOAD.viewmodel.rental
             }
             return _intance;
         }
+        //Add something to filter
         private void setUpStatuses()
         {
-            _selectedStatuses = new ObservableCollection<string>();
-            _selectedStatuses.Add("All");
-            _selectedStatuses.Add("Over due");
-            _selectedStatuses.Add("Received all");
-            _selectedStatuses.Add("Waiting");
-            selectedStatus = _selectedStatuses[0];
-            OnPropertyChanged("selectedStatuses");
+            _selectedStatuses = new ObservableCollection<string>();            
         }
-        private ObservableCollection<RentalBill> filterRentalBills(String filter)
-        {
-            ObservableCollection<RentalBill> filterRentalBills = new ObservableCollection<RentalBill>();
-            switch (filter)
-            {
-                case "All":
-                    {
-                        filterRentalBills = rentalBillReponsitory.getAllRentalBill();
-                        break;
-                    }
-                case "Over due":
-                    {
-                        filterRentalBills = rentalBillReponsitory.getRentalBillsByFilterStatus(RentalBillStatus.OVERDUE.ToString());
-                        break;
-                    }
-                case "Received all":
-                    {
-                        filterRentalBills = rentalBillReponsitory.getRentalBillsByFilterStatus(RentalBillStatus.RECEIVEDALL.ToString());
-                        break;
-                    }
-                case "Waiting":
-                    {
-                        filterRentalBills = rentalBillReponsitory.getRentalBillsByFilterStatus(RentalBillStatus.WAITING.ToString());
-                        break;
-                    }
-            }
-            return filterRentalBills;
-        }
+        
         private RentalPageViewModel()
         {
-            seachKey = "";
-            _rentalBills = new ObservableCollection<RentalBill>();
+            seachKey = "";            
             rentalBillReponsitory = RentalBillRepository.getIntance();
             NewOrder = new RelayCommand<object>((p) => { return true; }, (p) => { turnToAddPage(); });
+            ReturnCommand = new RelayCommand<object>((p) => { return true; }, (p) => { turnAllRentalToReturn(_selectedRentalBill.id, _selectedRentalBill.guestId); });
             setUpStatuses();
             RentalAddPageViewModel.turnBackToRentalAllOrders += RentalAddPageViewModel_turnBackToRentalAllOrders;
         }
+
+       
 
         private void RentalAddPageViewModel_turnBackToRentalAllOrders()
         {

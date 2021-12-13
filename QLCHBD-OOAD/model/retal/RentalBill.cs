@@ -34,76 +34,21 @@ namespace QLCHBD_OOAD.model.retal
         private int _totalPrice;
         public string totalPrice
         {
-            get => _totalPrice.ToString();
-        }
-        private RentalBillStatus _status;
-        public RentalBillStatus status
-        {
-            get => _status;
-        }
-        private String _stringStatus;
-        public String stringStatus
-        {
-            get => _stringStatus;
-            set
-            {
-                if(value == RentalBillStatus.OVERDUE.ToString())
-                {
-                    _stringStatus = "Over due";
-                }
-                else
-                {
-                    if(value == RentalBillStatus.RECEIVEDALL.ToString())
-                    {
-                        _stringStatus = "Received all";
-                    }
-                    else
-                    {
-                        _stringStatus = "Wating for receive";
-                    }
-                }
-            }
-        }
-        private String _backgroundStatus;
-        public String backgroundStatus
-        {
-            get => _backgroundStatus;
-            set
-            {
-                if (value == RentalBillStatus.WAITING.ToString())
-                {
-                    _backgroundStatus = "#FFFFFF";
-                }
-                else
-                {
-                    if (value == RentalBillStatus.RECEIVEDALL.ToString())
-                    {
-                        _backgroundStatus = "#C6C6C6";
-                    }
-                    else
-                    {
-                        _backgroundStatus = "#E4C7C7";
-                    }
-                }
-            }
+            get => _totalPrice.ToString("#,###");
         }
         
-        public RentalBill(long id, long guestId, string guestName, DateTime createTime, int totalPrice, RentalBillStatus status)
+        public RentalBill(long id, long guestId, string guestName, DateTime createTime, int totalPrice)
         {
             this._id = id;
             this._guestId = guestId;
             this._guestName = guestName;
             this._createTime = createTime;
-            this._totalPrice = totalPrice;
-            this._status = status;
-            this.stringStatus = status.ToString();
-            this.backgroundStatus = status.ToString();
+            this._totalPrice = totalPrice;           
         }
         public RentalBill(long guestId, int totalPrice, RentalBillStatus status)
         {
             this._guestId = guestId;
-            this._totalPrice = totalPrice;
-            this._status = status;
+            this._totalPrice = totalPrice;            
         }
 
     }

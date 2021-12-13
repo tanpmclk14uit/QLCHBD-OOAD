@@ -77,8 +77,23 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-
                 RentalBillItem rentalBill = new RentalBillItem((long)reader[0], (string)reader[1],(int)reader[2],(int)reader[3], (DateTime)reader[4],(int)reader[5]);
+                if(rentalBill.returned < rentalBill.amount)
+                {
+                    if(rentalBill.getDueDate() < DateTime.Now)
+                    {
+                        rentalBill.setRentalBIllStatus(appUtil.RentalBillStatus.OVERDUE);
+                    }
+                    else
+                    {
+                        rentalBill.setRentalBIllStatus(appUtil.RentalBillStatus.WAITING);
+                    }
+                    
+                }
+                else
+                {
+                    rentalBill.setRentalBIllStatus(appUtil.RentalBillStatus.RETURNED);
+                }
                 rentalBillItems.Add(rentalBill);
             }
             database.closeConnection();
