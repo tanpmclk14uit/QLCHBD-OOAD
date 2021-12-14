@@ -31,7 +31,7 @@ namespace QLCHBD_OOAD.view.delivery
             InitializeComponent();
             DataContext = DeliveryPageViewModel.getInstance();
             deliveryHolder.Content = new DeliveryMainPage();
-            DeliveryDetailPageViewModel.turnToDeliveryPage += turnBackToMainPage;
+            DeliveryDetailPageViewModel.turnToDeliveryPage += turnBackToDeliveryMainPage;
             DeliveryDetailPageViewModel.turnToDeliveryCheckOutPage += turnDeliveryCheckOutPage;
             ProviderListWindowViewModel.turnToProviderDetailPage += turnToProviderDetailPage;
             DeliveryProviderDetailViewModel.turnToDeliveryDetailPage += turnBackToMainPage;
