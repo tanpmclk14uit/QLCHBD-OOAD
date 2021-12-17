@@ -30,7 +30,7 @@
                     </Grid.ColumnDefinitions>
                     <Border BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="White">
-                            <TextBlock Text="195" VerticalAlignment="Center"
+                            <TextBlock Text="{Binding numberOnDelivery}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
                             <TextBlock Text="DELIVERY" VerticalAlignment="Bottom"
@@ -47,7 +47,7 @@
                 </Grid>
             </Border>
             <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
-                    Grid.Row="1">
+                    Grid.Row="1" x:Name="borrowed" MouseDown="borrowed_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.37*"/>
@@ -55,7 +55,7 @@
                     </Grid.ColumnDefinitions>
                     <Border BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="White">
-                            <TextBlock Text="195" VerticalAlignment="Center"
+                            <TextBlock Text="{Binding numberOnBorrow}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
                             <TextBlock Text="BORROWED" VerticalAlignment="Bottom"
@@ -78,7 +78,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
-                    Grid.Row="1">
+                    Grid.Row="1" x:Name="total" MouseDown="total_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.37*"/>
@@ -86,7 +86,7 @@
                     </Grid.ColumnDefinitions>
                     <Border BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="White">
-                            <TextBlock Text="195" VerticalAlignment="Center"
+                            <TextBlock Text="{Binding total}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
                             <TextBlock Text="TOTAL" VerticalAlignment="Bottom"
@@ -103,7 +103,7 @@
                 </Grid>
             </Border>
             <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
-                    Grid.Row="0">
+                    Grid.Row="0" x:Name="inStock" MouseDown="inStock_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.37*"/>
@@ -111,7 +111,7 @@
                     </Grid.ColumnDefinitions>
                     <Border BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="White">
-                            <TextBlock Text="195" VerticalAlignment="Center"
+                            <TextBlock Text="{Binding numberInStock}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
                             <TextBlock Text="IN STOCK" VerticalAlignment="Bottom"

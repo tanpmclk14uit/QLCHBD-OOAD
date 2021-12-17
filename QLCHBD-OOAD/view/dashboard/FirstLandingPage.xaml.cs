@@ -23,6 +23,9 @@ namespace QLCHBD_OOAD.view.dashboard
     public partial class FirstLandingPage : Page
     {
         public static event OnChangePage onChangePageDelivering;
+        public static event OnChangePage onChangePageTotal;
+        public static event OnChangePage onChangePageInStock;
+        public static event OnChangePage onChangePageBorrowed;
         public FirstLandingPage()
         {
             InitializeComponent();
@@ -32,6 +35,21 @@ namespace QLCHBD_OOAD.view.dashboard
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             onChangePageDelivering();
+        }
+
+        private void total_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            onChangePageTotal();
+        }
+
+        private void inStock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            onChangePageInStock();
+        }
+
+        private void borrowed_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            onChangePageBorrowed();
         }
     }
 }

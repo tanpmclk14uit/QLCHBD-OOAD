@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace QLCHBD_OOAD.dao
 {
@@ -98,6 +99,20 @@ namespace QLCHBD_OOAD.dao
             }
             database.closeConnection();
             return max;
+        }
+
+        public long getNumberDeliveringImage()
+        {
+            string command = "Select Sum(import_form_item.quantity) from `import_form_item`";
+            var reader = database.executeCommand(command);
+            long result = 0;
+            while (reader.Read())
+            {
+                if (reader[0] != DBNull.Value)
+                result = Convert.ToInt64((Decimal)reader[0]);
+            }
+            database.closeConnection();
+            return result;
         }
 
     }

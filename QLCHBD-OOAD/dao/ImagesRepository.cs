@@ -196,6 +196,7 @@ namespace QLCHBD_OOAD.dao
             return result;
         }
 
+        // for set ID
         public long getNumberOfImage()
         {
             string command = "Select count(*) from `disk`";
@@ -204,6 +205,21 @@ namespace QLCHBD_OOAD.dao
              while (reader.Read())
             {
                 result = (long)reader[0];
+            }
+            db.closeConnection();
+            return result;
+        }
+
+        //for get all amount of image
+        public long getTotalOfImage()
+        {
+            string command = "Select Sum(disk.quantity) from `disk`";
+            var reader = db.executeCommand(command);
+            long result = 0;
+            while (reader.Read())
+            {
+                if (reader[0] != DBNull.Value)
+                    result = Convert.ToInt64((Decimal)reader[0]);
             }
             db.closeConnection();
             return result;

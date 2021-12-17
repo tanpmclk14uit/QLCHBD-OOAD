@@ -9,6 +9,7 @@ namespace QLCHBD_OOAD.model.staff
 {
     class Staff
     {
+        public Staff() { }
         public Staff(long id, String name, String userName, String password, String residentId, bool isManager, bool isLogedIn, StaffStatus status, DateTime birthday, string image)
         {
             this._id = id;
@@ -27,6 +28,10 @@ namespace QLCHBD_OOAD.model.staff
         public long id
         {
             get => _id;
+            set
+            {
+                _id = value;
+            }
         }
 
         private int _salaryCoefficient;
@@ -39,12 +44,20 @@ namespace QLCHBD_OOAD.model.staff
         public String name
         {
             get => _name;
+            set
+            {
+                _name = value;
+            }
         }
 
         private String _userName;
         public String userName
         {
             get => _userName;
+            set
+            {
+                _userName = value;
+            }
         }
 
         private String _password;
@@ -61,12 +74,20 @@ namespace QLCHBD_OOAD.model.staff
         public String residentId
         {
             get => _residentId;
+            set
+            {
+                _residentId = value;
+            }
         }
 
         private String _image;
         public String image
         {
             get => _image;
+            set
+            {
+                _image = value;
+            }
         }
 
         private StaffStatus _status;

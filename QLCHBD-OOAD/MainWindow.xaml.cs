@@ -49,6 +49,28 @@ namespace QLCHBD_OOAD
             GuestDetailInformation.toggleForm += ToggleForm;
             RentalAddNewMember.toggle += ToggleSecondaryForm;
             FirstLandingPage.onChangePageDelivering += onChangePageDelivering;
+            FirstLandingPage.onChangePageTotal += onChangePageTotal;
+            FirstLandingPage.onChangePageBorrowed += onChangeBorrowed;
+            FirstLandingPage.onChangePageInStock += onChangeInStock;
+
+        }
+
+        private void onChangeInStock()
+        {
+            ImageFunctionPage content = new ImageFunctionPage();
+            Holder.Content = content;
+        }
+
+        private void onChangeBorrowed()
+        {
+            RentalMainPage rentalMainPage = new RentalMainPage();
+            Holder.Content = rentalMainPage;
+        }
+
+        private void onChangePageTotal()
+        {
+            ReportMainPage content = new ReportMainPage();
+            Holder.Content = content;
         }
 
         private void onChangePageDelivering()

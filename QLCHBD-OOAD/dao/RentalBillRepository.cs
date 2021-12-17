@@ -32,7 +32,20 @@ namespace QLCHBD_OOAD.dao
             database = Db.getInstace();
         }
 
-        
+        public long getNumberBorrowedImage()
+        {
+            string command = "Select Sum(rental_bill_item.quantity - rental_bill_item.receive_quantity) from `rental_bill_item`";
+            var reader = database.executeCommand(command);
+            long result = 0;         
+            while (reader.Read())
+            {
+                if (reader[0] != DBNull.Value)
+                    result = Convert.ToInt64((Decimal)reader[0]);
+            }
+            database.closeConnection();
+            return result;
+        }
+
         public ObservableCollection<RentalBill> getRentalBillsById(string id)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();

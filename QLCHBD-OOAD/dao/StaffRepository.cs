@@ -36,7 +36,7 @@ namespace QLCHBD_OOAD.dao
             var reader = db.executeCommand(command);
             while (reader.Read())
             {
-                Staff staff = new Staff((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4],(bool)reader[5], (bool)reader[6], stringToStaffStatus((string)reader[7]), (DateTime)reader[8], (string)reader[9]);
+                Staff staff = new Staff((long)reader[0], (string)reader[1], (string)reader[2], PasswordHash.Decrypt((string)reader[3]), (string)reader[4],(bool)reader[5], (bool)reader[6], stringToStaffStatus((string)reader[7]), (DateTime)reader[8], (string)reader[9]);
                 staffs.Add(staff);
             }
             db.closeConnection();
@@ -50,7 +50,6 @@ namespace QLCHBD_OOAD.dao
             var reader = db.executeCommand(command);
             while(reader.Read())
             {
-                MessageBox.Show(reader[0].GetType().ToString());
                 i = Convert.ToInt32((long)reader[0]);
             }
             db.closeConnection();
@@ -59,9 +58,38 @@ namespace QLCHBD_OOAD.dao
 
         public void changePassword(String newPassword, long id)
         {
-            string command = $"UPDATE staff SET password = {newPassword} WHERE id = {id}";
+            string command = $"UPDATE staff SET password = {PasswordHash.Encrypt(newPassword)} WHERE id = {id}";
             var reader = db.executeCommand(command);
             db.closeConnection();
+        }
+
+        //username already exist
+        public bool isRightPassword(String username, String password)
+        {
+            string command = $"SELECT staff.password FROM staff WHERE staff.user_name = '{username}'";
+            var reader = db.executeCommand(command);
+            while (reader.Read())
+            {
+                if (PasswordHash.Decrypt((string)reader[0]) == password)
+                {
+                    return true;
+                }    
+            }
+            return false;
+        }
+
+        public Staff getStaffWithUsername(String username)
+        {
+            Staff result = new Staff();
+            string command = $"SELECT id, name, user_name, password, cmnd_cccd, is_manager, is_loged_in, status, birth_date, image FROM `staff` WHERE staff.user_name = '{username}'";
+            var reader = db.executeCommand(command);
+            while (reader.Read())
+            {
+                Staff staff = new Staff((long)reader[0], (string)reader[1], (string)reader[2], PasswordHash.Decrypt((string)reader[3]), (string)reader[4], (bool)reader[5], (bool)reader[6], stringToStaffStatus((string)reader[7]), (DateTime)reader[8], (string)reader[9]);
+                Replication.CopyPropertiesTo(staff, result);
+            }
+            db.closeConnection();
+            return result;
         }
 
         public void deleteStaff(long id)
