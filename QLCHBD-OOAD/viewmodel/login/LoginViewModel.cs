@@ -55,7 +55,6 @@ namespace QLCHBD_OOAD.viewmodel.login
                 {
                     Staff staff = staffRepository.getStaffWithUsername(name);
                     CurrentStaff.getInstance().setStaff(staff);
-                    MessageBox.Show(CurrentStaff.getInstance().currentStaff.userName);
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     loginHanlder();
