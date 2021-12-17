@@ -1,0 +1,132 @@
+﻿<Page x:Class="QLCHBD_OOAD.view.dashboard.FirstLandingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QLCHBD_OOAD.view.dashboard"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:components="clr-namespace:QLCHBD_OOAD.Components"
+      mc:Ignorable="d" 
+      d:DesignHeight="985"
+      d:DesignWidth="1580"
+      Background="#E6EBEE"
+      Title="FirstLandingPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+                    MouseDown="Border_MouseDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.37*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="White">
+                            <TextBlock Text="195" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                            <TextBlock Text="DELIVERY" VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="#4DD0E5" >
+                            <Image Source="/QLCHBD-OOAD;component/Assets/delivery.png"
+                               Margin="22.5 0 22.5 0"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+                    Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.37*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="White">
+                            <TextBlock Text="195" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                            <TextBlock Text="BORROWED" VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="#6AC176" >
+                            <Image Source="/QLCHBD-OOAD;component/Assets/borrowed.png"
+                               Margin="22.5 0 22.5 0"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+                    Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.37*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="White">
+                            <TextBlock Text="195" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                            <TextBlock Text="TOTAL" VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="#F6BB86" >
+                            <Image Source="/QLCHBD-OOAD;component/Assets/total.png"
+                               Margin="22.5 0 22.5 0"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+                    Grid.Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.37*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="White">
+                            <TextBlock Text="195" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                            <TextBlock Text="IN STOCK" VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center" FontSize="60"
+                                   FontWeight="Bold"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
+                        <Grid Background="#E26D85" >
+                            <Image Source="/QLCHBD-OOAD;component/Assets/inStock.png"
+                               Margin="22.5 0 22.5 0"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

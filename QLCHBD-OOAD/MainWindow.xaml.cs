@@ -22,6 +22,8 @@ using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.report;
 using QLCHBD_OOAD.view.staff;
 using QLCHBD_OOAD.view.guest;
+using QLCHBD_OOAD.view.dashboard;
+using QLCHBD_OOAD.appUtil;
 
 namespace QLCHBD_OOAD
 {
@@ -34,8 +36,8 @@ namespace QLCHBD_OOAD
         public MainWindow()
         {
             InitializeComponent();
-            //HomeScreen content = new HomeScreen();
-            //Holder.Content = content;
+            FirstLandingPage content = new FirstLandingPage();
+            Holder.Content = content;
             diskView.ToggleForm += ToggleForm;
             DeleteImageForm.ToggleForm += ToggleForm;
             ChangeImageInformationForm.ToggleForm += ToggleForm;
@@ -46,6 +48,13 @@ namespace QLCHBD_OOAD
             ChangePasswordWindow.ToggleForm += ToggleForm;
             GuestDetailInformation.toggleForm += ToggleForm;
             RentalAddNewMember.toggle += ToggleSecondaryForm;
+            FirstLandingPage.onChangePageDelivering += onChangePageDelivering;
+        }
+
+        private void onChangePageDelivering()
+        {
+            DeliveryMainPage content = new DeliveryMainPage();
+            Holder.Content = content;
         }
 
         public bool isOpen = false;
@@ -64,15 +73,13 @@ namespace QLCHBD_OOAD
         }
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("DashBoard Screen still being making color process, try again another time", "Error");
-            //Screen content = new Screen();
-            //Holder.Content = content;
+            FirstLandingPage content = new FirstLandingPage();
+            Holder.Content = content;
         }
 
         private void bttImages_Click(object sender, RoutedEventArgs e)
         {
-            //Screen content = new Screen();
-            //Holder.Content = content;
+
             ImageFunctionPage imagesPage = new ImageFunctionPage();
             Holder.Content = imagesPage;
         }
