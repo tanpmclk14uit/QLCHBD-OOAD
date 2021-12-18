@@ -91,19 +91,37 @@ namespace QLCHBD_OOAD.viewmodel.returning
             updateRentedDisk();
             updateReturnedByRentalBillItem();
         }
+        public bool isReturnListEmpty()
+        {
+            foreach (ReceiptItemViewModel receipt in receiptItems)
+            {
+                if (receipt.isSelected && (receipt.returned != 0 || receipt.lost != 0))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         private void updateRentedDisk()
         {
             foreach (ReceiptItemViewModel receipt in receiptItems)
             {
-              
-                detailRentalBillReponsitory.updateRentedById(receipt.diskId, receipt.returned);
+
+                if (receipt.isSelected && receipt.returned != 0)
+                {
+                    detailRentalBillReponsitory.updateRentedById(receipt.diskId, receipt.returned);
+                }   
             }
-        }
+        }        
+       
         private void updateReturnedByRentalBillItem()
         {
             foreach (ReceiptItemViewModel receipt in receiptItems)
             {
-                detailRentalBillReponsitory.updateReturnById(receipt.id, receipt.returned);
+                if(receipt.isSelected == true && receipt.returned !=0)
+                {
+                    detailRentalBillReponsitory.updateReturnById(receipt.id, receipt.returned);
+                }                
             }
             _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(rentalId);
             _receiptItems = mapToReceiptItems(_rentalBillItems);

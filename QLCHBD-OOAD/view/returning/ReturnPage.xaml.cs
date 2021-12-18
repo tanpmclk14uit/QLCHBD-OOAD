@@ -52,12 +52,21 @@ namespace QLCHBD_OOAD.view.returning
 
         private void return_Click(object sender, RoutedEventArgs e)
         {
-            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to return all disks?");
-            myDialog.ShowDialog();
-            if(myDialog.action == true)
+            if (returningViewModel.isReturnListEmpty())
             {
-                returningViewModel.makeNewReceipt();
-            }            
+                MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ERROR, "Nothing returned! Please check return column and check box!");
+                myDialog.ShowDialog();
+            }
+            else
+            {
+                MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to return all disks?");
+                myDialog.ShowDialog();
+                if (myDialog.action == true)
+                {
+                    returningViewModel.makeNewReceipt();
+                }
+            }
+                      
         }
     }
 }
