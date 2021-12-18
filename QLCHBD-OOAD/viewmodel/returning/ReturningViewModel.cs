@@ -17,6 +17,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
     {
         public ICommand Back { get; set; }
 
+
         public static event TurnBackPageHandler turnBackPageHandler;
 
         private Visibility _isMember;
@@ -62,9 +63,10 @@ namespace QLCHBD_OOAD.viewmodel.returning
         {
             get => _orderId;
         }
+        private long rentalId;
         public ReturningViewModel(long rentalId, long guestId)
         {
-            Back = new RelayCommand<object>((p) => { return true; }, (p) => { backToALlRentalPage(); });
+            Back = new RelayCommand<object>((p) => { return true; }, (p) => { backToALlRentalPage(); });           
             _orderId = rentalId.ToString();
             detailRentalBillReponsitory = DetailRentalBillReponsitory.getIntance();
             _guest = detailRentalBillReponsitory.getGuestById(guestId);
@@ -76,12 +78,36 @@ namespace QLCHBD_OOAD.viewmodel.returning
             {
                 isMember = Visibility.Hidden;
             }
+            this.rentalId = rentalId;
             _createBy = detailRentalBillReponsitory.getOrderCreateBy(rentalId);
             _createDate = detailRentalBillReponsitory.getOrderCreateDate(rentalId);           
             _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(rentalId);
             _receiptItems = mapToReceiptItems(_rentalBillItems);
             ReceiptItemViewModel.onCalculateFee += ReceiptItemViewModel_onCalculateFee;
-           
+        }
+
+        public void makeNewReceipt()
+        {
+            updateRentedDisk();
+            updateReturnedByRentalBillItem();
+        }
+        private void updateRentedDisk()
+        {
+            foreach (ReceiptItemViewModel receipt in receiptItems)
+            {
+              
+                detailRentalBillReponsitory.updateRentedById(receipt.diskId, receipt.returned);
+            }
+        }
+        private void updateReturnedByRentalBillItem()
+        {
+            foreach (ReceiptItemViewModel receipt in receiptItems)
+            {
+                detailRentalBillReponsitory.updateReturnById(receipt.id, receipt.returned);
+            }
+            _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(rentalId);
+            _receiptItems = mapToReceiptItems(_rentalBillItems);
+            OnPropertyChanged("receiptItems");
         }
         private double _totalFee;
 
@@ -117,7 +143,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
             foreach (var rentalItem in rentalBillItems)
             {
                 int amount = rentalItem.amount - rentalItem.returned;
-                ReceiptItemViewModel receipt = new ReceiptItemViewModel(rentalItem.diskId, rentalItem.diskName, rentalItem.rentalPrice, amount, rentalItem.getDueDate());
+                ReceiptItemViewModel receipt = new ReceiptItemViewModel(rentalItem.id, rentalItem.diskId, rentalItem.diskName, rentalItem.rentalPrice, amount, rentalItem.getDueDate());
                 receiptItems.Add(receipt);
             }
             return receiptItems;

@@ -48,7 +48,6 @@ namespace QLCHBD_OOAD.viewmodel.rental
                     RenalDiskDetailForm renalDiskDetailForm = new RenalDiskDetailForm(_selectedDisk);
                     renalDiskDetailForm.Show();                    
                 }
-                
             }
         }
         private Guest _guest;
@@ -112,6 +111,14 @@ namespace QLCHBD_OOAD.viewmodel.rental
             }
         }
 
+        public void onReturn()
+        {
+            _rentalBillItems = new ObservableCollection<RentalBillItem>();
+            _allImages = imagesRepository.getAllImagesForRental();
+            isMember = Visibility.Hidden;
+            _keyword = "";
+            guest = null;
+        }
         private RentalAddPageViewModel()
         {            
             _rentalBillItems = new ObservableCollection<RentalBillItem>();            
@@ -124,7 +131,6 @@ namespace QLCHBD_OOAD.viewmodel.rental
             _keyword = "";
             RentalDiskDetailFormViewModel.addNewRentalBillItem += RentalDiskDetailFormViewModel_addNewRentalBillItem;
             RentalAddMemberViewModel.guestTranferInformation += RentalAddMemberViewModel_guestTranferInformation;
-            
             rentalBillReponsitory = RentalBillRepository.getIntance();
         }
 
@@ -143,7 +149,8 @@ namespace QLCHBD_OOAD.viewmodel.rental
                 {
                     isMember = Visibility.Hidden;
                 }
-            }           
+            }
+            
         }
 
         private void onAddMemberClick()
@@ -170,7 +177,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
         private void onConfirmClick()
         {
             if(guest != null)
-            {
+            { 
                 RentalBill rentalBill = new RentalBill(guest.id, Convert.ToInt32(totalPrice), RentalBillStatus.WAITING);
                 rentalBillReponsitory.createNewRentalBill(rentalBill, 1, rentalBillItems);
             }

@@ -45,6 +45,7 @@ namespace QLCHBD_OOAD
             AddNewStaffWindow.Toggle += ToggleForm;
             ChangePasswordWindow.ToggleForm += ToggleForm;
             GuestDetailInformation.toggleForm += ToggleForm;
+            MyDialog.toggleForm += ToggleForm;
             RentalAddNewMember.toggle += ToggleSecondaryForm;
         }
 

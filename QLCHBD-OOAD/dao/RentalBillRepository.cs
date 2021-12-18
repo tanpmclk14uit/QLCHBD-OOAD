@@ -134,7 +134,7 @@ namespace QLCHBD_OOAD.dao
         public void createNewRentalBill(RentalBill rental, long staffID, ObservableCollection<RentalBillItem> rentalBillItems)
         {
             long lastInsertId = -1;
-            string command = $"INSERT INTO `rental_bill`(`guess_id`, `create_by`, `total_price`) VALUES ('{rental.guestId}','{staffID}','{rental.totalPrice}')";
+            string command = $"INSERT INTO `rental_bill`(`guess_id`, `create_by`, `total_price`) VALUES ('{rental.guestId}','{staffID}','{rental.totalPriceSave}')";
            
             try
             {
@@ -162,7 +162,7 @@ namespace QLCHBD_OOAD.dao
         private void createNewRentalBillItem(RentalBillItem rentalBillItem, long rentalId)
         {   
             string format = "yyyy-MM-dd HH:mm:ss";
-            string command = $"INSERT INTO `rental_bill_item`(`rental_id`, `quantity`, `rental_price`, `disk_name`, `disk_image`, `disk_id`, `due_date`, `receive_quantity`,`status` ) VALUES ('{rentalId}','{rentalBillItem.amount}','{rentalBillItem.rentalPrice}','{rentalBillItem.diskName}','{rentalBillItem.image}','{rentalBillItem.diskId}','{rentalBillItem.getDueDate().ToString(format)}','{rentalBillItem.returned}')";
+            string command = $"INSERT INTO `rental_bill_item`(`rental_id`, `quantity`, `rental_price`, `disk_name`, `disk_image`, `disk_id`, `due_date`, `receive_quantity` ) VALUES ('{rentalId}','{rentalBillItem.amount}','{rentalBillItem.rentalPrice}','{rentalBillItem.diskName}','{rentalBillItem.image}','{rentalBillItem.diskId}','{rentalBillItem.getDueDate().ToString(format)}','{rentalBillItem.returned}')";
             var reader = database.executeCommand(command);
             database.closeConnection();
         }
@@ -172,5 +172,8 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             database.closeConnection();
         }
+
+        
+
     }
 }

@@ -12,6 +12,12 @@ namespace QLCHBD_OOAD.viewmodel.returning
     class ReceiptItemViewModel: BaseViewModel
     {
         public static event CalculateFee onCalculateFee;
+
+        private long _id;
+        public long id
+        {
+            get => _id;           
+        }
         private long _diskId;
         public long diskId
         {
@@ -136,8 +142,9 @@ namespace QLCHBD_OOAD.viewmodel.returning
             double total = lostFee + overDueFee;
             return total;
         }
-        public ReceiptItemViewModel(long diskId, string diskName, int rentalPrice, int amount,  DateTime dueDate)
+        public ReceiptItemViewModel(long id,long diskId, string diskName, int rentalPrice, int amount,  DateTime dueDate)
         {
+            this._id = id;
             this._diskId = diskId;
             this._diskName = diskName;
             this._amount = amount;
@@ -158,10 +165,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
             {
                 this._overDueDays = 0;
             }
-            _additionalFee = 0;
-
-            
-            
+            _additionalFee = 0;        
         }
     }
 }

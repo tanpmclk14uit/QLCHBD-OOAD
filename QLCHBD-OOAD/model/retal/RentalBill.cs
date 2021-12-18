@@ -32,6 +32,10 @@ namespace QLCHBD_OOAD.model.retal
             get => _createTime.ToShortDateString();
         }
         private int _totalPrice;
+        public int totalPriceSave
+        {
+            get => _totalPrice;
+        }
         public string totalPrice
         {
             get => _totalPrice.ToString("#,###");

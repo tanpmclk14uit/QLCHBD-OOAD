@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.viewmodel.returning;
+﻿using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.viewmodel.returning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace QLCHBD_OOAD.view.returning
     public ReturnPage(long retalOrderId, long guestID)
     {
         InitializeComponent();
-            returningViewModel = new ReturningViewModel(retalOrderId, guestID);
+        returningViewModel = new ReturningViewModel(retalOrderId, guestID);
         DataContext = returningViewModel;
     }
 
@@ -47,6 +48,16 @@ namespace QLCHBD_OOAD.view.returning
         private void returnAll_Unchecked(object sender, RoutedEventArgs e)
         {
             returningViewModel.unCheckReturnAll();
+        }
+
+        private void return_Click(object sender, RoutedEventArgs e)
+        {
+            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to return all disks?");
+            myDialog.ShowDialog();
+            if(myDialog.action == true)
+            {
+                returningViewModel.makeNewReceipt();
+            }            
         }
     }
 }

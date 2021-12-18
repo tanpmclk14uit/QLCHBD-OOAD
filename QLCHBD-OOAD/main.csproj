@@ -113,6 +113,9 @@
     <Compile Include="Components\DeliveryProviderListWindow.xaml.cs">
       <DependentUpon>DeliveryProviderListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\MyDialog.xaml.cs">
+      <DependentUpon>MyDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="dao\AlbumRepository.cs" />
     <Compile Include="dao\DeliveryBilingItemsRepository.cs" />
     <Compile Include="dao\DeliveryBillRepository.cs" />
@@ -126,6 +129,7 @@
     </Compile>
     <Compile Include="dao\DeliveryOrderRepository.cs" />
     <Compile Include="dao\RentalBillRepository.cs" />
+    <Compile Include="dao\ReturnRepository.cs" />
     <Compile Include="dao\StaffRepository.cs" />
     <Compile Include="model\delivery\DeliBills.cs" />
     <Compile Include="model\delivery\DeliBillsItems.cs" />
@@ -319,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\LogOutForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\MyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -73,11 +73,11 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<RentalBillItem> getAllRentalBillItemByRentalId(long id)
         {
             ObservableCollection<RentalBillItem> rentalBillItems = new ObservableCollection<RentalBillItem>();
-            string command = "SELECT disk_id, disk_name, quantity, receive_quantity, due_date, rental_price FROM `rental_bill_item` where rental_id =" + id;
+            string command = "SELECT disk_id, disk_name, quantity, receive_quantity, due_date, rental_price, id FROM `rental_bill_item` where rental_id =" + id;
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                RentalBillItem rentalBill = new RentalBillItem((long)reader[0], (string)reader[1],(int)reader[2],(int)reader[3], (DateTime)reader[4],(int)reader[5]);
+                RentalBillItem rentalBill = new RentalBillItem((long) reader[6],(long)reader[0], (string)reader[1],(int)reader[2],(int)reader[3], (DateTime)reader[4],(int)reader[5]);
                 if(rentalBill.returned < rentalBill.amount)
                 {
                     if(rentalBill.getDueDate() < DateTime.Now)
@@ -98,6 +98,18 @@ namespace QLCHBD_OOAD.dao
             }
             database.closeConnection();
             return rentalBillItems;
+        }
+        public void updateReturnById(long id, int returned)
+        {
+            string command = $"UPDATE `rental_bill_item` SET receive_quantity = receive_quantity + {returned} where id = {id}";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void updateRentedById(long id, int returned)
+        {
+            string command = $"UPDATE `disk` SET rented = rented - {returned} where id = {id}";
+            database.executeCommand(command);
+            database.closeConnection();
         }
     }
 }

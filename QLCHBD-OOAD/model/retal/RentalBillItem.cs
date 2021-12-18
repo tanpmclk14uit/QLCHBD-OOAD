@@ -9,6 +9,12 @@ namespace QLCHBD_OOAD.model.retal
 {
     public class RentalBillItem
     {
+        private long _id;
+        public long id
+        {
+            get => _id;
+        }
+
         private long _diskId;
         public long diskId { get => _diskId; }
 
@@ -71,8 +77,9 @@ namespace QLCHBD_OOAD.model.retal
             }
         }
 
-        public RentalBillItem(long diskId, string diskName, int amount, int returned, DateTime dueDate, int rentalPrice) 
+        public RentalBillItem(long id, long diskId, string diskName, int amount, int returned, DateTime dueDate, int rentalPrice) 
         {
+            _id = id;
             _diskId = diskId;
             _diskName = diskName;
             _amount = amount;

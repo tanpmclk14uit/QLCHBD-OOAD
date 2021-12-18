@@ -23,4 +23,9 @@ namespace QLCHBD_OOAD.appUtil
     {
         WORKING, FIRED 
     }
+
+    public enum MyDialogStyle
+    {
+        CONFIRM, ALERT, ERROR, INFORMATION
+    }
 }
