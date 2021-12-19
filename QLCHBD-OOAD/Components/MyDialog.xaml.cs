@@ -65,8 +65,8 @@ namespace QLCHBD_OOAD.Components
                 case MyDialogStyle.INFORMATION:
                 {
                         errorIcon.Visibility = Visibility.Hidden;
-                        alertIcon.Visibility = Visibility.Visible;
-                        confirmIcon.Visibility = Visibility.Hidden;
+                        alertIcon.Visibility = Visibility.Hidden;
+                        confirmIcon.Visibility = Visibility.Visible;
                         cancel.Visibility = Visibility.Hidden;
                         confirm.Background = (Brush)bc.ConvertFrom("#28A745");
                         break;

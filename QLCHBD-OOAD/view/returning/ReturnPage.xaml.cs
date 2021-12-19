@@ -63,7 +63,7 @@ namespace QLCHBD_OOAD.view.returning
                 myDialog.ShowDialog();
                 if (myDialog.action == true)
                 {
-                    returningViewModel.makeNewReceipt();
+                    returningViewModel.returnProcess();
                 }
             }
                       

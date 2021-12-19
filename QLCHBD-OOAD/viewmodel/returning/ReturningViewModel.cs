@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
 using QLCHBD_OOAD.model.retal;
@@ -85,12 +86,21 @@ namespace QLCHBD_OOAD.viewmodel.returning
             _receiptItems = mapToReceiptItems(_rentalBillItems);
             ReceiptItemViewModel.onCalculateFee += ReceiptItemViewModel_onCalculateFee;
         }
-
-        public void makeNewReceipt()
+        public void returnProcess()
         {
+            makeNewReceipt();
             updateRentedDisk();
             updateReturnedByRentalBillItem();
             updateReturnedAllFieldByRentalId();
+            MyDialog myDialog = new MyDialog(MyDialogStyle.INFORMATION, "Returned success");
+            myDialog.ShowDialog();
+            turnBackPageHandler();
+        }
+
+        private void makeNewReceipt()
+        {
+            //do make new recepit
+
         }
         public void updateReturnedAllFieldByRentalId()
         {
@@ -121,6 +131,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
                 }   
                 if(receipt.isSelected && receipt.lost != 0)
                 {
+                    detailRentalBillReponsitory.updateRentedById(receipt.diskId, receipt.lost);
                     detailRentalBillReponsitory.updateTotalDiskWhenLost(receipt.diskId, receipt.lost);
                 }
 
