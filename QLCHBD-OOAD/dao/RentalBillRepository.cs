@@ -33,10 +33,10 @@ namespace QLCHBD_OOAD.dao
         }
 
         
-        public ObservableCollection<RentalBill> getRentalBillsById(string id)
+        public ObservableCollection<RentalBill> getRentalBillsThatNotReturnAllById(string id)
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
-            string command = "SELECT * FROM `rental_bill` WHERE ID = " + id;
+            string command = $"SELECT * FROM `rental_bill` WHERE ID = {id} and returned_all = 0";
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
@@ -116,10 +116,10 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return rentalBills;
         }
-        public ObservableCollection<RentalBill> getAllRentalBill()
+        public ObservableCollection<RentalBill> getAllRentalBillThatReturnedAll()
         {
             ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
-            string command = "SELECT * FROM `rental_bill`";
+            string command = "SELECT * FROM `rental_bill` where returned_all = 0";
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
@@ -172,8 +172,17 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             database.closeConnection();
         }
-
-        
+        public int getAmoutOfDiskByDiskId(long id)
+        {
+            int count = 0;
+            string command = $"Select quantity, rented from `disk` where id = {id}";
+            var reader = database.executeCommand(command);
+            while(reader != null && reader.Read())
+            {
+                count = (int)reader[0] - (int)reader[1];
+            }
+            return count;
+        }
 
     }
 }

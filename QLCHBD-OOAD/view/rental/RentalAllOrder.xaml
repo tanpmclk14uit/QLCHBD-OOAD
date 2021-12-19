@@ -15,7 +15,7 @@
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         <Grid Margin="10 0">
-            <Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>                
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
@@ -92,7 +92,6 @@
             </Grid>
         </Grid>
         <ScrollViewer Margin="10" Grid.Row="1">
-
             <StackPanel x:Name="panel">
                 <ListView  SelectionMode="Single"
                            SelectedItem="{Binding selectedRentalBill}"
@@ -171,16 +170,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="80"/>
                                                 <ColumnDefinition Width="80"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Button Grid.Column="1"
-                                Width="70"
-                                Height="33"                                
-                                FontSize="20"                               
-                                Background="#FF003D"
-                                >
-                                                <Image Source="/Assets/img_confirm (2).png" />
-
-                                            </Button>
+                                            </Grid.ColumnDefinitions>                                            
                                             <Button Grid.Column="2"
                                 Width="70"
                                 Height="33"

@@ -135,6 +135,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
                 }
             }
         }
+       
         private double caculatorFee()
         {
             double lostFee = lost * 5 * _rentalPrice + lost * overDueDays * 1.5 * _rentalPrice;

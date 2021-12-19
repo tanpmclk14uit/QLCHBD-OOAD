@@ -34,7 +34,12 @@
                        x:Name="confirmIcon"
                        Visibility="Hidden"
                        Height="144"
-                       Grid.Column="0"/>   
+                       Grid.Column="0"/>
+                <Image Source="/QLCHBD-OOAD;component/assets/img_x.png"
+                       Width="90"
+                       x:Name="errorIcon"
+                       Height="144"
+                       Grid.Column="0"/>
                 <StackPanel Grid.Column="1" 
                             VerticalAlignment="Center">
                     <Label Content="Delete images can not be undone, continue­­­?"

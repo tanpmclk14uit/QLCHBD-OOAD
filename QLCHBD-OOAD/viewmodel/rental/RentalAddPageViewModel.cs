@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
 using QLCHBD_OOAD.model.images;
@@ -202,13 +203,19 @@ namespace QLCHBD_OOAD.viewmodel.rental
         }
  
         private void RentalDiskDetailFormViewModel_addNewRentalBillItem(RentalBillItem rentalBillItem)
-        {
-            
+        {            
             foreach (var rental in _rentalBillItems)
             {
                 if(rental.diskId == rentalBillItem.diskId && rental.dueDate == rentalBillItem.dueDate)
                 {
                     int amount = rental.amount + rentalBillItem.amount;
+                    int maxInStock = rentalBillReponsitory.getAmoutOfDiskByDiskId(rentalBillItem.diskId);
+                    if(amount > maxInStock)
+                    {
+                        amount = maxInStock;
+                        MyDialog myDialog = new MyDialog(MyDialogStyle.ERROR, "Max in stock");
+                        myDialog.ShowDialog();
+                    }                    
                     _rentalBillItems.Remove(rental);
                     caculateTotalPrice(rentalBillItem);
                     rentalBillItem.amount = amount;

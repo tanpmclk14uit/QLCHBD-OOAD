@@ -73,11 +73,11 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<RentalBillItem> getAllRentalBillItemByRentalId(long id)
         {
             ObservableCollection<RentalBillItem> rentalBillItems = new ObservableCollection<RentalBillItem>();
-            string command = "SELECT disk_id, disk_name, quantity, receive_quantity, due_date, rental_price, id FROM `rental_bill_item` where rental_id =" + id;
+            string command = "SELECT disk_id, disk_name, quantity, receive_quantity, due_date, rental_price, id, lost_quantity FROM `rental_bill_item` where rental_id =" + id;
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                RentalBillItem rentalBill = new RentalBillItem((long) reader[6],(long)reader[0], (string)reader[1],(int)reader[2],(int)reader[3], (DateTime)reader[4],(int)reader[5]);
+                RentalBillItem rentalBill = new RentalBillItem((long) reader[6],(long)reader[0], (string)reader[1],(int)reader[2],(int)reader[3], (DateTime)reader[4],(int)reader[5], (int) reader[7]);
                 if(rentalBill.returned < rentalBill.amount)
                 {
                     if(rentalBill.getDueDate() < DateTime.Now)
@@ -111,5 +111,40 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
+        public void updateLostQuantityById(long id, int lost)
+        {
+            string command = $"UPDATE `rental_bill_item` SET lost_quantity = lost_quantity + {lost} where id = {id}";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void updateTotalDiskWhenLost(long id, int lost)
+        {
+            string command = $"UPDATE `disk` SET quantity = quantity - {lost} where id = {id}";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public bool isRentalReturnedAll(long id)
+        {
+            string command = $"SELECT COUNT(id) FROM rental_bill_item WHERE rental_id = {id} and quantity <> receive_quantity + lost_quantity;";
+            var reader = database.executeCommand(command);
+            if (reader != null && reader.Read())
+            {
+                
+                long count = (long)reader[0];
+                database.closeConnection();
+                return count == 0;
+            }
+            else
+            {
+                database.closeConnection();
+                return false;
+            }
+        }
+        public void updateReturnAll(long id)
+        {   
+            string command = $"UPDATE `rental_bill` SET returned_all = 1 WHERE id ={id} ";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
     }
-}
+} 

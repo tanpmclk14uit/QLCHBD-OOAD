@@ -183,6 +183,9 @@
     <Compile Include="viewmodel\staff\AddStaffViewModel.cs" />
     <Compile Include="viewmodel\staff\ChangePasswordViewModel.cs" />
     <Compile Include="viewmodel\staff\StaffManageViewModel.cs" />
+    <Compile Include="view\report\ReportRentalPage.xaml.cs">
+      <DependentUpon>ReportRentalPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\staff\StaffManagePage.xaml.cs">
       <DependentUpon>StaffManagePage.xaml</DependentUpon>
     </Compile>
@@ -411,6 +414,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\NewDeliveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\report\ReportRentalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

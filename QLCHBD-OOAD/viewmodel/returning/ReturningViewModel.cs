@@ -90,6 +90,13 @@ namespace QLCHBD_OOAD.viewmodel.returning
         {
             updateRentedDisk();
             updateReturnedByRentalBillItem();
+            updateReturnedAllFieldByRentalId();
+        }
+        public void updateReturnedAllFieldByRentalId()
+        {
+            if (detailRentalBillReponsitory.isRentalReturnedAll(long.Parse(orderId))) {
+                detailRentalBillReponsitory.updateReturnAll(long.Parse(orderId));
+            }
         }
         public bool isReturnListEmpty()
         {
@@ -99,6 +106,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
                 {
                     return false;
                 }
+                
             }
             return true;
         }
@@ -111,6 +119,11 @@ namespace QLCHBD_OOAD.viewmodel.returning
                 {
                     detailRentalBillReponsitory.updateRentedById(receipt.diskId, receipt.returned);
                 }   
+                if(receipt.isSelected && receipt.lost != 0)
+                {
+                    detailRentalBillReponsitory.updateTotalDiskWhenLost(receipt.diskId, receipt.lost);
+                }
+
             }
         }        
        
@@ -122,6 +135,10 @@ namespace QLCHBD_OOAD.viewmodel.returning
                 {
                     detailRentalBillReponsitory.updateReturnById(receipt.id, receipt.returned);
                 }                
+                if(receipt.isSelected && receipt.lost != 0)
+                {
+                    detailRentalBillReponsitory.updateLostQuantityById(receipt.id, receipt.lost);
+                }
             }
             _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(rentalId);
             _receiptItems = mapToReceiptItems(_rentalBillItems);
@@ -160,7 +177,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
             ObservableCollection<ReceiptItemViewModel> receiptItems = new ObservableCollection<ReceiptItemViewModel>();
             foreach (var rentalItem in rentalBillItems)
             {
-                int amount = rentalItem.amount - rentalItem.returned;
+                int amount = rentalItem.amount - rentalItem.returned - rentalItem.lost;
                 ReceiptItemViewModel receipt = new ReceiptItemViewModel(rentalItem.id, rentalItem.diskId, rentalItem.diskName, rentalItem.rentalPrice, amount, rentalItem.getDueDate());
                 receiptItems.Add(receipt);
             }

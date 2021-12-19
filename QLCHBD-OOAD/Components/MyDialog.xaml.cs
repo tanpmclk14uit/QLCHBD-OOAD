@@ -37,7 +37,7 @@ namespace QLCHBD_OOAD.Components
             {
                 case MyDialogStyle.ALERT:
                 {
-
+                        errorIcon.Visibility = Visibility.Hidden;
                         alertIcon.Visibility = Visibility.Visible;
                         confirmIcon.Visibility = Visibility.Hidden;
                         cancel.Visibility = Visibility.Visible;
@@ -46,6 +46,7 @@ namespace QLCHBD_OOAD.Components
                 }
                 case MyDialogStyle.CONFIRM:
                 {
+                        errorIcon.Visibility = Visibility.Hidden;
                         alertIcon.Visibility = Visibility.Hidden;
                         confirmIcon.Visibility = Visibility.Visible;
                         cancel.Visibility = Visibility.Visible;
@@ -54,6 +55,7 @@ namespace QLCHBD_OOAD.Components
                 }
                 case MyDialogStyle.ERROR:
                 {
+                        errorIcon.Visibility = Visibility.Visible;
                         alertIcon.Visibility = Visibility.Visible;
                         confirmIcon.Visibility = Visibility.Hidden;
                         cancel.Visibility = Visibility.Hidden;
@@ -62,6 +64,7 @@ namespace QLCHBD_OOAD.Components
                 }
                 case MyDialogStyle.INFORMATION:
                 {
+                        errorIcon.Visibility = Visibility.Hidden;
                         alertIcon.Visibility = Visibility.Visible;
                         confirmIcon.Visibility = Visibility.Hidden;
                         cancel.Visibility = Visibility.Hidden;

@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace QLCHBD_OOAD.view.report
 {
     /// <summary>
-    /// Interaction logic for ReportMainPage.xaml
+    /// Interaction logic for ReportRentalPage.xaml
     /// </summary>
-    public partial class ReportMainPage : Page
+    public partial class ReportRentalPage : Page
     {
-        public ReportMainPage()
+        public ReportRentalPage()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            holder.Content = new ReportGuestPage();
-        }
-
-        private void rental_Click(object sender, RoutedEventArgs e)
-        {
-            holder.Content = new ReportRentalPage();
         }
     }
 }

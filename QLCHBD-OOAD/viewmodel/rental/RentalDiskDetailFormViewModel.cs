@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.model.images;
 using QLCHBD_OOAD.model.retal;
 using System;
@@ -78,12 +79,12 @@ namespace QLCHBD_OOAD.viewmodel.rental
             selectedRentalBillItem = new RentalBillItem(images.id, images.name, amount, returnDate, images.rentalPrice, images.image);
         }
         private void onAddClick()
-        {            
+        {
             closeForm();
-            if(amount != 0)
+            if (amount != 0)
             {
                 addNewRentalBillItem(selectedRentalBillItem);
-            }              
+            }         
         }
 
         private void addMoreAmount()

@@ -51,7 +51,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
        
         public ObservableCollection<RentalBill> rentalBills
         {
-            get => rentalBillReponsitory.getAllRentalBill();
+            get => rentalBillReponsitory.getAllRentalBillThatReturnedAll();
         }
         private ObservableCollection<String> _selectedStatuses;
         public ObservableCollection<String> selectedStatuses
@@ -144,7 +144,6 @@ namespace QLCHBD_OOAD.viewmodel.rental
                                 }
                             }
                         }
-
                     }
                 }
             }
@@ -153,11 +152,9 @@ namespace QLCHBD_OOAD.viewmodel.rental
                 string id = Regex.Replace(seachKey, @"[^0-9]", string.Empty);
                 if (id != "")
                 {
-                    filterList = rentalBillReponsitory.getRentalBillsById(id);
+                    filterList = rentalBillReponsitory.getRentalBillsThatNotReturnAllById(id);
                 }
-                
             }
-
             return filterList;
         }
     }

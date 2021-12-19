@@ -76,8 +76,14 @@ namespace QLCHBD_OOAD.model.retal
 
             }
         }
+        private int _lost;
+        public int lost
+        {
+            get => _lost;
+            set => _lost = value;
+        }
 
-        public RentalBillItem(long id, long diskId, string diskName, int amount, int returned, DateTime dueDate, int rentalPrice) 
+        public RentalBillItem(long id, long diskId, string diskName, int amount, int returned, DateTime dueDate, int rentalPrice, int lost) 
         {
             _id = id;
             _diskId = diskId;
@@ -86,6 +92,7 @@ namespace QLCHBD_OOAD.model.retal
             _returned = returned;
             _dueDate = dueDate;
             _rentalPrice = rentalPrice;
+            _lost = lost;
         }
         public RentalBillItem(long diskId, string diskName, int amount, DateTime dueDate, int rentalPrice, string image)
         {
@@ -94,7 +101,7 @@ namespace QLCHBD_OOAD.model.retal
             _amount = amount;
             _dueDate = dueDate;
             _rentalPrice = rentalPrice;
-            _returned = 0;
+            _returned = 0;            
             _image = image;
         }
        

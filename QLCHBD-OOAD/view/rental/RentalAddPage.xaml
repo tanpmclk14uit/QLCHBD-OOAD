@@ -81,91 +81,29 @@
             <Grid Margin="10 10 10 0" Grid.Row="1" Background="White">
                 <DataGrid ItemsSource="{Binding rentalBillItems, Mode=OneWay}"
                       x:Name="rentalItem"
+                      FontSize="15"
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="False"
+                      CanUserReorderColumns="False"   
                       >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding diskId}" CanUserSort="True" Width="*" IsReadOnly="True" 
-                                            FontSize="20">
-                            <DataGridTextColumn.Header>
-                                <TextBlock  Text="Id" FontSize="25" HorizontalAlignment="Center"/>
-                            </DataGridTextColumn.Header>
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn Header="Disk ID" Binding="{Binding diskId}" CanUserSort="True" Width="*" IsReadOnly="True" 
+                                            FontSize="15">
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding diskName}" CanUserSort="True" Width="2.5*" IsReadOnly="True" FontSize="20">
-                            <DataGridTextColumn.Header>
-                                <TextBlock Text="Disk name" FontSize="25" HorizontalAlignment="Center"/>
-                            </DataGridTextColumn.Header>
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn Header="Disk name" Binding="{Binding diskName}" CanUserSort="True" Width="2*" IsReadOnly="True" FontSize="15">
+                            
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding rentalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
-                            <DataGridTextColumn.Header>
-                                <TextBlock Text="Price" FontSize="25" TextAlignment="Right"/>
-                            </DataGridTextColumn.Header>
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn Header="Rental price" Binding="{Binding rentalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="15">
+                            
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding amount, NotifyOnSourceUpdated=True}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
-                            <DataGridTextColumn.Header>
-                                <TextBlock Text="Amount" FontSize="25" HorizontalAlignment="Center"/>
-                            </DataGridTextColumn.Header>
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn Header="Amount" Binding="{Binding amount, NotifyOnSourceUpdated=True}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="15">
+                            
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Binding="{Binding dueDate}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
-                            <DataGridTextColumn.Header>
-                                <TextBlock Text="Due date" FontSize="25" HorizontalAlignment="Center"/>
-                            </DataGridTextColumn.Header>
-                            <DataGridTextColumn.CellStyle>
-                                <Style>
-                                    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment"
-                                        Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn Header="Due date" Binding="{Binding dueDate}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="15">
+                           
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
