@@ -26,6 +26,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
                 {
                     RentalDetailOrderWindown rental = new RentalDetailOrderWindown(value.id, value.guestId);
                     rental.ShowDialog();
+                    OnPropertyChanged("filterListRentalBill");
                     _selectedRentalBill = null;
                 }
             }

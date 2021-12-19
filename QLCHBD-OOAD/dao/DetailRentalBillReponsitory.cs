@@ -146,5 +146,7 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
+
+       
     }
 } 

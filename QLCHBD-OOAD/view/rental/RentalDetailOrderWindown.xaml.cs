@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.viewmodel.rental;
+﻿using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.viewmodel.rental;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,38 @@ namespace QLCHBD_OOAD.view.rental
     /// </summary>
     public partial class RentalDetailOrderWindown : Window
     {
+        DetailRentalPageViewModel rentalPageViewModel;
         public RentalDetailOrderWindown(long retalOrderId, long guestID)
         {
             InitializeComponent();
-            DataContext = new DetailRentalPageViewModel(retalOrderId, guestID);
+            rentalPageViewModel = new DetailRentalPageViewModel(retalOrderId, guestID);
+            DataContext = rentalPageViewModel;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (rentalPageViewModel.currentRentalBill.returnedALl)
+            {
+                MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Do you want to delete this rental, the action can't be undone!");
+                myDialog.ShowDialog();
+                if (myDialog.action == true)
+                {
+                    rentalPageViewModel.deleteOrder();
+                    this.Close();
+                }
+               
+            }
+            else
+            {
+                MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ERROR, "All item must be returned first!!");
+                myDialog.ShowDialog();
+            }
+            
         }
     }
 }

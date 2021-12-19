@@ -61,11 +61,14 @@ namespace QLCHBD_OOAD.viewmodel.rental
             }
         }
 
-
+        public RentalBill currentRentalBill;
+        private RentalBillRepository rentalBillRepository;
         public DetailRentalPageViewModel(long rentalId, long guestId)
-        {
+        {            
             Back =  new RelayCommand<object>((p) => { return true; }, (p) => { backToALlRentalPage(); });
             _orderId = rentalId.ToString();
+            rentalBillRepository = RentalBillRepository.getIntance();
+            currentRentalBill = rentalBillRepository.getAllRentalBillsById(_orderId)[0];
             detailRentalBillReponsitory = DetailRentalBillReponsitory.getIntance();           
             _guest = detailRentalBillReponsitory.getGuestById(guestId);
             if (_guest.isMember)
@@ -85,6 +88,10 @@ namespace QLCHBD_OOAD.viewmodel.rental
         private void backToALlRentalPage()
         {           
             turnBackPageHandler();
+        }
+        public void deleteOrder()
+        {
+            rentalBillRepository.deleteRentalById(currentRentalBill.id);
         }
     }
 }

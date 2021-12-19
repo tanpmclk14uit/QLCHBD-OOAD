@@ -221,6 +221,19 @@ namespace QLCHBD_OOAD.dao
             }
             return count;
         }
+        private void deleteRentalItemById(long id)
+        {
+            string command = $"DELETE FROM `rental_bill_item` WHERE rental_id ={id}";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
+        public void deleteRentalById(long id)
+        {
+            deleteRentalItemById(id);
+            string command = $"DELETE FROM `rental_bill` WHERE id = {id}";
+            database.executeCommand(command);
+            database.closeConnection();
+        }
 
     }
 }
