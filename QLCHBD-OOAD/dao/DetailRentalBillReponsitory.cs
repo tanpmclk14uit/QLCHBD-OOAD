@@ -60,7 +60,7 @@ namespace QLCHBD_OOAD.dao
         public string getOrderCreateBy(long id)
         {
             string createBy = null;
-            string command = "SELECT create_by  FROM rental_bill WHERE ID = " + id;
+            string command = $"SELECT name FROM staff JOIN rental_bill ON staff.id = rental_bill.create_by WHERE rental_bill.id = {id}";
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
@@ -78,7 +78,7 @@ namespace QLCHBD_OOAD.dao
             while (reader != null && reader.Read())
             {
                 RentalBillItem rentalBill = new RentalBillItem((long) reader[6],(long)reader[0], (string)reader[1],(int)reader[2],(int)reader[3], (DateTime)reader[4],(int)reader[5], (int) reader[7]);
-                if(rentalBill.returned < rentalBill.amount)
+                if(rentalBill.returned + rentalBill.lost  < rentalBill.amount)
                 {
                     if(rentalBill.getDueDate() < DateTime.Now)
                     {

@@ -33,35 +33,24 @@
                     
                     Height="40"
                     Background="AliceBlue"     
-                    BorderThickness="1px"
-                    BorderBrush="Gray"
-                    materialDesign:ButtonAssist.CornerRadius="5"
-                    Margin="10 0 5 0"                        
+                    BorderThickness="0px"
+                   
+                   VerticalAlignment="Bottom"
+                    Margin="20 0 0 0"                        
                     />
                 <Button  
                     Grid.Column="1"
                     Content="RECEIPT"      
-                   Margin="5"
-                   
+                  
+                   VerticalAlignment="Bottom"
                     Height="40"
                     Background="White"     
-                    BorderThickness="1px"
-                    BorderBrush="Gray"
-                    materialDesign:ButtonAssist.CornerRadius="5"
+                    BorderThickness="0px"
+                   
+                    
                                            
                     />
-                <Button       
-                    Grid.Column="2"
-                    Content="RESERVED"                   
-                   
-                   
-                    Height="40"
-                    Background="White"     
-                    BorderThickness="1px"
-                    BorderBrush="Gray"
-                    materialDesign:ButtonAssist.CornerRadius="5"
-                    Margin="5 0 10 0"                        
-                    />
+               
             </Grid>
             
 
@@ -83,16 +72,17 @@
                          Style="{DynamicResource seach}"
                          Grid.Column="2"/>
         </Grid>
-        <!--ItemsSource="{Binding filterListGuest}"-->
-        <!--SelectedItem="{Binding selectedGuest}"-->
-        <Grid  Grid.Row="1" Margin="20" Background="White">
+       
+        <Grid  Grid.Row="1" Margin="20 0 20 20" Background="White">
             <DataGrid
+                        Background="White"
                       SelectionMode="Single"                          
                       IsReadOnly="True"
                       CanUserDeleteRows="False"
                       CanUserResizeColumns="False"
-                      CanUserReorderColumns="False"                      
-                     
+                      CanUserReorderColumns="False"   
+                      SelectedItem="{Binding selectedRentalBill}"
+                      ItemsSource="{Binding filterListRentalBill}"
                       x:Name="rentalItem"   
                       FontSize="20"                      
                       CanUserAddRows="False"
@@ -106,19 +96,19 @@
                                         Width="0.5*"
                                         IsReadOnly="True">
                     </DataGridTextColumn>
-                    <DataGridTextColumn   Header="Guest name" CanUserResize="False" Binding="{Binding name}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+                    <DataGridTextColumn   Header="Guest name" CanUserResize="False" Binding="{Binding guestName}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
 
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Total price" CanUserResize="False" Binding="{Binding cmnd}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+                    <DataGridTextColumn Header="Total price" CanUserResize="False" Binding="{Binding totalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
 
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Create time" CanUserResize="False" Binding="{Binding birthDateString}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">
+                    <DataGridTextColumn Header="Create time" CanUserResize="False" Binding="{Binding createTime}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">
 
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Create by" CanUserResize="False" Binding="{Binding address}" CanUserSort="True" Width="1.5*"  IsReadOnly="True" FontSize="20">
+                    <DataGridTextColumn Header="Create by" CanUserResize="False" Binding="{Binding staffName}" CanUserSort="True" Width="1.5*"  IsReadOnly="True" FontSize="20">
 
                     </DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Returned"  CanUserResize="False" Binding="{Binding isMember}" CanUserSort="True" Width="0.7*" IsReadOnly="True">
+                    <DataGridCheckBoxColumn Header="Returned"  CanUserResize="False" Binding="{Binding returnedALl, Mode=OneWay}" CanUserSort="True" Width="0.7*" IsReadOnly="True">
 
                     </DataGridCheckBoxColumn>
 

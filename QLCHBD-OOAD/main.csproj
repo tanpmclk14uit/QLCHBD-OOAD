@@ -142,6 +142,7 @@
     <Compile Include="model\images\Images.cs" />
     <Compile Include="model\receipt\Receipt.cs" />
     <Compile Include="model\receipt\ReceiptItem.cs" />
+    <Compile Include="viewmodel\rental\RentalReportViewModel.cs" />
     <Compile Include="viewmodel\returning\ReceiptItemViewModel.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
@@ -183,6 +184,9 @@
     <Compile Include="viewmodel\staff\AddStaffViewModel.cs" />
     <Compile Include="viewmodel\staff\ChangePasswordViewModel.cs" />
     <Compile Include="viewmodel\staff\StaffManageViewModel.cs" />
+    <Compile Include="view\rental\RentalDetailOrderWindown.xaml.cs">
+      <DependentUpon>RentalDetailOrderWindown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\report\ReportRentalPage.xaml.cs">
       <DependentUpon>ReportRentalPage.xaml</DependentUpon>
     </Compile>
@@ -414,6 +418,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\NewDeliveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\rental\RentalDetailOrderWindown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

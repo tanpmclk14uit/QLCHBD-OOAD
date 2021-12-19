@@ -13,6 +13,11 @@
         ResizeMode="NoResize"        
         AllowsTransparency="True"
         Height="600" Width="920">
+    <Window.Resources>
+        <Style x:Key="DatePickerCalendarStyle"
+       TargetType="{x:Type Calendar}"
+       BasedOn="{StaticResource {x:Type Calendar}}" />
+    </Window.Resources>
     <Window.Background>
         <SolidColorBrush Color="Transparent" />
     </Window.Background>
@@ -118,12 +123,14 @@
                                VerticalAlignment="Center"></TextBlock>
                     <DatePicker Grid.Column="1"                                
                                 Height="50"     
+                                CalendarStyle="{StaticResource MaterialDesignCalendarPortraitForeground}"
                                 SelectedDate="{Binding returnDate}"
                                  Focusable="False"
                                 FontSize="30"                                
                                 IsTodayHighlighted="True"                               
                                 Name="datePicker"                               
                                 VerticalAlignment="Center" Width="auto" >
+                    
                     </DatePicker>
                     <Grid Grid.Column="1"   
                           Background="White"

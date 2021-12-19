@@ -40,14 +40,36 @@ namespace QLCHBD_OOAD.model.retal
         {
             get => _totalPrice.ToString("#,###");
         }
-        
+
+        private bool _returnedAll;
+        public bool returnedALl
+        {
+            get => _returnedAll;
+        }
+        private string _staffName;
+        public string staffName
+        {
+            get => _staffName;
+        }
         public RentalBill(long id, long guestId, string guestName, DateTime createTime, int totalPrice)
         {
             this._id = id;
             this._guestId = guestId;
             this._guestName = guestName;
             this._createTime = createTime;
-            this._totalPrice = totalPrice;           
+            this._totalPrice = totalPrice;
+        }
+        
+        public RentalBill(long id, long guestId, string guestName, DateTime createTime, int totalPrice, string staffName, bool isReturnedAll)
+        {
+            this._id = id;
+            this._guestId = guestId;
+            this._guestName = guestName;
+            this._createTime = createTime;
+            this._totalPrice = totalPrice;
+            _staffName = staffName;
+            _returnedAll = isReturnedAll;
+            
         }
         public RentalBill(long guestId, int totalPrice, RentalBillStatus status)
         {

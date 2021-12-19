@@ -46,7 +46,45 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return rentalBills;
         }
+        public ObservableCollection<RentalBill> getAllRentalBills()
+        {
+            ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
+            string command = $"SELECT * FROM `rental_bill`";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], getStaffNameById((long)reader[3]), (bool)reader[5]);
+                rentalBills.Add(rentalBill);
+            }
+            database.closeConnection();
+            return rentalBills;
+        }
+        public ObservableCollection<RentalBill> getAllRentalBillsById(string id)
+        {
+            ObservableCollection<RentalBill> rentalBills = new ObservableCollection<RentalBill>();
+            string command = $"SELECT * FROM `rental_bill` where id = {id}";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                RentalBill rentalBill = new RentalBill((long)reader[0], (long)reader[1], getNameById((long)reader[1]), (DateTime)reader[2], (int)reader[4], getStaffNameById((long)reader[3]), (bool)reader[5]);
+                rentalBills.Add(rentalBill);
+            }
+            database.closeConnection();
+            return rentalBills;
+        }
 
+        private string getStaffNameById(long id)
+        {
+            String name = "";
+            string command = $"SELECT name FROM `staff` WHERE ID = {id}";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                name = reader[0].ToString();
+            }
+            database.closeConnection();
+            return name;
+        }
         public ObservableCollection<ImageRentalInformation> getWaitingRentalBillsByDiskId(string id)
         {
             ObservableCollection<ImageRentalInformation> rentalBills = new ObservableCollection<ImageRentalInformation>();

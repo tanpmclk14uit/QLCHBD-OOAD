@@ -189,8 +189,11 @@ namespace QLCHBD_OOAD.viewmodel.returning
             foreach (var rentalItem in rentalBillItems)
             {
                 int amount = rentalItem.amount - rentalItem.returned - rentalItem.lost;
-                ReceiptItemViewModel receipt = new ReceiptItemViewModel(rentalItem.id, rentalItem.diskId, rentalItem.diskName, rentalItem.rentalPrice, amount, rentalItem.getDueDate());
-                receiptItems.Add(receipt);
+                if(amount != 0)
+                {
+                    ReceiptItemViewModel receipt = new ReceiptItemViewModel(rentalItem.id, rentalItem.diskId, rentalItem.diskName, rentalItem.rentalPrice, amount, rentalItem.getDueDate());
+                    receiptItems.Add(receipt);
+                }              
             }
             return receiptItems;
         }

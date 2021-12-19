@@ -30,14 +30,7 @@
                     materialDesign:ButtonAssist.CornerRadius="5"
                     Margin="10 0 10 0"                        
                     />
-            <Button Grid.Column="1"
-                    Height="40"
-                    Content="RESERVED ORDER"                    
-                    Background="White"     
-                    BorderThickness="1px"
-                    BorderBrush="Gray"
-                    materialDesign:ButtonAssist.CornerRadius="5"                                     
-                    />
+            
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
