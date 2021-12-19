@@ -114,6 +114,7 @@
       <DependentUpon>DeliveryProviderListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="dao\AlbumRepository.cs" />
+    <Compile Include="dao\BugetBillsRepository.cs" />
     <Compile Include="dao\DeliveryBilingItemsRepository.cs" />
     <Compile Include="dao\DeliveryBillRepository.cs" />
     <Compile Include="dao\DeliveryOrderItemsRepository.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="dao\DeliveryOrderRepository.cs" />
     <Compile Include="dao\RentalBillRepository.cs" />
     <Compile Include="dao\StaffRepository.cs" />
+    <Compile Include="model\buget\BugetBills.cs" />
     <Compile Include="model\delivery\DeliBills.cs" />
     <Compile Include="model\delivery\DeliBillsItems.cs" />
     <Compile Include="model\delivery\DeliOrderItems.cs" />
@@ -138,6 +140,8 @@
     <Compile Include="model\images\Images.cs" />
     <Compile Include="model\receipt\Receipt.cs" />
     <Compile Include="model\receipt\ReceiptItem.cs" />
+    <Compile Include="viewmodel\budget\BugetBill.cs" />
+    <Compile Include="viewmodel\budget\BugetViewModel.cs" />
     <Compile Include="viewmodel\returning\ReceiptItemViewModel.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
@@ -179,6 +183,12 @@
     <Compile Include="viewmodel\staff\AddStaffViewModel.cs" />
     <Compile Include="viewmodel\staff\ChangePasswordViewModel.cs" />
     <Compile Include="viewmodel\staff\StaffManageViewModel.cs" />
+    <Compile Include="view\report\ReportBugetPage.xaml.cs">
+      <DependentUpon>ReportBugetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\report\ReportDeliveryPage.xaml.cs">
+      <DependentUpon>ReportDeliveryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\staff\StaffManagePage.xaml.cs">
       <DependentUpon>StaffManagePage.xaml</DependentUpon>
     </Compile>
@@ -403,6 +413,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\NewDeliveryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\report\ReportBugetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\report\ReportDeliveryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

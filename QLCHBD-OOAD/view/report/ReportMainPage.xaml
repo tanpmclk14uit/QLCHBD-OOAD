@@ -23,7 +23,8 @@
                         Grid.Column="2"
                         Height="50"
                         Background="CornflowerBlue"
-                       Margin="10 0"
+                        Margin="10 0"
+                        Click="Click_Buget"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5" >
                         <TextBlock Text="BUDGET"
@@ -37,7 +38,8 @@
                         Grid.Column="2"
                         Height="50"
                         Background="Orange"
-                       Margin="5 0"
+                        Margin="5 0"
+                        Click="Click_Delivery"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5" >
                         <TextBlock Text="DELIVERY"
@@ -89,8 +91,16 @@
                                Foreground="Black"/>
                     </Button>
                 </StackPanel>
-                <Frame Grid.Row="1" Margin="20 0 20 20" x:Name="holder">                    
-                </Frame>
+                <Grid
+                    Grid.Row="1" Margin="20 0 20 20">
+                    <Frame  x:Name="holder">
+                    </Frame>
+                    <Border
+                       BorderBrush="Black"
+                       BorderThickness="1"
+                       CornerRadius="10"></Border>
+                </Grid>
+
             </Grid>
         </Border>
     </Grid>
