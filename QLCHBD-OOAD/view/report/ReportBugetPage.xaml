@@ -39,20 +39,26 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <DatePicker
+                        x:Name="dateStart"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Height="50"
+                        BorderBrush="Black"
+                        FontSize="35"
+                        SelectedDate="{Binding dateStart, Mode=TwoWay}"
+                        SelectedDateChanged="dateStart_SelectedDateChanged"
+                        BorderThickness="1"></DatePicker>
+                    <DatePicker
+                        x:Name="dateEnd"
                         Grid.Column="1"
                         Grid.Row="1"
                         Height="50"
                         BorderBrush="Black"
                         VerticalAlignment="Top"
                         FontSize="35"
+                        SelectedDateChanged="dateStart_SelectedDateChanged"
+                        SelectedDate="{Binding dateEnd, Mode=TwoWay}"
                         BorderThickness="1"></DatePicker>   
-                    <DatePicker
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        Height="50"
-                        BorderBrush="Black"
-                        FontSize="35"
-                        BorderThickness="1"></DatePicker>
                     <TextBlock
                         Grid.Column="0"
                         Grid.Row="0"
@@ -132,7 +138,7 @@
                     SelectedItem="{Binding selectedBills}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Value" Width="1.5*" Binding="{Binding MoneyIn}" IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyIn}" IsReadOnly="True"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <DataGrid
@@ -143,10 +149,11 @@
                     BorderBrush="Black"
                     BorderThickness="1"
                     AutoGenerateColumns="False"
-                    IsReadOnly="True">
+                    ItemsSource="{Binding bugetBillsList}"
+                    SelectedItem="{Binding selectedBills}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Value" Width="1.5*" Binding="{Binding MoneyOut}" IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyOut}" IsReadOnly="True"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid
@@ -155,7 +162,7 @@
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Border
                         BorderBrush="Black"
@@ -167,7 +174,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">In total:</TextBlock>
                     <TextBlock
-                        Text="{Binding}"
+                        Text="{Binding totalIn}"
                         Grid.Column="1"
                         FontSize="30" 
                         HorizontalAlignment="Center"
@@ -178,7 +185,7 @@
                     Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Border
                         BorderBrush="Black"
@@ -190,7 +197,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">In total:</TextBlock>
                     <TextBlock
-                        Text="{Binding}"
+                        Text="{Binding totalOut}"
                         Grid.Column="1"
                         FontSize="30" 
                         HorizontalAlignment="Center"

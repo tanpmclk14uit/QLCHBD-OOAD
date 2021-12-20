@@ -26,5 +26,10 @@ namespace QLCHBD_OOAD.view.report
             InitializeComponent();
             DataContext = BugetViewModel.getInstance();
         }
+
+        private void dateStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BugetViewModel.getInstance().getBugetInRange();
+        }
     }
 }

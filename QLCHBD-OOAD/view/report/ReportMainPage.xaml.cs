@@ -23,21 +23,25 @@ namespace QLCHBD_OOAD.view.report
         public ReportMainPage()
         {
             InitializeComponent();
+            holder.ClearValue(UidProperty);
             holder.Content = new ReportBugetPage();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            holder.ClearValue(UidProperty);
             holder.Content = new ReportGuestPage();
         }
 
         private void Click_Buget(object sender, RoutedEventArgs e)
         {
+            holder.ClearValue(UidProperty);
             holder.Content = new ReportBugetPage();
         }
 
         private void Click_Delivery(object sender, RoutedEventArgs e)
         {
+            holder.ClearValue(UidProperty);
             holder.Content = new ReportDeliveryPage();
         }
     }

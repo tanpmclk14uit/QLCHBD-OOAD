@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLCHBD_OOAD.viewmodel.delivery;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace QLCHBD_OOAD.view.report
         public ReportDeliveryPage()
         {
             InitializeComponent();
+            DataContext = DeliveryReportViewModel.getInstance();
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DeliveryReportViewModel.getInstance().getDeliveryInRange();
         }
     }
 }

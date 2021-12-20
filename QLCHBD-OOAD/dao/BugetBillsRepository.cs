@@ -30,10 +30,10 @@ namespace QLCHBD_OOAD.dao
         public List<BugetBills> getBugetBillsInRange(DateTime A, DateTime B)
         {
             List<BugetBills> bugetBills = new List<BugetBills>();
-            while (A.CompareTo(B) >= 0) 
+            while (A.CompareTo(B) <= 0) 
             {
                 bugetBills.Add(GetBugetBillsByDate(A));
-                A.AddDays(1);
+                A = A.AddDays(1);
             }
             return bugetBills;
         }
@@ -41,7 +41,7 @@ namespace QLCHBD_OOAD.dao
         {
             BugetBills bills = new BugetBills(getBillIDWithDay("import_bill", date),
                                     getBillIDWithDay("reserve_bill", date),
-                                    getSumValue("sum_value", "import_price", date) - getAdditionalFee(date),
+                                    getSumValue("sum_value", "import_bill", date) - getAdditionalFee(date),
                                     getSumValue("total_price", "rental_bill", date),
                                     date);
             return bills;
@@ -53,7 +53,7 @@ namespace QLCHBD_OOAD.dao
             string command = "SELECT id FROM " + table + " WHERE " +
                 "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
                 "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
-                "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "';";
+                "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "' IS NOT NULL;";
             var reader = db.executeCommand(command);
 
             while (reader.Read())
@@ -69,13 +69,18 @@ namespace QLCHBD_OOAD.dao
             string command = "SELECT SUM(" + valueName + ") FROM " + table + " WHERE " +
                 "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
                 "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
-                "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "';";
+                "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "'";
             var reader = db.executeCommand(command);
 
-            while (reader.Read())
+            try
             {
                 sum += (long)reader[0];
             }
+            catch (Exception e)
+            {
+                sum = 0;
+            }
+
             db.closeConnection();
             return sum;
         }
@@ -88,9 +93,13 @@ namespace QLCHBD_OOAD.dao
                 "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "';";
             var reader = db.executeCommand(command);
 
-            while (reader.Read())
+            try
             {
                 sum += (long)reader[0];
+            }
+            catch (Exception e)
+            {
+                sum = 0;
             }
             db.closeConnection();
             return sum;
