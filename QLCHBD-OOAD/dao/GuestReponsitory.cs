@@ -100,7 +100,7 @@ namespace QLCHBD_OOAD.dao
         public long countCurrentWaitingRenting(string guestId)
         {
             long count = 0;
-            string command = $"select SUM(rbi.quantity-rbi.receive_quantity) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id and rbi.due_date >= CURRENT_DATE";
+            string command = $"select SUM(rbi.quantity-rbi.receive_quantity-rbi.lost_quantity) from rental_bill_item rbi join rental_bill rb where rb.guess_id = {guestId} and rb.id = rbi.rental_id and rbi.due_date >= CURRENT_DATE";
             var reader = db.executeCommand(command);
             if (reader != null && reader.Read())
             {

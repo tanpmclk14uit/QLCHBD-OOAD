@@ -29,23 +29,23 @@
                 <Button                    
                     
                     Content="RENTAL"                 
-                    
+                    x:Name="rental"
                     
                     Height="40"
                     Background="AliceBlue"     
                     BorderThickness="0px"
                    
                    VerticalAlignment="Bottom"
-                    Margin="20 0 0 0"                        
+                    Margin="20 0 0 0" Click="rental_Click"                        
                     />
                 <Button  
                     Grid.Column="1"
                     Content="RECEIPT"      
-                  
+                  x:Name="receipt"
                    VerticalAlignment="Bottom"
                     Height="40"
                     Background="White"     
-                    BorderThickness="0px"
+                    BorderThickness="0px" Click="receipt_Click"
                    
                     
                                            
@@ -111,6 +111,45 @@
                     <DataGridCheckBoxColumn Header="Returned"  CanUserResize="False" Binding="{Binding returnedALl, Mode=OneWay}" CanUserSort="True" Width="0.7*" IsReadOnly="True">
 
                     </DataGridCheckBoxColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid
+                Visibility="Hidden"
+                        Background="White"
+                      SelectionMode="Single"                          
+                      IsReadOnly="True"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="False"
+                      CanUserReorderColumns="False"   
+                      SelectedItem="{Binding selectedRentalBill}"
+                      ItemsSource="{Binding filterListRentalBill}"
+                      x:Name="receiptItems"   
+                      FontSize="20"                      
+                      CanUserAddRows="False"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id"                                        
+                                        CanUserReorder="False"
+                                        CanUserResize="False"
+                                        Binding="{Binding id}"
+                                        CanUserSort="True"
+                                        Width="0.5*"
+                                        IsReadOnly="True">
+                    </DataGridTextColumn>
+                    <DataGridTextColumn   Header="Guest name" CanUserResize="False" Binding="{Binding guestName}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Additional fee" CanUserResize="False" Binding="{Binding totalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Create time" CanUserResize="False" Binding="{Binding createTime}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Create by" CanUserResize="False" Binding="{Binding staffName}" CanUserSort="True" Width="1.5*"  IsReadOnly="True" FontSize="20">
+
+                    </DataGridTextColumn>
+                   
 
                 </DataGrid.Columns>
             </DataGrid>

@@ -26,5 +26,21 @@ namespace QLCHBD_OOAD.view.report
             InitializeComponent();
             DataContext = new RentalReportViewModel();
         }
+
+        private void rental_Click(object sender, RoutedEventArgs e)
+        {
+            rental.Background = Brushes.AliceBlue;
+            receipt.Background = Brushes.White;
+            rentalItem.Visibility = Visibility.Visible;
+            receiptItems.Visibility = Visibility.Hidden;
+        }
+
+        private void receipt_Click(object sender, RoutedEventArgs e)
+        {
+            rental.Background = Brushes.White;
+            receipt.Background = Brushes.AliceBlue;
+            rentalItem.Visibility = Visibility.Hidden;
+            receiptItems.Visibility = Visibility.Visible;
+        }
     }
 }
