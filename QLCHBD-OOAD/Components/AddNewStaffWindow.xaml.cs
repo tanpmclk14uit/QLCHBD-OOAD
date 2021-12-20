@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace QLCHBD_OOAD.Components
 {
     /// <summary>
-    /// Interaction logic for AddNewStaffWindow.xaml
+    /// Interaction logic for AddNewSatffWindow.xaml
     /// </summary>
     public partial class AddNewStaffWindow : Window
     {
-        public static event ToggleFormDialogNotifyHandler Toggle; 
+        public static event ToggleFormDialogNotifyHandler Toggle;
         public AddNewStaffWindow()
         {
             InitializeComponent();
@@ -35,6 +35,6 @@ namespace QLCHBD_OOAD.Components
             this.Close();
             Toggle();
             AddStaffViewModel.cancel -= cancel;
-        }    
+        }
     }
 }

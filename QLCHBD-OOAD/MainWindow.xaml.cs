@@ -52,7 +52,6 @@ namespace QLCHBD_OOAD
             FirstLandingPage.onChangePageTotal += onChangePageTotal;
             FirstLandingPage.onChangePageBorrowed += onChangeBorrowed;
             FirstLandingPage.onChangePageInStock += onChangeInStock;
-
         }
 
         private void onChangeInStock()

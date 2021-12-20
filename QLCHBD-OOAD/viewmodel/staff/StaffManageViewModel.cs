@@ -178,5 +178,7 @@ namespace QLCHBD_OOAD.viewmodel.staff
             }
             return _instance;
         }
+
+
     }
 }
