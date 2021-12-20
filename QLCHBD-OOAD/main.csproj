@@ -163,7 +163,6 @@
     <Compile Include="model\receipt\Receipt.cs" />
     <Compile Include="model\receipt\ReceiptItem.cs" />
     <Compile Include="viewmodel\budget\BugetViewModel.cs" />
-    <Compile Include="viewmodel\delivery\DeliOders.cs" />
     <Compile Include="viewmodel\delivery\DeliveryReportViewModel.cs" />
     <Compile Include="viewmodel\returning\ReceiptItemViewModel.cs" />
     <Compile Include="model\retal\RentalBill.cs" />

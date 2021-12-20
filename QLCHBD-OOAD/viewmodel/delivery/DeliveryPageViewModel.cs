@@ -37,13 +37,18 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             orderItemsRepository = DeliveryOrderItemsRepository.getInstance();
             setUpStatusses();
 
-            AddOrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addOrderDelivery(); });
-            ModifyProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onModifyProvider(); });
-            AddProviderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { addProviderDelivery(); });
-            DeleteCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING")) return true; return false; }, (p) => { onDelete(); });
-            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && !deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "ERROR")) return true; return false; }, (p) => { turnToPaymentPage(selectedDeliOrder.id.ToString()); });
+            AddOrderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { addOrderDelivery(); });
+            ModifyProviderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onModifyProvider(); });
+            AddProviderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { addProviderDelivery(); });
+            DeleteCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING") && UserRoles()) return true; return false; }, (p) => { onDelete(); });
+            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && !deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "ERROR") && UserRoles()) return true; return false; }, (p) => { turnToPaymentPage(selectedDeliOrder.id.ToString()); });
         }
 
+        //-------------------------------------------------------------------------------------------------
+        private bool UserRoles()
+        {
+            return true;
+        }
         //-------------------------------------------------------------------------------------------------
         private static DeliveryPageViewModel _intance;
         public static DeliveryPageViewModel getInstance()

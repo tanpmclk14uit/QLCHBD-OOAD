@@ -96,9 +96,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                 else if (billRepository.getImportBillStatusByImportFormID(id).Equals("PAID"))
                 {
                     
-                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onAfterConfirmAll(); });
-                    ConfirmAllCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
-                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+                    UpdateCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onAfterConfirmAll(); });
+                    ConfirmAllCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => {});
+                    ChangeImageCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => {});
                     UpdateContent = "🏠";
                     ConfirmAllContent = "PAID";
                     image = "/QLCHBD-OOAD;component/assets/img_paid.png";
@@ -109,10 +109,16 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             }
             else
             {
-                ConfirmAllCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmCommand(id); });
-                UpdateCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onUpdate(id); });
-                ChangeImageCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onChangeImageCommand(); });
+                ConfirmAllCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onConfirmCommand(id); });
+                UpdateCommand = new RelayCommand<object>((p) => { if (selectedItems != null && UserRoles()) return true; return false; }, (p) => { onUpdate(id); });
+                ChangeImageCommand = new RelayCommand<object>((p) => { if (selectedItems != null && UserRoles()) return true; return false; }, (p) => { onChangeImageCommand(); });
             }
+        }
+        //-------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------
+        private bool UserRoles()
+        {
+            return true;
         }
         //-------------------------------------------------------------------------------------------------
         private void setSelectedUIAfterConfirmAll()
