@@ -27,7 +27,23 @@ namespace QLCHBD_OOAD.view.rental
             InitializeComponent();
             rentalPageViewModel = new DetailRentalPageViewModel(retalOrderId, guestID);
             DataContext = rentalPageViewModel;
+            MyDialog.toggleForm += ToggleForm;
+            
         }
+        private void ToggleForm()
+        {
+            if (this.Opacity == 1)
+            {
+                this.Opacity = 0.3;
+                this.IsEnabled = false;
+            }
+            else
+            {
+                this.Opacity = 1;
+                this.IsEnabled = true;
+            }
+        }
+
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {

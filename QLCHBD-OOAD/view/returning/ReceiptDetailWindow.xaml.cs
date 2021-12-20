@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.model.receipt;
+﻿using QLCHBD_OOAD.Components;
+using QLCHBD_OOAD.model.receipt;
 using QLCHBD_OOAD.viewmodel.returning;
 using System;
 using System.Collections.Generic;
@@ -25,16 +26,16 @@ namespace QLCHBD_OOAD.view.returning
         {
             InitializeComponent();
             DataContext = new DetailReceiptViewModel(receipt);
+            
         }
+
+       
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+   
     }
 }

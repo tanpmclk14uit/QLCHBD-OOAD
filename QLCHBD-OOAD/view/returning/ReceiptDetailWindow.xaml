@@ -137,22 +137,10 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        
         <Button
             HorizontalAlignment="Right"
                         Margin="20 0"
-                        Width="200"
-                        Grid.Row="2"
-                        Height="40"                        
-                       Background="Red"
-            Content="DELETE"
-            FontSize="20"
-            Foreground="Black"  
-                       x:Name="Delete"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        materialDesign:ButtonAssist.CornerRadius="5" Click="Delete_Click" />
-        <Button
-            HorizontalAlignment="Right"
-                        Margin="240 0"
                         Width="200"
                         Grid.Row="2"
                         Height="40"                        
