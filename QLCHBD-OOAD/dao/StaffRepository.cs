@@ -63,6 +63,14 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
         }
 
+        public void setIsManager(bool isManager, long id)
+        {
+            int isManagerInt = isManager ? 1 : 0;
+            string command = $"UPDATE staff SET is_manager = {isManagerInt} WHERE id = {id}";
+            var reader = db.executeCommand(command);
+            db.closeConnection();
+        }
+
         //username already exist
         public bool isRightPassword(String username, String password)
         {

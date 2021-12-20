@@ -91,6 +91,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Width="120" Grid.RowSpan="2"
                         Grid.ColumnSpan="2"
+                        
                         x:Name="spAccountManage"
                         HorizontalAlignment="Left"
                         Height="40" Visibility="Hidden"
@@ -99,6 +100,7 @@
                         FontSize="10" Name="btnChangePassword" Click="btnChangePassword_Click"/>
                 <Button Background="White" Content="Manage(Admin)" Height="20" VerticalContentAlignment="Top" 
                         FontSize="10"
+                       
                         Click="btnManageStaff_Click"
                         Name="btnManageStaff"
                         Margin="0 -2 0 0"/>

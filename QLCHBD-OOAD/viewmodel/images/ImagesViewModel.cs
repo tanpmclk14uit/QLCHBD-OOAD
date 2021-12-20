@@ -46,7 +46,15 @@ namespace QLCHBD_OOAD.viewmodel.images
             {
                 _selectedAlbum = value;
                 _selectedImage = null;
-                _images = filterByAlbum(value);
+                if (value != "All")
+                {
+                    _images = filterByAlbum(value);
+                }
+                else
+                {
+                    _images = imagesRepository.getAllImages();
+                } 
+                    
                 OnPropertyChanged("filterListImages");
                 OnPropertyChanged("selectedAlbum");
             }
@@ -171,6 +179,7 @@ namespace QLCHBD_OOAD.viewmodel.images
             {
                 listAlbumName.Add(albums.name);
             }
+            listAlbumName.Add("All");
             return listAlbumName;
         }
 

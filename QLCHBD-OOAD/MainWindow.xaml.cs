@@ -24,6 +24,8 @@ using QLCHBD_OOAD.view.staff;
 using QLCHBD_OOAD.view.guest;
 using QLCHBD_OOAD.view.dashboard;
 using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.view.login;
+using QLCHBD_OOAD.model.staff;
 
 namespace QLCHBD_OOAD
 {
@@ -38,6 +40,7 @@ namespace QLCHBD_OOAD
             InitializeComponent();
             FirstLandingPage content = new FirstLandingPage();
             Holder.Content = content;
+            setUpForAuthorize();
             diskView.ToggleForm += ToggleForm;
             DeleteImageForm.ToggleForm += ToggleForm;
             ChangeImageInformationForm.ToggleForm += ToggleForm;
@@ -52,6 +55,19 @@ namespace QLCHBD_OOAD
             FirstLandingPage.onChangePageTotal += onChangePageTotal;
             FirstLandingPage.onChangePageBorrowed += onChangeBorrowed;
             FirstLandingPage.onChangePageInStock += onChangeInStock;
+        }
+
+        private void setUpForAuthorize()
+        {
+            if (!CurrentStaff.getInstance().currentStaff.isManager)
+            {
+                btnManageStaff.Visibility = Visibility.Collapsed;
+                spAccountManage.Margin = new Thickness(0, 20, 0 ,0);
+            }
+            else
+            {
+                btnManageStaff.Visibility = Visibility.Visible;
+            }
         }
 
         private void onChangeInStock()
@@ -125,10 +141,10 @@ namespace QLCHBD_OOAD
         }
         private void bttLogout_Click(object sender, RoutedEventArgs e)
         {
-
-            MessageBox.Show("Logout Screen still being making color process, try again another time", "Error");
-            //Screen content = new Screen();
-            //Holder.Content = content;
+            LoginWindow content = new LoginWindow();
+            content.Show();
+            CurrentStaff.getInstance().CopyPropertiesTo(new Staff());
+            this.Close();
         }
 
 
