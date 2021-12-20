@@ -143,6 +143,7 @@
     <Compile Include="model\receipt\Receipt.cs" />
     <Compile Include="model\receipt\ReceiptItem.cs" />
     <Compile Include="viewmodel\rental\RentalReportViewModel.cs" />
+    <Compile Include="viewmodel\returning\DetailReceiptViewModel.cs" />
     <Compile Include="viewmodel\returning\ReceiptItemViewModel.cs" />
     <Compile Include="model\retal\RentalBill.cs" />
     <Compile Include="model\retal\RentalBillItem.cs" />
@@ -189,6 +190,9 @@
     </Compile>
     <Compile Include="view\report\ReportRentalPage.xaml.cs">
       <DependentUpon>ReportRentalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\returning\ReceiptDetailWindow.xaml.cs">
+      <DependentUpon>ReceiptDetailWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\staff\StaffManagePage.xaml.cs">
       <DependentUpon>StaffManagePage.xaml</DependentUpon>
@@ -426,6 +430,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\report\ReportRentalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\returning\ReceiptDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

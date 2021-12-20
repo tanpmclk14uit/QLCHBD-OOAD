@@ -32,6 +32,18 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return id;
         }
+        public ObservableCollection<ReceiptItem> getAllReceiptItemsById(long id)
+        {
+            ObservableCollection<ReceiptItem> receipts = new ObservableCollection<ReceiptItem>();
+            string command = $"SELECT * FROM `receipt_item` WHERE receipt = {id}";
+            var reader = database.executeCommand(command);
+            while(reader != null && reader.Read())
+            {
+                ReceiptItem receipt = new ReceiptItem((long)reader[3], (string)reader[4], (int)reader[2], (int)reader[6], (int)reader[5]);
+                receipts.Add(receipt);
+            }
+            return receipts;
+        }
         public void createNewReceiptItem(ReceiptItem receiptItem)
         {
             string command = $"INSERT INTO `receipt_item`( `receipt`, `returned_quantity`, `disk_id`, `disk_name`, `delay_date`, `lost_quantity`) VALUES ('{receiptItem.receipt}','{receiptItem.returnedQuantity}','{receiptItem.diskId}','{receiptItem.diskName}','{receiptItem.delayDays}','{receiptItem.lostQuantity}')";
@@ -45,12 +57,24 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while(reader!=null && reader.Read())
             {
-                Receipt receipt = new Receipt((long)reader[0], getNameById((long)reader[1]), (DateTime)reader[2], getStaffNameById((long)reader[3]), (int)reader[4]);
+                Receipt receipt = new Receipt((long)reader[0], getNameById((long)reader[1]), (DateTime)reader[2], getStaffNameById((long)reader[3]), (int)reader[4], (long)reader[1], (long)reader[3]);
                 receipts.Add(receipt);
             }
             return receipts;
         }
-        private string getNameById(long id)
+        public ObservableCollection<Receipt> getReceiptById(string receiptId)
+        {
+            ObservableCollection<Receipt> receipts = new ObservableCollection<Receipt>();
+            string command = $"SELECT * FROM `receipt` where id = {receiptId}";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                Receipt receipt = new Receipt((long)reader[0], getNameById((long)reader[1]), (DateTime)reader[2], getStaffNameById((long)reader[3]), (int)reader[4], (long)reader[1], (long)reader[3]);
+                receipts.Add(receipt);
+            }
+            return receipts;
+        }
+        public string getNameById(long id)
         {
             String name = "";
             string command = $"SELECT name FROM `guest` WHERE ID = {id}";
@@ -62,7 +86,8 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return name;
         }
-        private string getStaffNameById(long id)
+
+        public string getStaffNameById(long id)
         {
             String name = "";
             string command = $"SELECT name FROM `staff` WHERE ID = {id}";

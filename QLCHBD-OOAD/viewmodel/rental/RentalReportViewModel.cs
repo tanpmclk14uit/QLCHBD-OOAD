@@ -2,6 +2,7 @@
 using QLCHBD_OOAD.model.receipt;
 using QLCHBD_OOAD.model.retal;
 using QLCHBD_OOAD.view.rental;
+using QLCHBD_OOAD.view.returning;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,6 +42,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
             {
                 _seachKey = value;
                 OnPropertyChanged("filterListRentalBill");
+                OnPropertyChanged("filterListReceipts");
                 OnPropertyChanged("seachKey");
             }
         }
@@ -63,6 +65,23 @@ namespace QLCHBD_OOAD.viewmodel.rental
         public ObservableCollection<Receipt> receipts
         {
             get => receiptRepository.getAllReceipts();
+        }
+        private Receipt _selectedReceipt;
+        public Receipt selectedReceipt
+        {
+            get => _selectedReceipt;
+            set
+            {
+                _selectedReceipt = value;
+                if(value != null)
+                {
+                    ReceiptDetailWindow receiptDetailWindow = new ReceiptDetailWindow(value);
+                    receiptDetailWindow.ShowDialog();
+                    OnPropertyChanged("filterListReceipts");
+                    _selectedReceipt = null;
+                }
+                
+            }
         }
         public RentalReportViewModel()
         {
@@ -148,14 +167,14 @@ namespace QLCHBD_OOAD.viewmodel.rental
                     }
                 }
             }
-            //else
-            //{
-            //    string id = Regex.Replace(seachKey, @"[^0-9]", string.Empty);
-            //    if (id != "")
-            //    {
-            //        filterList = rentalBillReponsitory.getAllRentalBillsById(id);
-            //    }
-            //}
+            else
+            {
+                string id = Regex.Replace(seachKey, @"[^0-9]", string.Empty);
+                if (id != "")
+                {
+                    filterList = receiptRepository.getReceiptById(id);
+                }
+            }
             return filterList;
         }
     }

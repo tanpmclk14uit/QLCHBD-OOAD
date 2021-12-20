@@ -96,7 +96,7 @@
                                         Width="0.5*"
                                         IsReadOnly="True">
                     </DataGridTextColumn>
-                    <DataGridTextColumn   Header="Guest name" CanUserResize="False" Binding="{Binding guestName}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+                    <DataGridTextColumn   Header="Guest name" CanUserResize="False" Binding="{Binding guestName}" CanUserSort="True" Width="2*" IsReadOnly="True" FontSize="20">
 
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Total price" CanUserResize="False" Binding="{Binding totalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
@@ -122,7 +122,7 @@
                       CanUserDeleteRows="False"
                       CanUserResizeColumns="False"
                       CanUserReorderColumns="False"   
-                      SelectedItem="{Binding selectedRentalBill}"
+                      SelectedItem="{Binding selectedReceipt}"
                       ItemsSource="{Binding filterListReceipts}"
                       x:Name="receiptItems"   
                       FontSize="20"                      

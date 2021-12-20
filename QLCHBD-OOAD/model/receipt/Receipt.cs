@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QLCHBD_OOAD.model.receipt
 {
-    class Receipt
+    public class Receipt
     {
         private long _id;
         public long id
@@ -45,13 +45,15 @@ namespace QLCHBD_OOAD.model.receipt
         {
             get => _additionalFee;
         }
-        public Receipt(long id, string guestName, DateTime createTime, string staffName, int additionalFee)
+        public Receipt(long id, string guestName, DateTime createTime, string staffName, int additionalFee, long guestId, long createBy)
         {
             _id = id;
             _guestName = guestName;
             _createTime = createTime;
             _staffName = staffName;
             _additionalFee = additionalFee;
+            _guestId = guestId;
+            _createBy = createBy;
         }
         public Receipt(long guestId, long createBy, int additionalFee)
         {
