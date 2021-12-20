@@ -50,7 +50,7 @@ namespace QLCHBD_OOAD.Components
 
         private void bttDivorce_Click(object sender, RoutedEventArgs e)
         {
-            if (Convert.ToInt32(tb_quantity.Text) >= 0)
+            if (Convert.ToInt32(tb_quantity.Text) > 0)
             {
                 tb_quantity.Text = (Convert.ToInt32(tb_quantity.Text) - 1).ToString();
             }

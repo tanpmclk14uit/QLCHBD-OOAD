@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.model.images;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.images;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -167,7 +168,7 @@ namespace QLCHBD_OOAD.dao
             if (images.isCheck == true) isCheck = 1;
             bool result = false;
 
-            string command = $"INSERT INTO `disk` ( `name`, `album`, `quantity`, `image`, `locate`, `checked`, `rental_price`, `provider`, `id_by_provider`, `loss_charges`, `create_time`, `update_time`, `create_by`, `update_by`, `rented`, `publishing_date`) VALUES ('{images.name}','{images.idAlbum}','{images.quantity}','{images.image}','{images.locate}','{isCheck}','{images.rentalPrice}','{images.idProvider}','{images.idByProvider}','{images.lostCharges}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1', '0', '{images.publish.ToString(format)}')";
+            string command = $"INSERT INTO `disk` ( `name`, `album`, `quantity`, `image`, `locate`, `checked`, `rental_price`, `provider`, `id_by_provider`, `loss_charges`, `create_time`, `update_time`, `create_by`, `update_by`, `rented`, `publishing_date`) VALUES ('{images.name}','{images.idAlbum}','{images.quantity}','{images.image}','{images.locate}','{isCheck}','{images.rentalPrice}','{images.idProvider}','{images.idByProvider}','{images.lostCharges}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '{CurrentStaff.getInstance().currentStaff.id}', '{CurrentStaff.getInstance().currentStaff.id}', '0', '{images.publish.ToString(format)}')";
             var reader = db.executeCommand(command);
             if (reader != null)
             {

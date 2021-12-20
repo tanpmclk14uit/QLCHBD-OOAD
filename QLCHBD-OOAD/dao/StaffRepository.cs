@@ -110,7 +110,7 @@ namespace QLCHBD_OOAD.dao
         public void addStaff(string name, string residentId, DateTime birthday, string username, string password)
         {
             string format = "yyyy-MM-dd";
-            string command = $"INSERT INTO `staff` (`name`, `birth_date`, `image`, `user_name`, `password`, `is_manager`, `cmnd_cccd`, `status`, `is_loged_in`, `create_time`, `update_time`, `create_by`, `update_by`, `salary_coefficient`) VALUES ('{name}', '{birthday.ToString(format)}', 'none', '{username}', '{PasswordHash.Encrypt(password)}', '0', '{residentId}', 'WORKING', '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1', '20000')";
+            string command = $"INSERT INTO `staff` (`name`, `birth_date`, `image`, `user_name`, `password`, `is_manager`, `cmnd_cccd`, `status`, `is_loged_in`, `create_time`, `update_time`, `create_by`, `update_by`, `salary_coefficient`) VALUES ('{name}', '{birthday.ToString(format)}', 'none', '{username}', '{PasswordHash.Encrypt(password)}', '0', '{residentId}', 'WORKING', '0', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '{CurrentStaff.getInstance().currentStaff.id}', '{CurrentStaff.getInstance().currentStaff.id}', '20000')";
             var reader = db.executeCommand(command);
             db.closeConnection();
         }
