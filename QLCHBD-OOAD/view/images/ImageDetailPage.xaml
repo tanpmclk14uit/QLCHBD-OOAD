@@ -65,7 +65,7 @@
                     </Button>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.3*"/>
+                            <ColumnDefinition Width="0.9*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <Grid>
@@ -86,7 +86,7 @@
                            Margin="20 0 0 0"
                            FontFamily="Calibri"
                                Grid.Row="1"/>
-                            <TextBlock Text="Publishing date: "
+                            <TextBlock Text="Publish : "
                            FontSize="30"
                            Margin="20 0 0 0"
                            FontFamily="Calibri"
@@ -130,7 +130,7 @@
                     </Grid>
                     <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center"
                         Margin="13 0 13 0">
-                        <Button Width="161"
+                        <Button Width="140"
                         Height="62"
                         Margin="0 0 7 0"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -142,9 +142,9 @@
                                FontWeight="Medium"
                                Foreground="Black"/>
                         </Button>
-                        <Button Width="175"
+                        <Button Width="140"
                         Height="62"
-                        Margin="0 0 7 0"
+                        Margin="0 0 0 0"
                         Click="Button_Click"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5"

@@ -23,17 +23,21 @@ namespace QLCHBD_OOAD.Components
     public partial class diskView : Window
     {
         public static event ToggleFormDialogNotifyHandler ToggleForm;
-
+        private DiskViewViewModel diskViewViewModel;
         public diskView()
         {
             InitializeComponent();
             ToggleForm();
-            DataContext = new DiskViewViewModel();
+            diskViewViewModel = new DiskViewViewModel();
+            DataContext = diskViewViewModel;
         }
 
         private void bttDivorce_Click(object sender, RoutedEventArgs e)
         {
-            tb_quantity.Text = (Convert.ToInt32(tb_quantity.Text) - 1).ToString();
+            if (Convert.ToInt32(tb_quantity.Text) >= 0)
+            {
+                tb_quantity.Text = (Convert.ToInt32(tb_quantity.Text) - 1).ToString();
+            }
         }
 
         private void bttPlus_Click(object sender, RoutedEventArgs e)
@@ -43,8 +47,11 @@ namespace QLCHBD_OOAD.Components
 
         private void bttSave_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            ToggleForm();
+            if (diskViewViewModel.validateForUI())
+            {
+                this.Close();
+                ToggleForm();
+            }
         }
 
         private void bttCancel_Click(object sender, RoutedEventArgs e)
@@ -52,6 +59,7 @@ namespace QLCHBD_OOAD.Components
             this.Close();
             ToggleForm();
         }
+
 
     }
 }

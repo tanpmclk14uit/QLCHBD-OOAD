@@ -24,11 +24,13 @@ namespace QLCHBD_OOAD.Components
     {
 
         public static event ToggleFormDialogNotifyHandler ToggleForm;
+        private ChangeImagesInformationViewModel changeImagesInformationViewModel;
         public ChangeImageInformationForm(Images images)
         {
             InitializeComponent();
             ToggleForm();
-            DataContext = new ChangeImagesInformationViewModel(images);
+            changeImagesInformationViewModel = new ChangeImagesInformationViewModel(images);
+            DataContext = changeImagesInformationViewModel;
         }
 
         private void bttCancel_Click(object sender, RoutedEventArgs e)
@@ -39,13 +41,19 @@ namespace QLCHBD_OOAD.Components
 
         private void bttSave_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            ToggleForm();
+            if (changeImagesInformationViewModel.validateForUI())
+            {
+                this.Close();
+                ToggleForm();
+            }
         }
 
         private void bttDivorce_Click(object sender, RoutedEventArgs e)
         {
-            tb_quantity.Text = (Convert.ToInt32(tb_quantity.Text) - 1).ToString();
+            if (Convert.ToInt32(tb_quantity.Text) >= 0)
+            {
+                tb_quantity.Text = (Convert.ToInt32(tb_quantity.Text) - 1).ToString();
+            }
         }
 
         private void bttPlus_Click(object sender, RoutedEventArgs e)

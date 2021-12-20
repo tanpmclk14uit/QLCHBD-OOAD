@@ -57,5 +57,29 @@ namespace QLCHBD_OOAD.dao
             db.closeConnection();
             return albums;
         }
+
+        public long getAlbumIdByName(string name)
+        {
+            long result = 0;
+            string command = $"SELECT album.id FROM album WHERE album.name = '{name}'";
+            var reader = db.executeCommand(command);
+            while (reader.Read())
+            {
+                result = (long)reader[0];
+            }
+            return result;
+        }
+
+        public string getAlbumNameById(long id)
+        {
+            string result = "";
+            string command = $"SELECT album.name FROM album WHERE album.id = '{id}'";
+            var reader = db.executeCommand(command);
+            while (reader.Read())
+            {
+                result = (string)reader[0];
+            }
+            return result;
+        }
     }
 }
