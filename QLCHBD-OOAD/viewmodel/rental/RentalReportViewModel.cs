@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.dao;
+using QLCHBD_OOAD.model.receipt;
 using QLCHBD_OOAD.model.retal;
 using QLCHBD_OOAD.view.rental;
 using System;
@@ -31,6 +32,7 @@ namespace QLCHBD_OOAD.viewmodel.rental
                 }
             }
         }
+
         private String _seachKey;
         public String seachKey
         {
@@ -52,9 +54,20 @@ namespace QLCHBD_OOAD.viewmodel.rental
         {
             get => rentalBillReponsitory.getAllRentalBills();
         }
+        private ReceiptRepository receiptRepository;
+
+        public ObservableCollection<Receipt> filterListReceipts
+        {
+            get => filterReceiptByInfo(); 
+        }
+        public ObservableCollection<Receipt> receipts
+        {
+            get => receiptRepository.getAllReceipts();
+        }
         public RentalReportViewModel()
         {
             rentalBillReponsitory = RentalBillRepository.getIntance();
+            receiptRepository = ReceiptRepository.getIntance();
             seachKey = "";
         }
 
@@ -99,6 +112,50 @@ namespace QLCHBD_OOAD.viewmodel.rental
                     filterList = rentalBillReponsitory.getAllRentalBillsById(id);
                 }
             }
+            return filterList;
+        }
+
+        private ObservableCollection<Receipt> filterReceiptByInfo()
+        {
+            ObservableCollection<Receipt> filterList = new ObservableCollection<Receipt>();
+
+            if (seachKey == "" || seachKey[0] != '#')
+            {
+                foreach (var receipt in receipts)
+                {
+
+                    foreach (PropertyInfo prop in receipt.GetType().GetProperties())
+                    {
+                        var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+
+                        if (type == typeof(string) || type == typeof(int) || type == typeof(DateTime))
+                        {
+                            var receipt_field = prop.GetValue(receipt, null);
+                            if (receipt_field != null)
+                            {
+                                String receipt_data = receipt_field.ToString().Trim().ToLower();
+                                String keyWord = seachKey.ToLower();
+                                if (receipt_data != null && keyWord != null)
+                                {
+                                    if (receipt_data.Contains(keyWord))
+                                    {
+                                        filterList.Add(receipt);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //else
+            //{
+            //    string id = Regex.Replace(seachKey, @"[^0-9]", string.Empty);
+            //    if (id != "")
+            //    {
+            //        filterList = rentalBillReponsitory.getAllRentalBillsById(id);
+            //    }
+            //}
             return filterList;
         }
     }

@@ -75,7 +75,7 @@
        
         <Grid  Grid.Row="1" Margin="20 0 20 20" Background="White">
             <DataGrid
-                        Background="White"
+                      Background="White"
                       SelectionMode="Single"                          
                       IsReadOnly="True"
                       CanUserDeleteRows="False"
@@ -123,7 +123,7 @@
                       CanUserResizeColumns="False"
                       CanUserReorderColumns="False"   
                       SelectedItem="{Binding selectedRentalBill}"
-                      ItemsSource="{Binding filterListRentalBill}"
+                      ItemsSource="{Binding filterListReceipts}"
                       x:Name="receiptItems"   
                       FontSize="20"                      
                       CanUserAddRows="False"
@@ -140,7 +140,7 @@
                     <DataGridTextColumn   Header="Guest name" CanUserResize="False" Binding="{Binding guestName}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
 
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Additional fee" CanUserResize="False" Binding="{Binding totalPrice}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
+                    <DataGridTextColumn Header="Additional fee" CanUserResize="False" Binding="{Binding additionalFee}" CanUserSort="True" Width="1.5*" IsReadOnly="True" FontSize="20">
 
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Create time" CanUserResize="False" Binding="{Binding createTime}" CanUserSort="True" Width="*" IsReadOnly="True" FontSize="20">

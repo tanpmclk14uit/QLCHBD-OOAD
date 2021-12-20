@@ -38,6 +38,42 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
+        public ObservableCollection<Receipt> getAllReceipts()
+        {
+            ObservableCollection<Receipt> receipts = new ObservableCollection<Receipt>();
+            string command = $"SELECT * FROM `receipt`";
+            var reader = database.executeCommand(command);
+            while(reader!=null && reader.Read())
+            {
+                Receipt receipt = new Receipt((long)reader[0], getNameById((long)reader[1]), (DateTime)reader[2], getStaffNameById((long)reader[3]), (int)reader[4]);
+                receipts.Add(receipt);
+            }
+            return receipts;
+        }
+        private string getNameById(long id)
+        {
+            String name = "";
+            string command = $"SELECT name FROM `guest` WHERE ID = {id}";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                name = reader[0].ToString();
+            }
+            database.closeConnection();
+            return name;
+        }
+        private string getStaffNameById(long id)
+        {
+            String name = "";
+            string command = $"SELECT name FROM `staff` WHERE ID = {id}";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                name = reader[0].ToString();
+            }
+            database.closeConnection();
+            return name;
+        }
     }
 
 }

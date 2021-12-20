@@ -38,7 +38,7 @@ namespace QLCHBD_OOAD.model.receipt
 
         public string staffName
         {
-            get => staffName;
+            get => _staffName;
         }
         private int _additionalFee;
         public int additionalFee
