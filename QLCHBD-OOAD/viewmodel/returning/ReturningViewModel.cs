@@ -2,6 +2,7 @@
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.Guest;
+using QLCHBD_OOAD.model.receipt;
 using QLCHBD_OOAD.model.retal;
 using System;
 using System.Collections.Generic;
@@ -64,12 +65,16 @@ namespace QLCHBD_OOAD.viewmodel.returning
         {
             get => _orderId;
         }
-        private long rentalId;
+
+        private RentalBill currentRental;
+
+        private ReceiptRepository receiptRepository;
         public ReturningViewModel(long rentalId, long guestId)
         {
             Back = new RelayCommand<object>((p) => { return true; }, (p) => { backToALlRentalPage(); });           
             _orderId = rentalId.ToString();
             detailRentalBillReponsitory = DetailRentalBillReponsitory.getIntance();
+            receiptRepository = ReceiptRepository.getIntance();
             _guest = detailRentalBillReponsitory.getGuestById(guestId);
             if (_guest.isMember)
             {
@@ -79,7 +84,8 @@ namespace QLCHBD_OOAD.viewmodel.returning
             {
                 isMember = Visibility.Hidden;
             }
-            this.rentalId = rentalId;
+
+            this.currentRental = RentalBillRepository.getIntance().getAllRentalBillsById(rentalId.ToString())[0];
             _createBy = detailRentalBillReponsitory.getOrderCreateBy(rentalId);
             _createDate = detailRentalBillReponsitory.getOrderCreateDate(rentalId);           
             _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(rentalId);
@@ -96,11 +102,25 @@ namespace QLCHBD_OOAD.viewmodel.returning
             myDialog.ShowDialog();
             turnBackPageHandler();
         }
+        private Receipt toReceipt(RentalBill rental)
+        {
+            //set currentStaff id
+            int currentStaffId = 1;
+            return new Receipt(rental.guestId, currentStaffId, int.Parse(_totalFee.ToString()));
+        }
+        private ReceiptItem mapToReceiptItem(ReceiptItemViewModel receiptItem, long receiptId)
+        {
+            return new ReceiptItem(receiptId,receiptItem.diskId, receiptItem.diskName, receiptItem.returned, receiptItem.lost, receiptItem.overDueDays);
+        }
 
         private void makeNewReceipt()
         {
-            //do make new recepit
-
+            Receipt receipt = toReceipt(currentRental);
+            long receiptId = receiptRepository.createNewReceipt(receipt);
+            foreach (ReceiptItemViewModel receiptItemVM in receiptItems)
+            {
+                receiptRepository.createNewReceiptItem(mapToReceiptItem(receiptItemVM, receiptId));
+            }
         }
         public void updateReturnedAllFieldByRentalId()
         {
@@ -151,7 +171,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
                     detailRentalBillReponsitory.updateLostQuantityById(receipt.id, receipt.lost);
                 }
             }
-            _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(rentalId);
+            _rentalBillItems = detailRentalBillReponsitory.getAllRentalBillItemByRentalId(currentRental.id);
             _receiptItems = mapToReceiptItems(_rentalBillItems);
             OnPropertyChanged("receiptItems");
         }

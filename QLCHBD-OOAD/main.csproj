@@ -128,8 +128,8 @@
       <DependentUpon>DeliveryOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="dao\DeliveryOrderRepository.cs" />
+    <Compile Include="dao\ReceiptRepository.cs" />
     <Compile Include="dao\RentalBillRepository.cs" />
-    <Compile Include="dao\ReturnRepository.cs" />
     <Compile Include="dao\StaffRepository.cs" />
     <Compile Include="model\delivery\DeliBills.cs" />
     <Compile Include="model\delivery\DeliBillsItems.cs" />
