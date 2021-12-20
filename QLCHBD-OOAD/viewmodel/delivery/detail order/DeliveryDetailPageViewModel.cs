@@ -44,11 +44,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             Items = deliveryOrderItemsRepository.getItemsbyImportFormsID(id);
             _importForm = deliveryOrderRepository.getDeliOrderById(id);
 
-            BackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { turnToDeliveryPage(); });
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onDelete(); });
-            ConfirmCommand = new RelayCommand<object>((p) => { return deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING"); }, (p) => { onConfirm(); });
+            BackCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { turnToDeliveryPage(); });
+            DeleteCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onDelete(); });
+            ConfirmCommand = new RelayCommand<object>((p) => { return deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING") && UserRoles(); }, (p) => { onConfirm(); });
         }
-
+        private bool UserRoles()
+        {
+            return true;
+        }
         private void onConfirm()
         {
             turnToDeliveryCheckOutPage(id.ToString());
