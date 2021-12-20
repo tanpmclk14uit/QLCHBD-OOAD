@@ -1,10 +1,15 @@
-﻿using QLCHBD_OOAD.dao;
+﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.delivery
 {
@@ -19,12 +24,15 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         DeliveryOrderRepository deliveryOrderRepository;
         private List<DeliOrder> _deliOrdersList;
         public List<DeliOrder> deliOrdersList => _deliOrdersList;
+        public ICommand ExportDocxCommand { get; set; }
+        public ICommand ExportXlxsCommand { get; set; }
         //-------------------------------------------------------------------------------------------------
         public DeliveryReportViewModel()
         {
             _deliOrdersList = new List<DeliOrder>();
             deliveryOrderRepository = DeliveryOrderRepository.getInstance();
-
+            ExportDocxCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+            ExportXlxsCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -65,5 +73,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
                 }
         }
+        //-------------------------------------------------------------------------------------------------
+
     }
 }

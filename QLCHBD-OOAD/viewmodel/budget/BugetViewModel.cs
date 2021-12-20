@@ -1,10 +1,13 @@
-﻿using QLCHBD_OOAD.dao;
+﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.buget;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace QLCHBD_OOAD.viewmodel.budget
@@ -41,6 +44,8 @@ namespace QLCHBD_OOAD.viewmodel.budget
             }
             return _intance;
         }
+        //-------------------------------------------------------------------------------------------------
+        
         //-------------------------------------------------------------------------------------------------
         public void GetTotalINOUT()
         {

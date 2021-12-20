@@ -80,7 +80,7 @@
                     materialDesign:ButtonAssist.CornerRadius="10"
                     Background="DodgerBlue"
                     Margin="10"
-                    Command="{Binding}">
+                    Command="{Binding ExportDocxCommand}">
                 <TextBlock>EXPORT<LineBreak/>.DOCX</TextBlock>
             </Button>
             <Button
@@ -92,7 +92,7 @@
                     materialDesign:ButtonAssist.CornerRadius="10"
                     Background="LawnGreen"
                     Margin="10"
-                    Command="{Binding}">
+                    Command="{Binding ExportXlxsCommand}">
                 <TextBlock>EXPORT<LineBreak/>.XLXS</TextBlock>
             </Button>
             <DatePicker
