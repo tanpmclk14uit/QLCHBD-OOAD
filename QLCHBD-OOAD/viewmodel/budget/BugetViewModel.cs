@@ -29,7 +29,7 @@ namespace QLCHBD_OOAD.viewmodel.budget
         {
             bugetBillsRepository = BugetBillsRepository.getInstance();
             _bugetBillsList = new List<BugetBills>();
-            dateStart = DateTime.Now;
+            dateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dateEnd = DateTime.Now;
 
 
