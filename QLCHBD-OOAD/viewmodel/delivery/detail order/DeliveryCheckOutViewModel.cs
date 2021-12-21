@@ -96,9 +96,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                 else if (billRepository.getImportBillStatusByImportFormID(id).Equals("PAID"))
                 {
                     
-                    UpdateCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onAfterConfirmAll(); });
-                    ConfirmAllCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
-                    ChangeImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+                    UpdateCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onAfterConfirmAll(); });
+                    ConfirmAllCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => {});
+                    ChangeImageCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => {});
                     UpdateContent = "🏠";
                     ConfirmAllContent = "PAID";
                     image = "/QLCHBD-OOAD;component/assets/img_paid.png";
@@ -109,10 +109,16 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             }
             else
             {
-                ConfirmAllCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirmCommand(id); });
-                UpdateCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onUpdate(id); });
-                ChangeImageCommand = new RelayCommand<object>((p) => { if (selectedItems != null) return true; return false; }, (p) => { onChangeImageCommand(); });
+                ConfirmAllCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onConfirmCommand(id); });
+                UpdateCommand = new RelayCommand<object>((p) => { if (selectedItems != null && UserRoles()) return true; return false; }, (p) => { onUpdate(id); });
+                ChangeImageCommand = new RelayCommand<object>((p) => { if (selectedItems != null && UserRoles()) return true; return false; }, (p) => { onChangeImageCommand(); });
             }
+        }
+        //-------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------
+        private bool UserRoles()
+        {
+            return true;
         }
         //-------------------------------------------------------------------------------------------------
         private void setSelectedUIAfterConfirmAll()
@@ -281,31 +287,37 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         //-------------------------------------------------------------------------------------------------
         private void onConfirmAll(string id)
         {
-            billRepository.addTemporaryBills(billID, id, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
-            foreach (var item in imagesItemsList)
-            {
-                itemsRepository.insertItems(item, billID.ToString());
-                if (imagesRepository.imageIsNotNull(item.id.ToString()) && item.quantity != 0)
+            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to Confirm all disks?");
+            //myDialog.ShowDialog();
+            //if (myDialog.action == true)
+            //{
+                billRepository.addTemporaryBills(billID, id, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
+                foreach (var item in imagesItemsList)
                 {
-                    confirmImage(item);
-                    imagesRepository.updateImage(item);
-                }
-                else if (item.quantity != 0)
-                {
-                    confirmImage(item);
-                    imagesRepository.uploadNewImage(item);
-                }
+                    itemsRepository.insertItems(item, billID.ToString());
+                    if (imagesRepository.imageIsNotNull(item.id.ToString()) && item.quantity != 0)
+                    {
+                        confirmImage(item);
+                        imagesRepository.updateImage(item);
+                    }
+                    else if (item.quantity != 0)
+                    {
+                        confirmImage(item);
+                        imagesRepository.uploadNewImage(item);
+                    }
 
-            }
-            orderRepository.updateStatusDELIVERED(id);
+                }
+                orderRepository.updateStatusDELIVERED(id);
 
-            setSelectedUIAfterConfirmAll();
-            ConfirmAllContent = "PAY";
-            UpdateContent = "🏠";
-            image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
-            OnPropertyChanged("image");
-            OnPropertyChanged("ConfirmAllContent");
-            OnPropertyChanged("UpdateContent");
+                setSelectedUIAfterConfirmAll();
+                ConfirmAllContent = "PAY";
+                UpdateContent = "🏠";
+                image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
+                OnPropertyChanged("image");
+                OnPropertyChanged("ConfirmAllContent");
+                OnPropertyChanged("UpdateContent");
+            //}
+
         }
         //-------------------------------------------------------------------------------------------------
         private void onPay(string id)

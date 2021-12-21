@@ -263,9 +263,9 @@ namespace QLCHBD_OOAD.dao
 
         public string getProviderImagebyImportFormID(string id)
         {
-            string command = "SELECT provider.image FROM import_form LEFT JOIN provider ON provider.name = import_form.provider_name AND import_form.id = " + id + " IS NOT NULL;";
+            string command = "SELECT provider.image FROM import_form LEFT JOIN provider ON provider.name = import_form.provider_name WHERE import_form.id = " + id + ";";
             var reader = database.executeCommand(command);
-            if (reader.Read())
+            if (reader.Read() && reader[0] != DBNull.Value)
             {
                 string image = (string)reader[0];
                 return image;
@@ -273,5 +273,30 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return "/QLCHBD-OOAD;component/assets/img_noImage.png";
         }
+
+        public List<DeliOrder> getImportFormInRange(DateTime A, DateTime B)
+        {
+            List<DeliOrder> list = new List<DeliOrder>();
+
+            while (A.CompareTo(B) <= 0)
+            {
+                string command = "SELECT * FROM import_form WHERE " +
+                    "DATE_FORMAT(create_time, '%d') = '" + A.Day + "' " +
+                    "AND DATE_FORMAT(create_time, '%m') = '" + A.Month + "' " +
+                    "AND DATE_FORMAT(create_time, '%Y') = '" + A.Year + "' IS NOT NULL;";
+                var reader = database.executeCommand(command);
+
+                while (reader.Read())
+                {
+                    DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
+                    deliOrder.setImage = checkImageExists(deliOrder.id);
+                    list.Add(deliOrder);
+                }
+
+                A = A.AddDays(1);
+            }
+            return list;
+        }
+
     }
 }

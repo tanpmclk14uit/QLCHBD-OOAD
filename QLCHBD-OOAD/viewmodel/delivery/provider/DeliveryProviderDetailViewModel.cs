@@ -107,14 +107,26 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
 
         private void onDelete(string id)
         {
-            providerRepository.removeProviderByID(id);
-            turnToDeliveryDetailPage();
+            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to delete this provider?");
+            //myDialog.ShowDialog();
+            //if (myDialog.action == true)
+            //{
+                providerRepository.removeProviderByID(id);
+                turnToDeliveryDetailPage();
+            //}
+
         }
 
         private void onConfirm()
         {
-            providerRepository.updateByProvider(_provider);
-            turnToDeliveryDetailPage();
+            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Confirm?");
+            //myDialog.ShowDialog();
+            //if (myDialog.action == true)
+            //{
+                providerRepository.updateByProvider(_provider);
+                turnToDeliveryDetailPage();
+            //}
+
         }
     }
 }

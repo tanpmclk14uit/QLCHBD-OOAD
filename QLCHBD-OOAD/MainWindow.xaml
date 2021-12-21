@@ -43,6 +43,8 @@
             <Setter Property="Height" Value="30"></Setter>
             <Setter Property="Background" Value="#1E3C64"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1.5"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
 
@@ -104,7 +106,7 @@
                         Margin="0 -2 0 0"/>
             </StackPanel>
             <WrapPanel Grid.Column="1" Orientation="Horizontal"
-                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                        HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,0,5,0">
 
                 <Button 
                     x:Name="bttMinimize"
