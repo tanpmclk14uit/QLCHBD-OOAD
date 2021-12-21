@@ -64,10 +64,14 @@ namespace QLCHBD_OOAD
             if (!CurrentStaff.getInstance().currentStaff.isManager)
             {
                 btnManageStaff.Visibility = Visibility.Collapsed;
+                bttReport.Visibility = Visibility.Collapsed;
+                Grid.SetRow(bttLogout, 5);
                 spAccountManage.Margin = new Thickness(0, 20, 0 ,0);
             }
             else
             {
+                Grid.SetRow(bttLogout, 6);
+                bttReport.Visibility = Visibility.Visible;
                 btnManageStaff.Visibility = Visibility.Visible;
             }
         }
