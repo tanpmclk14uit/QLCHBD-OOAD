@@ -27,7 +27,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         public ICommand ExportDocxCommand { get; set; }
         public ICommand ExportXlxsCommand { get; set; }
         //-------------------------------------------------------------------------------------------------
-        public DeliveryReportViewModel()
+        private DeliveryReportViewModel()
         {
             _deliOrdersList = new List<DeliOrder>();
             deliveryOrderRepository = DeliveryOrderRepository.getInstance();

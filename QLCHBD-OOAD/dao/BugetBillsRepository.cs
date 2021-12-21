@@ -40,7 +40,7 @@ namespace QLCHBD_OOAD.dao
         public BugetBills GetBugetBillsByDate(DateTime date)
         {
             BugetBills bills = new BugetBills(getBillIDWithDay("import_bill", date),
-                                    getBillIDWithDay("reserve_bill", date),
+                                    getBillIDWithDay("receipt", date),
                                     getSumValue("sum_value", "import_bill", date) - getAdditionalFee(date),
                                     getSumValue("total_price", "rental_bill", date),
                                     date);
@@ -50,10 +50,8 @@ namespace QLCHBD_OOAD.dao
         private List<long> getBillIDWithDay(string table, DateTime date)
         {
             List<long> IDs = new List<long>();
-            string command = "SELECT id FROM " + table + " WHERE " +
-                "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
-                "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
-                "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "' IS NOT NULL;";
+            string format = "yyyy-MM-dd";
+            string command = $"SELECT id FROM {table} WHERE create_time = '{date.ToString(format)}'";
             var reader = db.executeCommand(command);
 
             while (reader.Read())
@@ -66,10 +64,8 @@ namespace QLCHBD_OOAD.dao
         private long getSumValue(string valueName, string table, DateTime date)
         {
             long sum = 0;
-            string command = "SELECT SUM(" + valueName + ") FROM " + table + " WHERE " +
-                "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
-                "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
-                "AND DATE_FORMAT(create_time, '%Y') = '" + date.Year + "'";
+            string format = "yyyy-MM-dd";
+            string command = $"SELECT SUM({valueName}) FROM {table} WHERE create_time = '{date.ToString(format)}'";
             var reader = db.executeCommand(command);
 
             if (reader.Read() && reader[0] != DBNull.Value)
@@ -85,10 +81,8 @@ namespace QLCHBD_OOAD.dao
         private long getAdditionalFee(DateTime date)
         {
             long sum = 0;
-            string command = "SELECT SUM(additional_fee) FROM receipt WHERE " +
-                "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
-                "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
-                "AND DATE_FORMAT(create_time, '%Y') = '" + date.Year + "';";
+            string format = "yyyy-MM-dd";
+            string command = $"SELECT SUM(additional_fee) FROM receipt WHERE create_time = '{date.ToString(format)}'";
             var reader = db.executeCommand(command);
 
             if (reader.Read() && reader[0] != DBNull.Value)

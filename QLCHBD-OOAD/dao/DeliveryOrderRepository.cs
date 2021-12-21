@@ -97,7 +97,7 @@ namespace QLCHBD_OOAD.dao
         }
         public void deleteFormWithID(string id)
         {
-            string command = "DELETE FROM import_form WHERE id = '"+id+"';";
+            string command = "DELETE FROM import_form WHERE id = '" + id + "';";
             database.executeCommand(command);
             database.closeConnection();
         }
@@ -123,7 +123,7 @@ namespace QLCHBD_OOAD.dao
                 database.closeConnection();
                 if (strStatus.Equals(status)) return true;
                 else return false;
-                
+
             }
             database.closeConnection();
             return false;
@@ -277,24 +277,16 @@ namespace QLCHBD_OOAD.dao
         public List<DeliOrder> getImportFormInRange(DateTime A, DateTime B)
         {
             List<DeliOrder> list = new List<DeliOrder>();
+            string format = "yyyy-MM-dd";
+            string command = $"SELECT * FROM import_form WHERE create_time BETWEEN '{A.ToString(format)}' AND '{B.AddDays(1).ToString(format)}'";
+            var reader = database.executeCommand(command);
 
-            while (A.CompareTo(B) <= 0)
+            while (reader.Read())
             {
-                string command = "SELECT * FROM import_form WHERE " +
-                    "DATE_FORMAT(create_time, '%d') = '" + A.Day + "' " +
-                    "AND DATE_FORMAT(create_time, '%m') = '" + A.Month + "' " +
-                    "AND DATE_FORMAT(create_time, '%Y') = '" + A.Year + "' IS NOT NULL;";
-                var reader = database.executeCommand(command);
-
-                while (reader.Read())
-                {
-                    DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
-                    deliOrder.setImage = checkImageExists(deliOrder.id);
-                    list.Add(deliOrder);
-                }
-
-                A = A.AddDays(1);
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
+                list.Add(deliOrder);
             }
+
             return list;
         }
 

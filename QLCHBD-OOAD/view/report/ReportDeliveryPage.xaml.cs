@@ -31,5 +31,10 @@ namespace QLCHBD_OOAD.view.report
         {
             DeliveryReportViewModel.getInstance().getDeliveryInRange();
         }
+
+        private void DatePicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            DeliveryReportViewModel.getInstance().getDeliveryInRange();
+        }
     }
 }

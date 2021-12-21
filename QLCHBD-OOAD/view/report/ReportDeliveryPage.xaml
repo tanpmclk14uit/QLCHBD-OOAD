@@ -127,7 +127,7 @@
                 BorderBrush="Black"
                 VerticalAlignment="Top"
                 FontSize="35"
-                SelectedDateChanged="DatePicker_SelectedDateChanged"
+                SelectedDateChanged="DatePicker_SelectedDateChanged_1"
                 SelectedDate="{Binding dateEnd}"
                 BorderThickness="1"></DatePicker>
             <TextBlock
