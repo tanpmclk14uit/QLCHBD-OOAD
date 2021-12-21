@@ -50,7 +50,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         }
         private bool UserRoles()
         {
-            return true;
+            return CurrentStaff.getInstance().currentStaff.isManager;
         }
         private void onConfirm()
         {

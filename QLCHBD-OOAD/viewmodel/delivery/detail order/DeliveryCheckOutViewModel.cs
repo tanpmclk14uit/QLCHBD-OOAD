@@ -287,10 +287,10 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         //-------------------------------------------------------------------------------------------------
         private void onConfirmAll(string id)
         {
-            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to Confirm all disks?");
-            //myDialog.ShowDialog();
-            //if (myDialog.action == true)
-            //{
+            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to Confirm all disks?");
+            myDialog.ShowDialog();
+            if (myDialog.action == true)
+            {
                 billRepository.addTemporaryBills(billID, id, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
                 foreach (var item in imagesItemsList)
                 {
@@ -316,7 +316,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                 OnPropertyChanged("image");
                 OnPropertyChanged("ConfirmAllContent");
                 OnPropertyChanged("UpdateContent");
-            //}
+            }
 
         }
         //-------------------------------------------------------------------------------------------------

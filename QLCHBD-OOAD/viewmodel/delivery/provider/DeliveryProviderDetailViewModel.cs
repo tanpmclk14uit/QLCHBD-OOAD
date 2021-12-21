@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.model.images;
@@ -107,25 +108,25 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
 
         private void onDelete(string id)
         {
-            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to delete this provider?");
-            //myDialog.ShowDialog();
-            //if (myDialog.action == true)
-            //{
+            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to delete this provider?");
+            myDialog.ShowDialog();
+            if (myDialog.action == true)
+            {
                 providerRepository.removeProviderByID(id);
                 turnToDeliveryDetailPage();
-            //}
+            }
 
         }
 
         private void onConfirm()
         {
-            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Confirm?");
-            //myDialog.ShowDialog();
-            //if (myDialog.action == true)
-            //{
+            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Confirm?");
+            myDialog.ShowDialog();
+            if (myDialog.action == true)
+            {
                 providerRepository.updateByProvider(_provider);
                 turnToDeliveryDetailPage();
-            //}
+            }
 
         }
     }
