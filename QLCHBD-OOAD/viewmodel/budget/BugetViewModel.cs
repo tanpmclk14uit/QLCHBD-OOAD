@@ -1,9 +1,14 @@
-﻿using OfficeOpenXml;
+﻿using NPOI.SS.UserModel;
+using NPOI.SS.Util;
+using NPOI.XSSF.UserModel;
+using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.buget;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +39,7 @@ namespace QLCHBD_OOAD.viewmodel.budget
 
 
             ExportDocxCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
-            ExportXlxsCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
+            ExportXlxsCommand = new RelayCommand<object>((p) => { return true; }, (p) => { exportElxsFile(); });
         }
         //-------------------------------------------------------------------------------------------------
         private static BugetViewModel _intance;
@@ -47,7 +52,55 @@ namespace QLCHBD_OOAD.viewmodel.budget
             return _intance;
         }
         //-------------------------------------------------------------------------------------------------
-        
+        private void exportElxsFile()
+        {
+            // export
+            XSSFWorkbook wb = new XSSFWorkbook();
+
+            // Tạo ra 1 sheet
+            ISheet sheet = wb.CreateSheet();
+
+            // Bắt đầu ghi lên sheet
+
+            // Tạo row
+            var row0 = sheet.CreateRow(0);
+            // Merge lại row đầu 3 cột
+            row0.CreateCell(0); // tạo ra cell trc khi merge
+            CellRangeAddress cellMerge = new CellRangeAddress(0, 0, 0, 5);
+            sheet.AddMergedRegion(cellMerge);
+            string name = $"Buget report from {dateStart} to {dateEnd}";
+            row0.GetCell(0).SetCellValue(name);
+            // Ghi tên cột ở row 1
+            var row1 = sheet.CreateRow(1);
+            row1.CreateCell(0).SetCellValue("Time");
+            row1.CreateCell(1).SetCellValue("Money in");
+            row1.CreateCell(2).SetCellValue("Money out");
+            row1.CreateCell(3).SetCellValue("Total money");
+
+            // bắt đầu duyệt mảng và ghi tiếp tục
+            int rowIndex = 2;
+            foreach (var item in bugetBillsList)
+            {
+                // tao row mới
+                var newRow = sheet.CreateRow(rowIndex);
+
+                // set giá trị
+                newRow.CreateCell(0).SetCellValue(item.DateToString);
+                newRow.CreateCell(1).SetCellValue(item.MoneyIn);
+                newRow.CreateCell(2).SetCellValue(item.MoneyOut);
+                newRow.CreateCell(3).SetCellValue(item.TotalMoney);
+
+                // tăng index
+                rowIndex++;
+            }
+
+            // xong hết thì save file lại
+            string format = "dd-MM-yyyy-hh-mm-ss";
+            string path = @"D:\Report\" + "BugetReport" + DateTime.Now.ToString(format) + ".xlsx";
+            FileStream fs = new FileStream(path, FileMode.CreateNew);
+            wb.Write(fs);
+            Process.Start(path);
+        }
         //-------------------------------------------------------------------------------------------------
         public void GetTotalINOUT()
         {
