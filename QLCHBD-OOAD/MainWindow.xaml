@@ -65,7 +65,9 @@
 
             <Ellipse Width="35" Height="35" HorizontalAlignment="Center" MouseDown="Ellipse_MouseDown">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg" />
+                    <ImageBrush
+                        x:Name="imgStaff"
+                        ImageSource="http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg" />
                 </Ellipse.Fill>
             </Ellipse>
             

@@ -41,6 +41,7 @@ namespace QLCHBD_OOAD
             FirstLandingPage content = new FirstLandingPage();
             Holder.Content = content;
             setUpForAuthorize();
+            setUpStaff();
             diskView.ToggleForm += ToggleForm;
             DeleteImageForm.ToggleForm += ToggleForm;
             ChangeImageInformationForm.ToggleForm += ToggleForm;
@@ -68,6 +69,13 @@ namespace QLCHBD_OOAD
             {
                 btnManageStaff.Visibility = Visibility.Visible;
             }
+        }
+
+        private void setUpStaff()
+        {
+            tbName.Text = CurrentStaff.getInstance().currentStaff.name;
+            tbRole.Text = CurrentStaff.getInstance().currentStaff.isManager ? "Manager" : "Staff";
+            imgStaff.ImageSource = CurrentStaff.getInstance().currentStaff.isManager ? new BitmapImage(new Uri("https://icons.iconarchive.com/icons/aha-soft/free-large-boss/256/Admin-icon.png")): new BitmapImage(new Uri("https://icons.iconarchive.com/icons/aha-soft/people/256/engineer-icon.png"));
         }
 
         private void onChangeInStock()
