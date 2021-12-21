@@ -138,7 +138,7 @@
         </Grid>
 
         <DockPanel>
-            <Grid Background="#1E3C64">
+            <Grid Background="#1E3C64" x:Name="gridNavigate">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="150"></RowDefinition>
                     <RowDefinition></RowDefinition>
