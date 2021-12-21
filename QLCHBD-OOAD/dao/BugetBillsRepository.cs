@@ -50,8 +50,11 @@ namespace QLCHBD_OOAD.dao
         private List<long> getBillIDWithDay(string table, DateTime date)
         {
             List<long> IDs = new List<long>();
-            string format = "yyyy-MM-dd";
-            string command = $"SELECT id FROM {table} WHERE create_time = '{date.ToString(format)}'";
+
+            string command = "SELECT id FROM " + table + " WHERE " +
+                "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
+                "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
+                "AND DATE_FORMAT(create_time, '%Y') = '" + date.Year + "' IS NOT NULL;";
             var reader = db.executeCommand(command);
 
             while (reader.Read())
@@ -64,8 +67,10 @@ namespace QLCHBD_OOAD.dao
         private long getSumValue(string valueName, string table, DateTime date)
         {
             long sum = 0;
-            string format = "yyyy-MM-dd";
-            string command = $"SELECT SUM({valueName}) FROM {table} WHERE create_time = '{date.ToString(format)}'";
+            string command = "SELECT SUM(" + valueName + ") FROM " + table + " WHERE " +
+                "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
+                "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
+                "AND DATE_FORMAT(create_time, '%Y') = '" + date.Year + "'";
             var reader = db.executeCommand(command);
 
             if (reader.Read() && reader[0] != DBNull.Value)
@@ -81,8 +86,10 @@ namespace QLCHBD_OOAD.dao
         private long getAdditionalFee(DateTime date)
         {
             long sum = 0;
-            string format = "yyyy-MM-dd";
-            string command = $"SELECT SUM(additional_fee) FROM receipt WHERE create_time = '{date.ToString(format)}'";
+            string command = "SELECT SUM(additional_fee) FROM receipt WHERE " +
+                "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
+                "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
+                "AND DATE_FORMAT(create_time, '%Y') = '" + date.Year + "';";
             var reader = db.executeCommand(command);
 
             if (reader.Read() && reader[0] != DBNull.Value)
