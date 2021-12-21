@@ -85,13 +85,13 @@
                     <chart:SfChart.Legend>
                         <chart:ChartLegend/>
                     </chart:SfChart.Legend>
-                    <chart:ColumnSeries Label="Money In" ItemsSource="{Binding bugetBillsList}" XBindingPath="MoneyIn" YBindingPath="MoneyIn" Palette="Elite" ShowTooltip="True" >
+                    <chart:ColumnSeries Label="Money In" ItemsSource="{Binding bugetBillsList}" XBindingPath="DateToString" YBindingPath="MoneyIn" Palette="Elite" ShowTooltip="True" >
                         <chart:ColumnSeries.AdornmentsInfo>
                             <chart:ChartAdornmentInfo ShowLabel="True"/>
                         </chart:ColumnSeries.AdornmentsInfo>
 
                     </chart:ColumnSeries>
-                    <chart:ColumnSeries Label="Money Out" ItemsSource="{Binding bugetBillsList}" XBindingPath="MoneyOut" YBindingPath="MoneyOut" Palette="SandyBeach" ShowTooltip="True">
+                    <chart:ColumnSeries Label="Money Out" ItemsSource="{Binding bugetBillsList}" XBindingPath="DateToString" YBindingPath="MoneyOut" Palette="SandyBeach" ShowTooltip="True">
                         <chart:ColumnSeries.AdornmentsInfo>
                             <chart:ChartAdornmentInfo ShowLabel="True"/>
                         </chart:ColumnSeries.AdornmentsInfo>

@@ -32,5 +32,6 @@ namespace QLCHBD_OOAD.model.buget
         public long MoneyOut { get => _moneyOut;}
         public long TotalMoney => _moneyIn - _moneyOut;
         public DateTime Date { get => _date;}
+        public String DateToString { get => _date.ToShortDateString();}
     }
 }

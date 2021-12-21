@@ -69,20 +69,18 @@ namespace QLCHBD_OOAD.dao
             string command = "SELECT SUM(" + valueName + ") FROM " + table + " WHERE " +
                 "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
                 "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
-                "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "'";
+                "AND DATE_FORMAT(create_time, '%Y') = '" + date.Year + "'";
             var reader = db.executeCommand(command);
 
-            try
+            if (reader.Read() && reader[0] != DBNull.Value)
             {
-                sum += (long)reader[0];
-            }
-            catch (Exception e)
-            {
-                sum = 0;
+                sum += Convert.ToInt64((decimal)reader[0]);
+                db.closeConnection();
+                return sum;
             }
 
             db.closeConnection();
-            return sum;
+            return 0;
         }
         private long getAdditionalFee(DateTime date)
         {
@@ -90,19 +88,18 @@ namespace QLCHBD_OOAD.dao
             string command = "SELECT SUM(additional_fee) FROM receipt WHERE " +
                 "DATE_FORMAT(create_time, '%d') = '" + date.Day + "' " +
                 "AND DATE_FORMAT(create_time, '%m') = '" + date.Month + "' " +
-                "AND DATE_FORMAT(create_time, '%y') = '" + date.Year + "';";
+                "AND DATE_FORMAT(create_time, '%Y') = '" + date.Year + "';";
             var reader = db.executeCommand(command);
 
-            try
+            if (reader.Read() && reader[0] != DBNull.Value)
             {
-                sum += (long)reader[0];
+                sum += Convert.ToInt64((decimal)reader[0]);
+                db.closeConnection();
+                return sum;
             }
-            catch (Exception e)
-            {
-                sum = 0;
-            }
+
             db.closeConnection();
-            return sum;
+            return 0;
         }
 
 

@@ -283,7 +283,7 @@ namespace QLCHBD_OOAD.dao
                 string command = "SELECT * FROM import_form WHERE " +
                     "DATE_FORMAT(create_time, '%d') = '" + A.Day + "' " +
                     "AND DATE_FORMAT(create_time, '%m') = '" + A.Month + "' " +
-                    "AND DATE_FORMAT(create_time, '%y') = '" + A.Year + "' IS NOT NULL;";
+                    "AND DATE_FORMAT(create_time, '%Y') = '" + A.Year + "' IS NOT NULL;";
                 var reader = database.executeCommand(command);
 
                 while (reader.Read())
