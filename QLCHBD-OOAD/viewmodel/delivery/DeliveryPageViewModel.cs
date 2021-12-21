@@ -233,9 +233,14 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void onDelete()
         {
+            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to Cancel this parcel?");
+            //myDialog.ShowDialog();
+            //if (myDialog.action == true)
+            //{
+                deliOrderlReponsitory.updateStatusERROR(selectedDeliOrder.id.ToString());
+                selectedStatus = selectedStatus;
+            //}
 
-            deliOrderlReponsitory.updateStatusERROR(selectedDeliOrder.id.ToString());
-            selectedStatus = selectedStatus;
 
 
         }

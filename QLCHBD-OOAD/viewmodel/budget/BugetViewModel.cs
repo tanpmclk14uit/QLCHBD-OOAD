@@ -72,6 +72,9 @@ namespace QLCHBD_OOAD.viewmodel.budget
                 else
                 {
 
+                    //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ERROR, "Start Date must be earlier than End Date");
+                    //myDialog.ShowDialog();
+
                 }
         }
         private BugetBills getBugetByDate(DateTime date) => bugetBillsRepository.GetBugetBillsByDate(date);

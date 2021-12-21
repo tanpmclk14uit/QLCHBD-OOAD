@@ -287,31 +287,37 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         //-------------------------------------------------------------------------------------------------
         private void onConfirmAll(string id)
         {
-            billRepository.addTemporaryBills(billID, id, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
-            foreach (var item in imagesItemsList)
-            {
-                itemsRepository.insertItems(item, billID.ToString());
-                if (imagesRepository.imageIsNotNull(item.id.ToString()) && item.quantity != 0)
+            //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "You definitely want to Confirm all disks?");
+            //myDialog.ShowDialog();
+            //if (myDialog.action == true)
+            //{
+                billRepository.addTemporaryBills(billID, id, orderRepository.getDeliOrderById(id).provider, sumAmount(), sumValue(), createID);
+                foreach (var item in imagesItemsList)
                 {
-                    confirmImage(item);
-                    imagesRepository.updateImage(item);
-                }
-                else if (item.quantity != 0)
-                {
-                    confirmImage(item);
-                    imagesRepository.uploadNewImage(item);
-                }
+                    itemsRepository.insertItems(item, billID.ToString());
+                    if (imagesRepository.imageIsNotNull(item.id.ToString()) && item.quantity != 0)
+                    {
+                        confirmImage(item);
+                        imagesRepository.updateImage(item);
+                    }
+                    else if (item.quantity != 0)
+                    {
+                        confirmImage(item);
+                        imagesRepository.uploadNewImage(item);
+                    }
 
-            }
-            orderRepository.updateStatusDELIVERED(id);
+                }
+                orderRepository.updateStatusDELIVERED(id);
 
-            setSelectedUIAfterConfirmAll();
-            ConfirmAllContent = "PAY";
-            UpdateContent = "🏠";
-            image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
-            OnPropertyChanged("image");
-            OnPropertyChanged("ConfirmAllContent");
-            OnPropertyChanged("UpdateContent");
+                setSelectedUIAfterConfirmAll();
+                ConfirmAllContent = "PAY";
+                UpdateContent = "🏠";
+                image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
+                OnPropertyChanged("image");
+                OnPropertyChanged("ConfirmAllContent");
+                OnPropertyChanged("UpdateContent");
+            //}
+
         }
         //-------------------------------------------------------------------------------------------------
         private void onPay(string id)

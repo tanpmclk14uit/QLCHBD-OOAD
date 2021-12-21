@@ -70,7 +70,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 }
                 else
                 {
-
+                    //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ERROR, "Start Date must be earlier than End Date");
+                    //myDialog.ShowDialog();
                 }
         }
         //-------------------------------------------------------------------------------------------------
