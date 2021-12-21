@@ -31,6 +31,9 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             _deliOrdersList = new List<DeliOrder>();
             deliveryOrderRepository = DeliveryOrderRepository.getInstance();
+            dateStart = DateTime.Now;
+            dateEnd = DateTime.Now;
+
             ExportDocxCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
             ExportXlxsCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
         }

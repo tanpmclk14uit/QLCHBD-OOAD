@@ -29,6 +29,8 @@ namespace QLCHBD_OOAD.viewmodel.budget
         {
             bugetBillsRepository = BugetBillsRepository.getInstance();
             _bugetBillsList = new List<BugetBills>();
+            dateStart = DateTime.Now;
+            dateEnd = DateTime.Now;
 
 
             ExportDocxCommand = new RelayCommand<object>((p) => { return true; }, (p) => {});
