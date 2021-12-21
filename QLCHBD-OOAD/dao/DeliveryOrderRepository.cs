@@ -137,7 +137,7 @@ namespace QLCHBD_OOAD.dao
             if (reader.Read())
             {
                 DeliOrders = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
-                DeliOrders.setImage = checkImageExists(DeliOrders.image);
+                DeliOrders.setImage = checkImageExists(DeliOrders.id);
                 database.closeConnection();
                 return DeliOrders;
             }
@@ -152,7 +152,7 @@ namespace QLCHBD_OOAD.dao
             while (reader != null && reader.Read())
             {
                 DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
-                deliOrder.setImage = checkImageExists(deliOrder.image);
+                deliOrder.setImage = checkImageExists(deliOrder.id);
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
@@ -166,7 +166,7 @@ namespace QLCHBD_OOAD.dao
             while (reader.Read())
             {
                 DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
-                checkImageExists(deliOrder.image);
+                checkImageExists(deliOrder.id);
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
@@ -180,7 +180,7 @@ namespace QLCHBD_OOAD.dao
             while (reader.Read())
             {
                 DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
-                deliOrder.setImage = checkImageExists(deliOrder.image);
+                deliOrder.setImage = checkImageExists(deliOrder.id);
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
@@ -245,8 +245,9 @@ namespace QLCHBD_OOAD.dao
 
 
 
-        private string checkImageExists(string imagePath)
+        private string checkImageExists(long id)
         {
+            string imagePath = getProviderImagebyImportFormID(id.ToString());
             if (File.Exists(imagePath))
             {
                 file = File.OpenRead(imagePath);
@@ -258,6 +259,19 @@ namespace QLCHBD_OOAD.dao
             }
 
             return imagePath;
+        }
+
+        public string getProviderImagebyImportFormID(string id)
+        {
+            string command = "SELECT provider.image FROM import_form LEFT JOIN provider ON provider.name = import_form.provider_name AND import_form.id = " + id + " IS NOT NULL;";
+            var reader = database.executeCommand(command);
+            if (reader.Read())
+            {
+                string image = (string)reader[0];
+                return image;
+            }
+            database.closeConnection();
+            return "/QLCHBD-OOAD;component/assets/img_noImage.png";
         }
     }
 }
