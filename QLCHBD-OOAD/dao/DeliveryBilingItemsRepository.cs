@@ -117,6 +117,19 @@ namespace QLCHBD_OOAD.dao
 
             return deliBillsItems;
         }
+        public long getNumberDeliveringImage()
+        {
+            string command = "Select Sum(import_form_item.quantity) from `import_form_item`";
+            var reader = database.executeCommand(command);
+            long result = 0;
+            while (reader.Read())
+            {
+                result = (long)reader[0];
+            }
+            database.closeConnection();
+            return result;
+        }
+
 
     }
 }

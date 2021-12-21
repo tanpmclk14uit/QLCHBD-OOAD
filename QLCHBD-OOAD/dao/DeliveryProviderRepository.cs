@@ -157,9 +157,43 @@ namespace QLCHBD_OOAD.dao
             return deliProviders;
         }
 
+        public ObservableCollection<DeliProviders> getAllProvider()
+        {
+            ObservableCollection<DeliProviders> providersLists = new ObservableCollection<DeliProviders>();
+            string command = "SELECT * FROM provider";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                DeliProviders provider = new DeliProviders((long)reader[0], (string)reader[1], (int)reader[2], (string)reader[3], (string)reader[4], (DateTime)reader[5], (DateTime)reader[6], (long)reader[7], (long)reader[8], (string)reader[9]);
+                providersLists.Add(provider);
+            }
+            database.closeConnection();
+            return providersLists;
+        }
 
+        public long getProviderIdByName(string providerName)
+        {
+            long result = 0;
+            string command = $"SELECT provider.id FROM provider WHERE provider.name = '{providerName}'";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                result = (long)reader[0];
+            }
+            return result;
+        }
 
-
+        public string getProviderNameById(long id)
+        {
+            string result = "";
+            string command = $"SELECT provider.name FROM provider WHERE provider.id = '{id}'";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                result = (string)reader[0];
+            }
+            return result;
+        }
 
     }
 }

@@ -12,7 +12,7 @@ namespace QLCHBD_OOAD.model.images
     public class Images
     {
         public Images(long id, string name, long idAlbum, int quantity, string image, string locate, Boolean isCheck, int rentalPrice, long idProvider, long idByProvider, int lostCharges,
-            DateTime createTime, DateTime updateTime, long createBy, long updateBy, int rented )
+            DateTime publishing,DateTime createTime, DateTime updateTime, long createBy, long updateBy, int rented )
         {
             this._id = id;
             this._name = name;
@@ -27,6 +27,7 @@ namespace QLCHBD_OOAD.model.images
             this._lostCharges = lostCharges;
             this._createTime = createTime;
             this._updateTime = updateTime;
+            this.publish = publishing;
             this._createBy = createBy;
             this._updateBy = updateBy;
             this._providerPrice = lostCharges.ToString();
@@ -274,10 +275,21 @@ namespace QLCHBD_OOAD.model.images
             }
         }
 
+        
         private DateTime _createTime;
         public String createTime
         {
             get => _createTime.ToShortDateString();
+        }
+
+        private DateTime _publish;
+        public DateTime publish
+        {
+            get => _publish;
+            set
+            {
+                _publish = value;
+            }
         }
 
         private DateTime _updateTime;

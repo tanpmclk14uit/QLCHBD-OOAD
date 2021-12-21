@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.model.images;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.images;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,19 +37,11 @@ namespace QLCHBD_OOAD.dao
             var reader = db.executeCommand(commnad);
             while(reader.Read())
             {
-                if (reader[11] == reader[12])
-                {
+
                     Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
+                        (long)reader[9], (int)reader[10], (DateTime)reader[16], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                     images.Add(image);
-                }
-                else
-                {
-                    
-                    Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                        (long)reader[9], (int)reader[10], (DateTime)reader[11], (long)reader[13], (int)reader[15]);
-                    images.Add(image);
-                }    
+
                 
             }
             db.closeConnection();
@@ -115,7 +108,7 @@ namespace QLCHBD_OOAD.dao
             while (reader.Read())
             {
                 Images image = new Images((Byte)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
+                   (long)reader[9], (int)reader[10], (DateTime)reader[16], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -131,7 +124,7 @@ namespace QLCHBD_OOAD.dao
             {               
           
                 Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
+                   (long)reader[9], (int)reader[10], (DateTime)reader[16], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -147,7 +140,7 @@ namespace QLCHBD_OOAD.dao
             {
 
                 Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                   (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
+                   (long)reader[9], (int)reader[10], (DateTime)reader[16], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -156,12 +149,12 @@ namespace QLCHBD_OOAD.dao
         public List<Images> getImagesByAlbum(long id)
         {
             List<Images> images = new List<Images>();
-            string command = "SELECT disk.id, disk.name, disk.album, disk.quantity, disk.image, disk.locate, disk.checked, disk.rental_price, disk.provider, disk.id_by_provider, disk.loss_charges, disk.create_time, disk.update_time, disk.create_by, disk.update_by, rented FROM `disk` inner join `album` WHERE disk.album = album.id AND album.ID =" + id.ToString();
+            string command = "SELECT disk.id, disk.name, disk.album, disk.quantity, disk.image, disk.locate, disk.checked, disk.rental_price, disk.provider, disk.id_by_provider, disk.loss_charges, disk.create_time, disk.update_time, disk.create_by, disk.update_by, rented, publishing_date FROM `disk` inner join `album` WHERE disk.album = album.id AND album.ID =" + id.ToString();
             var reader = db.executeCommand(command);
             while (reader.Read())
             {
                 Images image = new Images((long)reader[0], (string)reader[1], (long)reader[2], (int)reader[3], (string)reader[4], (string)reader[5], (Boolean)reader[6], (int)reader[7], (long)reader[8],
-                      (long)reader[9], (int)reader[10], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
+                      (long)reader[9], (int)reader[10], (DateTime)reader[16], (DateTime)reader[11], (DateTime)reader[12], (long)reader[13], (long)reader[14], (int)reader[15]);
                 images.Add(image);
             }
             db.closeConnection();
@@ -171,9 +164,11 @@ namespace QLCHBD_OOAD.dao
         public bool uploadNewImage(Images images)
         {
             int isCheck = 0;
+            string format = "yyyy-MM-dd";
             if (images.isCheck == true) isCheck = 1;
             bool result = false;
-            string command = $"INSERT INTO `disk` (`id`, `name`, `album`, `quantity`, `image`, `locate`, `checked`, `rental_price`, `provider`, `id_by_provider`, `loss_charges`, `create_time`, `update_time`, `create_by`, `update_by`, `rented`) VALUES ('{images.id}','{images.name}','{images.idAlbum}','{images.quantity}','{images.image}','{images.locate}','{isCheck}','{images.rentalPrice}','{images.idProvider}','{images.idByProvider}','{images.lostCharges}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1', '0')";
+
+            string command = $"INSERT INTO `disk` ( `name`, `album`, `quantity`, `image`, `locate`, `checked`, `rental_price`, `provider`, `id_by_provider`, `loss_charges`, `create_time`, `update_time`, `create_by`, `update_by`, `rented`, `publishing_date`) VALUES ('{images.name}','{images.idAlbum}','{images.quantity}','{images.image}','{images.locate}','{isCheck}','{images.rentalPrice}','{images.idProvider}','{images.idByProvider}','{images.lostCharges}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '{CurrentStaff.getInstance().currentStaff.id}', '{CurrentStaff.getInstance().currentStaff.id}', '0', '{images.publish.ToString(format)}')";
             var reader = db.executeCommand(command);
             if (reader != null)
             {
@@ -196,6 +191,7 @@ namespace QLCHBD_OOAD.dao
             return result;
         }
 
+        // for set ID
         public long getNumberOfImage()
         {
             string command = "Select count(*) from `disk`";
@@ -209,10 +205,26 @@ namespace QLCHBD_OOAD.dao
             return result;
         }
 
-        public bool updateImage(long id, string image, bool isCheck, string name, int quantity, long provider, long idByProvider, string createDate, int loss, int price, string locate, long album)
+        //for get all amount of image
+        public long getTotalOfImage()
         {
+            string command = "Select Sum(disk.quantity) from `disk`";
+            var reader = db.executeCommand(command);
+            long result = 0;
+            while (reader.Read())
+            {
+                if (reader[0] != DBNull.Value)
+                    result = Convert.ToInt64((Decimal)reader[0]);
+            }
+            db.closeConnection();
+            return result;
+        }
+
+        public bool updateImage(long id, string image, bool isCheck, string name, int quantity, long provider, long idByProvider, DateTime publish, int loss, int price, string locate, long album)
+        {
+            string format = "yyyy-MM-dd";
             bool result = false;
-            string command = $"UPDATE `disk` SET disk.album= {album} , disk.checked={isCheck}, disk.name = '{name}', disk.quantity = {quantity}, disk.provider = {provider}, disk.image= '{image}', disk.locate = '{locate}', disk.create_time = CURRENT_TIMESTAMP, disk.update_time= CURRENT_TIMESTAMP	, disk.loss_charges = {loss}, disk.rental_price= {price}, disk.id_by_provider = {idByProvider} WHERE disk.id = {id}";
+            string command = $"UPDATE `disk` SET disk.album= {album} , disk.checked={isCheck}, disk.name = '{name}', disk.quantity = {quantity}, disk.provider = {provider}, disk.image= '{image}', disk.locate = '{locate}',  disk.update_time= CURRENT_TIMESTAMP	, disk.loss_charges = {loss}, disk.rental_price= {price}, disk.id_by_provider = {idByProvider}, disk.publishing_date = '{publish.ToString(format)}' WHERE disk.id = {id}";
             var reader = db.executeCommand(command);
             if (reader != null)
             {

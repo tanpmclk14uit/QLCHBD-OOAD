@@ -18,10 +18,9 @@ namespace QLCHBD_OOAD.viewmodel.staff
         public static event CancelAddStaffHandler cancel;
         public ChangePasswordViewModel()
         {
-            currentStaff = new Staff(2, "Khang bùi", "duykhang1511", "123456789", "11111111111", false, true, StaffStatus.WORKING, DateTime.Now, "");
-            this.name = currentStaff.userName;
+            this.name = CurrentStaff.getInstance().currentStaff.userName;
             this.newPassword = "";
-            this.password = currentStaff.password;
+            this.password = CurrentStaff.getInstance().currentStaff.password;
             changePasswordCommand = new RelayCommand<object>((p) => { return true; }, (p) => { changePassword(); });
         }
 
@@ -33,7 +32,7 @@ namespace QLCHBD_OOAD.viewmodel.staff
             }
             else
             {
-                StaffRepository.getInstance().changePassword(newPassword, currentStaff.id);
+                StaffRepository.getInstance().changePassword(newPassword, CurrentStaff.getInstance().currentStaff.id);
                 update();
                 name = "";
                 password = "";
@@ -43,16 +42,7 @@ namespace QLCHBD_OOAD.viewmodel.staff
             }
         }
 
-        private Staff _currentStaff;
-        public Staff currentStaff
-        {
-            get => _currentStaff;
-            set
-            {
-                _currentStaff = value;
-                OnPropertyChanged("currentStaff");
-            }
-        }
+        
 
         private String _name;
         public String name

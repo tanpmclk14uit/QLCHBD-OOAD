@@ -32,6 +32,21 @@ namespace QLCHBD_OOAD.dao
             database = Db.getInstace();
         }
 
+        public long getNumberBorrowedImage()
+        {
+            string command = "Select Sum(rental_bill_item.quantity - rental_bill_item.receive_quantity) from `rental_bill_item`";
+            var reader = database.executeCommand(command);
+            long result = 0;         
+            while (reader.Read())
+            {
+                if (reader[0] != DBNull.Value)
+                    result = Convert.ToInt64((Decimal)reader[0]);
+            }
+            database.closeConnection();
+            return result;
+        }
+
+        
         
         public ObservableCollection<RentalBill> getRentalBillsThatNotReturnAllById(string id)
         {
@@ -88,13 +103,16 @@ namespace QLCHBD_OOAD.dao
         public ObservableCollection<ImageRentalInformation> getWaitingRentalBillsByDiskId(string id)
         {
             ObservableCollection<ImageRentalInformation> rentalBills = new ObservableCollection<ImageRentalInformation>();
-            string command = "SELECT rental_bill_item.rental_id, disk.name, rental_bill_item.quantity, rental_bill_item.rental_price, rental_bill_item.due_date FROM `rental_bill` inner join `disk` inner join `rental_bill_item` WHERE disk.id = " + id + " and rental_bill_item.rental_id = rental_bill.id and rental_bill.status = \"WAITING\" and disk.id = rental_bill_item.disk_id";
+            string command = "SELECT rental_bill_item.rental_id, disk.name, rental_bill_item.quantity, rental_bill_item.rental_price, rental_bill_item.due_date FROM `rental_bill` inner join `disk` inner join `rental_bill_item` WHERE disk.id = " + id + " and rental_bill_item.rental_id = rental_bill.id and rental_bill_item.quantity > rental_bill_item.receive_quantity and disk.id = rental_bill_item.disk_id";
             var reader = database.executeCommand(command);
-            while (reader.Read())
+            if (reader != null)
             {
-                ImageRentalInformation rentalBill = new ImageRentalInformation((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4]);
-                rentalBills.Add(rentalBill);
+                while (reader.Read())
+                {
+                    ImageRentalInformation rentalBill = new ImageRentalInformation((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4]);
+                    rentalBills.Add(rentalBill);
 
+                }
             }
             database.closeConnection();
             return rentalBills;

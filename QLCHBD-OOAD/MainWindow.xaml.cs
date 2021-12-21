@@ -22,6 +22,10 @@ using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.report;
 using QLCHBD_OOAD.view.staff;
 using QLCHBD_OOAD.view.guest;
+using QLCHBD_OOAD.view.dashboard;
+using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.view.login;
+using QLCHBD_OOAD.model.staff;
 
 namespace QLCHBD_OOAD
 {
@@ -34,8 +38,10 @@ namespace QLCHBD_OOAD
         public MainWindow()
         {
             InitializeComponent();
-            //HomeScreen content = new HomeScreen();
-            //Holder.Content = content;
+            FirstLandingPage content = new FirstLandingPage();
+            Holder.Content = content;
+            setUpForAuthorize();
+            setUpStaff();
             diskView.ToggleForm += ToggleForm;
             DeleteImageForm.ToggleForm += ToggleForm;
             ChangeImageInformationForm.ToggleForm += ToggleForm;
@@ -47,6 +53,54 @@ namespace QLCHBD_OOAD
             GuestDetailInformation.toggleForm += ToggleForm;
             MyDialog.toggleForm += ToggleForm;
             RentalAddNewMember.toggle += ToggleSecondaryForm;
+            FirstLandingPage.onChangePageDelivering += onChangePageDelivering;
+            FirstLandingPage.onChangePageTotal += onChangePageTotal;
+            FirstLandingPage.onChangePageBorrowed += onChangeBorrowed;
+            FirstLandingPage.onChangePageInStock += onChangeInStock;
+        }
+
+        private void setUpForAuthorize()
+        {
+            if (!CurrentStaff.getInstance().currentStaff.isManager)
+            {
+                btnManageStaff.Visibility = Visibility.Collapsed;
+                spAccountManage.Margin = new Thickness(0, 20, 0 ,0);
+            }
+            else
+            {
+                btnManageStaff.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void setUpStaff()
+        {
+            tbName.Text = CurrentStaff.getInstance().currentStaff.name;
+            tbRole.Text = CurrentStaff.getInstance().currentStaff.isManager ? "Manager" : "Staff";
+            imgStaff.ImageSource = CurrentStaff.getInstance().currentStaff.isManager ? new BitmapImage(new Uri("https://icons.iconarchive.com/icons/aha-soft/free-large-boss/256/Admin-icon.png")): new BitmapImage(new Uri("https://icons.iconarchive.com/icons/aha-soft/people/256/engineer-icon.png"));
+        }
+
+        private void onChangeInStock()
+        {
+            ImageFunctionPage content = new ImageFunctionPage();
+            Holder.Content = content;
+        }
+
+        private void onChangeBorrowed()
+        {
+            RentalMainPage rentalMainPage = new RentalMainPage();
+            Holder.Content = rentalMainPage;
+        }
+
+        private void onChangePageTotal()
+        {
+            ReportMainPage content = new ReportMainPage();
+            Holder.Content = content;
+        }
+
+        private void onChangePageDelivering()
+        {
+            DeliveryMainPage content = new DeliveryMainPage();
+            Holder.Content = content;
         }
 
         public bool isOpen = false;
@@ -65,15 +119,13 @@ namespace QLCHBD_OOAD
         }
         private void bttDashBoard_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("DashBoard Screen still being making color process, try again another time", "Error");
-            //Screen content = new Screen();
-            //Holder.Content = content;
+            FirstLandingPage content = new FirstLandingPage();
+            Holder.Content = content;
         }
 
         private void bttImages_Click(object sender, RoutedEventArgs e)
         {
-            //Screen content = new Screen();
-            //Holder.Content = content;
+
             ImageFunctionPage imagesPage = new ImageFunctionPage();
             Holder.Content = imagesPage;
         }
@@ -98,10 +150,10 @@ namespace QLCHBD_OOAD
         }
         private void bttLogout_Click(object sender, RoutedEventArgs e)
         {
-
-            MessageBox.Show("Logout Screen still being making color process, try again another time", "Error");
-            //Screen content = new Screen();
-            //Holder.Content = content;
+            LoginWindow content = new LoginWindow();
+            content.Show();
+            CurrentStaff.getInstance().CopyPropertiesTo(new Staff());
+            this.Close();
         }
 
 

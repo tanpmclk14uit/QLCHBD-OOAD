@@ -79,7 +79,7 @@ namespace QLCHBD_OOAD.viewmodel.images
 
         public string createDate
         {
-            get => selectedDisk.createTime.ToString();
+            get => selectedDisk.publish.ToShortDateString();
 
         }
         public string quantity

@@ -13,7 +13,8 @@
       Title="diskView"
       Height="480" Width="450">
     <Window.Resources>
-        <Style TargetType="{x:Type CheckBox}" x:Name="checbox_style">
+        
+            <Style TargetType="{x:Type CheckBox}" x:Name="checbox_style">
             <Setter Property="Background" Value="White" />
             <Setter Property="BorderBrush" Value="#FF262E34"/>
             <Setter Property="Foreground" Value="#FF262E34"/>
@@ -44,6 +45,183 @@
                             </Trigger>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="eliCheck" Property="Visibility" Value="Visible"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="32" />
+                            </Grid.ColumnDefinitions>
+                            <Border
+                          x:Name="Border"
+                          Grid.ColumnSpan="2"
+                          CornerRadius="0"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="#707070"
+                          BorderThickness="0" 
+                        />
+
+                            <Path
+                            x:Name="Arrow"
+                            Grid.Column="1"    
+                            Fill="{TemplateBinding Foreground}"
+                            Stroke="{TemplateBinding Foreground}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M 0 0 L 4 4 L 8 0 Z"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="True" />
+        </ControlTemplate>
+
+        <Style x:Key="theComboBox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="#707070" />
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White" />
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="MinWidth" Value="150"/>
+            <Setter Property="MinHeight" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton
+                            Cursor="Hand"
+                            Name="ToggleButton"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Style="{StaticResource ComboBoxToggleButton}"
+                            Grid.Column="2"
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press"/>
+
+                            <ContentPresenter
+                            Name="ContentSite"
+                            IsHitTestVisible="False"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="10,3,30,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}"
+                            Template="{StaticResource ComboBoxTextBox}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="3,3,23,3"
+                            Focusable="True"                               
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True"
+                            Focusable="False"
+                            PopupAnimation="Slide">
+                                <Grid
+                              Name="DropDown"
+                              SnapsToDevicePixels="True"               
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border
+                                    CornerRadius="8"
+                                    x:Name="DropDownBorder"
+                                    Background="White"
+                                    BorderThickness="1"
+                                    BorderBrush="Black"
+                                    />
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable" Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="theComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border
+                        Name="Border"
+                        Padding="5"
+                        Margin="2"
+                        BorderThickness="2,0,0,0"
+                        CornerRadius="0"
+                        Background="Transparent"
+                        BorderBrush="Transparent">
+                            <TextBlock TextAlignment="Left">
+                            <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#B3CB37"/>
+                                <Setter TargetName="Border" Property="Background" Value="#F8FAEB"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -99,14 +277,14 @@
 
         <Border
             Grid.Column="0"
-            Height="430"
+            Height="400"
             Width="220"
             Margin="10"
             CornerRadius="5">
             <Border.Background>
                 <ImageBrush
                     x:Name="imgDisk"
-                    Stretch="Fill" ImageSource="https://www.indiewire.com/wp-content/uploads/2019/12/us-1.jpg?w=758"/>
+                    Stretch="Fill" ImageSource="{Binding image}"/>
             </Border.Background>
         </Border>
 
@@ -114,16 +292,22 @@
                 Grid.Column="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom">
-            <TextBlock 
-                FontWeight="Bold"
-                FontSize="20"
-                >ID:</TextBlock>
-            <TextBlock 
-                x:Name="txtID"
-                FontWeight="Bold"
-                FontSize="20">
-                #23423
-            </TextBlock>
+            <StackPanel Orientation="Vertical">
+            <TextBox x:Name="tbImage"
+                     Height="25"
+                    Width="140"
+                     Margin="0 0 0 5"
+                     Text="{Binding image, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource tbInfo}"></TextBox>
+            <Line X1="140" Y1="0" 
+                  Stroke="#0F52BA" StrokeThickness="0.5"></Line>
+            </StackPanel>
+            <Button Content="..."
+                    BorderBrush="Black"
+                    Height="30"
+                    Margin="10 0 0 5"
+                    Command="{Binding addPictureCommand}"
+                    />
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
@@ -138,17 +322,30 @@
 
             <TextBlock FontSize="15"
                 Style="{StaticResource txtTitle}">Album:</TextBlock>
-            <TextBox x:Name="tbAlbum" Height="25"
-                     Text="{Binding album, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource tbInfo}"></TextBox>
+            <ComboBox Name="cb_album"
+                      ItemsSource="{Binding albumName, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding selectedAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Style="{StaticResource theComboBox}"
+                      FontSize="15"
+                      Height="25"
+                       IsEditable="True"
+                        IsReadOnly="True"
+                        Text="" 
+                      ></ComboBox>
             <Line X1="200" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
-
             <TextBlock FontSize="15"
                 Style="{StaticResource txtTitle}">Provider:</TextBlock>
-            <TextBox x:Name="tbProvider" Height="25"
-                     Text="{Binding provider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource tbInfo}"></TextBox>
+            <ComboBox Name="cb_provider"
+                      ItemsSource="{Binding providerName, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding provider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Style="{StaticResource theComboBox}"
+                      FontSize="15"
+                      Height="25"
+                       IsEditable="True"
+                        IsReadOnly="True"
+                        Text="" 
+                      ></ComboBox>
             <Line X1="200" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
 
@@ -212,6 +409,7 @@
                         Stroke="#0F52BA" 
                         StrokeThickness="0.5"
                         VerticalAlignment="Bottom"></Line>
+                    
                 </Grid>
 
             </StackPanel>
@@ -220,11 +418,16 @@
                 <TextBlock
                     Style="{StaticResource txtTitle}"
                     FontSize="15">Publishing date:</TextBlock>
-
-                <TextBox Width="110"
-                    Text="{Binding createDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    x:Name="tbPublish" FontSize="15" VerticalAlignment="Top" Margin="5, 0, 0, 0"
-                    Style="{StaticResource tbInfo}"></TextBox>
+                <DatePicker Grid.Row="2"   
+                                Height="auto"    
+                                SelectedDate="{Binding createDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Focusable="False"
+                                FontSize="14"                               
+                                IsTodayHighlighted="True"                               
+                                Name="datePicker"
+                                VerticalAlignment="Center" Width="100">
+                    
+                </DatePicker>
             </StackPanel>
 
             <Grid Margin="0, 10, 10, 0">

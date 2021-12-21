@@ -67,7 +67,9 @@
 
             <Ellipse Width="35" Height="35" HorizontalAlignment="Center" MouseDown="Ellipse_MouseDown">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg" />
+                    <ImageBrush
+                        x:Name="imgStaff"
+                        ImageSource="http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg" />
                 </Ellipse.Fill>
             </Ellipse>
             
@@ -93,6 +95,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Width="120" Grid.RowSpan="2"
                         Grid.ColumnSpan="2"
+                        
                         x:Name="spAccountManage"
                         HorizontalAlignment="Left"
                         Height="40" Visibility="Hidden"
@@ -101,6 +104,7 @@
                         FontSize="10" Name="btnChangePassword" Click="btnChangePassword_Click"/>
                 <Button Background="White" Content="Manage(Admin)" Height="20" VerticalContentAlignment="Top" 
                         FontSize="10"
+                       
                         Click="btnManageStaff_Click"
                         Name="btnManageStaff"
                         Margin="0 -2 0 0"/>

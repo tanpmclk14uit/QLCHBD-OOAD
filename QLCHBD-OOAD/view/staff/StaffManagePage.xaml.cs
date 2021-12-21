@@ -21,13 +21,17 @@ namespace QLCHBD_OOAD.view.staff
     /// </summary>
     public partial class StaffManagePage : Page
     {
+        private StaffManageViewModel staffManageViewModel;
         public StaffManagePage()
         {
             InitializeComponent();
-            this.DataContext = StaffManageViewModel.getIntance();
-
+            staffManageViewModel = StaffManageViewModel.getIntance();
+            this.DataContext = staffManageViewModel;
         }
 
-       
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            staffManageViewModel.isManagerChange();
+        }
     }
 }

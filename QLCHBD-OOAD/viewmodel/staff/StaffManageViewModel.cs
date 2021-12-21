@@ -42,6 +42,7 @@ namespace QLCHBD_OOAD.viewmodel.staff
                 {
                     name = _selectedItem.name;
                     password = _selectedItem.password;
+                    isManager = _selectedItem.isManager;
                     if (_selectedItem.isManager)
                     {
                         image = "https://icons.iconarchive.com/icons/aha-soft/free-large-boss/256/Admin-icon.png";
@@ -51,6 +52,9 @@ namespace QLCHBD_OOAD.viewmodel.staff
                 else
                 {
                     image = "/QLCHBD-OOAD;component/Assets/staff-ava.png";
+                    name = "";
+                    password = "";
+                    isManager = false;
                 }
                 OnPropertyChanged("selectedItem");
             }
@@ -100,12 +104,23 @@ namespace QLCHBD_OOAD.viewmodel.staff
             }
         }
 
+        private Boolean _isManager;
+        public Boolean isManager
+        {
+            get => _isManager;
+            set
+            {
+                _isManager = value;
+                OnPropertyChanged("isManager");
+            }
+        }
         private StaffManageViewModel()
         {
             lstStaffs = StaffRepository.getInstance().getAllStaff();
             name = "";
             password = "";
             newPassword = "";
+            isManager = false;
             image = "/QLCHBD-OOAD;component/Assets/staff-ava.png";
             changePasswordCommand = new RelayCommand<object>((p) => { return true; }, (p) => { changePassword();});
             deleteStaffCommand = new RelayCommand<object>((p) => { return true; }, (p) => { deleteStaff(); });
@@ -149,22 +164,34 @@ namespace QLCHBD_OOAD.viewmodel.staff
 
         private void deleteStaff()
         {
-            if (selectedItem == null)
+            if (selectedItem.id == CurrentStaff.getInstance().currentStaff.id)
             {
-                MessageBox.Show("Please choose the staff first !");
-            } else if (selectedItem.isLogedIn) 
-            {
-                MessageBox.Show("Cant delete account currently loged in !");
+                MessageBox.Show("Cant delete your own account");
             }
             else
             {
-                StaffRepository.getInstance().deleteStaff(selectedItem.id);
-                selectedItem = null;
-                lstStaffs = StaffRepository.getInstance().getAllStaff();
-                name = "";
-                password = "";
-                newPassword = "";
-                MessageBox.Show("Delete Staff Success !");
+                if (selectedItem.isManager == true)
+                {
+                    MessageBox.Show("Cant delete an admin");
+                }   
+                else if (selectedItem == null)
+                {
+                    MessageBox.Show("Please choose the staff first !");
+                }
+                else if (selectedItem.isLogedIn)
+                {
+                    MessageBox.Show("Cant delete account currently loged in !");
+                }
+                else
+                {
+                    StaffRepository.getInstance().deleteStaff(selectedItem.id);
+                    selectedItem = null;
+                    lstStaffs = StaffRepository.getInstance().getAllStaff();
+                    name = "";
+                    password = "";
+                    newPassword = "";
+                    MessageBox.Show("Delete Staff Success !");
+                }
             }
         }    
 
@@ -178,5 +205,30 @@ namespace QLCHBD_OOAD.viewmodel.staff
             }
             return _instance;
         }
+
+        public void isManagerChange()
+        {
+            if (selectedItem != null)
+            {
+                if (selectedItem.id == CurrentStaff.getInstance().currentStaff.id)
+                {
+                    MessageBox.Show("Cant change your own account");
+                    isManager = !isManager;
+                }
+                else
+                {
+
+                    StaffRepository.getInstance().setIsManager(isManager, selectedItem.id);
+                    lstStaffs = StaffRepository.getInstance().getAllStaff();
+                    if (isManager)
+                    {
+                        MessageBox.Show("Set is manager success!");
+                    }
+                    else MessageBox.Show("Set is staff success!");
+
+                }
+            }
+        }
+
     }
 }

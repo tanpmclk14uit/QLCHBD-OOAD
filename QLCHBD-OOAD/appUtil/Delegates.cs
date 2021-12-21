@@ -37,5 +37,8 @@ namespace QLCHBD_OOAD.appUtil
     public delegate void updateAddStaffHandler();
     public delegate void UpdateAddStaffListHandler();
     public delegate void CalculateFee();
+    public delegate void OnChangePage();
+    public delegate void Login();
+    public delegate void MakeStaffBecomeManager();
     public delegate void OnMyDialogConfirmClick();
 }
