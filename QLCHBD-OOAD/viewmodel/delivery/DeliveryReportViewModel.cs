@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using System;
@@ -73,8 +74,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                 }
                 else
                 {
-                    //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ERROR, "Start Date must be earlier than End Date");
-                    //myDialog.ShowDialog();
+                    MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ERROR, "Start Date must be earlier than End Date");
+                    myDialog.ShowDialog();
                 }
         }
         //-------------------------------------------------------------------------------------------------

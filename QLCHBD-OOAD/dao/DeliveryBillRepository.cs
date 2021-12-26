@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.delivery;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,17 @@ namespace QLCHBD_OOAD.dao
             if (instance == null)
                 instance = new DeliveryBillRepository();
             return instance;
+        }
+        private DeliveryBillStatus stringToDeliveryBillStatus(String status)
+        {
+            if (status == DeliveryBillStatus.PAID.ToString())
+            {
+                return DeliveryBillStatus.PAID;
+            }
+            else
+            {
+                return DeliveryBillStatus.UNPAID;
+            }
         }
         public bool DeliBillsIDisNotNULL(long id)
         {
@@ -67,9 +80,34 @@ namespace QLCHBD_OOAD.dao
         }
         public void updateTemporaryBillsWithImportFormID(string id)
         {
-            string command = "UPDATE import_bill SET status = 'PAID' WHERE import_form_id = '" + id + "';";
+            string command = $"UPDATE import_bill SET status = 'PAID', payment_date = CURRENT_TIMESTAMP WHERE import_form_id = '{id}', update_by = '{CurrentStaff.getInstance().currentStaff.id}';";
             database.executeCommand(command);
             database.closeConnection();
+        }
+
+        public List<DeliBills> GetDeliBillInRange(DateTime A, DateTime B)
+        {
+            List<DeliBills> listBills = new List<DeliBills>();
+            string format = "yyyy-MM-dd";
+            string command = $"SELECT * FROM import_bill WHERE status = 'PAID' AND create_time >= '{A.ToString(format)}' AND create_time <= '{B.AddDays(1).ToString(format)}'";
+            var reader = database.executeCommand(command);
+            while (reader.Read())
+            {
+                listBills.Add(new DeliBills(
+                    (long)reader[0], 
+                    (long)reader[1], 
+                    (string)reader[2], 
+                    (DateTime)reader[3], 
+                    (int)reader[4], 
+                    (int)reader[5], 
+                    stringToDeliveryBillStatus(reader[6].ToString()), 
+                    (DateTime)reader[7], 
+                    (DateTime)reader[8], 
+                    (long)reader[9], 
+                    (long)reader[10]));
+            }
+            database.closeConnection();
+            return listBills;
         }
 
     }

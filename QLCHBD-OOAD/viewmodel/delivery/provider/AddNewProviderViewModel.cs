@@ -127,7 +127,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
             else
             {
                 image = setupImageFromDialog("provider");
-                deliveryProviderRepository.insertProviderWithTextBox(tbIDProvider, tbName, tbNumber, tbMail, tbAddress, 1.ToString(), image);
+                deliveryProviderRepository.insertProviderWithTextBox(tbIDProvider, tbName, tbNumber, tbMail, tbAddress, CurrentStaff.getInstance().currentStaff.id.ToString(), image);
                 MessageBox.Show("Provider is added to Database", "Error");
                 closeForm();
             }

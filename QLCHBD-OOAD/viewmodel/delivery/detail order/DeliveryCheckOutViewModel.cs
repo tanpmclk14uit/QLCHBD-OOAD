@@ -20,7 +20,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
     class DeliveryCheckOutViewModel : BaseViewModel
     {
         public static ChangePageHandler turnToDeliveryMainPage;
-        int createID = 1;
+        long createID = CurrentStaff.getInstance().currentStaff.id;
         FileStream file;
         public ICommand UpdateCommand { get; set; }
         public ICommand ConfirmAllCommand { get; set; }

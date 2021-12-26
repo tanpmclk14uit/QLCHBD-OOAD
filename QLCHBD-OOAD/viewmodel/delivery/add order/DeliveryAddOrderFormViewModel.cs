@@ -150,7 +150,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             if (totalAmount != 0)
             {
 
-                deliveryOrderRepository.createNewImportForm(id.ToString(), selectedStatus, totalAmount, totalBills, 1, getProviderImage());
+                deliveryOrderRepository.createNewImportForm(id.ToString(), selectedStatus, totalAmount, totalBills, CurrentStaff.getInstance().currentStaff.id);
                 foreach (var item in importItems)
                 {
                     deliveryOrderItemsRepository.insertItems(item);

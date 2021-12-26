@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.model.delivery;
 namespace QLCHBD_OOAD.dao
 {
@@ -122,7 +123,7 @@ namespace QLCHBD_OOAD.dao
                 "`mail` = '" + providers.providerMail + "', " +
                 "`address` = '" + providers.providerAddress + "', " +
                 "`update_time` = CURRENT_TIMESTAMP, " +
-                "`update_by` = '" + 1 + "', " +
+                "`update_by` = '" + CurrentStaff.getInstance().currentStaff.id + "', " +
                 "`image` = '" + providers.image + "'" +
                 " WHERE id =" + providers.id;
             database.executeCommand(command);

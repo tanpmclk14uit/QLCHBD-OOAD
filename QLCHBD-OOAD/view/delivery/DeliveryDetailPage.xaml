@@ -10,44 +10,44 @@
       d:DesignWidth="1580"
       Title="DeliveryDetailPage">
     <Grid Background="#E6EBEE">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="5*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
         <Border 
-            Grid.Column="0"
+            Grid.Row="0"
             Background="White"
             CornerRadius="20"
             BorderThickness="1.5"
             BorderBrush="Black"
-            Margin="20 20 0 20">
+            Margin="20 20 20 0">
             <Grid
                 Grid.Column="0"
                 Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="1.2*"></RowDefinition>
-                    <RowDefinition Height="1.1*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button Command="{Binding BackCommand}"
-                Width="40"                  
-                Height="40"      
-                BorderThickness="0"
-                HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button
+                    VerticalAlignment="Top"
+                    Command="{Binding BackCommand}"
+                    Width="40"                  
+                    Height="40"      
+                    BorderThickness="0"
+                    HorizontalAlignment="Left">
                     <Button.Background>
-
                         <ImageBrush ImageSource="/Assets/ic_back.png"                   
-                   Stretch="Fill"                   
-                   />
+                        Stretch="Fill"/>
                     </Button.Background>
                 </Button>
-                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+                <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="10">
                     <Image
                         Source="{Binding image}"
                         Stretch="Fill"
                         Margin="1"></Image>
                 </Border>
-                <Grid Grid.Row="2">
+                <Grid Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -63,9 +63,9 @@
                         <RowDefinition Height="auto" ></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock FontSize="35">ID: #</TextBlock>
-                        <TextBlock FontSize="35" Text="{Binding id}"></TextBlock>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock FontSize="30">ID: #</TextBlock>
+                        <TextBlock FontSize="30" Text="{Binding id}"></TextBlock>
                     </StackPanel>
                     <TextBlock 
                         Grid.Row="2"
@@ -120,30 +120,32 @@
                     <Grid
                         Grid.Row="7"
                         Grid.Column="0"
-                        Grid.ColumnSpan="2">
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Right">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button
-                        Grid.Column="1"
-                        Background="Red"
-                        Height="70"
-                        Margin="5 20 0 0"
-                        materialDesign:ButtonAssist.CornerRadius="5 5 15 5"
-                        FontSize="33"
-                        Command="{Binding DeleteCommand}">
-                            Delete
+                            Grid.Column="0"
+                            Background="Red"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            MinHeight="60"
+                            FontSize="30"
+                            Margin="0 0 10 0"
+                            HorizontalAlignment="Right"
+                            Command="{Binding DeleteCommand}">
+                            DELETE
                         </Button>
                         <Button
-                        Grid.Column="0"
-                        Background="#0DBE00"
-                        Height="70"
-                        Margin="0 20 5 0"
-                        materialDesign:ButtonAssist.CornerRadius="5 5 5 15"
-                        FontSize="33"
-                        Command="{Binding ConfirmCommand}">
-                            Delivered
+                            Grid.Column="1"
+                            Background="#0DBE00"
+                            MinHeight="60"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            FontSize="30"
+                            HorizontalAlignment="Right"
+                            Command="{Binding ConfirmCommand}">
+                                DELIVERED
                         </Button>
                     </Grid>
 
@@ -153,7 +155,7 @@
         </Border>
 
         <Border 
-            Grid.Column="1"
+            Grid.Row="1"
             Background="White"
             CornerRadius="20"
             Width="auto"
