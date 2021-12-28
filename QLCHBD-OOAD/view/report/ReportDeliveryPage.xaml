@@ -16,6 +16,11 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style x:Key="RightAligned" TargetType="DataGridCell">
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+        </Grid.Resources>
         <DataGrid
             Grid.Row="0"
             FontSize="30" 
@@ -23,9 +28,16 @@
             BorderBrush="Black"
             BorderThickness="1"
             AutoGenerateColumns="False"
+            
             ItemsSource="{Binding deliOrdersList}">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding createTime}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding createTime}" IsReadOnly="True">
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="ID" Width="1*" Binding="{Binding id}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Provider" Width="1*" Binding="{Binding provider}" IsReadOnly="True"></DataGridTextColumn>
                 <DataGridTextColumn Header="Amount" Width="1*" Binding="{Binding amount}" IsReadOnly="True"></DataGridTextColumn>

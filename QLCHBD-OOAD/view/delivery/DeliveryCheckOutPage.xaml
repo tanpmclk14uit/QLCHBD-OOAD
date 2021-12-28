@@ -192,6 +192,11 @@
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding orderItemsList}"
                 SelectedItem="{Binding selectedItems}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>

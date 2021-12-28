@@ -158,6 +158,11 @@
                     BorderThickness="1"
                     AutoGenerateColumns="False"
                     ItemsSource="{Binding bugetList}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date }" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyIn}" IsReadOnly="True"></DataGridTextColumn>
@@ -172,6 +177,11 @@
                     BorderThickness="1"
                     AutoGenerateColumns="False"
                     ItemsSource="{Binding bugetList}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyOut}" IsReadOnly="True"></DataGridTextColumn>

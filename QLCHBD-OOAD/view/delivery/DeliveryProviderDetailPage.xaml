@@ -213,6 +213,11 @@
                 FontStyle="Normal"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding imageList}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Disk ID" Width="0.8*" Binding="{Binding id}" IsReadOnly="True"></DataGridTextColumn>
                     <DataGridTextColumn Header="Disk Name" Width="1*" Binding="{Binding name}" IsReadOnly="True"></DataGridTextColumn>

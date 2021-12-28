@@ -174,6 +174,11 @@
                 FontStyle="Normal"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding Items}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding diskName}" IsReadOnly="True"></DataGridTextColumn>
                         <DataGridTextColumn Header="List Price" Width="1*" Binding="{Binding imPrice}" IsReadOnly="True"></DataGridTextColumn>
