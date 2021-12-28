@@ -217,12 +217,15 @@
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center" />
                     </Style>
+                    <Style x:Key="NameCellStyle" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Disk ID" Width="0.8*" Binding="{Binding id}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Disk Name" Width="1*" Binding="{Binding name}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Amount" Width="0.8*" Binding="{Binding quantity}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Import price" Width="1*" Binding="{Binding providerPrice}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk ID" Width="0.8*" Binding="{Binding id}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk Name" Width="1*" Binding="{Binding name}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Amount" Width="0.8*" Binding="{Binding quantity}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Import price" Width="1*" Binding="{Binding providerPrice}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <!--<ListView FontSize="30">

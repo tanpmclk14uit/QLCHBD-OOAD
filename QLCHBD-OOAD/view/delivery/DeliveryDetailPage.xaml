@@ -169,7 +169,7 @@
                 </Grid.RowDefinitions>
                 <DataGrid 
                 Grid.Row="0"
-                Margin="10"
+                Margin="0,10,20,10"
                 FontSize="30" 
                 FontStyle="Normal"
                 AutoGenerateColumns="False"
@@ -178,12 +178,15 @@
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
+                        <Style x:Key="NameCellStyle" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding diskName}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="List Price" Width="1*" Binding="{Binding imPrice}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Amount" Width="1*" Binding="{Binding Amount}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Value" Width="1.5*" Binding="{Binding value}" IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding diskName}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="List Price" Width="1*" Binding="{Binding imPrice}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Amount" Width="1*" Binding="{Binding Amount}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Value" Width="1.5*" Binding="{Binding value}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid Grid.Row="1">
