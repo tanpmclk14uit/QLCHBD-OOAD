@@ -45,7 +45,7 @@ namespace QLCHBD_OOAD.viewmodel.budget
             deliveryBillRepository = DeliveryBillRepository.getInstance();
             receiptRepository = ReceiptRepository.getIntance();
 
-            dateStart = DateTime.Now;
+            dateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dateEnd = DateTime.Now;
 
 
