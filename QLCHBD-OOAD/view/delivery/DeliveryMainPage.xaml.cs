@@ -27,6 +27,7 @@ namespace QLCHBD_OOAD.view.delivery
             InitializeComponent();
             DataContext = DeliveryPageViewModel.getInstance();
             DeliveryPageViewModel.getInstance().resetUI();
+            setupUI();
         }
 
         private void setupUI()

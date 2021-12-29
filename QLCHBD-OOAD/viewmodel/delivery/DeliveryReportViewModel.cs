@@ -15,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Word = Microsoft.Office.Interop.Word;
@@ -92,7 +93,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             oPara1.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
             oPara1.Range.Font.Bold = 0;
 
-            //Insert a 3 x 5 table, fill it with data, and make the first row
+            //Insert a 5 x 2 table, fill it with data, and make the first row
             //bold and italic.
             Word.Table oTable;
             Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
@@ -253,19 +254,20 @@ namespace QLCHBD_OOAD.viewmodel.delivery
                     totalValueCancel += item.totalBills;
                     totalCancel++;
                 }
-                OnPropertyChanged("totalAmount");
-                OnPropertyChanged("totalValue");
-                OnPropertyChanged("totalAll");
-                OnPropertyChanged("totalAmountCancel");
-                OnPropertyChanged("totalValueCancel");
-                OnPropertyChanged("totalCancel");
-                OnPropertyChanged("totalAmountDelivered");
-                OnPropertyChanged("totalValueDelivered");
-                OnPropertyChanged("totalDelivered");
-                OnPropertyChanged("totalAmountDelivering");
-                OnPropertyChanged("totalValueDelivering");
-                OnPropertyChanged("totalDelivering");
             }
+
+            OnPropertyChanged("totalAmount");
+            OnPropertyChanged("totalValue");
+            OnPropertyChanged("totalAll");
+            OnPropertyChanged("totalAmountCancel");
+            OnPropertyChanged("totalValueCancel");
+            OnPropertyChanged("totalCancel");
+            OnPropertyChanged("totalAmountDelivered");
+            OnPropertyChanged("totalValueDelivered");
+            OnPropertyChanged("totalDelivered");
+            OnPropertyChanged("totalAmountDelivering");
+            OnPropertyChanged("totalValueDelivering");
+            OnPropertyChanged("totalDelivering");
         }
 
         //-------------------------------------------------------------------------------------------------
