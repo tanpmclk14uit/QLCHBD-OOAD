@@ -28,6 +28,9 @@ namespace QLCHBD_OOAD.view.report
         }
         private void setupUI()
         {
+            gridCancel.Visibility = Visibility.Visible;
+            gridDelivered.Visibility = Visibility.Visible;
+            gridDelivering.Visibility = Visibility.Visible;
             if (txCancel.Text.Equals("0")) gridCancel.Visibility = Visibility.Collapsed;
             if (txDelivered.Text.Equals("0")) gridDelivered.Visibility = Visibility.Collapsed;
             if (txDelivering.Text.Equals("0")) gridDelivering.Visibility = Visibility.Collapsed;
