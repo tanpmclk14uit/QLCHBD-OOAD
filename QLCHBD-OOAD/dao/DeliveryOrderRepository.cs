@@ -84,13 +84,14 @@ namespace QLCHBD_OOAD.dao
         }
         public void createNewImportForm(string formID, string provider, int totalAmount, long totalPrice, long id)
         {
-            string command = "INSERT INTO import_form (`id`, `provider_name`, `sum_amount`, `sum_value`, `create_by`, `update_by`) VALUES ('" +
+            string command = "INSERT INTO import_form (`id`, `provider_name`, `sum_amount`, `sum_value`, `create_by`, `update_by`, `image`) VALUES ('" +
                  formID + "', '" +
                  provider + "', '" +
                  totalAmount + "', '" +
                  totalPrice + "', '" +
                  id + "', '" +
-                 id + "');";
+                 id + "', '" +
+                 "/QLCHBD-OOAD;component/assets/img_noImage.png');";
             database.executeCommand(command);
             database.closeConnection();
         }
