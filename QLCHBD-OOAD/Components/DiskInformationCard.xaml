@@ -35,11 +35,7 @@
                                FontWeight="Medium"
                                Foreground="Black"/>
             </Button>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.4*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -69,37 +65,25 @@
                            FontFamily="Calibri"
                                Grid.Row="3"/>
                 </Grid>
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
 
-                    <TextBlock Text="{Binding name}"
-                             TextWrapping="WrapWithOverflow"
+
+                <TextBlock 
+                               TextWrapping="Wrap"
+                           TextTrimming="WordEllipsis"
                            FontFamily="Calibri"
                            FontSize="30"
-                               Grid.Row="0"/>
-                    <TextBlock Text="{Binding nameProvider}"
-                           FontFamily="Calibri"
-                           FontSize="30"
-                               Grid.Row="1"/>
-                    <TextBlock Text="{Binding createDate}"
-                           FontFamily="Calibri"
-                           FontSize="30"
-                               Grid.Row="2"/>
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" 
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top">
-                        <TextBlock Text="{Binding quantity}"
-                           FontFamily="Calibri"                    
-                           FontSize="30"/>
-                       
-                    </StackPanel>
-                </Grid>
-            </Grid>
+                               Grid.Row="0"
+                        >
+                    <Run Text="{Binding name}"/>
+                    <Run Text="{Binding nameProvider}"/>
+                    <Run Text="{Binding createDate}"/>
+                    <Run Text="{Binding quantity}"/>
+                </TextBlock>
+
+                    
+                      
+              
+            </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center"
                         Margin="13 0 13 0">
                 <Button Width="161"

@@ -48,13 +48,10 @@ namespace QLCHBD_OOAD.dao
             int i = 0;
             string command = $"SELECT count(*) FROM `staff` WHERE user_name = '{username}' and status = 'WORKING'";
             var reader = db.executeCommand(command);
-            if (!(reader[0] == DBNull.Value))
-            {
                 while (reader.Read())
                 {
                     i = Convert.ToInt32((long)reader[0]);
                 }
-            }
             db.closeConnection();
             return i;
         }
