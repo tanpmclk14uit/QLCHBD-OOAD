@@ -78,7 +78,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="{Binding name}"
-                             
+                             TextWrapping="WrapWithOverflow"
                            FontFamily="Calibri"
                            FontSize="30"
                                Grid.Row="0"/>
