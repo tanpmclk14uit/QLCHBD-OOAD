@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.viewmodel.delivery;
 
 namespace QLCHBD_OOAD.view.delivery
@@ -26,6 +27,16 @@ namespace QLCHBD_OOAD.view.delivery
             InitializeComponent();
             DataContext = DeliveryPageViewModel.getInstance();
             DeliveryPageViewModel.getInstance().resetUI();
+        }
+
+        private void setupUI()
+        {
+            if (!CurrentStaff.getInstance().currentStaff.isManager)
+            {
+                bttAddProvider.Visibility = Visibility.Hidden;
+                bttModifyProvider.Visibility = Visibility.Hidden;
+                bttNewOrder.Visibility = Visibility.Hidden;
+            }
         }
 
         private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)

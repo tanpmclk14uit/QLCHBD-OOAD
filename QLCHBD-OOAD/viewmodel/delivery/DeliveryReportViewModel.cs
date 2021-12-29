@@ -4,6 +4,7 @@ using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using QLCHBD_OOAD.appUtil;
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
@@ -27,6 +28,17 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         public long totalAmount { get; set; }
         public long totalValue { get; set; }
+        public long totalAll { get; set; }
+        public long totalAmountCancel { get; set; }
+        public long totalValueCancel { get; set; }
+        public long totalCancel { get; set; }
+        public long totalAmountDelivered { get; set; }
+        public long totalValueDelivered { get; set; }
+        public long totalDelivered { get; set; }
+        public long totalAmountDelivering { get; set; }
+        public long totalValueDelivering { get; set; }
+        public long totalDelivering { get; set; }
+
 
         DeliveryOrderRepository deliveryOrderRepository;
         private List<DeliOrder> _deliOrdersList;
@@ -167,7 +179,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             row0.CreateCell(0); // tạo ra cell trc khi merge
             CellRangeAddress cellMerge = new CellRangeAddress(0, 0, 0, 5);
             sheet.AddMergedRegion(cellMerge);
-            string name = $"Buget report from {dateStart} to {dateEnd}";
+            string name = $"Delivery Report from {dateStart} to {dateEnd}";
             row0.GetCell(0).SetCellValue(name);
             // Ghi tên cột ở row 1
             var row1 = sheet.CreateRow(1);
@@ -208,14 +220,54 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         {
             totalAmount = 0;
             totalValue = 0;
+            totalAll = 0;
+            totalAmountCancel = 0;
+            totalValueCancel = 0;
+            totalCancel = 0;
+            totalAmountDelivered = 0;
+            totalValueDelivered = 0;
+            totalDelivered = 0;
+            totalAmountDelivering = 0;
+            totalValueDelivering = 0;
+            totalDelivering = 0;
             foreach(var item in _deliOrdersList)
             {
                 totalAmount += item.amount;
                 totalValue += item.totalBills;
+                totalAll++;
+                if (item.status == DeliveryOrderStatus.WATING)
+                {
+                    totalAmountDelivering += item.amount;
+                    totalValueDelivering += item.totalBills;
+                    totalDelivering++;
+                }
+                if (item.status == DeliveryOrderStatus.DELIVERED)
+                {
+                    totalAmountDelivered += item.amount;
+                    totalValueDelivered += item.totalBills;
+                    totalDelivered++;
+                }
+                if (item.status == DeliveryOrderStatus.ERROR)
+                {
+                    totalAmountCancel += item.amount;
+                    totalValueCancel += item.totalBills;
+                    totalCancel++;
+                }
+                OnPropertyChanged("totalAmount");
+                OnPropertyChanged("totalValue");
+                OnPropertyChanged("totalAll");
+                OnPropertyChanged("totalAmountCancel");
+                OnPropertyChanged("totalValueCancel");
+                OnPropertyChanged("totalCancel");
+                OnPropertyChanged("totalAmountDelivered");
+                OnPropertyChanged("totalValueDelivered");
+                OnPropertyChanged("totalDelivered");
+                OnPropertyChanged("totalAmountDelivering");
+                OnPropertyChanged("totalValueDelivering");
+                OnPropertyChanged("totalDelivering");
             }
-            OnPropertyChanged("totalAmount");
-            OnPropertyChanged("totalValue");
         }
+
         //-------------------------------------------------------------------------------------------------
         public void getDeliveryInRange()
         {

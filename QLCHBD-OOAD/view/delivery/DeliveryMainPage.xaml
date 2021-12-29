@@ -253,6 +253,7 @@
                                                 Text="{Binding stringStatus}"></TextBlock>
 
                                         <Button
+                                            x:Name="bttDelivered"
                                                 Grid.Column="1"
                                                 Grid.Row="6"
                                                 FontSize="15"
@@ -264,6 +265,7 @@
         
                                                 >Delivered</Button>
                                         <Button
+                                            x:Name="bttCancel"
                                                 Grid.Column="0"
                                                 Grid.Row="6"
                                                 FontSize="15"
