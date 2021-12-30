@@ -131,6 +131,7 @@ namespace QLCHBD_OOAD
         {
 
             ImageFunctionPage imagesPage = new ImageFunctionPage();
+            ImagesViewModel.getIntance().reloadList();
             Holder.Content = imagesPage;
         }
 

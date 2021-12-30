@@ -169,6 +169,10 @@ namespace QLCHBD_OOAD.model.images
         public String displayQuantity
         {
             get => remaining + "/" + _quantity.ToString();
+            set
+            {
+                _displayQuantity = remaining + "/" + _quantity.ToString();
+            }
         }
 
         public string _image;

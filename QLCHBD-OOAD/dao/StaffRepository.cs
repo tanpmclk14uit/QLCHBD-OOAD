@@ -58,7 +58,7 @@ namespace QLCHBD_OOAD.dao
 
         public void changePassword(String newPassword, long id)
         {
-            string command = $"UPDATE staff SET password = {PasswordHash.Encrypt(newPassword)} WHERE id = {id}";
+            string command = $"UPDATE staff SET password = '{PasswordHash.Encrypt(newPassword)}' WHERE id = {id}";
             var reader = db.executeCommand(command);
             db.closeConnection();
         }
