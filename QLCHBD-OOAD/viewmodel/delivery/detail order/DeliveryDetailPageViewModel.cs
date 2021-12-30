@@ -46,7 +46,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             Items = deliveryOrderItemsRepository.getItemsbyImportFormsID(id);
             _importForm = deliveryOrderRepository.getDeliOrderById(id);
 
-            BackCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { BackToDeliveryPage(); });
+            BackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { BackToDeliveryPage(); });
             DeleteCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onDelete(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING") && UserRoles(); }, (p) => { onConfirm(); });
         }
