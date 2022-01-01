@@ -226,62 +226,42 @@
                       ItemsSource="{Binding lstStaffs, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"
                       BorderBrush="Black"
                       BorderThickness="1">
+
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="16"/>
+                    </Style>
+                    <Style x:Key="NameCellStyle" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="16"/>
+                    </Style>
+                    <Style x:Key="ManagerCellStyle" TargetType="CheckBox">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Width="1*" Binding="{Binding Path=id}" IsReadOnly="True">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                 Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="ID" Width="1*" ElementStyle="{StaticResource NameCellStyle}" Binding="{Binding Path=id}" IsReadOnly="True">
+                       
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Name" Width="1*" Binding="{Binding Path=name}" IsReadOnly="True">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                 Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Name" Width="1*" ElementStyle="{StaticResource NameCellStyle}" Binding="{Binding Path=name}" IsReadOnly="True">
+                      
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Resident ID" Width="2*" Binding="{Binding Path=residentId, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                 Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Resident ID" Width="2*" ElementStyle="{StaticResource NameCellStyle}" Binding="{Binding Path=residentId, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+                      
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Birthday" Width="1.5*" Binding="{Binding Path=birthday, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                 Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Birthday" Width="1.5*" ElementStyle="{StaticResource NameCellStyle}" Binding="{Binding Path=birthday, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+                        
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Username" Width="3*" Binding="{Binding Path=userName, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                 Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Username" Width="3*" ElementStyle="{StaticResource NameCellStyle}" Binding="{Binding Path=userName, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+                       
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Password" Width="3*" Binding="{Binding Path=password ,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                 Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn Header="Password" Width="3*" ElementStyle="{StaticResource NameCellStyle}" Binding="{Binding Path=password ,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+                        
                     </DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="isManager" Width="2*" Binding="{Binding Path=isManager, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
-                        <DataGridCheckBoxColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment"
-                 Value="Center" />
-                            </Style>
-                        </DataGridCheckBoxColumn.HeaderStyle>
+                    <DataGridCheckBoxColumn Header="isManager" Width="2*" ElementStyle="{StaticResource ManagerCellStyle}" Binding="{Binding Path=isManager, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+                        
                     </DataGridCheckBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>

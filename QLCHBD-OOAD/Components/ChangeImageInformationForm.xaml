@@ -11,7 +11,7 @@
       Topmost="True"
       ResizeMode="NoResize"
       Title="ChangeImageInfomationForm"
-      Height="480" Width="450">
+      Height="700" Width="670">
     <Window.Resources>
         <Style TargetType="{x:Type CheckBox}" x:Name="checbox_style">
             <Setter Property="Background" Value="White" />
@@ -276,8 +276,9 @@
 
         <Border
             Grid.Column="0"
-            Height="400"
-            Width="220"
+            Height="600"
+            Width="300"
+            Margin="10 10 10 75"
             CornerRadius="5">
             <Border.Background>
                 <ImageBrush
@@ -290,7 +291,7 @@
                 Grid.Column="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                    Margin="0 0 0 4 ">
+                    Margin="0 0 0 20 ">
             <StackPanel Orientation="Vertical">
                 <TextBox x:Name="tbImage"
                      Height="25"
@@ -309,17 +310,20 @@
                     />
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+        <StackPanel HorizontalAlignment="Center" 
+                    Width="300"
+                    Height="650"
+                    VerticalAlignment="Center" Grid.Column="1">
             <TextBlock FontSize="15"
                 Style="{StaticResource txtTitle}">Name:</TextBlock>
             <TextBox x:Name="tbName"
                      Height="25"
                      Text="{Binding name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource tbInfo}"></TextBox>
-            <Line X1="200" Y1="0" 
+            <Line X1="300" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
 
-            <TextBlock FontSize="15"
+            <TextBlock FontSize="15" Margin="0 20 0 0"
                 Style="{StaticResource txtTitle}">Album:</TextBlock>
             <ComboBox Name="cb_album"
                       ItemsSource="{Binding albumName, UpdateSourceTrigger=PropertyChanged}"
@@ -331,9 +335,9 @@
                         IsReadOnly="True"
                         Text="" 
                       ></ComboBox>
-            <Line X1="200" Y1="0" 
+            <Line X1="300" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
-            <TextBlock FontSize="15"
+            <TextBlock FontSize="15" Margin="0 20 0 0"
                 Style="{StaticResource txtTitle}">Provider:</TextBlock>
             <ComboBox Name="cb_provider"
                       ItemsSource="{Binding providerName, UpdateSourceTrigger=PropertyChanged}"
@@ -345,17 +349,17 @@
                         IsReadOnly="True"
                         Text="" 
                       ></ComboBox>
-            <Line X1="200" Y1="0" 
+            <Line X1="300" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
-            <TextBlock FontSize="15"
+            <TextBlock FontSize="15" Margin="0 20 0 0"
                 Style="{StaticResource txtTitle}">Locate:</TextBlock>
             <TextBox x:Name="tbLocate" Height="25"
                      Text="{Binding locate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource tbInfo}"></TextBox>
-            <Line X1="200" Y1="0" 
+            <Line X1="300" Y1="0" 
                   Stroke="#0F52BA" StrokeThickness="0.5"></Line>
 
-            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+            <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
                 <TextBlock  VerticalAlignment="Bottom"
                     Style="{StaticResource txtTitle}"
                     FontSize="15">Id by provider:</TextBlock>
@@ -366,7 +370,7 @@
                         x:Name="tbIdByProvider"
                         FontSize="18"
                         Style="{StaticResource tbInfo}"></TextBox>
-                    <Line X1="100" Y1="0" 
+                    <Line X1="200" Y1="0" 
                         Stroke="#0F52BA" 
                         StrokeThickness="0.5"
                         VerticalAlignment="Bottom"></Line>
@@ -374,7 +378,7 @@
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+            <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
                 <TextBlock  VerticalAlignment="Bottom"
                     Style="{StaticResource txtTitle}"
                     FontSize="15">Price:</TextBlock>
@@ -385,14 +389,14 @@
                         FontSize="18"
                         Text="{Binding price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource tbInfo}"></TextBox>
-                    <Line X1="153" Y1="0" 
+                    <Line X1="253" Y1="0" 
                         Stroke="#0F52BA" 
                         StrokeThickness="0.5"
                         VerticalAlignment="Bottom"></Line>
                 </Grid>
 
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+            <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
                 <TextBlock  VerticalAlignment="Bottom"
                     Style="{StaticResource txtTitle}"
                     FontSize="15">Loss:</TextBlock>
@@ -403,7 +407,7 @@
                         x:Name="tbLoss"
                         FontSize="18"
                         Style="{StaticResource tbInfo}"></TextBox>
-                    <Line X1="156" Y1="0" 
+                    <Line X1="256" Y1="0" 
                         Stroke="#0F52BA" 
                         StrokeThickness="0.5"
                         VerticalAlignment="Bottom"></Line>
@@ -411,7 +415,7 @@
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0, 15, 0, 0">
+            <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
                 <TextBlock
                     Style="{StaticResource txtTitle}"
                     FontSize="15">Publishing date:</TextBlock>
@@ -423,14 +427,14 @@
                                 FontSize="14"                               
                                 IsTodayHighlighted="True"                               
                                 Name="datePicker"
-                                VerticalAlignment="Center" Width="100">
+                                VerticalAlignment="Center" Width="190">
 
                 </DatePicker>
             </StackPanel>
 
-            <Grid Margin="0, 10, 10, 0">
+            <Grid Margin="0, 20, 0, 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="210"></ColumnDefinition>
                     <ColumnDefinition Width="20"></ColumnDefinition>
                     <ColumnDefinition Width="40"></ColumnDefinition>
                     <ColumnDefinition Width="20"></ColumnDefinition>
@@ -456,9 +460,9 @@
                     Click="bttPlus_Click">+</Button>
 
             </Grid>
-            <Grid Margin="0 10 0 0">
+            <Grid Margin="0 20 0 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2.2*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="IsCheck: " Style="{StaticResource txtTitle}"
@@ -470,7 +474,7 @@
                 </CheckBox>
             </Grid>
 
-            <Grid Margin="0,40, 0, 0">
+            <Grid Margin="0,80, 0, 0" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="15"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -482,7 +486,6 @@
                 <Button 
                     x:Name="bttSave"
                     Command="{Binding saveCommand}"
-                    Height="28"
                     Background="#28A745"
                     FontWeight="Bold"
                     Foreground="White"

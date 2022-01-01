@@ -29,6 +29,7 @@
                                    Foreground="White"/>
                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              Text="{Binding name, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="16"
                              Background="White"/>
                     </StackPanel>
                 <StackPanel Grid.Row="2" Margin="80 0 80 0"
@@ -38,6 +39,7 @@
                     <PasswordBox Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                              Background="White"
                                  x:Name="pbPassword"
+                                 FontSize="16"
                                  Height="50"
                                  PasswordChanged="PasswordBox_PasswordChanged"/>
                 </StackPanel>
