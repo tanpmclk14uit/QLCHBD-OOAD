@@ -303,6 +303,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                     else if (item.quantity != 0)
                     {
                         confirmImage(item);
+                        item.publish = DateTime.Now;
                         imagesRepository.uploadNewImage(item);
                     }
 
@@ -312,6 +313,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                 setSelectedUIAfterConfirmAll();
                 ConfirmAllContent = "PAY";
                 UpdateContent = "🏠";
+
                 image = "/QLCHBD-OOAD;component/assets/img_unpay.png";
                 OnPropertyChanged("image");
                 OnPropertyChanged("ConfirmAllContent");

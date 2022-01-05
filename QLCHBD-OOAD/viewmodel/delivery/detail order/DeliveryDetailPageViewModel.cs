@@ -48,21 +48,28 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
             BackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { BackToDeliveryPage(); });
             DeleteCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onDelete(); });
-            ConfirmCommand = new RelayCommand<object>((p) => { return deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING") && UserRoles(); }, (p) => { onConfirm(); });
+            ConfirmCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onConfirm(id); });
         }
         private bool UserRoles()
         {
             return CurrentStaff.getInstance().currentStaff.isManager;
         }
-        private void onConfirm()
+        private void onConfirm(string id)
         {
-
-            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Parcel has been delivered?");
-            myDialog.ShowDialog();
-            if (myDialog.action == true)
+            if (deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING"))
+            {
+                MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Parcel has been delivered?");
+                myDialog.ShowDialog();
+                if (myDialog.action == true)
+                {
+                    turnToDeliveryCheckOutPage(id.ToString());
+                }
+            }
+            else
             {
                 turnToDeliveryCheckOutPage(id.ToString());
             }
+            
             
         }
 

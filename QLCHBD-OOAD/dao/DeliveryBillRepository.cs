@@ -80,7 +80,7 @@ namespace QLCHBD_OOAD.dao
         }
         public void updateTemporaryBillsWithImportFormID(string id)
         {
-            string command = $"UPDATE import_bill SET status = 'PAID', payment_date = CURRENT_TIMESTAMP WHERE import_form_id = '{id}', update_by = '{CurrentStaff.getInstance().currentStaff.id}';";
+            string command = $"UPDATE import_bill SET status = 'PAID', payment_date = CURRENT_TIMESTAMP WHERE import_form_id = '{id}' AND update_by = '{CurrentStaff.getInstance().currentStaff.id}';";
             database.executeCommand(command);
             database.closeConnection();
         }

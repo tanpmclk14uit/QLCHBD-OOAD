@@ -107,8 +107,9 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             if (reader.Read())
             {
+                string strStatus = reader[0].ToString();
                 database.closeConnection();
-                return reader[0].ToString();
+                return strStatus;
             }
             database.closeConnection();
             return null;

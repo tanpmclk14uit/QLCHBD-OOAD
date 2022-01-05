@@ -40,8 +40,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             AddOrderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { addOrderDelivery(); });
             ModifyProviderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onModifyProvider(); });
             AddProviderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { addProviderDelivery(); });
-            DeleteCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "WATING") && UserRoles()) return true; return false; }, (p) => { onDelete(); });
-            DeliveredCommand = new RelayCommand<object>((p) => { if (selectedDeliOrder != null && !deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "ERROR") && UserRoles()) return true; return false; }, (p) => { onDelivered(); });
+            DeleteCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onDelete(); });
+            DeliveredCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onDelivered(); });
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -232,18 +232,29 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         
         private void onDelivered()
         {
-            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Parcel has been delivered?");
-            myDialog.ShowDialog();
-            if (myDialog.action == true)
-            {
+            if (selectedDeliOrder != null){
+
                 turnToPaymentPage(selectedDeliOrder.id.ToString());
+
+                //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Parcel has been delivered?");
+                //myDialog.ShowDialog();
+                //if (myDialog.action == true)
+                //{
+                    
+                //}
+                
             }
+            
         }
 
         private void onDelete()
         {
+            if (selectedDeliOrder != null && !deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "ERROR"))
+            {
                 deliOrderlReponsitory.updateStatusERROR(selectedDeliOrder.id.ToString());
                 selectedStatus = selectedStatus;
+            }
+                
         }
 
     }
