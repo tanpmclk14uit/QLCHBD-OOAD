@@ -9,9 +9,9 @@
       d:DesignWidth="1580"
       Title="ProviderDetailPage">
 
-    
-    
-    
+
+
+
     <Grid Background="#E6EBEE">
         <Grid.RowDefinitions>
             <RowDefinition Height="3.5*"></RowDefinition>
@@ -74,7 +74,7 @@
 
                 <Grid Grid.Column="1" Margin="15 0 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto" MinWidth="200"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -111,7 +111,7 @@
                         Grid.Row="6"
                         Grid.Column="0"
                         FontSize="30"
-                        VerticalAlignment="Top">Update Date:</TextBlock>
+                        VerticalAlignment="Top" Height="40">Update Date:</TextBlock>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                         <TextBlock FontSize="25">#</TextBlock>
                         <TextBlock FontSize="25" Text="{Binding id}"></TextBlock>
@@ -157,7 +157,7 @@
                         FontSize="30" 
                         Grid.Column="1"
                         VerticalAlignment="Top"
-                        Text="{Binding dayCreate}"></TextBlock>
+                        Text="{Binding dayCreate}" Height="40"></TextBlock>
 
 
 
@@ -195,7 +195,7 @@
                         </Button>
                     </Grid>
                 </Grid>
-                
+
             </Grid>
         </Border>
 

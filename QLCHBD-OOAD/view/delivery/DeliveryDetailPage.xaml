@@ -20,7 +20,7 @@
             CornerRadius="5"
             BorderThickness="1.5"
             BorderBrush="Black"
-            Margin="20 20 20 0">
+            Margin="10 20 20 0">
             <Grid
                 Grid.Column="0"
                 Margin="10">
@@ -49,7 +49,7 @@
                 </Border>
                 <Grid Grid.Column="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto" MinWidth="178" ></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -63,10 +63,11 @@
                         <RowDefinition Height="auto" ></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <TextBlock FontSize="30">ID: #</TextBlock>
-                        <TextBlock FontSize="30" Text="{Binding id}"></TextBlock>
-                    </StackPanel>
+
+                    <TextBlock 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        FontSize="30">ID:</TextBlock>
                     <TextBlock 
                         Grid.Row="2"
                         Grid.Column="0"
@@ -88,7 +89,10 @@
                         Grid.Column="0"
                         FontSize="30">ID create:</TextBlock>
 
-
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock FontSize="30">#</TextBlock>
+                        <TextBlock FontSize="30" Text="{Binding id}"></TextBlock>
+                    </StackPanel>
                     <TextBlock
                         Grid.Row="2"
                         Grid.Column="1"
@@ -106,7 +110,7 @@
                         Text="{Binding totalBills}"></TextBlock>
                     <TextBlock
                         Grid.Row="5"
-                        Grid.Column="4"
+                        Grid.Column="1"
                         FontSize="30"
                         Text="{Binding stringStatus}"></TextBlock>
                     <TextBlock
@@ -119,9 +123,8 @@
 
                     <Grid
                         Grid.Row="7"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        HorizontalAlignment="Right">
+                        Grid.Column="1"
+                        HorizontalAlignment="Right" Width="324">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -145,7 +148,7 @@
                             FontSize="30"
                             HorizontalAlignment="Right"
                             Command="{Binding ConfirmCommand}">
-                                DELIVERED
+                            DELIVERED
                         </Button>
                     </Grid>
 
