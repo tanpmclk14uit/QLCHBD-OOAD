@@ -31,6 +31,10 @@ namespace QLCHBD_OOAD.model.retal
         {
             get => _createTime.ToShortDateString();
         }
+        public DateTime createTimeButInDateTimeFormat
+        {
+            get => _createTime;
+        }
         private int _totalPrice;
         public int totalPriceSave
         {
@@ -75,6 +79,17 @@ namespace QLCHBD_OOAD.model.retal
         {
             this._guestId = guestId;
             this._totalPrice = totalPrice;            
+        }
+
+        public RentalBill(DateTime createTime, int totalPrice)
+        {
+            this._createTime = createTime;
+            this._totalPrice = totalPrice;
+            this._id = 0;
+            this._guestId = 0;
+            this._guestName = "None";
+            _staffName = "None";
+            _returnedAll = false;
         }
 
     }

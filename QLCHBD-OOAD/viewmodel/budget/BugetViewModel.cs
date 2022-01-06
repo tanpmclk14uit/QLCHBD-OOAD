@@ -6,6 +6,7 @@ using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.model.receipt;
+using QLCHBD_OOAD.model.retal;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,8 +20,10 @@ namespace QLCHBD_OOAD.viewmodel.budget
     {
         private DeliveryBillRepository deliveryBillRepository;
         private ReceiptRepository receiptRepository;
+        private RentalBillRepository rentalBillRepository;
         private List<DeliBills> _deliBillsList;
         private List<Receipt> _receiptsList;
+        private List<RentalBill> _rentalBillList;
         private List<BugetTotalBill> _bugetList;
         public List<BugetTotalBill> bugetList => _bugetList;
 
@@ -44,6 +47,7 @@ namespace QLCHBD_OOAD.viewmodel.budget
         {
             deliveryBillRepository = DeliveryBillRepository.getInstance();
             receiptRepository = ReceiptRepository.getIntance();
+            rentalBillRepository = RentalBillRepository.getIntance();
 
             dateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dateEnd = DateTime.Now;
@@ -222,6 +226,7 @@ namespace QLCHBD_OOAD.viewmodel.budget
                 {
                     _deliBillsList = deliveryBillRepository.GetDeliBillInRange(dateStart, dateEnd);
                     _receiptsList = receiptRepository.getReceiptInRange(dateStart, dateEnd);
+                    _rentalBillList = rentalBillRepository.getRentalBillInRange(dateStart, dateEnd);
                     getBugetTotalBillInRange(dateStart, dateEnd);
                     GetTotalINOUT();
                     OnPropertyChanged("deliBillsList");
@@ -233,6 +238,7 @@ namespace QLCHBD_OOAD.viewmodel.budget
 
                     MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ERROR, "Start Date must be earlier than End Date");
                     myDialog.ShowDialog();
+                    dateStart = new DateTime(dateEnd.Year, dateEnd.Month, 1);
 
                 }
         }
@@ -265,6 +271,15 @@ namespace QLCHBD_OOAD.viewmodel.budget
                     item.createTimeButInDateTimeFormat.Year == A.Year)
                 {
                     sum += item.additionalFee;
+                }
+            }
+            foreach (var item in _rentalBillList)
+            {
+                if (item.createTimeButInDateTimeFormat.Date == A.Date &&
+                    item.createTimeButInDateTimeFormat.Month == A.Month &&
+                    item.createTimeButInDateTimeFormat.Year == A.Year)
+                {
+                    sum += item.totalPriceSave;
                 }
             }
             return sum;

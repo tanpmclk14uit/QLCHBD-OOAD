@@ -112,6 +112,7 @@ namespace QLCHBD_OOAD.dao
                 Receipt receipt = new Receipt((long)reader[0], getNameById((long)reader[1]), (DateTime)reader[2], getStaffNameById((long)reader[3]), (int)reader[4], (long)reader[1], (long)reader[3]);
                 receipts.Add(receipt);
             }
+            database.closeConnection();
             return receipts;
         }
     }

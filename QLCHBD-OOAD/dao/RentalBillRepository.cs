@@ -253,5 +253,20 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
         }
 
+        public List<RentalBill> getRentalBillInRange(DateTime A, DateTime B)
+        {
+            List<RentalBill> rentalBills = new List<RentalBill>();
+            string format = "yyyy-MM-dd";
+            string command = $"SELECT create_time, total_price FROM rental_Bill WHERE create_time BETWEEN '{A.ToString(format)}' AND '{B.AddDays(1).ToString(format)}'";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                RentalBill rentalBill = new RentalBill((DateTime)reader[0], (int)reader[1]);
+                rentalBills.Add(rentalBill);
+            }
+            database.closeConnection();
+            return rentalBills;
+        }
+
     }
 }
