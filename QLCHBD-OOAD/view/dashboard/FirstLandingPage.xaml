@@ -28,15 +28,18 @@
                         <ColumnDefinition Width="2.37*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Border BorderBrush="#707070" BorderThickness="1">
-                        <Grid Background="White">
+                    <Border BorderBrush="#707070" BorderThickness="1"
+                            Background="White">
+                        <StackPanel Background="White"
+                                    VerticalAlignment="Center"
+                                    Orientation="Vertical">
                             <TextBlock Text="{Binding numberOnDelivery}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                            <TextBlock Text="DELIVERY" VerticalAlignment="Bottom"
+                            <TextBlock Text="DELIVERY" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                        </Grid>
+                        </StackPanel>
                     </Border>
                     <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="#4DD0E5" >
@@ -53,15 +56,16 @@
                         <ColumnDefinition Width="2.37*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Border BorderBrush="#707070" BorderThickness="1">
-                        <Grid Background="White">
+                    <Border BorderBrush="#707070" BorderThickness="1" Background="White">
+                        <StackPanel Background="White"
+                                    VerticalAlignment="Center">
                             <TextBlock Text="{Binding numberOnBorrow}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                            <TextBlock Text="BORROWED" VerticalAlignment="Bottom"
+                            <TextBlock Text="BORROWED" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                        </Grid>
+                        </StackPanel>
                     </Border>
                     <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="#6AC176" >
@@ -84,15 +88,16 @@
                         <ColumnDefinition Width="2.37*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Border BorderBrush="#707070" BorderThickness="1">
-                        <Grid Background="White">
+                    <Border BorderBrush="#707070" BorderThickness="1" Background="White">
+                        <StackPanel Background="White"
+                                    VerticalAlignment="Center">
                             <TextBlock Text="{Binding total}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                            <TextBlock Text="TOTAL" VerticalAlignment="Bottom"
+                            <TextBlock Text="TOTAL" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                        </Grid>
+                        </StackPanel>
                     </Border>
                     <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="#F6BB86" >
@@ -109,15 +114,16 @@
                         <ColumnDefinition Width="2.37*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Border BorderBrush="#707070" BorderThickness="1">
-                        <Grid Background="White">
+                    <Border BorderBrush="#707070" BorderThickness="1" Background="White">
+                        <StackPanel Background="White"
+                                    VerticalAlignment="Center">
                             <TextBlock Text="{Binding numberInStock}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                            <TextBlock Text="IN STOCK" VerticalAlignment="Bottom"
+                            <TextBlock Text="IN STOCK" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" FontSize="60"
                                    FontWeight="Bold"/>
-                        </Grid>
+                        </StackPanel>
                     </Border>
                     <Border Grid.Column="1" BorderBrush="#707070" BorderThickness="1">
                         <Grid Background="#E26D85" >

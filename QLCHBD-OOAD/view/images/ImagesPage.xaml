@@ -199,74 +199,71 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="190" />
-                <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <Border Padding="20 0 20 0">
                 <ComboBox Name="cb_album"
                       ItemsSource="{Binding albumName, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding selectedAlbum}"
                       Style="{StaticResource theComboBox}"
-                      FontSize="30"
-                      Height="48"
+                      FontSize="20"
+                      Height="40"
                        IsEditable="True"
                         IsReadOnly="True"
                         Text="Select album..."
                       ></ComboBox>
             </Border>
-            <Border Grid.Column="1" 
-                    Padding="10 0 10 0">
-                <Button 
-                    Click="Button_Click"
-                    Content="ADD DISK"
-                    FontSize="30"
-                    FontWeight="Light"
-                    Height="58"
-                    BorderBrush="#707070"
-                    BorderThickness="1"
-                    materialDesign:ButtonAssist.CornerRadius="8"
+            <Border Grid.Column="2" 
+                    Padding="5 0 25 0">
+                <Button Content="ADD DISK" 
+                        Click="Button_Click"
+                    Height="40"
+                    Background="White"     
+                    BorderThickness="1px"
+                    BorderBrush="Gray"
+                    materialDesign:ButtonAssist.CornerRadius="5"                      
                     />
             </Border>
-            <Border Grid.Column="2"
-                    Padding="10 0 10 0">
+            <Border Grid.Column="3"
+                    Padding="0 0 45 0">
+
                 <Button Name="btn_new_order"
-                    Content="NEW ORDER"
+                    Content="NEW IMPORT"
                     Command="{Binding addOrderCommand}"
-                    FontSize="30"
-                    FontWeight="Light"
-                    Height="58"
-                    BorderBrush="#707070"
-                    BorderThickness="1"
-                    materialDesign:ButtonAssist.CornerRadius="8"
+                    Height="40"
+                    Background="White"     
+                    BorderThickness="1px"
+                    BorderBrush="Gray"
+                    materialDesign:ButtonAssist.CornerRadius="5"                      
                     />
             </Border>
-            <Border Grid.Column="3">
+            <Border Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Border Padding="10 0 0 0">
-                        <TextBlock Text="Search: "
-                               FontSize="30"
-                               HorizontalAlignment="Right"
-                               VerticalAlignment="Center"/>
-                    </Border>
-                    <Border Grid.Column="1" Padding="0 0 20 0">
-                        <TextBox TextWrapping="Wrap"     
-                                 
+                    <TextBlock 
+                           Grid.Column="0"
+                           Text="Search:"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                        Margin="0 0 10 0"
+                           TextWrapping="Wrap"
+                           FontSize="20"
+                           />
+                    <TextBox TextWrapping="Wrap"     
+                        
                          MaxLines="1"
                          VerticalContentAlignment="Center"
-                         BorderBrush="#707070"
-                         Text="{Binding searchKey, UpdateSourceTrigger=PropertyChanged}"
-                         BorderThickness="1"
-                         Height="40"  
+                         Height="40"
+                          Text="{Binding searchKey, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0 0 10 0"  
                          FontSize="20"
-                         Grid.Column="1"
-                         Template="{StaticResource TextBoxBaseControlTemplate}">
-                        </TextBox>
-                    </Border>
+                         Style="{DynamicResource seach}"
+                         Grid.Column="1"/>
                 </Grid>
             </Border>
         </Grid>
@@ -313,7 +310,7 @@
                                           x:Name="txtCount"
                                           FontSize="18"
                                           FontWeight="Bold"
-                                          Text="{Binding displayQuantity}"
+                                          Text="{Binding displayQuantity, UpdateSourceTrigger=PropertyChanged}"
                                           HorizontalAlignment="Right"
                                           VerticalAlignment="Top"
                                           Margin="0,0,5,5"

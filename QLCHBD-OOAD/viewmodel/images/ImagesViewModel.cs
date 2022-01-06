@@ -132,6 +132,12 @@ namespace QLCHBD_OOAD.viewmodel.images
             return _intance;
         }
 
+        public void reloadList()
+        {
+            _images = imagesRepository.getAllImages();
+            OnPropertyChanged("filterListImages");
+        }
+
         public void onChange()
         {
             _images = imagesRepository.getAllImages();

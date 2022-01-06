@@ -54,18 +54,18 @@
 
         <Grid 
             DockPanel.Dock="Top"
-            Height="60" 
+            Height="70" 
             VerticalAlignment="Top" 
             Background="#1E3C64"
             MouseLeftButtonDown="Header_MouseDown"
             MouseLeftButtonUp="Header_MouseUp"
             Mouse.MouseMove="Header_MouseMove">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Ellipse Width="35" Height="35" HorizontalAlignment="Center" MouseDown="Ellipse_MouseDown">
+            <Ellipse Width="60" Height="60" HorizontalAlignment="Center" MouseDown="Ellipse_MouseDown">
                 <Ellipse.Fill>
                     <ImageBrush
                         x:Name="imgStaff"
@@ -73,10 +73,10 @@
                 </Ellipse.Fill>
             </Ellipse>
             
-            <StackPanel Grid.Column="1" Margin="0, 10, 0, 0">
+            <StackPanel Grid.Column="1" Margin="0, 5, 0, 0">
                 <TextBlock
                    x:Name="tbName"
-                    FontSize="16"
+                    FontSize="22"
                     FontFamily="Roboto"
                     FontWeight="Bold"
                     Foreground="White"
@@ -85,7 +85,7 @@
                     Grid.Column="1">eNViDAT</TextBlock>
                 <TextBlock
                     x:Name="tbRole"
-                    FontSize="10"
+                    FontSize="15"
                     FontFamily="Roboto"
                     FontWeight="Bold"
                     Foreground="White"
