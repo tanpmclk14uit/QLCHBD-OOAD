@@ -26,15 +26,25 @@ namespace QLCHBD_OOAD.view.report
             InitializeComponent();
             DataContext = DeliveryReportViewModel.getInstance();
         }
-
+        private void setupUI()
+        {
+            gridCancel.Visibility = Visibility.Visible;
+            gridDelivered.Visibility = Visibility.Visible;
+            gridDelivering.Visibility = Visibility.Visible;
+            if (txCancel.Text.Equals("0")) gridCancel.Visibility = Visibility.Collapsed;
+            if (txDelivered.Text.Equals("0")) gridDelivered.Visibility = Visibility.Collapsed;
+            if (txDelivering.Text.Equals("0")) gridDelivering.Visibility = Visibility.Collapsed;
+        }
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DeliveryReportViewModel.getInstance().getDeliveryInRange();
+            setupUI();
         }
 
         private void DatePicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
         {
             DeliveryReportViewModel.getInstance().getDeliveryInRange();
+            setupUI();
         }
     }
 }

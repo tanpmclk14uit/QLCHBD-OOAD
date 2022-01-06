@@ -29,54 +29,54 @@
 
             </Grid.Resources>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button 
-                Grid.Column="0"
+                Grid.Column="3"
                 x:Name="bttNewOrder"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="15, 10, 0, 0"
-                Height="60"
-                Width="200"
-                FontSize="28"
+                Margin="15, 10, 0, 8"
+                Height="40"
+                VerticalAlignment="Center"
+                FontSize="25"
                 Command="{Binding AddOrderCommand}"
                 >NEW ORDER
             </Button>
             <Button 
-                Grid.Column="1"
+                Grid.Column="4"
                 x:Name="bttAddProvider"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="5, 10, 0, 0"
-                Height="60"
-                Width="250"
-                FontSize="28"
+                Margin="5, 10, 0, 8"
+                Height="40"
+                VerticalAlignment="Center"
+                FontSize="25"
                 Command="{Binding AddProviderCommand}"
                 >ADD PROVIDER
             </Button>
             <Button 
-                Grid.Column="2"
+                Grid.Column="5"
                 x:Name="bttModifyProvider"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="5, 10, 0, 0"
-                Height="60"
-                Width="280"
-                FontSize="28"
+                Margin="5, 10, 40, 8"
+                VerticalAlignment="Center"
+                Height="40"
+                FontSize="25"
                 Command="{Binding ModifyProviderCommand}"
                 >MODIFY PROVIDER
             </Button>
             <ComboBox
-                Grid.Column="3"
+                Grid.Column="0"
                 x:Name="cbSortDelivery"
                 Margin="40, 10, 10, 15"
-                FontSize="20"
+                FontSize="25"
                 materialDesign:ColorZoneAssist.Background="LightGray"
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
@@ -88,19 +88,22 @@
                 ItemsSource="{Binding selectedStatuses}">
             </ComboBox>
             <TextBlock
-                Grid.Column="4"
-                Margin="10, 0, 0, 13"
-                FontSize="30"
+                Grid.Column="1"
+                Margin="10, 10, 0, 15"
+                FontSize ="30"
                 VerticalAlignment="Center"
-                >Search:</TextBlock>
+                >SEARCH:</TextBlock>
+
             <TextBox
-                Grid.Column="5"
-                Margin="5, 10, 15, 15"
+                Grid.Column="2"
+                TextWrapping="Wrap" 
+                MaxLines="1"
+                Margin="5, 15, 15, 15"
                 Background="White"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Left"
                 FontSize="25"
-                Template="{StaticResource tbHeaderControlTemplate}"
+                Style="{DynamicResource seach}"
                 Text="{Binding seachKey, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Grid>
@@ -119,13 +122,13 @@
                             <DataTemplate>
                                 <Grid Width="400" Height="300" >
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                        <ColumnDefinition Width="4*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Border
                                        Grid.ColumnSpan="2"
                                        BorderThickness="1"
-                                       CornerRadius="10"
+                                       CornerRadius="5"
                                        BorderBrush="Black"
                                        Background="White">
                                     </Border>
@@ -156,7 +159,7 @@
                                         </Grid.RowDefinitions>
 
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
                                             <ColumnDefinition></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
 
@@ -250,24 +253,26 @@
                                                 Text="{Binding stringStatus}"></TextBlock>
 
                                         <Button
-                                                Grid.Column="0"
+                                            x:Name="bttDelivered"
+                                                Grid.Column="1"
                                                 Grid.Row="6"
                                                 FontSize="15"
                                                 FontWeight="Bold"
+                                                Margin="0 0 10 10"
                                                 Background="#0DBE00"
                                                 BorderThickness="1"
                                                 Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeliveredCommand, Mode=TwoWay}"
         
                                                 >Delivered</Button>
                                         <Button
-                                                materialDesign:ButtonAssist.CornerRadius="5"
-                                                Grid.Column="1"
+                                            x:Name="bttCancel"
+                                                Grid.Column="0"
                                                 Grid.Row="6"
                                                 FontSize="15"
                                                 FontWeight="Bold"
                                                 Background="#E6343A"
                                                 BorderThickness="1"
-                                                Margin="5 0 10 0"
+                                                Margin="5 0 10 10"
                                                 Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeleteCommand, Mode=TwoWay}">Cancel</Button>
                                     </Grid>
                                 </Grid>

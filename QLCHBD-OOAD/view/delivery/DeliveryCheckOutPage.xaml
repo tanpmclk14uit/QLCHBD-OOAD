@@ -19,7 +19,7 @@
         <Border 
             Grid.Column="0"
             Background="White"
-            CornerRadius="20"
+            CornerRadius="5"
             BorderThickness="1.5"
             BorderBrush="Black"
             Margin="20 20 0 20">
@@ -65,7 +65,7 @@
                             Grid.Row="0"
                             Grid.ColumnSpan="2"
                             FontSize="30"
-                            materialDesign:ButtonAssist.CornerRadius="10"
+                            materialDesign:ButtonAssist.CornerRadius="5"
                             BorderBrush="Black"
                             BorderThickness="2"
                             Background="White"
@@ -156,7 +156,7 @@
                         Height="45"
                         VerticalAlignment="Bottom"
                         Margin="0 5 0 0"
-                        materialDesign:ButtonAssist.CornerRadius="10"
+                        materialDesign:ButtonAssist.CornerRadius="5"
                         Background="#0DBE00"
                         Content="{Binding UpdateContent}"
                         Command="{Binding UpdateCommand}"></Button>
@@ -167,7 +167,7 @@
                         Height="70"
                         FontSize="30"
                         Margin="0 5 0 0"
-                        materialDesign:ButtonAssist.CornerRadius="10"
+                        materialDesign:ButtonAssist.CornerRadius="5"
                         Background="CornflowerBlue"
                         Content="{Binding ConfirmAllContent}"
                         Command="{Binding ConfirmAllCommand}">
@@ -180,7 +180,7 @@
         <Border 
             Grid.Column="1"
             Background="White"
-            CornerRadius="20"
+            CornerRadius="5"
             Width="auto"
             BorderThickness="1.5"
             BorderBrush="Black"
@@ -192,6 +192,14 @@
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding orderItemsList}"
                 SelectedItem="{Binding selectedItems}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                    <Style x:Key="NameCellStyle" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>

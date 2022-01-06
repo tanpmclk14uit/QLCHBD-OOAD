@@ -39,26 +39,15 @@
             </Grid>
             <StackPanel Grid.Row="1" 
                         Orientation="Horizontal" 
-                        FlowDirection="RightToLeft" >
-                <Button Width="202"
-                        Height="66"
-                        Background="Red"
-                        Margin="20 0 20 0"
-                        Command="{Binding CancleCommand}"
-                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        materialDesign:ButtonAssist.CornerRadius="16">
-                    <TextBlock Text="CANCEL"
-                               FontSize="40"
-                               FontFamily="Roboto"
-                               FontWeight="Medium"
-                               Foreground="White"/>
-                </Button>
+                        FlowDirection="RightToLeft" 
+                        Margin="0 0 10 0">
+
                 <Button Width="210"
                         Height="66"
                         Command="{Binding ByHandCommand}"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="16"
-                        Background="#8B8B8B">
+                        Background="Green">
                     <TextBlock Text="BY HAND"
                                FontSize="40"
                                FontFamily="Roboto"
@@ -67,12 +56,24 @@
                 </Button>
                 <Button Width="202"
                         Height="66"
-                        Background="Green"
-                        Margin="20 0 20 0"
+                        Background="DarkOliveGreen"
+                        Margin="10 0 10 0"
                         Command="{Binding ImportCommand}"
                          Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="16">
                     <TextBlock Text="IMPORT"
+                               FontSize="40"
+                               FontFamily="Roboto"
+                               FontWeight="Medium"
+                               Foreground="White"/>
+                </Button>
+                <Button Width="202"
+                        Height="66"
+                        Background="Gray"
+                        Command="{Binding CancleCommand}"
+                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        materialDesign:ButtonAssist.CornerRadius="16">
+                    <TextBlock Text="CANCEL"
                                FontSize="40"
                                FontFamily="Roboto"
                                FontWeight="Medium"

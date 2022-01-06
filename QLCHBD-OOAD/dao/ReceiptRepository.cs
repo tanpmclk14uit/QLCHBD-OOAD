@@ -99,6 +99,21 @@ namespace QLCHBD_OOAD.dao
             database.closeConnection();
             return name;
         }
+
+
+        public List<Receipt> getReceiptInRange(DateTime A, DateTime B)
+        {
+            List<Receipt> receipts = new List<Receipt>();
+            string format = "yyyy-MM-dd";
+            string command = $"SELECT * FROM receipt WHERE create_time BETWEEN '{A.ToString(format)}' AND '{B.AddDays(1).ToString(format)}'";
+            var reader = database.executeCommand(command);
+            while (reader != null && reader.Read())
+            {
+                Receipt receipt = new Receipt((long)reader[0], getNameById((long)reader[1]), (DateTime)reader[2], getStaffNameById((long)reader[3]), (int)reader[4], (long)reader[1], (long)reader[3]);
+                receipts.Add(receipt);
+            }
+            return receipts;
+        }
     }
 
 }

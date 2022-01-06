@@ -24,6 +24,10 @@ namespace QLCHBD_OOAD.model.receipt
         {
             get => _createTime.ToShortDateString();
         }
+        public DateTime createTimeButInDateTimeFormat
+        {
+            get => _createTime;
+        }
         private string _guestName;
         public string guestName
         {

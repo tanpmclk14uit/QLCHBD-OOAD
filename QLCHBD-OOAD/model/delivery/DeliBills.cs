@@ -10,57 +10,61 @@ namespace QLCHBD_OOAD.model.delivery
     class DeliBills
     {
         private long _id;
+        private long _importFormID;
         private string _providerName;
-        private string _paymentDate;
+        private DateTime _paymentDate;
+        private long _sumAmmount;
+        private long _sumValue;
         private DeliveryBillStatus _status;
+        private String _stringStatus;
         private DateTime _createTime;
         private DateTime _updateTime;
         private long _createID;
         private long _updateID;
 
-        public DeliBills(long id, string providerName, string paymentDate, DeliveryBillStatus status, DateTime createTime, DateTime updateTime, long createID, long updateID)
+        public DeliBills(long id, long importFormID, string providerName, DateTime paymentDate, long sumAmmount, long sumValue, DeliveryBillStatus status, DateTime createTime, DateTime updateTime, long createID, long updateID)
         {
             _id = id;
+            _importFormID = importFormID;
             _providerName = providerName;
             _paymentDate = paymentDate;
+            _sumAmmount = sumAmmount;
+            _sumValue = sumValue;
             _status = status;
             _createTime = createTime;
             _updateTime = updateTime;
             _createID = createID;
             _updateID = updateID;
+            _stringStatus = status.ToString();
         }
-        public DeliBills(long id, string providerName, string paymentDate, long createID, long updateID)
+
+        public long Id { get => _id;}
+        public long ImportFormID { get => _importFormID;}
+        public string ProviderName { get => _providerName;}
+        public string PaymentDate { get => _paymentDate.ToShortDateString();}
+        public DateTime PaymentDateButInDateTimeFormat { get => _paymentDate;}
+        public long SumAmmount { get => _sumAmmount;}
+        public long SumValue { get => _sumValue;}
+        public DeliveryBillStatus Status { get => _status;}
+        public String stringStatus
         {
-            _id = id;
-            _providerName = providerName;
-            _paymentDate = paymentDate;
-            _status = DeliveryBillStatus.UNPAID;
-            _createTime = DateTime.Now;
-            _updateTime = DateTime.Now;
-            _createID = createID;
-            _updateID = updateID;
+            get => _stringStatus;
+            set
+            {
+                if (value == DeliveryBillStatus.PAID.ToString())
+                {
+                    _stringStatus = "PAID";
+                }
+                else
+                {
+                    _stringStatus = "UNPAID";
+                }
+            }
+
         }
-        public DeliBills(long id, string providerName, string paymentDate, long createID)
-        {
-            _id = id;
-            _providerName = providerName;
-            _paymentDate = paymentDate;
-            _status = DeliveryBillStatus.UNPAID;
-            _createTime = DateTime.Now;
-            _updateTime = DateTime.Now;
-            _createID = createID;
-            _updateID = createID;
-        }
-
-        public long id => _id;
-        public string providerName => _providerName;
-        public string paymentDate => _paymentDate;
-        public DeliveryBillStatus status => _status;
-        public String createTime => _createTime.ToShortDateString();
-        public String updateTime => _updateTime.ToShortDateString();
-        public long createID => _createID;
-        public long updateID => _updateID;
-
-
+        public DateTime CreateTime { get => _createTime;}
+        public DateTime UpdateTime { get => _updateTime;}
+        public long CreateID { get => _createID;}
+        public long UpdateID { get => _updateID;}
     }
 }

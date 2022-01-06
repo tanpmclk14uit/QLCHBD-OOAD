@@ -1,4 +1,4 @@
-﻿<Page x:Class="QLCHBD_OOAD.view.report.ReportBugetPage"
+﻿ <Page x:Class="QLCHBD_OOAD.view.report.ReportBugetPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -85,13 +85,13 @@
                     <chart:SfChart.Legend>
                         <chart:ChartLegend/>
                     </chart:SfChart.Legend>
-                    <chart:ColumnSeries Label="Money In" ItemsSource="{Binding bugetBillsList}" XBindingPath="DateToString" YBindingPath="MoneyIn" Palette="Elite" ShowTooltip="True" >
+                    <chart:ColumnSeries Label="Money In" ItemsSource="{Binding bugetList}" XBindingPath="Date" YBindingPath="MoneyIn" Palette="Elite" ShowTooltip="True" >
                         <chart:ColumnSeries.AdornmentsInfo>
                             <chart:ChartAdornmentInfo ShowLabel="True"/>
                         </chart:ColumnSeries.AdornmentsInfo>
 
                     </chart:ColumnSeries>
-                    <chart:ColumnSeries Label="Money Out" ItemsSource="{Binding bugetBillsList}" XBindingPath="DateToString" YBindingPath="MoneyOut" Palette="SandyBeach" ShowTooltip="True">
+                    <chart:ColumnSeries Label="Money Out" ItemsSource="{Binding bugetList}" XBindingPath="Date" YBindingPath="MoneyOut" Palette="SandyBeach" ShowTooltip="True">
                         <chart:ColumnSeries.AdornmentsInfo>
                             <chart:ChartAdornmentInfo ShowLabel="True"/>
                         </chart:ColumnSeries.AdornmentsInfo>
@@ -152,31 +152,45 @@
                 <DataGrid
                     Grid.Row="1"
                     Grid.Column="0"
-                    FontSize="30" 
+                    FontSize="25" 
                     FontStyle="Normal"
                     BorderBrush="Black"
                     BorderThickness="1"
                     AutoGenerateColumns="False"
-                    ItemsSource="{Binding bugetBillsList}"
-                    SelectedItem="{Binding selectedBills}">
+                    ItemsSource="{Binding bugetList}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                        <Style x:Key="NameCellStyle" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyIn}" IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date }" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyIn}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <DataGrid
                     Grid.Row="1"
                     Grid.Column="1"
-                    FontSize="30" 
+                    FontSize="25" 
                     FontStyle="Normal"
                     BorderBrush="Black"
                     BorderThickness="1"
                     AutoGenerateColumns="False"
-                    ItemsSource="{Binding bugetBillsList}"
-                    SelectedItem="{Binding selectedBills}">
+                    ItemsSource="{Binding bugetList}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        </Style>
+                        <Style x:Key="NameCellStyle" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date}" IsReadOnly="True"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyOut}" IsReadOnly="True"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Date" Width="1*" Binding="{Binding Date}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Value" Width="1*" Binding="{Binding MoneyOut}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid
@@ -193,13 +207,13 @@
                         Grid.ColumnSpan="2"></Border>
                     <TextBlock
                         Grid.Column="0"
-                        FontSize="30" 
+                        FontSize="25" 
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">In total:</TextBlock>
                     <TextBlock
                         Text="{Binding totalIn}"
                         Grid.Column="1"
-                        FontSize="30" 
+                        FontSize="25" 
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"></TextBlock>
                 </Grid>
@@ -216,13 +230,13 @@
                         Grid.ColumnSpan="2"></Border>
                     <TextBlock
                         Grid.Column="0"
-                        FontSize="30" 
+                        FontSize="25" 
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center">In total:</TextBlock>
                     <TextBlock
                         Text="{Binding totalOut}"
                         Grid.Column="1"
-                        FontSize="30" 
+                        FontSize="25" 
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"></TextBlock>
                 </Grid>

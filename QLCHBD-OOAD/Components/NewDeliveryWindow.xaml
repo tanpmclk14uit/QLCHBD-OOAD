@@ -32,7 +32,7 @@
             </Grid.ColumnDefinitions>
             <ComboBox
                 Grid.Column="0"
-                Margin="5,30,30,0"
+                Margin="5,5,30,0"
                 Width="200"
                 FontSize="20"
                 HorizontalContentAlignment="Left"
@@ -60,30 +60,11 @@
                 </Button.Style>
             </Button>
 
-            <Button
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                Width="100"
-                materialDesign:ButtonAssist.CornerRadius="5"
-                Margin="10,30,10,0"
-                BorderThickness="1"
-                Command="{Binding RemoveCommand}"
-                BorderBrush="Black" HorizontalAlignment="Right">Remove</Button>
-            <Button
-                Grid.Column="2"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Width="100"
-                materialDesign:ButtonAssist.CornerRadius="5"
-                Margin="10,30,10,0"
-                BorderThickness="1"
-                Command="{Binding AddCommand}"
-                BorderBrush="Black">Add Disk</Button>
         </Grid>
         <Border 
             Grid.Row="1"
             Background="White"
-            CornerRadius="20"
+            CornerRadius="5"
             BorderThickness="1"
             BorderBrush="Black"
             Margin="4">
@@ -178,17 +159,21 @@
                     </DataGrid.Columns>
                 </DataGrid>-->
                 <Grid
-                        Grid.Row="1" Margin="18,0,0,0">
+                        Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>
+                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
+                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1"/>
                     <TextBlock
                             Grid.Column="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="18"
+                        
                             FontWeight="Bold">In Total</TextBlock>
                     <TextBlock
                             Grid.Column="1"
@@ -210,17 +195,49 @@
 
         </Border>
 
-        <Button 
-            Grid.Row="2"
+        <Grid
+            Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                Width="100"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                BorderThickness="1"
+                Margin="0 10 5 10"
+                Command="{Binding RemoveCommand}"
+                Background="OrangeRed"
+                BorderBrush="Black" HorizontalAlignment="Right">REMOVE</Button>
+            <Button
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Width="100"
+                Margin="0,10,5,10"
+                Background="GreenYellow"
+                materialDesign:ButtonAssist.CornerRadius="5"
+                BorderThickness="1"
+                Command="{Binding AddCommand}"
+                BorderBrush="Black">ADD DISK</Button>
+            <Button 
+            Grid.Column="2"
             materialDesign:ButtonAssist.CornerRadius="5"
             BorderThickness="1"
             BorderBrush="Black"
+                Background="MediumSeaGreen"
             Width="300"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Margin="0,0,5,10"
-            Content="Confirm"
+            Margin="0,10,5,10"
+            Content="CONFIRM"
             Command="{Binding ConfirmCommand}"></Button>
+        </Grid>
+
     </Grid>
 </Window>
 

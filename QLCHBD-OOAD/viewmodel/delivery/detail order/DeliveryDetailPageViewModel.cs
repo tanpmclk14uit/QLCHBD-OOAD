@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.dao;
 using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.view.delivery.DeliveryPage;
@@ -16,6 +17,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
     class DeliveryDetailPageViewModel : BaseViewModel
     {
         public static ChangePageHandler turnToDeliveryPage;
+        public static ChangePageHandler BackToDeliveryPage;
         public static ChangePageHandler turnToDeliveryCheckOutPage;
 
 
@@ -44,24 +46,44 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             Items = deliveryOrderItemsRepository.getItemsbyImportFormsID(id);
             _importForm = deliveryOrderRepository.getDeliOrderById(id);
 
-            BackCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { turnToDeliveryPage(); });
+            BackCommand = new RelayCommand<object>((p) => { return true; }, (p) => { BackToDeliveryPage(); });
             DeleteCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onDelete(); });
-            ConfirmCommand = new RelayCommand<object>((p) => { return deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING") && UserRoles(); }, (p) => { onConfirm(); });
+            ConfirmCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onConfirm(id); });
         }
         private bool UserRoles()
         {
             return CurrentStaff.getInstance().currentStaff.isManager;
         }
-        private void onConfirm()
+        private void onConfirm(string id)
         {
-            turnToDeliveryCheckOutPage(id.ToString());
+            if (deliveryOrderRepository.ImportFormWithStatusByID(id, "WATING"))
+            {
+                MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Parcel has been delivered?");
+                myDialog.ShowDialog();
+                if (myDialog.action == true)
+                {
+                    turnToDeliveryCheckOutPage(id.ToString());
+                }
+            }
+            else
+            {
+                turnToDeliveryCheckOutPage(id.ToString());
+            }
+            
+            
         }
 
         private void onDelete()
         {
-            deliveryOrderItemsRepository.removeItemByImportFormsID(id);
-            deliveryOrderRepository.DeleteImportFormByID(id);
-            turnToDeliveryPage(id.ToString());
+            MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.ALERT, "Parcel has been delivered?");
+            myDialog.ShowDialog();
+            if (myDialog.action == true)
+            {
+                deliveryOrderItemsRepository.removeItemByImportFormsID(id);
+                deliveryOrderRepository.DeleteImportFormByID(id);
+                turnToDeliveryPage(id.ToString());
+            }
+            
         }
     }
 }

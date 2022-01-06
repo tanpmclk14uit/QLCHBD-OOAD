@@ -47,19 +47,19 @@ namespace QLCHBD_OOAD.dao
         }
         public void updateStatusDELIVERED(string id)
         {
-            string command = "UPDATE import_form SET status = 'DELIVERED' WHERE id = '" + id + "'";
+            string command = $"UPDATE import_form SET status = 'DELIVERED', update_by = '{CurrentStaff.getInstance().currentStaff.id}' WHERE id = '" + id + "'";
             database.executeCommand(command);
             database.closeConnection();
         }
         public void updateStatusERROR(string id)
         {
-            string command = "UPDATE import_form SET status = 'ERROR' WHERE id = '" + id + "'";
+            string command = $"UPDATE import_form SET status = 'ERROR', update_by = '{CurrentStaff.getInstance().currentStaff.id}' WHERE id = '{id}'";
             database.executeCommand(command);
             database.closeConnection();
         }
         public void updateStatusWAITING(string id)
         {
-            string command = "UPDATE import_form SET status = 'WATING' WHERE id = '" + id + "'";
+            string command = $"UPDATE import_form SET status = 'WATING', update_by = '{CurrentStaff.getInstance().currentStaff.id}' WHERE id = '" + id + "'";
             database.executeCommand(command);
             database.closeConnection();
         }
@@ -82,16 +82,16 @@ namespace QLCHBD_OOAD.dao
             database.executeCommand(command);
             database.closeConnection();
         }
-        public void createNewImportForm(string formID, string provider, int totalAmount, long totalPrice, long id, string image)
+        public void createNewImportForm(string formID, string provider, int totalAmount, long totalPrice, long id)
         {
-            string command = "INSERT INTO import_form (`id`, `provider_name`, `sum_amount`, `sum_value`, `image`, `create_by`, `update_by`) VALUES ('" +
+            string command = "INSERT INTO import_form (`id`, `provider_name`, `sum_amount`, `sum_value`, `create_by`, `update_by`, `image`) VALUES ('" +
                  formID + "', '" +
                  provider + "', '" +
                  totalAmount + "', '" +
                  totalPrice + "', '" +
-                 image + "', '" +
                  id + "', '" +
-                 id + "');";
+                 id + "', '" +
+                 "/QLCHBD-OOAD;component/assets/img_noImage.png');";
             database.executeCommand(command);
             database.closeConnection();
         }
@@ -107,8 +107,9 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             if (reader.Read())
             {
-                return reader[0].ToString();
+                string strStatus = reader[0].ToString();
                 database.closeConnection();
+                return strStatus;
             }
             database.closeConnection();
             return null;

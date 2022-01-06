@@ -62,31 +62,40 @@
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+            FontSize="20"
+            VerticalAlignment="Center"
+            Margin="5 15 10 10"
             Text="{Binding tbIDStore}"></TextBox>
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            
-            Style="{StaticResource tbStyle}"
+            FontSize="20"
+            VerticalAlignment="Center"
+            Margin="5 15 10 10"
             Text="{Binding tbIDProvider}"></TextBox>
         <TextBox
             x:Name="tbName"
             Grid.Row="2"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+            FontSize="20"
+            VerticalAlignment="Center"
+            Margin="5 15 10 10"
             Text="{Binding tbName}"></TextBox>
         <TextBox
             x:Name="tbPrice"
             Grid.Row="3"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+            FontSize="20"
+            VerticalAlignment="Center"
+            Margin="5 15 10 10"
             Text="{Binding tbPrice}"></TextBox>
         <TextBox
            x:Name="tbAmount"
             Grid.Row="4"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+            FontSize="20"
+            VerticalAlignment="Center"
+            Margin="5 15 10 10"
             Text="{Binding tbAmount}"></TextBox>
 
         <Grid Grid.Row="5" Grid.Column="1">
@@ -95,19 +104,19 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button
-                Grid.Column="1"
+                Grid.Column="0"
                 Width="100"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Margin="0 0 10 0"
                 materialDesign:ButtonAssist.CornerRadius="5"
-                Background="Red"
+                Background="LightGray"
                 BorderThickness="1"
                 FontSize="17"
                 Command="{Binding CancelCommand}"
                 BorderBrush="Black">Cancel</Button>
             <Button
-                Grid.Column="0"
+                Grid.Column="1"
                 Width="100"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"

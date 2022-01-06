@@ -9,28 +9,27 @@
       d:DesignWidth="1580"
       Title="ProviderDetailPage">
 
-    
-    
-    
+
+
+
     <Grid Background="#E6EBEE">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="5*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3.5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
         <Border 
-            Grid.Column="0"
+            Grid.Row="0"
             Background="White"
-            CornerRadius="20"
+            CornerRadius="5"
             BorderThickness="1.5"
             BorderBrush="Black"
-            Margin="20 20 0 20">
+            Margin="20 20 20 0">
             <Grid
-                Grid.Column="0"
-                Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1.1*"></RowDefinition>
-                    <RowDefinition Height="1.1*"></RowDefinition>
-                </Grid.RowDefinitions>
+                Margin="10 10 10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style x:Key="myTextBoxStyle" TargetType="TextBox" >
                         <Setter Property="Background" Value="Transparent"></Setter>
@@ -39,16 +38,43 @@
                         <Setter Property="BorderThickness" Value="0"></Setter>
                     </Style>
                 </Grid.Resources>
-                <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
-                    <Image
+                <Grid
+                    Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border 
+                    Grid.Row="0"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    CornerRadius="5">
+                        <Image
                         Grid.Row="0"
                         Source="{Binding image}"
                         Stretch="Fill"></Image>
-                </Border>
+                    </Border>
 
-                <Grid Grid.Row="1">
+                    <Button 
+                            Grid.Row="1"
+                            FontSize="26"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            BorderBrush="Black"
+                            BorderThickness="2"
+                            MinHeight="50"
+                            Margin="0 10 0 10"
+                            Background="White"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Command="{Binding ChangeImageCommand}">
+                        Change Image
+                    </Button>
+                </Grid>
+
+
+                <Grid Grid.Column="1" Margin="15 0 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto" MinWidth="200"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -58,25 +84,9 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition ></RowDefinition>
-                        <RowDefinition Height="auto" ></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button 
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Grid.ColumnSpan="2"
-                            FontSize="30"
-                            materialDesign:ButtonAssist.CornerRadius="10"
-                            BorderBrush="Black"
-                            BorderThickness="2"
-                            Background="White"
-                            MinHeight="50"
-                            Margin="0 5 0 0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Command="{Binding ChangeImageCommand}">
-                        Change Image
-                    </Button>
                     <TextBlock 
                         Grid.Row="1"
                         Grid.Column="0"
@@ -101,10 +111,10 @@
                         Grid.Row="6"
                         Grid.Column="0"
                         FontSize="30"
-                        VerticalAlignment="Top">Update Date:</TextBlock>
+                        VerticalAlignment="Top" Height="40">Update Date:</TextBlock>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock FontSize="35">#</TextBlock>
-                        <TextBlock FontSize="35" Text="{Binding id}"></TextBlock>
+                        <TextBlock FontSize="25">#</TextBlock>
+                        <TextBlock FontSize="25" Text="{Binding id}"></TextBlock>
                     </StackPanel>
 
                     <TextBlock
@@ -147,7 +157,7 @@
                         FontSize="30" 
                         Grid.Column="1"
                         VerticalAlignment="Top"
-                        Text="{Binding dayCreate}"></TextBlock>
+                        Text="{Binding dayCreate}" Height="40"></TextBlock>
 
 
 
@@ -157,53 +167,65 @@
                         Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button
-                        Grid.Column="1"
+                        Grid.Column="0"
                         Background="Red"
-                        Height="70"
-                        Margin="5 10 0 0"
-                        materialDesign:ButtonAssist.CornerRadius="5 5 15 5"
-                        FontSize="33"
+                        Height="40"
+                        Margin="10 0 10 0"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        FontSize="25"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
                         Command="{Binding DeleteCommand}">
                             Delete
                         </Button>
                         <Button
-                        Grid.Column="0"
+                        Grid.Column="1"
                         Background="#0DBE00"
-                        Height="70"
-                        Margin="0 10 5 0"
-                        materialDesign:ButtonAssist.CornerRadius="5 5 5 15"
-                        FontSize="33"
+                        Height="40"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 0 0"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        FontSize="25"
                         Command="{Binding ConfirmCommand}">
                             Confirm
                         </Button>
                     </Grid>
                 </Grid>
-                
+
             </Grid>
         </Border>
 
         <Border 
-            Grid.Column="1"
+            Grid.Row="1"
             Background="White"
-            CornerRadius="20"
+            CornerRadius="5"
             Width="auto"
             BorderThickness="1.5"
             BorderBrush="Black"
-            Margin="10 20 20 20">
+            Margin="20 10 20 20">
             <DataGrid 
                 Margin="10"
                 FontSize="30" 
                 FontStyle="Normal"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding imageList}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                    <Style x:Key="NameCellStyle" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Disk ID" Width="0.8*" Binding="{Binding id}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Disk Name" Width="1*" Binding="{Binding name}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Amount" Width="0.8*" Binding="{Binding quantity}" IsReadOnly="True"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Import price" Width="1*" Binding="{Binding providerPrice}" IsReadOnly="True"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk ID" Width="0.8*" Binding="{Binding id}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Disk Name" Width="1*" Binding="{Binding name}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Amount" Width="0.8*" Binding="{Binding quantity}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Import price" Width="1*" Binding="{Binding providerPrice}" IsReadOnly="True" ElementStyle="{StaticResource NameCellStyle}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <!--<ListView FontSize="30">
