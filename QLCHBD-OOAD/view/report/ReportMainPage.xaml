@@ -81,6 +81,7 @@
                         Width="150"
                         Grid.Column="2"
                         Height="50"
+                        Visibility="Hidden"
                         Background="LawnGreen"
                        Margin="5 0"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"

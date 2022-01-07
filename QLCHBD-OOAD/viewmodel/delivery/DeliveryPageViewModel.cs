@@ -13,6 +13,7 @@ using QLCHBD_OOAD.model.delivery;
 using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.view.delivery.Add_Order;
 using System.Windows;
+using QLCHBD_OOAD.view.delivery.component;
 
 namespace QLCHBD_OOAD.viewmodel.delivery
 {
@@ -226,8 +227,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void addProviderDelivery()
         {
-            DeliveryAskForm askForm = new DeliveryAskForm();
-            askForm.ShowDialog();
+            AddNewProvider newProviderWindow = new AddNewProvider();
+            newProviderWindow.ShowDialog();
         }
         
         private void onDelivered()

@@ -266,11 +266,20 @@ namespace QLCHBD_OOAD.dao
         {
             string command = "SELECT provider.image FROM import_form LEFT JOIN provider ON provider.name = import_form.provider_name WHERE import_form.id = " + id + ";";
             var reader = database.executeCommand(command);
-            if (reader.Read() && reader[0] != DBNull.Value)
+            try
             {
-                string image = (string)reader[0];
-                return image;
+                if (reader != null &&  reader.Read() && reader[0] != DBNull.Value)
+                {
+                    string image = (string)reader[0];
+                    return image;
+                }
             }
+            catch
+            {
+                database.closeConnection();
+                return "/QLCHBD-OOAD;component/assets/img_noImage.png";
+            }
+            
             database.closeConnection();
             return "/QLCHBD-OOAD;component/assets/img_noImage.png";
         }

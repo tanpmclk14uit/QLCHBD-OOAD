@@ -215,6 +215,10 @@ namespace QLCHBD_OOAD.viewmodel.budget
             {
                 totalIn += item.additionalFee;
             }
+            foreach (var item in _rentalBillList)
+            {
+                totalIn += item.totalPriceSave;
+            }
             OnPropertyChanged("totalIn");
             OnPropertyChanged("totalOut");
         }
