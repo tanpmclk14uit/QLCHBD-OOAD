@@ -41,7 +41,7 @@
                 x:Name="bttNewOrder"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="15, 10, 0, 8"
+                Margin="15, 20, 0, 8"
                 Height="40"
                 VerticalAlignment="Center"
                 FontSize="25"
@@ -53,7 +53,7 @@
                 x:Name="bttAddProvider"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="5, 10, 0, 8"
+                Margin="5, 20, 0, 8"
                 Height="40"
                 VerticalAlignment="Center"
                 FontSize="25"
@@ -65,7 +65,7 @@
                 x:Name="bttModifyProvider"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="5, 10, 40, 8"
+                Margin="5, 20, 40, 8"
                 VerticalAlignment="Center"
                 Height="40"
                 FontSize="25"
@@ -75,7 +75,7 @@
             <ComboBox
                 Grid.Column="0"
                 x:Name="cbSortDelivery"
-                Margin="40, 10, 10, 15"
+                Margin="40, 20, 10, 15"
                 FontSize="25"
                 materialDesign:ColorZoneAssist.Background="LightGray"
                 HorizontalContentAlignment="Left"
@@ -89,7 +89,7 @@
             </ComboBox>
             <TextBlock
                 Grid.Column="1"
-                Margin="10, 10, 0, 15"
+                Margin="10, 20, 0, 15"
                 FontSize ="30"
                 VerticalAlignment="Center"
                 >SEARCH:</TextBlock>
@@ -98,7 +98,7 @@
                 Grid.Column="2"
                 TextWrapping="Wrap" 
                 MaxLines="1"
-                Margin="5, 15, 15, 15"
+                Margin="5, 25, 15, 15"
                 Background="White"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Left"
