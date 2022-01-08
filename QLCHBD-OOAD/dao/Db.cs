@@ -59,9 +59,9 @@ namespace QLCHBD_OOAD.dao
                 reader = cmd.ExecuteReader();
 
             }
-            catch 
+            catch(Exception e)
             {
-                MessageBox.Show("Server error");
+                MessageBox.Show(e.ToString());
             }
             return reader;
         }

@@ -257,7 +257,7 @@ namespace QLCHBD_OOAD.dao
         {
             List<RentalBill> rentalBills = new List<RentalBill>();
             string format = "yyyy-MM-dd";
-            string command = $"SELECT create_time, total_price FROM rental_Bill WHERE create_time BETWEEN '{A.ToString(format)}' AND '{B.AddDays(1).ToString(format)}'";
+            string command = $"SELECT create_time, total_price FROM rental_bill WHERE create_time BETWEEN '{A.ToString(format)}' AND '{B.AddDays(1).ToString(format)}'";
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
