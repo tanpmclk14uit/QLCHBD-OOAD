@@ -210,6 +210,11 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             }
 
             // xong hết thì save file lại
+            string directoryPath = @"c:\Report";
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
             string format = "ddMMyy_hhmmss";
             string path = @"c:\Report\DeliveryReport_" + DateTime.Now.ToString(format) + ".xlsx";
             FileStream fs = new FileStream(path, FileMode.CreateNew);

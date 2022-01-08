@@ -197,6 +197,11 @@ namespace QLCHBD_OOAD.viewmodel.budget
 
             // xong hết thì save file lại
             string format = "ddMMyy_hhmmss";
+            string directoryPath = @"c:\Report";
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
             string path = @"c:\Report\BugetReport_" + DateTime.Now.ToString(format) + ".xlsx";
             FileStream fs = new FileStream(path, FileMode.CreateNew);
             wb.Write(fs);
