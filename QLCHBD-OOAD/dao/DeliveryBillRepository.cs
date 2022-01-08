@@ -107,6 +107,7 @@ namespace QLCHBD_OOAD.dao
                     (long)reader[10]));
             }
             database.closeConnection();
+
             return listBills;
         }
 
