@@ -328,7 +328,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             ConfirmAllContent = "PAID";
             image = "/QLCHBD-OOAD;component/assets/img_paid.png";
             OnPropertyChanged("image");
-            OnPropertyChanged("bttContent");
+            OnPropertyChanged("ConfirmAllContent");
         }
         //-------------------------------------------------------------------------------------------------
         private void onAfterConfirmAll()

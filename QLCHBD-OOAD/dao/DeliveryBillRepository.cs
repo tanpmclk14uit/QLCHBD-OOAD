@@ -93,18 +93,21 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                listBills.Add(new DeliBills(
-                    (long)reader[0], 
-                    (long)reader[1], 
-                    (string)reader[2], 
-                    (DateTime)reader[3], 
-                    (int)reader[4], 
-                    (int)reader[5], 
-                    stringToDeliveryBillStatus(reader[6].ToString()), 
-                    (DateTime)reader[7], 
-                    (DateTime)reader[8], 
-                    (long)reader[9], 
-                    (long)reader[10]));
+                if (reader[3] != DBNull.Value)
+                {
+                    listBills.Add(new DeliBills(
+                                        (long)reader[0],
+                                        (long)reader[1],
+                                        (string)reader[2],
+                                        (DateTime)reader[3],
+                                        (int)reader[4],
+                                        (int)reader[5],
+                                        stringToDeliveryBillStatus(reader[6].ToString()),
+                                        (DateTime)reader[7],
+                                        (DateTime)reader[8],
+                                        (long)reader[9],
+                                        (long)reader[10]));
+                }
             }
             database.closeConnection();
 
