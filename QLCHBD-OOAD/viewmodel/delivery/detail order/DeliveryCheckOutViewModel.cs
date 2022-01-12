@@ -76,6 +76,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             image = "/QLCHBD-OOAD;component/assets/img_noImage.png";
             UpdateContent = "UPDATE";
             ConfirmAllContent = "CONFIRM";
+            rentalPrice = 0;
 
             if (orderRepository.getImportFormStatusWithID(id).Equals("DELIVERED"))
             {
@@ -191,7 +192,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                                         item.imPrice,
                                         item.diskID,
                                         totalCopy));
-                imagesItemsList.Add(new Images(count,
+                imagesItemsList.Add(new Images(item.diskID,
                                 item.diskName,
                                 selectedAlbumList[0].id,
                                 totalCopy,

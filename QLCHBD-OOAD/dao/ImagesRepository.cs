@@ -246,7 +246,15 @@ namespace QLCHBD_OOAD.dao
 
             }
 
-            command = $"UPDATE `ooad_qlchbd`.`disk` SET `name` = '{images.name}', `album` = '{images.idAlbum}', `quantity` = '{images.quantity + quantity}', `image` = '{images.image}', `locate` = '{images.locate}', `rental_price` = '{images.rentalPrice}', `provider` = '{images.idProvider}', `id_by_provider` = '{images.idByProvider}', `loss_charges` = '{images.providerPrice}', `update_by` = '{images.updateBy}' WHERE (`id` = '{images.id}');";
+            if (images.image.Length != 0)
+            {
+                command = $"UPDATE `ooad_qlchbd`.`disk` SET `name` = '{images.name}', `album` = '{images.idAlbum}', `quantity` = '{images.quantity + quantity}', `locate` = '{images.locate}', `provider` = '{images.idProvider}', `id_by_provider` = '{images.idByProvider}', `loss_charges` = '{images.providerPrice}', `update_by` = '{images.updateBy}' WHERE (`id` = '{images.id}');";
+
+            }
+            else
+            {
+                command = $"UPDATE `ooad_qlchbd`.`disk` SET `name` = '{images.name}', `album` = '{images.idAlbum}', `quantity` = '{images.quantity + quantity}', `image` = '{images.image}', `locate` = '{images.locate}', `provider` = '{images.idProvider}', `id_by_provider` = '{images.idByProvider}', `loss_charges` = '{images.providerPrice}', `update_by` = '{images.updateBy}' WHERE (`id` = '{images.id}');";
+            }
             reader = db.executeCommand(command);
             db.closeConnection();
         }
