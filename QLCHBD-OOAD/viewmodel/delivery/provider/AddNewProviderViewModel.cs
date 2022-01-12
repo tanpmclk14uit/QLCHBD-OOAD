@@ -22,18 +22,32 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
     {
         public static event CloseFormHandler closeForm;
         private DeliveryProviderRepository deliveryProviderRepository;
+        private int _id;
+        public int id => _id;
 
         public ICommand CancelCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
         public ICommand AddImageCommand { get; set; }
 
-
         public AddNewProviderViewModel()
         {
             deliveryProviderRepository = DeliveryProviderRepository.getInstance();
+            generateID();
             CancelCommand = new RelayCommand<object>((p) => { return true; }, (p) => { closeForm(); });
             ConfirmCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onConfirm(); });
             AddImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => { onAddImage(); });
+        }
+        
+        private void generateID()
+        {
+            Random random = new Random();
+            _id = (int)random.Next();
+            while (deliveryProviderRepository.isProviderNull(_id.ToString()))
+            {
+                _id = (int)random.Next();
+            }
+            tbIDProvider = _id.ToString();
+            OnPropertyChanged("tbIDProvider");
         }
         private string setupImageFromDialog(string name) 
         {
@@ -120,6 +134,11 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
                 MessageBox.Show("Max length: 10", "Provider");
             }
             else
+                if (image.Length > 255)
+            {
+                MessageBox.Show("Image link is to long", "Image");
+            }
+            else
                 if (deliveryProviderRepository.isProviderNull(tbIDProvider))
             {
                 MessageBox.Show("Provider ID is existed", "ID");
@@ -127,7 +146,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.provider
             else
             {
                 image = setupImageFromDialog("provider");
-                deliveryProviderRepository.insertProviderWithTextBox(tbIDProvider, tbName, tbNumber, tbMail, tbAddress, CurrentStaff.getInstance().currentStaff.id.ToString(), image);
+                deliveryProviderRepository.insertProviderWithTextBox(id.ToString(), tbName, tbNumber, tbMail, tbAddress, CurrentStaff.getInstance().currentStaff.id.ToString(), image);
                 MessageBox.Show("Provider is added to Database", "Error");
                 closeForm();
             }

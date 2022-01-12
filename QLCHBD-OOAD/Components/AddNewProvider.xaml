@@ -67,7 +67,8 @@
             Grid.Row="0"
             Grid.Column="1"
             FontSize="20"
-            
+            IsReadOnly="True"
+            Foreground="DarkGray"
             Padding="5 0 0 0"
             VerticalAlignment="Center"
             Text="{Binding tbIDProvider, Mode=TwoWay}"></TextBox>

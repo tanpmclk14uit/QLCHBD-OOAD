@@ -40,6 +40,7 @@ namespace QLCHBD_OOAD.dao
         }
 
 
+
         public void insertProviderWithTextBox(string ID, string name, string number, string mail, string address, string id, string image)
         {
             string command = "INSERT INTO provider (`id`, `name`, `number`, `mail`, `image`, `address`, `create_time`, `update_time`, `create_by`, `update_by`) VALUES (" +

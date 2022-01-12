@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         
-        Title="DeliveryProviderListWindow" Height="550" Width="450">
+        Title="DeliveryProviderListWindow" Height="550" Width="600">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -38,7 +38,7 @@
                       IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Width="1*" Binding="{Binding Path=id}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Provider Name" Width="3*" Binding="{Binding Path=providerName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Provider Name" Width="2*" Binding="{Binding Path=providerName}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
