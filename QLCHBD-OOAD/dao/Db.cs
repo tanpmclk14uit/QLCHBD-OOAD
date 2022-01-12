@@ -53,7 +53,6 @@ namespace QLCHBD_OOAD.dao
             {
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
-
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = command;
                 reader = cmd.ExecuteReader();

@@ -167,7 +167,7 @@ namespace QLCHBD_OOAD.dao
             while (reader.Read())
             {
                 DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), reader[9] == null ? "/QLCHBD-OOAD;component/assets/img_noImage.png" : (string)reader[9]);
-                checkImageExists(deliOrder.id);
+                deliOrder.setImage = checkImageExists(deliOrder.id);
                 deliOrders.Add(deliOrder);
             }
             database.closeConnection();
@@ -266,6 +266,7 @@ namespace QLCHBD_OOAD.dao
                 if (reader != null &&  reader.Read() && reader[0] != DBNull.Value)
                 {
                     string image = (string)reader[0];
+                    database.closeConnection();
                     return image;
                 }
             }
@@ -291,7 +292,7 @@ namespace QLCHBD_OOAD.dao
                 DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
                 list.Add(deliOrder);
             }
-
+            database.closeConnection();
             return list;
         }
 
