@@ -36,5 +36,10 @@ namespace QLCHBD_OOAD.view.rental
             this.Close();
             toggle();
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            toggle();
+            base.OnClosed(e);
+        }
     }
 }

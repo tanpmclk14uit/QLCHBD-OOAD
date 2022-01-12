@@ -105,7 +105,7 @@ namespace QLCHBD_OOAD.viewmodel.returning
         private Receipt toReceipt(RentalBill rental)
         {
             //set currentStaff id
-            int currentStaffId = 1;
+            long currentStaffId = CurrentStaff.getInstance().currentStaff.id;
             return new Receipt(rental.guestId, currentStaffId, int.Parse(_totalFee.ToString()));
         }
         private ReceiptItem mapToReceiptItem(ReceiptItemViewModel receiptItem, long receiptId)

@@ -163,7 +163,7 @@
                 Height="50"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Margin="0 0 10 0"
+                Margin="0 0 10 0"              
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="Green"
                 Foreground="White"

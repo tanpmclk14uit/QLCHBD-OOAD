@@ -1,4 +1,5 @@
 ﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.Components;
 using QLCHBD_OOAD.viewmodel.dashboard;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,16 @@ namespace QLCHBD_OOAD.view.dashboard
 
         private void total_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            onChangePageTotal();
+            if (CurrentStaff.getInstance().currentStaff.isManager)
+            {
+                onChangePageTotal();
+            }
+            else
+            {
+                MyDialog myDialog = new MyDialog(MyDialogStyle.ERROR, "Admin only!");
+                myDialog.ShowDialog();
+            }
+           
         }
 
         private void inStock_MouseDown(object sender, MouseButtonEventArgs e)

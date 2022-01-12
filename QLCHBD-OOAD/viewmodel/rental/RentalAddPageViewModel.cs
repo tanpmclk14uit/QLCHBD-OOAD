@@ -180,7 +180,8 @@ namespace QLCHBD_OOAD.viewmodel.rental
             if(guest != null)
             { 
                 RentalBill rentalBill = new RentalBill(guest.id, Convert.ToInt32(totalPrice), RentalBillStatus.WAITING);
-                rentalBillReponsitory.createNewRentalBill(rentalBill, 1, rentalBillItems);
+                long staffID = CurrentStaff.getInstance().currentStaff.id;
+                rentalBillReponsitory.createNewRentalBill(rentalBill, staffID, rentalBillItems);
             }
             else
             {

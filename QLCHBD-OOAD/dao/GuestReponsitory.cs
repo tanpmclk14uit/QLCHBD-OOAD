@@ -1,4 +1,5 @@
-﻿using QLCHBD_OOAD.model.Guest;
+﻿using QLCHBD_OOAD.appUtil;
+using QLCHBD_OOAD.model.Guest;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -117,7 +118,8 @@ namespace QLCHBD_OOAD.dao
         public string findStaffNameById(string id)
         {
             string staffName = "";
-            string command = $"select name from staff where id = 1";
+     
+            string command = $"select name from staff where id = '{id}'";
             var reader = db.executeCommand(command);           
             if(reader!=null && reader.Read())
             {
@@ -132,7 +134,7 @@ namespace QLCHBD_OOAD.dao
             long resultId = -1;
             int isMember = guest.isMember ? 1 : 0;            
             string format = "yyyy-MM-dd";
-            string command = $"INSERT INTO `guest`( `cmnd_cccd`, `address`, `birth_date`, `name`,`membership` ) VALUES ('{guest.cmnd}','{guest.address}','{guest.birthDate.ToString(format)}','{guest.name}','{isMember}')";            
+            string command = $"INSERT INTO `guest`( `cmnd_cccd`, `address`, `birth_date`, `name`,`membership`,`create_by` ) VALUES ('{guest.cmnd}','{guest.address}','{guest.birthDate.ToString(format)}','{guest.name}','{isMember}','{CurrentStaff.getInstance().currentStaff.id}')";            
             resultId = db.excuteInsertCommand(command);
             return resultId;
         }
@@ -163,7 +165,14 @@ namespace QLCHBD_OOAD.dao
                 Guest guest = new Guest((long)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (DateTime)reader[4], (bool)reader[5]);
                 guests.Add(guest);
             }
+            db.closeConnection();
             return guests;
+        }
+        public void deleteGuest(long id)
+        {
+            string command = $"DELETE FROM `guest` WHERE id = '{id}'";
+            var reader = db.executeCommand(command);
+            db.closeConnection();
         }
 
     }

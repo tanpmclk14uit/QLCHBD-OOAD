@@ -63,7 +63,7 @@ namespace QLCHBD_OOAD.viewmodel.guest
         public void setGuest(Guest guest)
         {
             this.guest = guestReponsitory.findDetailGuestById(guest.id.ToString());
-            staffName = guestReponsitory.findStaffNameById(guest.createById);
+            staffName = guestReponsitory.findStaffNameById(this.guest.createById);
             allRenting = guestReponsitory.countAllRentedBook(guest.id.ToString());            
             allOverdueRenting = guestReponsitory.countCurrentOverDueRenting(guest.id.ToString());
             allCurrentRenting = guestReponsitory.countCurrentWaitingRenting(guest.id.ToString())+ allOverdueRenting;
@@ -80,7 +80,10 @@ namespace QLCHBD_OOAD.viewmodel.guest
                 }
             }
         }
-
+        public void deleteGuest(long id)
+        {
+            guestReponsitory.deleteGuest(id);
+        }
        
         private GuestDetailViewModel()
         {

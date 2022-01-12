@@ -220,7 +220,7 @@
                         Background="Red"
                        Margin="10 0"
                          Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        materialDesign:ButtonAssist.CornerRadius="5" >
+                        materialDesign:ButtonAssist.CornerRadius="5" Click="Button_Click_1" >
                     <TextBlock Text="DELETE"
                                FontSize="20"
                                FontFamily="Roboto"

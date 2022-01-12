@@ -97,8 +97,10 @@ namespace QLCHBD_OOAD
 
         private void onChangePageTotal()
         {
+
             ReportMainPage content = new ReportMainPage();
             Holder.Content = content;
+
         }
 
         private void onChangePageDelivering()
