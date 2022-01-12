@@ -44,7 +44,7 @@
                 Margin="15, 20, 0, 8"
                 Height="40"
                 VerticalAlignment="Center"
-                FontSize="25"
+                FontSize="20"
                 Command="{Binding AddOrderCommand}"
                 >NEW ORDER
             </Button>
@@ -56,7 +56,7 @@
                 Margin="5, 20, 0, 8"
                 Height="40"
                 VerticalAlignment="Center"
-                FontSize="25"
+                FontSize="20"
                 Command="{Binding AddProviderCommand}"
                 >ADD PROVIDER
             </Button>
@@ -68,7 +68,8 @@
                 Margin="5, 20, 40, 8"
                 VerticalAlignment="Center"
                 Height="40"
-                FontSize="25"
+                FontSize="20"
+                
                 Command="{Binding ModifyProviderCommand}"
                 >MODIFY PROVIDER
             </Button>
@@ -99,7 +100,6 @@
                 TextWrapping="Wrap" 
                 MaxLines="1"
                 Margin="5, 25, 15, 15"
-                Background="White"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Left"
                 FontSize="25"

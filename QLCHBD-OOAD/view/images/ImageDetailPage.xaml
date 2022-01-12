@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="1.2*"/>
                 <ColumnDefinition Width="3.5*"/>
             </Grid.ColumnDefinitions>
-            <Border BorderThickness="1" CornerRadius="16" Background="White"
+            <Border BorderThickness="1" CornerRadius="5" Background="White"
             BorderBrush="Black" Margin="15 0 0 15">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -45,7 +45,7 @@
                         <RowDefinition Height="4*"/>
                         <RowDefinition Height="1.5*"/>
                     </Grid.RowDefinitions>
-                    <Border CornerRadius="40" Margin="20 20 20 0" Background="Black">
+                    <Border CornerRadius="5" Margin="20 20 20 0" Background="Black">
                         <Grid>
                             <Image Source="{Binding image}"
                            Stretch="Fill"/>
@@ -133,35 +133,36 @@
                     <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center"
                         Margin="0 0 0 0">
                         <Button Width="140"
-                        Height="62"
-                        Margin="0 0 15 0"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        materialDesign:ButtonAssist.CornerRadius="5"
-                        Background="#0DBE00">
-                            <TextBlock Text="Confirm"
-                               FontSize="30"
+                            Height="62"
+                            Margin="0 0 15 0"
+                            Click="Button_Click"
+                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            Background="Red">
+                            <TextBlock Text="Delete"
+                               FontSize="25"
                                FontFamily="Roboto"
                                FontWeight="Medium"
-                               Foreground="Black"/>
+                               Foreground="White"/>
                         </Button>
                         <Button Width="140"
                         Height="62"
                         Margin="15 0 0 0"
-                        Click="Button_Click"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5"
-                        Background="#707070">
-                            <TextBlock Text="Delete"
-                               FontSize="30"
+                        Background="#0DBE00">
+                            <TextBlock Text="Confirm"
+                               FontSize="25"
                                FontFamily="Roboto"
                                FontWeight="Medium"
-                               Foreground="Black"/>
+                               Foreground="White"/>
                         </Button>
+
                     </StackPanel>
                 </Grid>
             </Border>
             <Border Grid.Column="1" Background="White" Margin="15 0 25 15"
-                    BorderBrush="Black" BorderThickness="1" CornerRadius="20">
+                    BorderBrush="Black" BorderThickness="1" CornerRadius="5">
                 <DataGrid Margin="10 20 10 10" 
                           AutoGenerateColumns="False" 
                           CanUserAddRows="False"
