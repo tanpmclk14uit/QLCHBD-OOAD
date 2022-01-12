@@ -192,7 +192,8 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Content="ADD"
-                            x:Name="btnSave"                            
+                            x:Name="btnSave"  
+                            Grid.Column="1"
                             Command="{Binding Add}"
                             FontSize="25"
                             FontWeight="Bold"
@@ -207,7 +208,7 @@
                             VerticalAlignment="Bottom">
                     </Button>
                     <Button x:Name="btnExit"                           
-                            Grid.Column="1"
+                            Grid.Column="0"
                             materialDesign:ButtonAssist.CornerRadius="14"
                              Margin="0 0 0 10"
                             Content="CANCEL"

@@ -160,9 +160,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button
-                        Grid.Column="2"
+                        Grid.Column="1"
                         Height="50"
-                        Background="Red"
+                        Background="Gray"
                        Margin="10 0"
                          Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         materialDesign:ButtonAssist.CornerRadius="5" Click="Button_Click">
@@ -170,10 +170,10 @@
                                FontSize="20"
                                FontFamily="Roboto"
                                FontWeight="Medium"
-                               Foreground="Black"/>
+                               Foreground="White"/>
                 </Button>
                 <Button 
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Command="{Binding Confirm}"
                         Height="50"
                     Margin="10 0"

@@ -14,7 +14,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Margin="20 0 0 0">
+        <Grid Grid.Column="1" Margin="20 0 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
@@ -23,25 +23,28 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="150"/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button                     
                     Content="ADD GUEST" 
                     Command="{Binding AddMember}"
                     Height="40"
+                    Grid.Column="1"
                     Background="White"     
                     BorderThickness="1px"
                     BorderBrush="Gray"
                     materialDesign:ButtonAssist.CornerRadius="5"
                     Margin="10 0 10 0"                        
                     />
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Border Margin="10 13 10 7" CornerRadius="50" BorderThickness="0">
+                    <Border Margin="10 13 10 7"
+                            CornerRadius="50"
+                            BorderThickness="0">
                         <Border.Background>
                             <ImageBrush ImageSource="/Assets/guest.png" 
                                         Stretch="UniformToFill"/>
@@ -133,17 +136,17 @@
                     Command="{Binding Cancel}"
                     Content="CANCEL"              
                     Height="60"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     FontSize="30"
-                    Background="Red"     
-                    BorderThickness="1px"
-                    BorderBrush="Gray"
+                    Background="Gray" 
+                    Foreground="White"
+                    BorderThickness="0px"                   
                     materialDesign:ButtonAssist.CornerRadius="5"
                     Margin="10 0 10 0"                        
                     />
                 <Button    
                     Command="{Binding Confirm}"
-                    Grid.Column="0"
+                    Grid.Column="1"
                     Content="CONFIRM"   
                     FontSize="30"
                     Foreground="White"
@@ -156,14 +159,14 @@
                     />
             </Grid>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Column="3" Margin="0 0 20 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock 
@@ -185,7 +188,7 @@
                          Grid.Column="1"/>
             </Grid>
             <ScrollViewer Grid.Row="1" >
-                <StackPanel Margin="20 5 0 0"  x:Name="panel">
+                <StackPanel Margin="10 5 0 0"  x:Name="panel">
                     <ListView  SelectedItem="{Binding selectedDisk, Mode=TwoWay}"
                                SelectionMode="Single"
                                x:Name="listImage"
