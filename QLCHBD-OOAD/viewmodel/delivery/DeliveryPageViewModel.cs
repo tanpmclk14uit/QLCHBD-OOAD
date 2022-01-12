@@ -37,7 +37,6 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             deliOrderlReponsitory = DeliveryOrderRepository.getInstance();
             orderItemsRepository = DeliveryOrderItemsRepository.getInstance();
             setUpStatusses();
-
             AddOrderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { addOrderDelivery(); });
             ModifyProviderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onModifyProvider(); });
             AddProviderCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { addProviderDelivery(); });
@@ -104,7 +103,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             set
             {
                 _selectedStatus = value;
-                _deliOrders = filterDeliOders(value);
+                deliOrders = filterDeliOders(value);
                 OnPropertyChanged("seachKey");
                 OnPropertyChanged("fillerListDeliOder");
                 OnPropertyChanged("selectedStatus");
@@ -171,30 +170,35 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
             if (seachKey == "" || seachKey[0] != '#')
             {
-                foreach (var deliOrder in deliOrders)
+                foreach (DeliOrder deliOrder in deliOrders)
                 {
-
-                    foreach (PropertyInfo prop in deliOrders.GetType().GetProperties())
+                    foreach (PropertyInfo prop in deliOrder.GetType().GetProperties())
                     {
                         var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
-
-                        if (type == typeof(string) || type == typeof(int) || type == typeof(DateTime))
+                        try
                         {
-                            var deliOrder_field = prop.GetValue(deliOrders, null);
-                            if (deliOrder_field != null)
+                            if (type == typeof(string) || type == typeof(int) || type == typeof(DateTime))
                             {
-                                String deliOrder_data = deliOrder_field.ToString().Trim().ToLower();
-                                String keyWord = seachKey.ToLower();
-                                if (deliOrder_data != null && keyWord != null)
+                                var deliOrder_field = prop.GetValue(deliOrder, null);
+                                if (deliOrder_field != null)
                                 {
-                                    if (deliOrder_data.Contains(keyWord))
+                                    String deliOrder_data = deliOrder_field.ToString().Trim().ToLower();
+                                    String keyWord = seachKey.ToLower();
+                                    if (deliOrder_data != null && keyWord != null)
                                     {
-                                        filterList.Add(deliOrder);
-                                        break;
+                                        if (deliOrder_data.Contains(keyWord))
+                                        {
+                                            filterList.Add(deliOrder);
+                                            break;
+                                        }
                                     }
                                 }
                             }
                         }
+                        catch
+                        {
+
+                        }                      
 
                     }
                 }

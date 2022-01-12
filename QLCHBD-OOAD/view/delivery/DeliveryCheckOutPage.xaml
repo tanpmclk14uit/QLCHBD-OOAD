@@ -159,6 +159,7 @@
                         Foreground="White"
                         materialDesign:ButtonAssist.CornerRadius="5"
                         Background="CornflowerBlue"
+                        Visibility="{Binding confirmVisibility}"
                         VerticalAlignment="Bottom"
                         Content="{Binding ConfirmAllContent}"
                         Command="{Binding ConfirmAllCommand}">

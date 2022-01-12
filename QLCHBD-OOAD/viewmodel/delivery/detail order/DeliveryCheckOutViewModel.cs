@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -36,6 +37,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
         private DeliveryOrderItemsRepository orderItemsRepository;
         private AlbumRepository albumRepository;
         private DeliveryProviderRepository providerRepository;
+        public Visibility confirmVisibility { get; set; }
 
 
         public ObservableCollection<DeliOrderItems> orderItemsList { get; }
@@ -49,6 +51,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
 
         public DeliveryCheckOutViewModel(string id)
         {
+          
             orderRepository = DeliveryOrderRepository.getInstance();
             billRepository = DeliveryBillRepository.getInstance();
             itemsRepository = DeliveryBilingItemsRepository.getInstance();
@@ -77,7 +80,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
             UpdateContent = "UPDATE";
             ConfirmAllContent = "CONFIRM";
             rentalPrice = 0;
-
+            confirmVisibility = Visibility.Visible;
             if (orderRepository.getImportFormStatusWithID(id).Equals("DELIVERED"))
             {
                 setSelectedUIAfterConfirmAll();
@@ -100,6 +103,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                     UpdateCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onAfterConfirmAll(); });
                     ConfirmAllCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => {});
                     ChangeImageCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => {});
+                
                     UpdateContent = "🏠";
                     ConfirmAllContent = "PAID";
                     image = "/QLCHBD-OOAD;component/assets/img_paid.png";
@@ -115,11 +119,12 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                 ConfirmAllCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { });
                 ChangeImageCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { });
                 UpdateContent = "🏠";
-                ConfirmAllContent = "XXXX";
+                confirmVisibility = Visibility.Hidden;                    
                 image = "/QLCHBD-OOAD;component/assets/img_cancel.png";
                 OnPropertyChanged("image");
                 OnPropertyChanged("UpdateContent");
                 OnPropertyChanged("ConfirmAllContent");
+                OnPropertyChanged("confirmVisibility");
             }
             else
             {
