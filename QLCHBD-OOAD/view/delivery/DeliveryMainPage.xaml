@@ -29,22 +29,22 @@
 
             </Grid.Resources>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition ></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="1.2*" ></ColumnDefinition>
+                <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                <ColumnDefinition Width="2*" ></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button 
                 Grid.Column="3"
                 x:Name="bttNewOrder"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="15, 20, 0, 8"
+                Margin="15,15, 0, 8"
                 Height="40"
                 VerticalAlignment="Center"
-                FontSize="20"
+                FontSize="15"
                 Command="{Binding AddOrderCommand}"
                 >NEW ORDER
             </Button>
@@ -53,10 +53,10 @@
                 x:Name="bttAddProvider"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="5, 20, 0, 8"
+                Margin="5, 15, 0, 8"
                 Height="40"
                 VerticalAlignment="Center"
-                FontSize="20"
+                FontSize="15"
                 Command="{Binding AddProviderCommand}"
                 >ADD PROVIDER
             </Button>
@@ -65,10 +65,10 @@
                 x:Name="bttModifyProvider"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 Background="White"
-                Margin="5, 20, 40, 8"
+                Margin="5, 15, 20, 8"
                 VerticalAlignment="Center"
                 Height="40"
-                FontSize="20"
+                FontSize="15"
                 
                 Command="{Binding ModifyProviderCommand}"
                 >MODIFY PROVIDER
@@ -76,13 +76,14 @@
             <ComboBox
                 Grid.Column="0"
                 x:Name="cbSortDelivery"
-                Margin="40, 20, 10, 15"
+                Margin="10, 20, 10, 15"
                 FontSize="25"
                 materialDesign:ColorZoneAssist.Background="LightGray"
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
                 BorderBrush="Gray"
                 BorderThickness="1"
+                Style="{DynamicResource theComboBox}"
                 Padding="10 0 10 0" 
                 Background="White"
                 SelectedItem="{Binding selectedStatus}"
@@ -91,7 +92,7 @@
             <TextBlock
                 Grid.Column="1"
                 Margin="10, 20, 0, 15"
-                FontSize ="30"
+                FontSize ="25"
                 VerticalAlignment="Center"
                 >SEARCH:</TextBlock>
 
@@ -99,8 +100,8 @@
                 Grid.Column="2"
                 TextWrapping="Wrap" 
                 MaxLines="1"
-                Margin="5, 25, 15, 15"
-                VerticalContentAlignment="Center"
+                Margin="5, 20, 15, 15"
+                VerticalContentAlignment="Stretch"
                 HorizontalContentAlignment="Left"
                 FontSize="25"
                 Style="{DynamicResource seach}"
@@ -259,21 +260,23 @@
                                                 FontSize="15"
                                                 FontWeight="Bold"
                                                 Margin="0 0 10 10"
-                                                Background="#0DBE00"
+                                                Background="Green"
+                                            Foreground="White"
                                                 BorderThickness="1"
                                                 Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeliveredCommand, Mode=TwoWay}"
         
-                                                >Delivered</Button>
+                                                >DELIVERED</Button>
                                         <Button
                                             x:Name="bttCancel"
                                                 Grid.Column="0"
                                                 Grid.Row="6"
                                                 FontSize="15"
+                                            Foreground="White"
                                                 FontWeight="Bold"
-                                                Background="#E6343A"
+                                                Background="Red"
                                                 BorderThickness="1"
                                                 Margin="5 0 10 10"
-                                                Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeleteCommand, Mode=TwoWay}">Cancel</Button>
+                                                Command="{Binding RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.DeleteCommand, Mode=TwoWay}">CANCEL</Button>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

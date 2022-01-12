@@ -45,18 +45,20 @@
                         Grid.Row="0"
                         Height="50"
                         BorderBrush="Black"
-                        FontSize="35"
+                        FontSize="25"
+                        CalendarStyle="{StaticResource MaterialDesignCalendarPortraitForeground}"
                         SelectedDate="{Binding dateStart, Mode=TwoWay}"
                         SelectedDateChanged="dateStart_SelectedDateChanged"
                         BorderThickness="1"></DatePicker>
                     <DatePicker
                         x:Name="dateEnd"
                         Grid.Column="1"
+                        CalendarStyle="{StaticResource MaterialDesignCalendarPortraitForeground}"
                         Grid.Row="1"
                         Height="50"
                         BorderBrush="Black"
                         VerticalAlignment="Top"
-                        FontSize="35"
+                        FontSize="25"
                         SelectedDateChanged="dateStart_SelectedDateChanged"
                         SelectedDate="{Binding dateEnd, Mode=TwoWay}"
                         BorderThickness="1"></DatePicker>   
@@ -152,7 +154,7 @@
                 <DataGrid
                     Grid.Row="1"
                     Grid.Column="0"
-                    FontSize="25" 
+                    FontSize="20" 
                     FontStyle="Normal"
                     BorderBrush="Black"
                     BorderThickness="1"
@@ -174,7 +176,7 @@
                 <DataGrid
                     Grid.Row="1"
                     Grid.Column="1"
-                    FontSize="25" 
+                    FontSize="20" 
                     FontStyle="Normal"
                     BorderBrush="Black"
                     BorderThickness="1"

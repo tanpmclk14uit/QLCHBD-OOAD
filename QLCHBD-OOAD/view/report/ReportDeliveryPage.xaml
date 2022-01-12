@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <DataGrid
             Grid.Row="0"
-            FontSize="30" 
+            FontSize="20" 
             FontStyle="Normal"
             BorderBrush="Black"
             BorderThickness="1"
@@ -283,7 +283,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="0.7*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -316,7 +316,8 @@
                 Grid.Row="0"
                 Height="50"
                 BorderBrush="Black"
-                FontSize="35"
+                FontSize="25"
+                CalendarStyle="{StaticResource MaterialDesignCalendarPortraitForeground}"
                 SelectedDateChanged="DatePicker_SelectedDateChanged"
                 SelectedDate="{Binding dateStart}"
                 BorderThickness="1"></DatePicker>
@@ -326,7 +327,8 @@
                 Height="50"
                 BorderBrush="Black"
                 VerticalAlignment="Top"
-                FontSize="35"
+                FontSize="25"
+                CalendarStyle="{StaticResource MaterialDesignCalendarPortraitForeground}"
                 SelectedDateChanged="DatePicker_SelectedDateChanged_1"
                 SelectedDate="{Binding dateEnd}"
                 BorderThickness="1"></DatePicker>

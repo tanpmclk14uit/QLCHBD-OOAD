@@ -241,11 +241,6 @@ namespace QLCHBD_OOAD.dao
             return result;
         }
 
-
-
-
-
-
         private string checkImageExists(long id)
         {
             string imagePath = getProviderImagebyImportFormID(id.ToString());

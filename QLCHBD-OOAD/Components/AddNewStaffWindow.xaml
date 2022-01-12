@@ -10,7 +10,7 @@
       WindowStartupLocation="CenterScreen"
       Topmost="True"
       ResizeMode="NoResize"
-        Title="AddNewStaffWindow" Height="450" Width="700">
+        Title="AddNewStaffWindow" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="tbStyle" TargetType="TextBox">
             <Setter Property="FontSize" Value="20"></Setter>
@@ -69,15 +69,16 @@
                 </Grid.RowDefinitions>
                 <TextBox Text="{Binding name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          FontSize="14"  
-                         Style="{StaticResource tbStyle}"
+                        
                          VerticalAlignment="Center"/>
                 <TextBox Text="{Binding residentId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Grid.Row="1"
                           FontSize="14"
-                        Style="{StaticResource tbStyle}"
+                        
                           VerticalAlignment="Center"/>
                 <DatePicker Grid.Row="2"                                
-                                Height="auto"     
+                                Height="auto" 
+                            CalendarStyle="{StaticResource MaterialDesignCalendarPortraitForeground}"
                                 SelectedDate="{Binding birthday, UpdateSourceTrigger=PropertyChanged}"
                                  Focusable="False"
                                 FontSize="14"                               
@@ -88,12 +89,12 @@
                 <TextBox Text="{Binding userName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="3"
                         FontSize="14"
-                       Style="{StaticResource tbStyle}"
+                     
                        VerticalAlignment="Center"/>
                 <TextBox Text="{Binding password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                            Grid.Row="4"
                            FontSize="14"
-                         Style="{StaticResource tbStyle}"
+                        
                            VerticalAlignment="Center"/>
             </Grid>
         </Grid>
@@ -101,11 +102,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Background="#28A745"
                     Command="{Binding addStaffCommand}"
-                    Height="66"
-                    Width="150"
+                    Height="60"
+                    Width="200"
+                    Grid.Column="2"
                     Content="SAVE"
                     FontSize="30"
                     Foreground="White"
@@ -113,8 +116,9 @@
             <Button Grid.Column="1"
                     Command="{Binding cancelCommand}"
                     Background="#8B8B8B"
-                    Height="66"
-                    Width="150"
+                    Height="60"
+                 
+                    Width="200"
                     Content="CANCEL"
                     FontSize="30"
                     Foreground="White"

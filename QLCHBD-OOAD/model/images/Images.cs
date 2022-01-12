@@ -99,7 +99,9 @@ namespace QLCHBD_OOAD.model.images
             get => _orderAmount;
             set
             {
-                if (value == "" || Convert.ToInt32(value) < 0) _orderAmount = "0";
+
+                bool valid = Int32.TryParse(value, out int result);
+                if ( !valid || value == "" || Convert.ToInt32(value) < 0) _orderAmount = "0";
                 else _orderAmount = value;
                 if (_orderAmount != "")
                 {

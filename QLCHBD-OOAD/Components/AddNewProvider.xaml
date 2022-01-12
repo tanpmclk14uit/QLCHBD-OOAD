@@ -10,7 +10,7 @@
         ResizeMode="NoResize"
         BorderThickness="1"
         BorderBrush="Black"
-        Title="AddNewProvider" Height="500" Width="400">
+        Title="AddNewProvider" Height="500" Width="500">
     <Grid>
         <Grid.Resources>
             <Style x:Key="txtStyle" TargetType="TextBlock">
@@ -66,27 +66,38 @@
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+            FontSize="20"
+            
+            Padding="5 0 0 0"
+            VerticalAlignment="Center"
             Text="{Binding tbIDProvider, Mode=TwoWay}"></TextBox>
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+           FontSize="20"
+             Padding="5 0 0 0"
+            VerticalAlignment="Center"
             Text="{Binding tbName, Mode=TwoWay}"></TextBox>
         <TextBox
             Grid.Row="2"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+             Padding="5 0 0 0"
+            FontSize="20"
+            VerticalAlignment="Center"
             Text="{Binding tbNumber, Mode=TwoWay}"></TextBox>
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+             Padding="5 0 0 0"
+           FontSize="20"
+            VerticalAlignment="Center"
             Text="{Binding tbMail, Mode=TwoWay}"></TextBox>
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
-            Style="{StaticResource tbStyle}"
+            FontSize="20"
+             Padding="5 0 0 0"
+            VerticalAlignment="Center"
             Text="{Binding tbAddress, Mode=TwoWay}"></TextBox>
         <Grid
             Grid.Row="5"
@@ -97,16 +108,19 @@
             </Grid.ColumnDefinitions>
             <TextBox
                 Grid.Column="0"
+                 Padding="5 0 0 0"
                 Text="{Binding image, Mode=TwoWay}"
-                Style="{StaticResource tbStyle}"></TextBox>
+                FontSize="20"
+            VerticalAlignment="Center"></TextBox>
             <Button
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 BorderBrush="Black"
                 BorderThickness="1"
                 FontWeight="Bold"
+                
                 Margin="0 5 5 0"
-                Background="Gray"
+                Background="LightGray"
                 Command="{Binding AddImageCommand}">...</Button>
         </Grid>
 
@@ -117,28 +131,31 @@
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="0"
-                Width="100"
+                Width="150"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Margin="0 0 10 0"
+                Padding="0"
                 materialDesign:ButtonAssist.CornerRadius="5"
-                Background="LightGray"
+                Background="Gray"
+                Foreground="White"
                 BorderThickness="1"
                 FontSize="17"
                 Command="{Binding CancelCommand}"
-                BorderBrush="Black">Cancel</Button>
+               >CANCEL</Button>
             <Button
                 Grid.Column="1"
-                Width="100"
+                Width="150"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Margin="0 0 10 0"
                 materialDesign:ButtonAssist.CornerRadius="5"
-                Background="GreenYellow"
+                Background="Green"
+                Foreground="White"
                 BorderThickness="1"
                 FontSize="17"
                 Command="{Binding ConfirmCommand}"
-                BorderBrush="Black">Confirm</Button>
+               >CONFIRM</Button>
         </Grid>
 
     </Grid>

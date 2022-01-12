@@ -164,35 +164,40 @@ namespace QLCHBD_OOAD.viewmodel.staff
 
         private void deleteStaff()
         {
-            if (selectedItem.id == CurrentStaff.getInstance().currentStaff.id)
+            if(selectedItem != null)
             {
-                MessageBox.Show("Cant delete your own account");
-            }
-            else
-            {
-                if (selectedItem.isManager == true)
+                if (selectedItem.id == CurrentStaff.getInstance().currentStaff.id)
                 {
-                    MessageBox.Show("Cant delete an admin");
-                }   
-                else if (selectedItem == null)
-                {
-                    MessageBox.Show("Please choose the staff first !");
-                }
-                else if (selectedItem.isLogedIn)
-                {
-                    MessageBox.Show("Cant delete account currently loged in !");
+                    MessageBox.Show("Cant delete your own account");
                 }
                 else
                 {
-                    StaffRepository.getInstance().deleteStaff(selectedItem.id);
-                    selectedItem = null;
-                    lstStaffs = StaffRepository.getInstance().getAllStaff();
-                    name = "";
-                    password = "";
-                    newPassword = "";
-                    MessageBox.Show("Delete Staff Success !");
+                    if (selectedItem.isManager == true)
+                    {
+                        MessageBox.Show("Cant delete an admin");
+                    }
+
+                    else if (selectedItem.isLogedIn)
+                    {
+                        MessageBox.Show("Cant delete account currently loged in !");
+                    }
+                    else
+                    {
+                        StaffRepository.getInstance().deleteStaff(selectedItem.id);
+                        selectedItem = null;
+                        lstStaffs = StaffRepository.getInstance().getAllStaff();
+                        name = "";
+                        password = "";
+                        newPassword = "";
+                        MessageBox.Show("Delete Staff Success !");
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("Please choose the staff first !");
+            }
+
         }    
 
         private static StaffManageViewModel _instance;

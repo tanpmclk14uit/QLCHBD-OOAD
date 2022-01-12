@@ -12,15 +12,14 @@
         Background="Transparent"
         
         Title="DeliveryProviderListWindow" Height="550" Width="450">
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Border
             Grid.Row="0"
-            Grid.RowSpan="2"
-            CornerRadius="10"
+            Grid.RowSpan="2"     
             Background="White"
             BorderBrush="Black"
             BorderThickness="0.5"></Border>
@@ -30,7 +29,7 @@
                 Grid.ColumnSpan="2"
                 BorderThickness="1"
                 BorderBrush="Black"
-                CornerRadius="10"
+                
                 Margin="10">
             <DataGrid FontSize="25" Margin="5"
                       ItemsSource="{Binding providerList}"
@@ -49,29 +48,33 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button
-                Grid.Column="1"
-                Width="100"
+                Grid.Column="0"
+                Height="40"
+                Width="150"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Margin="0 0 10 0"
                 materialDesign:ButtonAssist.CornerRadius="5"
-                Background="Red"
+                Background="Gray"
                 BorderThickness="1"
+                Foreground="White"
                 FontSize="17"
                 Command="{Binding CancelCommand}"
-                BorderBrush="Black">Cancel</Button>
+                >CANCEL</Button>
             <Button
-                Grid.Column="0"
-                Width="100"
+                Grid.Column="1"
+                Width="150"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Margin="0 0 10 0"
+                Height="40"
                 materialDesign:ButtonAssist.CornerRadius="5"
-                Background="DarkSeaGreen"
+                Background="Green"
+                Foreground="White"
                 BorderThickness="1"
                 FontSize="17"
                 Command="{Binding SelectCommand}"
-                BorderBrush="Black">Select</Button>
+                >SELECT</Button>
         </Grid>
 
     </Grid>

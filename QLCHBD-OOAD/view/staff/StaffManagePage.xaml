@@ -106,7 +106,7 @@
         </Grid.RowDefinitions>
         <Border Margin="10 10 10 0">
             <Grid>
-                <Border Background="white" BorderThickness="1" CornerRadius="20"
+                <Border Background="white" BorderThickness="1" CornerRadius="5"
                         BorderBrush="Gray">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -183,31 +183,31 @@
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Background="#E6EBEE"
                                     Height="50"
-                                materialDesign:ButtonAssist.CornerRadius="15">
+                                materialDesign:ButtonAssist.CornerRadius="5">
                                 <StackPanel>
-                                    <TextBlock Text="Change" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="Password"/>
+                                    <TextBlock Text="CHANGE" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="PASSWORD"/>
                                 </StackPanel>
                             </Button>
                             <Button Command="{Binding deleteStaffCommand}"
                                 Grid.Row="2"
-                                    Content="Delete Staff"
-                                BorderBrush="Gray"
+                                    Content="DELETE STAFF"                                
                                 BorderThickness="1"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#FCBDC8"
+                                Background="Red"
+                                    Foreground="White"
                                     Height="50"
-                                materialDesign:ButtonAssist.CornerRadius="15">
+                                materialDesign:ButtonAssist.CornerRadius="5">
                             </Button>
-                        <Button Content="Add Staff"
+                        <Button Content="ADD STAFF"
                         Command="{Binding addStaffCommand}"
                                 Grid.Row="1"
-                                BorderBrush="Gray"
+                                Foreground="White"                              
                                 BorderThickness="0.5"
                                 Height="50"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                Background="#6AC176"
-                                materialDesign:ButtonAssist.CornerRadius="15"/>
+                                Background="Green"
+                                materialDesign:ButtonAssist.CornerRadius="5"/>
                     </Grid>
                     </Grid>
                 </Border>

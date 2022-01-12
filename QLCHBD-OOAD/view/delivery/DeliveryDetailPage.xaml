@@ -124,17 +124,19 @@
                     <Grid
                         Grid.Row="7"
                         Grid.Column="1"
-                        HorizontalAlignment="Right" Width="324">
+                        HorizontalAlignment="Right" Width="420">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button
                             Grid.Column="0"
                             Background="Red"
+                            Width="200"
+                            Foreground="White"
                             materialDesign:ButtonAssist.CornerRadius="5"
                             MinHeight="60"
-                            FontSize="30"
+                            FontSize="25"
                             Margin="0 0 10 0"
                             HorizontalAlignment="Right"
                             Command="{Binding DeleteCommand}">
@@ -142,10 +144,12 @@
                         </Button>
                         <Button
                             Grid.Column="1"
-                            Background="#0DBE00"
+                            Width="200"
+                            Background="Green"
                             MinHeight="60"
+                            Foreground="White"
                             materialDesign:ButtonAssist.CornerRadius="5"
-                            FontSize="30"
+                            FontSize="25"
                             HorizontalAlignment="Right"
                             Command="{Binding ConfirmCommand}">
                             DELIVERED

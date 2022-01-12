@@ -424,6 +424,8 @@
                     FontSize="15">Publishing date:</TextBlock>
                 <DatePicker Grid.Row="2"   
                                 Height="auto"    
+                            CalendarStyle="{StaticResource MaterialDesignCalendarPortraitForeground}"
+                           
                                 SelectedDate="{Binding createDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Focusable="False"
                                 FontSize="14"                               
@@ -491,7 +493,7 @@
                     Background="#28A745"
                     FontWeight="Bold"
                     Foreground="White"
-                    Grid.Column="1"
+                    Grid.Column="3"
                     Click="bttSave_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -505,7 +507,7 @@
                     Background="#8B8B8B"
                     FontWeight="Bold"
                     Foreground="White"
-                    Grid.Column="3"
+                    Grid.Column="1"
                     Click="bttCancel_Click">
                     <Button.Resources>
                         <Style TargetType="Border">

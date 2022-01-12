@@ -209,9 +209,10 @@
                 Width="100"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 BorderThickness="1"
+                Foreground="White"
                 Margin="0 10 5 10"
                 Command="{Binding RemoveCommand}"
-                Background="OrangeRed"
+                Background="Red"
                 BorderBrush="Black" HorizontalAlignment="Right">REMOVE</Button>
             <Button
                 Grid.Column="1"
@@ -222,6 +223,7 @@
                 Background="GreenYellow"
                 materialDesign:ButtonAssist.CornerRadius="5"
                 BorderThickness="1"
+              
                 Command="{Binding AddCommand}"
                 BorderBrush="Black">ADD DISK</Button>
             <Button 
@@ -229,7 +231,8 @@
             materialDesign:ButtonAssist.CornerRadius="5"
             BorderThickness="1"
             BorderBrush="Black"
-                Background="MediumSeaGreen"
+                Foreground="White"
+                Background="Green"
             Width="300"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"

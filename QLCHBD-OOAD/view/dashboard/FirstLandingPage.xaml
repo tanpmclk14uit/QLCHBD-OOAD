@@ -21,7 +21,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+            <Border Margin="20 20 10 10" BorderBrush="#707070" BorderThickness="1"
                     MouseDown="Border_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -49,7 +49,7 @@
                     </Border>
                 </Grid>
             </Border>
-            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+            <Border Margin="20 10 10 20" BorderBrush="#707070" BorderThickness="1"
                     Grid.Row="1" x:Name="borrowed" MouseDown="borrowed_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -81,7 +81,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+            <Border Margin="10 10 20 20" BorderBrush="#707070" BorderThickness="1"
                     Grid.Row="1" x:Name="total" MouseDown="total_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -107,7 +107,7 @@
                     </Border>
                 </Grid>
             </Border>
-            <Border Margin="60 60 60 60" BorderBrush="#707070" BorderThickness="1"
+            <Border Margin="10 20 20 10" BorderBrush="#707070" BorderThickness="1"
                     Grid.Row="0" x:Name="inStock" MouseDown="inStock_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
