@@ -107,6 +107,19 @@ namespace QLCHBD_OOAD.viewmodel.delivery.detail_order
                     OnPropertyChanged("UpdateContent");
                     OnPropertyChanged("ConfirmAllContent");
                 }
+
+            }
+            else if (orderRepository.getImportFormStatusWithID(id).Equals("ERROR"))
+            {
+                UpdateCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { onAfterConfirmAll(); });
+                ConfirmAllCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { });
+                ChangeImageCommand = new RelayCommand<object>((p) => { return UserRoles(); }, (p) => { });
+                UpdateContent = "🏠";
+                ConfirmAllContent = "XXXX";
+                image = "/QLCHBD-OOAD;component/assets/img_cancel.png";
+                OnPropertyChanged("image");
+                OnPropertyChanged("UpdateContent");
+                OnPropertyChanged("ConfirmAllContent");
             }
             else
             {

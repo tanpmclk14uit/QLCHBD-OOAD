@@ -233,16 +233,10 @@ namespace QLCHBD_OOAD.viewmodel.delivery
         
         private void onDelivered()
         {
-            if (selectedDeliOrder != null){
+            if (selectedDeliOrder != null)
+            {
 
                 turnToPaymentPage(selectedDeliOrder.id.ToString());
-
-                //MyDialog myDialog = new MyDialog(appUtil.MyDialogStyle.CONFIRM, "Parcel has been delivered?");
-                //myDialog.ShowDialog();
-                //if (myDialog.action == true)
-                //{
-                    
-                //}
                 
             }
             
@@ -250,7 +244,7 @@ namespace QLCHBD_OOAD.viewmodel.delivery
 
         private void onDelete()
         {
-            if (selectedDeliOrder != null && !deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "ERROR"))
+            if (selectedDeliOrder != null && !deliOrderlReponsitory.ImportFormWithStatusByID(selectedDeliOrder.id.ToString(), "ERROR") && !deliOrderlReponsitory.getImportFormStatusWithID(selectedDeliOrder.id.ToString()).Equals("DELIVERED"))
             {
                 deliOrderlReponsitory.updateStatusERROR(selectedDeliOrder.id.ToString());
                 selectedStatus = selectedStatus;
