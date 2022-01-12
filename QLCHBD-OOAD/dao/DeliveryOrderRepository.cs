@@ -152,7 +152,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader != null && reader.Read())
             {
-                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), reader[9] == null ? "/QLCHBD-OOAD;component/assets/img_noImage.png" : (string)reader[9]);
                 deliOrder.setImage = checkImageExists(deliOrder.id);
                 deliOrders.Add(deliOrder);
             }
@@ -166,7 +166,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), reader[9] == null ? "/QLCHBD-OOAD;component/assets/img_noImage.png" : (string)reader[9]);
                 checkImageExists(deliOrder.id);
                 deliOrders.Add(deliOrder);
             }
@@ -180,7 +180,7 @@ namespace QLCHBD_OOAD.dao
             var reader = database.executeCommand(command);
             while (reader.Read())
             {
-                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), (string)reader[9]);
+                DeliOrder deliOrder = new DeliOrder((long)reader[0], reader[1].ToString(), (int)reader[2], (int)reader[3], (DateTime)reader[4], (DateTime)reader[5], (long)reader[6], (long)reader[7], stringToDeliveryOrderStatus(reader[8].ToString()), reader[9] == null? "/QLCHBD-OOAD;component/assets/img_noImage.png" : (string)reader[9]);
                 deliOrder.setImage = checkImageExists(deliOrder.id);
                 deliOrders.Add(deliOrder);
             }
@@ -231,7 +231,7 @@ namespace QLCHBD_OOAD.dao
         public bool pushNewOrder(DeliOrder deliOrder)
         {
             bool result = false;
-            string command = $"INSERT INTO import_form (`id`, `provider_name`,`sum_amount`,`sum_value`,`create_time`,`update_time`, `create_by`, `update_by`, `status`) VALUES ('{deliOrder.id}', '{deliOrder.provider}', '{deliOrder.amount}', '{deliOrder.totalBills}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1', '{DeliveryOrderStatus.WATING}');";
+            string command = $"INSERT INTO import_form (`id`, `provider_name`,`sum_amount`,`sum_value`,`create_time`,`update_time`, `create_by`, `update_by`, `status`, `image`) VALUES ('{deliOrder.id}', '{deliOrder.provider}', '{deliOrder.amount}', '{deliOrder.totalBills}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1', '1', '{DeliveryOrderStatus.WATING}', '/QLCHBD-OOAD;component/assets/img_noImage.png');";
             var reader = database.executeCommand(command);
             if (reader != null)
             {
