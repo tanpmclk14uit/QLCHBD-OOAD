@@ -104,8 +104,8 @@ namespace QLCHBD_OOAD.viewmodel.delivery
             oTable.Cell(1, 1).Range.Text = "Store: ";
             oTable.Cell(2, 1).Range.Text = "Total Ammount: ";
             oTable.Cell(3, 1).Range.Text = "Total Money: ";
-            oTable.Cell(3, 1).Range.Text = "Day Start: ";
-            oTable.Cell(4, 1).Range.Text = "Day End: ";
+            oTable.Cell(4, 1).Range.Text = "Day Start: ";
+            oTable.Cell(5, 1).Range.Text = "Day End: ";
 
             oTable.Cell(1, 2).Range.Text = "Ahihi Store";
             oTable.Cell(2, 2).Range.Text = totalAmount.ToString();
