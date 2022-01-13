@@ -33,6 +33,14 @@ namespace QLCHBD_OOAD.viewmodel.dashboard
             _numberOnDelivery = deliveryOrderItemsRepository.getNumberDeliveringImage();
         }
 
+        public void onRefresh()
+        {
+            _total = imagesRepository.getTotalOfImage();
+            _numberOnBorrow = rentalBillRepository.getNumberBorrowedImage();
+            _numberInStock = _total - numberOnBorrow;
+            _numberOnDelivery = deliveryOrderItemsRepository.getNumberDeliveringImage();
+        }
+
         private long _numberOnDelivery;
         public long numberOnDelivery
         {

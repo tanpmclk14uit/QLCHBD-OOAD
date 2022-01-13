@@ -31,6 +31,7 @@ namespace QLCHBD_OOAD.view.dashboard
         {
             InitializeComponent();
             this.DataContext = FirstLandingViewModel.getIntance();
+            FirstLandingViewModel.getIntance().onRefresh();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
