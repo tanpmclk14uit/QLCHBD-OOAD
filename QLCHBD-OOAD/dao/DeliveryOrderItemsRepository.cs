@@ -103,7 +103,7 @@ namespace QLCHBD_OOAD.dao
 
         public long getNumberDeliveringImage()
         {
-            string command = "Select Sum(import_form_item.quantity) from `import_form_item`";
+            string command = "Select Sum(import_form.sum_amount) from `import_form` WHERE status = 'WAITING'";
             var reader = database.executeCommand(command);
             long result = 0;
             while (reader.Read())

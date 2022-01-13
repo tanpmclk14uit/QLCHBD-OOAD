@@ -15,5 +15,5 @@
                 NavigationUIVisibility="Hidden"
                 Content="{Binding SlideFrame, UpdateSourceTrigger=PropertyChanged}">
     </Frame>
-
+    
 </Page>
